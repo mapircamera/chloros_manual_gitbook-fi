@@ -16,7 +16,7 @@
 ## Kuvien käsittely (GUI)
 
 * [Projektiasetusten säätäminen](processing-images-gui/adjusting-project-settings.md)
-* [Tiedostojen lisääminen projektiin](processing-images-gui/page-1.md)
+* [Tiedostojen lisääminen projektiin](processing-images-gui/adding-files-to-a-project.md)
 * [Kohdekuvien valitseminen](processing-images-gui/choosing-target-images.md)
 * [Käsittelyn aloittaminen](processing-images-gui/starting-the-processing.md)
 * [Käsittelyn seuranta](processing-images-gui/monitoring-the-processing.md)
@@ -24,11 +24,11 @@
 
 ## PROJEKTIASETUKSET
 
-* [Projektiasetukset](project-settings/page-2.md)
+* [Projektiasetukset](project-settings/project-settings.md)
 * [Monispektriindeksikaavat](project-settings/multispectral-index-formulas.md)
 
 ## IMAGE VIEWER (GUI)
 
-* [Kuvan avaaminen koko näytön tilassa](image-viewer-gui/page-3.md)
+* [Kuvan avaaminen koko näytön tilassa](image-viewer-gui/opening-an-image-full-screen.md)
 * [Kuvatasot](image-viewer-gui/image-layers.md)
 * [Hakemisto/LUT hiekkalaatikko](image-viewer-gui/index-lut-sandbox.md)
