@@ -1,47 +1,45 @@
-# GUI: Navigointi
+# GUI : Navigointi
 
-Kun käynnistät ensimmäisen kerran Chlorosin ja Chlorosin (selain), se käynnistää taustaohjelmansa. Kun se on valmis, vasemman yläkulman päävalikon kuvake paljastuu <img src=".gitbook/assets/image (1).png" alt="" data-size="line">.
+Kun käynnistät Chloros- ja Chloros-sovellukset (selain) ensimmäisen kerran, niiden taustaprosessi käynnistyy. Kun se on valmis, vasemmassa yläkulmassa oleva päävalikon kuvake tulee näkyviin <img src=".gitbook/assets/image (1).png" alt="" data-size="line"> .
 
 <figure><img src=".gitbook/assets/header.JPG" alt=""><figcaption></figcaption></figure>
 
-Vasemmalta oikealle yläotsikko sisältää:
+Yläotsikossa on vasemmalta oikealle seuraavat vaihtoehdot:
 
 ### <img src=".gitbook/assets/image (1) (1).png" alt="" data-size="line"> Päävalikko
 
 Päävalikosta voit aloittaa uuden projektin, avata olemassa olevan projektin tai avata projektikansion.
 
-### <img src=".gitbook/assets/image (2).png" alt="" data-size="line"> Toisto-/käynnistyspainike
+### <img src=".gitbook/assets/image (2).png" alt="" data-size="line"> Toisto-/Käynnistä-painike
 
-Kun aloita käsittely -painike käynnistää kuvankäsittelyprosessin, kun se on käytössä.
+Kun tämä painike on käytössä, kuvankäsittelyprosessi käynnistyy.
 
-### <img src=".gitbook/assets/image (4).png" alt="" data-size="line"> Edistymispalkki <img src=".gitbook/assets/image (5).png" alt="" data-size="line">
+### <img src=".gitbook/assets/image (4).png" alt="" data-size="line"> Edistymispalkki <img src=".gitbook/assets/image (5).png" alt="" data-size="line">Ilmaisessa Chloros-tilassa, joka käsittelee kaikki tiedostot peräkkäin, edistymispalkki näyttää kaksi vaihetta: kohteen tunnistus ja käsittely.
 
-Ilmaisessa Chloros-tilassa, joka käsittelee kaikki tiedostot peräkkäin, edistymispalkki näyttää kaksi vaihetta: Kohteen tunnistus ja käsittely.
-
-Maksullisessa Chloros+ -lisenssitilassa, joka käsittelee kaikki tiedostot samanaikaisesti, edistymispalkki näyttää 4 vaihetta: Havaitseminen, analysointi, kalibrointi, vienti. Jos viet hiiren osoittimen Chloros+-etenemispalkin päälle, laajennettu 4 etenemispalkin paneeli pudotetaan alas, jotta voit seurata mukana. Yläosan edistymispalkin napsauttaminen pysäyttää avattavan paneelin, ja uudelleen napsauttaminen vapauttaa sen.
+Maksullisessa Chloros+-lisenssitilassa, joka käsittelee kaikki tiedostot samanaikaisesti, edistymispalkki näyttää neljä vaihetta: tunnistus, analysointi, kalibrointi ja vienti. Jos viet hiiren osoittimen Chloros+ -etenemispalkin päälle, avautuu laajennettu neljän etenemispalkin paneeli, josta voit seurata prosessin etenemistä. Klikkaamalla ylintä etenemispalkkia voit jäädyttää avattavan paneelin, ja klikkaamalla uudelleen voit vapauttaa sen.
 
 <figure><img src=".gitbook/assets/plus_prog.JPG" alt=""><figcaption></figcaption></figure>
 
-## Sivuvalikko
+## Sivupalkki
 
-Vasemman sivupalkin valikko sisältää erilaisia ​​kuvakkeita, joita voit käyttää:
+Vasemmassa sivupalkissa on useita kuvakkeita, joiden avulla voit suorittaa erilaisia toimintoja:
 
-#### <img src=".gitbook/assets/icon_project-settings.JPG" alt="" data-size="line"> [Projektiasetukset](project-settings/page-2.md)
+#### <img src=".gitbook/assets/icon_project-settings.JPG" alt="" data-size="line"> [Projektin asetukset](project-settings/project-settings.md)
 
-Projektiasetukset-välilehdellä voit säätää projektin yleisiä ja projektinkäsittelyasetuksia. Säädä näitä ennen kuin aloitat tiedostojesi käsittelyn.
+Projektin asetukset -välilehdessä voit säätää projektin yleisiä ja käsittelyasetuksia. Säädä nämä ennen tiedostojen käsittelyn aloittamista.
 
 #### <img src=".gitbook/assets/icon_file-browser.JPG" alt="" data-size="line"> Tiedostoselain
 
-Lisää tiedostoja/kansioita ja poista tiedostoja projektista. Päällekkäiset tiedostot ohitetaan. Valitse kohdesarakeruutu minkä tahansa kohdekuvan kohdalla, ja käsittely tarkastelee vain valittuja kuvia kohteiden varalta, mikä nopeuttaa huomattavasti käsittelyaikaa.
+Lisää tiedostoja/kansioita ja poista tiedostoja projektista. Duplikaattitiedostot ohitetaan. Valitse kohdekuvakentän ruutu haluamallesi kuvalle, jolloin käsittely tarkastelee vain valittuja kuvia, mikä nopeuttaa käsittelyaikaa huomattavasti.
 
-#### <img src=".gitbook/assets/icon_image-viewer.JPG" alt="" data-size="line"> [Kuvien katseluohjelma](image-viewer-gui/page-3.md)
+#### <img src=".gitbook/assets/icon_image-viewer.JPG" alt="" data-size="line"> [Kuvankatseluohjelma](image-viewer-gui/opening-an-image-full-screen.md)
 
-Kun kuvaa napsautetaan pääkuvankatseluohjelmassa, se avautuu koko näytölle Image Viewer -välilehdellä.
+Kun kuvaa napsautetaan pääkuvankatseluohjelmassa, se avautuu koko näytön kokoisena Kuvankatseluohjelma-välilehdessä.
 
 #### <img src=".gitbook/assets/icon_log.JPG" alt="" data-size="line"> Virheenkorjausloki
 
-Tarkista lokista virheenkorjaustulosteet, kun ongelmia ilmenee. Kopioi/lataa loki ja lähetä osoitteeseen [MAPIR-tuki](https://www.mapir.camera/community/contact) saadaksesi apua.
+Tarkista loki virheenkorjausmerkintöjen varalta, kun ongelmia ilmenee. Kopioi/lataa loki ja lähetä se [MAPIR-tukeen](https://www.mapir.camera/community/contact) saadaksesi apua.
 
 #### <img src=".gitbook/assets/icon_user.JPG" alt="" data-size="line"> [Käyttäjän kirjautuminen](chloros+-login.md)
 
-Käyttäjän kirjautumissivupalkin avulla voit kirjautua Chloros+ -tiliisi avataksesi lisäominaisuuksia. Voit myös tarkastella nykyistä sovellusversiota sekä säätää näytettävän tekstin kieltä Chloros GUI:ssa ja CLI:ssä.
+Käyttäjän kirjautumissivupalkin avulla voit kirjautua Chloros+ -tiliisi ja avata lisäominaisuudet. Voit myös tarkastella sovelluksen nykyistä versiota sekä säätää Chloros GUI- ja CLI-käyttöliittymän tekstin kieltä.

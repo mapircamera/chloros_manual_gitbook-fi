@@ -1,165 +1,165 @@
-# Monitoring the Processing
+# Käsittelyn seuranta
 
-Once processing has started, Chloros provides several ways to monitor progress, check for issues, and understand what's happening with your dataset. This page explains how to track your processing and interpret the information Chloros provides.
+Kun käsittely on alkanut, Chloros tarjoaa useita tapoja seurata edistymistä, tarkistaa ongelmia ja ymmärtää, mitä datajoukolle tapahtuu. Tällä sivulla selitetään, miten voit seurata käsittelyä ja tulkita Chloros:n tarjoamia tietoja.
 
-## Progress Bar Overview
+## Edistymispalkin yleiskatsaus
 
-The progress bar in the top header shows real-time processing status and completion percentage.
+Yläotsikon edistymispalkki näyttää reaaliaikaisen käsittelyn tilan ja valmistumisprosentin.
 
-### Free Mode Progress Bar
+### Ilmainen tila -edistymispalkki
 
-For users without Chloros+ license:
+Käyttäjille, joilla ei ole Chloros+ -lisenssiä:
 
-**2-Stage Progress Display:**
+**2-vaiheinen edistymisen näyttö:**
 
-1. **Target Detect** - Finding calibration targets in images
-2. **Processing** - Applying corrections and exporting
+1. **Kohteen tunnistus** - Kalibrointikohteiden etsiminen kuvista
+2. **Käsittely** - Korjausten tekeminen ja vienti
 
-**Progress bar shows:**
+**Edistymispalkki näyttää:**
 
-* Overall completion percentage (0-100%)
-* Current stage name
-* Simple horizontal bar visualization
+* Kokonaisvalmistumisprosentin (0–100 %)
+* Nykyisen vaiheen nimen
+* Yksinkertaisen vaakapalkin visualisoinnin
 
-### Chloros+ Progress Bar
+### Chloros+ -edistymispalkki
 
-For users with Chloros+ license:
+Käyttäjille, joilla on Chloros+ -lisenssi:
 
-**4-Stage Progress Display:**
+**4-vaiheinen edistymisen näyttö:**
 
-1. **Detecting** - Finding calibration targets
-2. **Analyzing** - Examining images and preparing pipeline
-3. **Calibrating** - Applying vignette and reflectance corrections
-4. **Exporting** - Saving processed files
+1. **Tunnistaminen** - Kalibrointikohteiden etsiminen
+2. **Analysointi** - Kuvien tarkastelu ja putkilinjan valmistelu
+3. **Kalibrointi** - Vignette- ja heijastavuuskorjausten soveltaminen
+4. **Vienti** - Käsiteltyjen tiedostojen tallentaminen
 
-**Interactive Features:**
+**Interaktiiviset ominaisuudet:**
 
-* **Hover over** progress bar to see expanded 4-stage panel
-* **Click** progress bar to freeze/pin the expanded panel
-* **Click again** to unfreeze and auto-hide on mouse leave
-* Each stage shows individual progress (0-100%)
-
-***
-
-## Understanding Each Processing Stage
-
-### Stage 1: Detecting (Target Detection)
-
-**What's happening:**
-
-* Chloros scans images marked with Target checkbox
-* Computer vision algorithms identify the 4 calibration panels
-* Reflectance values extracted from each panel
-* Target timestamps recorded for proper calibration scheduling
-
-**Duration:**
-
-* With marked targets: 10-60 seconds
-* Without marked targets: 5-30+ minutes (scans all images)
-
-**Progress indicator:**
-
-* Detecting: 0% → 100%
-* Number of images scanned
-* Targets found count
-
-**What to watch for:**
-
-* Should complete quickly if targets properly marked
-* If taking too long, targets may not be marked
-* Check Debug Log for "Target found" messages
-
-### Stage 2: Analyzing
-
-**What's happening:**
-
-* Reading image EXIF metadata (timestamps, exposure settings)
-* Determining calibration strategy based on target timestamps
-* Organizing image processing queue
-* Preparing parallel processing workers (Chloros+ only)
-
-**Duration:** 5-30 seconds
-
-**Progress indicator:**
-
-* Analyzing: 0% → 100%
-* Fast stage, usually completes quickly
-
-**What to watch for:**
-
-* Should progress steadily without pauses
-* Warnings about missing metadata will appear in Debug Log
-
-### Stage 3: Calibrating
-
-**What's happening:**
-
-* **Debayering**: Converting RAW Bayer pattern to 3 channels
-* **Vignette correction**: Removing lens edge darkening
-* **Reflectance calibration**: Normalizing with target values
-* **Index calculation**: Computing multispectral indices
-* Processing each image through the full pipeline
-
-**Duration:** Majority of total processing time (60-80%)
-
-**Progress indicator:**
-
-* Calibrating: 0% → 100%
-* Current image being processed
-* Images completed / Total images
-
-**Processing behavior:**
-
-* **Free mode**: Processes one image at a time sequentially
-* **Chloros+ mode**: Processes up to 16 images simultaneously
-* **GPU acceleration**: Significantly speeds up this stage
-
-**What to watch for:**
-
-* Steady progress through image count
-* Check Debug Log for per-image completion messages
-* Warnings about image quality or calibration issues
-
-### Stage 4: Exporting
-
-**What's happening:**
-
-* Writing calibrated images to disk in selected format
-* Exporting multispectral index images with LUT colors
-* Creating camera model subfolders
-* Preserving original filenames with appropriate suffixes
-
-**Duration:** 10-20% of total processing time
-
-**Progress indicator:**
-
-* Exporting: 0% → 100%
-* Files being written
-* Export format and destination
-
-**What to watch for:**
-
-* Disk space warnings
-* File write errors
-* Completion of all configured outputs
+* **Vie hiiri** edistymispalkin päälle nähdäksesi laajennetun 4-vaiheisen paneelin
+* **Napsauta** edistymispalkkia jäädyttääksesi/kiinnittääksesi laajennetun paneelin
+* **Napsauta uudelleen** vapauttaaksesi jäädytyksen ja piilottaaksesi paneelin automaattisesti, kun hiiri poistuu sen päältä
+* Jokainen vaihe näyttää yksilöllisen edistymisen (0–100 %)
 
 ***
 
-## Debug Log Tab
+## Kunkin käsittelyvaiheen ymmärtäminen
 
-The Debug Log provides detailed information about processing progress and any issues encountered.
+### Vaihe 1: Tunnistaminen (kohteen tunnistaminen)
 
-### Accessing the Debug Log
+**Mitä tapahtuu:**
 
-1. Click the **Debug Log** <img src="../.gitbook/assets/icon_log.JPG" alt="" data-size="line"> icon in the left sidebar
-2. Log panel opens showing real-time processing messages
-3. Auto-scrolls to show latest messages
+* Chloros skannaa kuvat, jotka on merkitty Kohde-valintaruudulla
+* Tietokoneen näköalgoritmit tunnistavat 4 kalibrointipaneelia
+* Heijastavuusarvot poimitaan kustakin paneelista
+* Kohteiden aikaleimat tallennetaan oikean kalibrointiaikataulun laatimista varten
 
-### Understanding Log Messages
+**Kesto:**
 
-#### Information Messages (White/Gray)
+* Merkityillä kohteilla: 10–60 sekuntia
+* Ilman merkittyjä kohteita: 5–30+ minuuttia (skannaa kaikki kuvat)
 
-Normal processing updates:
+**Edistymisilmaisin:**
+
+* Tunnistaminen: 0 % → 100 %
+* Skannattujen kuvien määrä
+* Löydettyjen kohteiden määrä
+
+**Mitä on syytä tarkkailla:**
+
+* Pitäisi valmistua nopeasti, jos kohteet on merkitty oikein
+* Jos kestää liian kauan, kohteita ei ehkä ole merkitty
+* Tarkista Debug Log -lokista, onko siellä viestejä &quot;Target found&quot; (Kohde löydetty)
+
+### Vaihe 2: Analysointi
+
+**Mitä tapahtuu:**
+
+* Kuvien EXIF-metatietojen lukeminen (aikaleimat, valotusasetukset)
+* Kalibrointistrategian määrittäminen kohteen aikaleimojen perusteella
+* Kuvankäsittelyjonon järjestäminen
+* Rinnakkaiskäsittelytyöntekijöiden valmistelu (vain Chloros+)
+
+**Kesto:** 5–30 sekuntia
+
+**Edistymisilmaisin:**
+
+* Analysointi: 0 % → 100 %
+* Nopea vaihe, valmistuu yleensä nopeasti
+
+**Mitä on syytä tarkkailla:**
+
+* Etenemisen tulisi olla tasaista ilman taukoja
+* Varoitukset puuttuvista metatiedoista näkyvät vianmäärityslogissa
+
+### Vaihe 3: Kalibrointi
+
+**Mitä tapahtuu:**
+
+* **Debayering**: RAW-Bayer-kuvion muuntaminen 3 kanavaksi
+* **Vignette-korjaus**: Poistaa objektiivin reunan tummenemisen
+* **Heijastavuuskalibrointi**: Normalisointi tavoitearvoilla
+* **Indeksilaskenta**: Laskee monispektriset indeksit
+* Käsittelee jokaisen kuvan koko prosessin läpi
+
+**Kesto:** Suurin osa kokonaiskäsittelyajasta (60–80 %)
+
+**Edistymisen osoitin:**
+
+* Kalibrointi: 0 % → 100 %
+* Käsiteltävä kuva
+* Valmiit kuvat / Kuvien kokonaismäärä
+
+**Käsittelyn toiminta:**
+
+* **Vapaa tila**: Käsittelee yhden kuvan kerrallaan peräkkäin
+* **Chloros+ -tila**: Käsittelee jopa 16 kuvaa samanaikaisesti
+* **GPU-kiihdytys**: Nopeuttaa tätä vaihetta merkittävästi
+
+**Mitä on syytä tarkkailla:**
+
+* Tasainen eteneminen kuvamäärän suhteen
+* Tarkista Debug Log -lokista kuvakohtaiset valmistumisilmoitukset
+* Varoitukset kuvanlaadusta tai kalibrointiongelmista
+
+### Vaihe 4: Vienti
+
+**Mitä tapahtuu:**
+
+* Kalibroitujen kuvien kirjoittaminen levylle valitussa muodossa
+* Monispektrisen indeksin kuvien vieminen LUT-väreillä
+* Kameramallien alikansioiden luominen
+* Alkuperäisten tiedostonimien säilyttäminen sopivilla päätteillä
+
+**Kesto:** 10–20 % kokonaiskäsittelyajasta
+
+**Edistymisen ilmaisin:**
+
+* Vienti: 0 % → 100 %
+* Tiedostojen kirjoittaminen
+* Vientimuoto ja kohde
+
+**Mitä on syytä tarkkailla:**
+
+* Levytilan varoitukset
+* Tiedostojen kirjoitusvirheet
+* Kaikkien määritettyjen tulosteiden valmistuminen
+
+***
+
+## Debug-lokivälilehti
+
+Debug-loki tarjoaa yksityiskohtaista tietoa käsittelyn edistymisestä ja mahdollisista ongelmista.
+
+### Debug-lokin avaaminen
+
+1. Napsauta **Debug-loki** <img src="../.gitbook/assets/icon_log.JPG" alt="" data-size="line"> -kuvaketta vasemmassa sivupalkissa.
+2. Lokipaneeli avautuu ja näyttää reaaliaikaiset käsittelyviestit.
+3. Vierittää automaattisesti uusimpia viestejä.
+
+### Lokiviestien ymmärtäminen
+
+#### Tiedotukset (valkoinen/harmaa)
+
+Normaalit käsittelypäivitykset:
 
 ```
 [INFO] Processing started
@@ -169,9 +169,9 @@ Normal processing updates:
 [INFO] Processing complete
 ```
 
-#### Warning Messages (Yellow)
+#### Varoitukset (keltainen)
 
-Non-critical issues that don't stop processing:
+Ei-kriittiset ongelmat, jotka eivät keskeytä käsittelyä:
 
 ```
 [WARN] No GPS data found in IMG_0145.RAW
@@ -179,11 +179,11 @@ Non-critical issues that don't stop processing:
 [WARN] Low contrast in calibration panel - results may vary
 ```
 
-**Action:** Review warnings after processing, but don't interrupt
+**Toimenpide:** Tarkista varoitukset käsittelyn jälkeen, mutta älä keskeytä käsittelyä.
 
-#### Error Messages (Red)
+#### Virheilmoitukset (Red)
 
-Critical issues that may cause processing to fail:
+Kriittiset ongelmat, jotka voivat aiheuttaa käsittelyn epäonnistumisen:
 
 ```
 [ERROR] Cannot write file - disk full
@@ -191,202 +191,202 @@ Critical issues that may cause processing to fail:
 [ERROR] No targets detected - enable reflectance calibration or mark target images
 ```
 
-**Action:** Stop processing, resolve error, restart
+**Toimenpide:** Keskeytä käsittely, korjaa virhe, käynnistä uudelleen.
 
-### Common Log Messages
+### Yleiset lokiviestit
 
-| Message                          | Meaning                                | Action Needed                                         |
+| Viesti                          | Merkitys                                | Tarvittava toimenpide                                         |
 | -------------------------------- | -------------------------------------- | ----------------------------------------------------- |
-| "Target detected in \[filename]" | Calibration target found successfully  | None - normal                                         |
-| "Processing image X of Y"        | Current progress update                | None - normal                                         |
-| "No targets found"               | No calibration targets detected        | Mark target images or disable reflectance calibration |
-| "Insufficient disk space"        | Not enough storage for output          | Free up disk space                                    |
-| "Skipping corrupted file"        | Image file is damaged                  | Re-copy file from SD card                             |
-| "PPK data applied"               | GPS corrections from .daq file applied | None - normal                                         |
+| &quot;Kohde havaittu tiedostossa \[tiedostonimi]&quot; | Kalibrointikohde löydetty onnistuneesti  | Ei mitään - normaali                                         |
+| &quot;Käsitellään kuvaa X/Y&quot;        | Nykyisen edistymisen päivitys                | Ei mitään - normaali                                         |
+| &quot;Kohteita ei löytynyt&quot;               | Kalibrointikohteita ei havaittu        | Merkitse kohdekuvat tai poista heijastavuuden kalibrointi käytöstä |
+| &quot;Levytilaa ei riitä&quot;        | Tallennustilaa ei riitä tulostukseen          | Vapauta levytilaa                                    |
+| &quot;Ohitetaan vioittunut tiedosto&quot;        | Kuvatiedosto on vioittunut                  | Kopioi tiedosto uudelleen SD-kortilta                             |
+| &quot;PPK-tiedot sovellettu&quot;               | .daq-tiedoston GPS-korjaukset sovellettu | Ei mitään - normaali                                         |
 
-### Copying Log Data
+### Lokitietojen kopiointi
 
-To copy log for troubleshooting or support:
+Lokien kopiointi vianmääritystä tai tukea varten:
 
-1. Open Debug Log panel
-2. Click **"Copy Log"** button (or right-click → Select All)
-3. Paste into text file or email
-4. Send to MAPIR support if needed
-
-***
-
-## System Resource Monitoring
-
-### CPU Usage
-
-**Free Mode:**
-
-* 1 CPU core at \~100%
-* Other cores idle or available
-* System remains responsive
-
-**Chloros+ Parallel Mode:**
-
-* Multiple cores at 80-100% (up to 16 cores)
-* High overall CPU utilization
-* System may feel less responsive
-
-**To monitor:**
-
-* Windows Task Manager (Ctrl+Shift+Esc)
-* Performance tab → CPU section
-* Look for "Chloros" or "chloros-backend" processes
-
-### Memory (RAM) Usage
-
-**Typical usage:**
-
-* Small projects (< 100 images): 2-4 GB
-* Medium projects (100-500 images): 4-8 GB
-* Large projects (500+ images): 8-16 GB
-* Chloros+ parallel mode uses more RAM
-
-**If memory is low:**
-
-* Process smaller batches
-* Close other applications
-* Upgrade RAM if regularly processing large datasets
-
-### GPU Usage (Chloros+ with CUDA)
-
-When GPU acceleration is enabled:
-
-* NVIDIA GPU shows high utilization (60-90%)
-* VRAM usage increases (requires 4GB+ VRAM)
-* Calibrating stage is significantly faster
-
-**To monitor:**
-
-* NVIDIA System Tray icon
-* Task Manager → Performance → GPU
-* GPU-Z or similar monitoring tool
-
-### Disk I/O
-
-**What to expect:**
-
-* High disk read during Analyzing stage
-* High disk write during Exporting stage
-* SSD significantly faster than HDD
-
-**Performance tip:**
-
-* Use SSD for project folder when possible
-* Avoid network drives for large datasets
-* Ensure disk isn't near capacity (affects write speed)
+1. Avaa Debug Log -paneeli.
+2. Napsauta **&quot;Copy Log&quot;**-painiketta (tai napsauta hiiren kakkospainikkeella → Valitse kaikki).
+3. Liitä tekstitiedostoon tai sähköpostiin.
+4. Lähetä tarvittaessa MAPIR-tukeen.
 
 ***
 
-## Detecting Problems During Processing
+## Järjestelmän resurssien valvonta
 
-### Warning Signs
+### CPU:n käyttö
 
-**Progress stalls (no change for 5+ minutes):**
+**Vapaa tila:**
 
-* Check Debug Log for errors
-* Verify disk space available
-* Check Task Manager to ensure Chloros is running
+* 1 CPU-ydin ~100 %:ssa
+* Muut ytimet käyttämättöminä tai käytettävissä
+* Järjestelmä reagoi edelleen
 
-**Error messages appear frequently:**
+**Chloros+ rinnakkaistila:**
 
-* Stop processing and review errors
-* Common causes: disk space, corrupted files, memory issues
-* See Troubleshooting section below
+* Useita ytimiä 80–100 %:ssa (enintään 16 ydintä)
+* Korkea CPU:n kokonaiskäyttöaste
+* Järjestelmä voi tuntua vähemmän reagoivalta
 
-**System becomes unresponsive:**
+**Seuranta:**
 
-* Chloros+ parallel mode using too many resources
-* Consider reducing concurrent tasks or upgrading hardware
-* Free mode is less resource-intensive
+* Windows Tehtävienhallinta (Ctrl+Shift+Esc)
+* Suorituskyky-välilehti → CPU-osio
+* Etsi prosessit &quot;Chloros&quot; tai &quot;chloros-backend&quot;
 
-### When to Stop Processing
+### Muistin (RAM) käyttö
 
-Stop processing if you see:
+**Tyypillinen käyttö:**
 
-* ❌ "Disk full" or "Cannot write file" errors
-* ❌ Repeated image file corruption errors
-* ❌ System completely frozen (not responding)
-* ❌ Realized wrong settings were configured
-* ❌ Wrong images imported
+* Pienet projektit (&lt; 100 kuvaa): 2–4 Gt
+* Keskisuuret projektit (100–500 kuvaa): 4–8 Gt
+* Suuret projektit (yli 500 kuvaa): 8–16 Gt
+* Chloros+ rinnakkaistila käyttää enemmän RAM-muistia
 
-**How to stop:**
+**Jos muistia on vähän:**
 
-1. Click **Stop/Cancel button** (replaces Start button)
-2. Processing halts, progress is lost
-3. Fix issues and restart from beginning
+* Käsittele pienempiä eriä
+* Sulje muut sovellukset
+* Päivitä RAM-muistia, jos käsittelet säännöllisesti suuria tietojoukkoja
 
-***
+### GPU:n käyttö (Chloros+ ja CUDA)
 
-## Troubleshooting During Processing
+Kun GPU-kiihdytys on käytössä:
 
-### Processing is Very Slow
+* NVIDIA GPU:n käyttöaste on korkea (60–90 %)
+* VRAM-muistin käyttö kasvaa (vaatii vähintään 4 Gt VRAM-muistia)
+* Kalibrointivaihe on huomattavasti nopeampi
 
-**Possible causes:**
+**Seuranta:**
 
-* Unmarked target images (scanning all images)
-* HDD instead of SSD storage
-* Insufficient system resources
-* Many indices configured
-* Network drive access
+* NVIDIA-kuvaketta järjestelmäpalkissa
+* Tehtävienhallinta → Suorituskyky → GPU
+* GPU-Z tai vastaava seurantatyökalu
 
-**Solutions:**
+### Levyn I/O
 
-1. If just started and in Detecting stage: Cancel, mark targets, restart
-2. For future: Use SSD, reduce indices, upgrade hardware
-3. Consider CLI for batch processing large datasets
+**Mitä odottaa:**
 
-### "Disk Space" Warnings
+* Korkea levyn lukunopeus analysointivaiheessa
+* Korkea levyn kirjoitusnopeus vientivaiheessa
+* SSD on huomattavasti nopeampi kuin HDD
 
-**Solutions:**
+**Suorituskykyvinkki:**
 
-1. Free up disk space immediately
-2. Move project to drive with more space
-3. Reduce number of indices to export
-4. Use JPG format instead of TIFF (smaller files)
-
-### Frequent "Corrupted File" Messages
-
-**Solutions:**
-
-1. Re-copy images from SD card to ensure integrity
-2. Test SD card for errors
-3. Remove corrupted files from project
-4. Continue processing remaining images
-
-### System Overheating / Throttling
-
-**Solutions:**
-
-1. Ensure adequate ventilation
-2. Clean dust from computer vents
-3. Reduce processing load (use Free mode instead of Chloros+)
-4. Process during cooler times of day
+* Käytä SSD-levyä projektikansiossa, jos mahdollista
+* Vältä verkkoasemia suurille tietojoukoille
+* Varmista, että levyn kapasiteetti ei ole lähes täynnä (vaikuttaa kirjoitusnopeuteen)
 
 ***
 
-## Processing Complete Notification
+## Ongelmien havaitseminen käsittelyn aikana
 
-When processing finishes:
+### Varoitusmerkit
 
-* Progress bar reaches 100%
-* **"Processing Complete"** message appears in Debug Log
-* Start button becomes enabled again
-* All output files are in camera model subfolder
+**Edistyminen pysähtyy (ei muutosta yli 5 minuuttiin):**
+
+* Tarkista virheistä virheloki
+* Tarkista levytilan saatavuus
+* Tarkista Tehtävienhallinnasta, että Chloros on käynnissä
+
+**Virheilmoitukset näkyvät usein:**
+
+* Keskeytä käsittely ja tarkista virheet
+* Yleisiä syitä: levytila, vioittuneet tiedostot, muistiongelmat
+* Katso alla oleva Vianmääritys-osio
+
+**Järjestelmä ei vastaa:**
+
+* Chloros+ rinnakkaistila käyttää liikaa resursseja
+* Harkitse samanaikaisten tehtävien vähentämistä tai laitteiston päivittämistä
+* Vapaa tila vaatii vähemmän resursseja
+
+### Milloin käsittely on keskeytettävä
+
+Keskeytä käsittely, jos näet:
+
+* ❌ &quot;Levy täynnä&quot; tai &quot;Tiedostoa ei voi kirjoittaa&quot; -virheet
+* ❌ Toistuvat kuvatiedostojen vioittumisvirheet
+* ❌ Järjestelmä on täysin jumissa (ei vastaa)
+* ❌ Huomaat, että asetukset on määritetty väärin
+* ❌ Väärät kuvat on tuotu
+
+**Kuinka lopettaa:**
+
+1. Napsauta **Lopeta/Peruuta-painiketta** (korvaa Käynnistä-painikkeen)
+2. Käsittely keskeytyy, edistys menetetään
+3. Korjaa ongelmat ja aloita alusta
 
 ***
 
-## Next Steps
+## Vianmääritys käsittelyn aikana
 
-Once processing completes:
+### Käsittely on erittäin hidasta
 
-1. **Review results** - See [Finishing the Processing](finishing-the-processing.md)
-2. **Check output folder** - Verify all files exported correctly
-3. **Review Debug Log** - Check for any warnings or errors
-4. **Preview processed images** - Use Image Viewer or external software
+**Mahdolliset syyt:**
 
-For information about reviewing and using your processed results, see [Finishing the Processing](finishing-the-processing.md).
+* Merkitsemättömät kohdekuvat (kaikkien kuvien skannaus)
+* HDD SSD-tallennustilan sijaan
+* Riittämättömät järjestelmäresurssit
+* Määritettyjä hakemistoja on paljon
+* Verkkolevyn käyttö
+
+**Ratkaisut:**
+
+1. Jos käsittely on juuri alkanut ja on tunnistamisvaiheessa: Peruuta, merkitse kohteet, aloita alusta
+2. Tulevaisuutta varten: Käytä SSD-levyä, vähennä hakemistojen määrää, päivitä laitteisto
+3. Harkitse CLI:n käyttöä suurten tietojoukkojen eräprosessointiin
+
+### &quot;Levytila&quot; -varoitukset
+
+**Ratkaisut:**
+
+1. Vapauta levytilaa välittömästi
+2. Siirrä projekti levylle, jossa on enemmän tilaa
+3. Vähennä vietävien indeksien määrää.
+4. Käytä JPG-muotoa TIFF:n sijaan (pienemmät tiedostot).
+
+### Usein toistuvat &quot;Corrupted File&quot; -viestit
+
+**Ratkaisut:**
+
+1. Kopioi kuvat uudelleen SD-kortilta varmistaaksesi niiden eheyden.
+2. Testaa SD-kortti virheiden varalta.
+3. Poista vioittuneet tiedostot projektista.
+4. Jatka jäljellä olevien kuvien käsittelyä.
+
+### Järjestelmän ylikuumeneminen / kuristaminen
+
+**Ratkaisut:**
+
+1. Varmista riittävä ilmanvaihto.
+2. Puhdista pöly tietokoneen tuuletusaukoista.
+3. Vähennä käsittelykuormitusta (käytä Free-tilaa Chloros+:n sijaan).
+4. Käsittele kuvat päivän viileimpään aikaan.
+
+***
+
+## Ilmoitus käsittelyn päättymisestä
+
+Kun käsittely on päättynyt:
+
+* Edistymispalkki saavuttaa 100 %
+* **&quot;Käsittely valmis&quot;** -viesti näkyy vianmäärityslogissa
+* Käynnistyspainike aktivoituu uudelleen
+* Kaikki tulostustiedostot ovat kameramallin alikansiossa
+
+***
+
+## Seuraavat vaiheet
+
+Kun käsittely on valmis:
+
+1. **Tarkista tulokset** - Katso [Käsittelyn lopettaminen](finishing-the-processing.md)
+2. **Tarkista tulostuskansio** - Varmista, että kaikki tiedostot on viety oikein
+3. **Tarkista virheenkorjausloki** - Tarkista, onko siinä varoituksia tai virheitä
+4. **Esikatsele käsiteltyjä kuvia** - Käytä kuvankatseluohjelmaa tai ulkoista ohjelmistoa
+
+Lisätietoja käsiteltyjen tulosten tarkastelusta ja käytöstä on kohdassa [Käsittelyn lopettaminen](finishing-the-processing.md).

@@ -1,306 +1,306 @@
-# Finishing the Processing
+# Käsittelyn loppuun saattaminen
 
-Once Chloros completes processing, it's time to review your results, verify output quality, and prepare your processed images for use in your workflow. This page guides you through the final steps and next actions.
+Kun Chloros on suorittanut käsittelyn, on aika tarkistaa tulokset, varmistaa tulostuksen laatu ja valmistella käsitellyt kuvat käytettäväksi työnkulussasi. Tämä sivu opastaa sinut viimeisten vaiheiden ja seuraavien toimien läpi.
 
-## Processing Complete Indication
+## Käsittelyn valmistumisen merkki
 
-When processing finishes successfully, you'll see several indicators:
+Kun käsittely on suoritettu onnistuneesti, näet useita merkkejä:
 
-* ✅ **Progress bar**: Reaches 100% completion
-* ✅ **Debug Log**: Shows "Processing Complete" message
-* ✅ **Start button**: Becomes enabled again (ready for next processing run)
-* ✅ **Output files**: All processed images saved to camera model subfolder
-
-***
-
-## Locating Your Processed Images
-
-### Opening the Output Folder
-
-1. Click the **Main Menu** <img src="../.gitbook/assets/image (1) (1).png" alt="" data-size="line"> icon (top left)
-2. Select **"Open Project Folder"**
-3. Your file explorer opens to the project directory
-4. Locate your project by name
+* ✅ **Edistymispalkki**: Saavuttaa 100 %:n valmiuden
+* ✅ **Debug-loki**: Näyttää viestin &quot;Käsittely valmis&quot;
+* ✅ **Käynnistyspainike**: Aktivoituu uudelleen (valmis seuraavaan käsittelyyn)
+* ✅ **Tulostustiedostot**: Kaikki käsitellyt kuvat tallennetaan kameramallin alikansioon
 
 ***
 
-## Reviewing Processed Images
+## Käsiteltyjen kuvien paikantaminen
 
-### Quick Preview in File Explorer
+### Tulostuskansion avaaminen
 
-**Windows built-in preview:**
-
-1. Navigate to camera model subfolder
-2. Select an image file
-3. Preview appears in Windows Explorer preview pane
-4. Use arrow keys to browse through images
-
-### Preview in External Image Viewers
-
-**Recommended viewers:**
-
-* **QGIS** - Free GIS software (best for georeferenced multispectral analysis)
-* **IrfanView** - Fast, lightweight image viewer (supports TIFF)
-* **Adobe Photoshop** - Professional editing (TIFF support)
-* **GIMP** - Free alternative to Photoshop
-* **Windows Photos** - Basic viewing (may not support 16-bit TIFF)
-
-### Preview in Chloros Image Viewer
-
-Use Chloros's built-in Image Viewer for advanced visualization:
-
-1. Click an image thumbnail in the File Browser
-2. Image opens in the main preview area
-3. Click **Image Viewer** <img src="../.gitbook/assets/icon_image-viewer.JPG" alt="" data-size="line"> tab in left sidebar
-4. Use [Index/LUT Sandbox](../image-viewer-gui/index-lut-sandbox.md) for interactive analysis
-
-See [Image Viewer](../image-viewer-gui/page-3.md) for detailed instructions.
+1. Napsauta **Päävalikko** <img src="../.gitbook/assets/image (1) (1).png" alt="" data-size="line"> (vasemmassa yläkulmassa)
+2. Valitse **&quot;Avaa projektikansio&quot;**
+3. Tiedostoselain avautuu projektikansioon
+4. Etsi projekti nimen perusteella
 
 ***
 
-## Reviewing the Debug Log
+## Käsiteltyjen kuvien tarkastelu
 
-### Check for Warnings or Errors
+### Nopea esikatselu tiedostoselaimessa
 
-1. Open **Debug Log** <img src="../.gitbook/assets/icon_log.JPG" alt="" data-size="line"> tab
-2. Scroll through messages
-3. Look for yellow warnings or red errors
-4. Review any issues noted
-5. Contact MAPIR support for assistance
+**Windows:n sisäänrakennettu esikatselu:**
 
-### Saving the Log
+1. Siirry kameramallin alikansioon
+2. Valitse kuvatiedosto
+3. Esikatselu näkyy Windows Explorerin esikatselupaneelissa
+4. Selaa kuvia nuolinäppäimillä
 
-To keep a record of processing or to send to MAPIR Support:
+### Esikatselu ulkoisissa kuvankatseluohjelmissa
 
-1. Click **"Copy"** or **"Download"** button
-2. Save as text file in project folder
-3. Include with project documentation
-4. Send to MAPIR support if issues encountered
+**Suositellut katseluohjelmat:**
 
-***
+* **QGIS** – ilmainen GIS-ohjelmisto (paras georeferenssoituun monispektriseen analyysiin)
+* **IrfanView** – nopea, kevyt kuvankatseluohjelma (tukee TIFF)
+* **Adobe Photoshop** - Ammattimainen kuvankäsittely (tukee TIFF)
+* **GIMP** - Ilmainen vaihtoehto Photoshopille
+* **Windows Photos** - Perustason katselu (ei välttämättä tue 16-bittistä TIFF)
 
-## Common Output Issues and Solutions
+### Esikatselu Chloros-kuvankatseluohjelmassa
 
-### Issue: Missing Output Files
+Käytä Chloros:n sisäänrakennettua kuvankatseluohjelmaa edistyneeseen visualisointiin:
 
-**Possible causes:**
+1. Napsauta kuvan pikkukuvaa tiedostoselaimessa
+2. Kuva avautuu pääesikatselualueelle
+3. Napsauta **Kuvankatseluohjelma** <img src="../.gitbook/assets/icon_image-viewer.JPG" alt="" data-size="line"> -välilehteä vasemmassa sivupalkissa.
+4. Käytä [Index/LUT Sandbox] (../image-viewer-gui/index-lut-sandbox.md) interaktiiviseen analyysiin.
 
-* Files didn't meet processing criteria
-* Target-only images (excluded from export)
-* Disk space ran out during export
-* File corruption during processing
-
-**Solutions:**
-
-1. Check Debug Log for skip/error messages
-2. Verify disk space was sufficient
-3. Count files: Should match (original count - target count) × (indices + 1)
-4. Re-import and reprocess any missing files
-
-### Issue: Dark or Bright Edges (Vignetting Still Visible)
-
-**Possible causes:**
-
-* Vignette correction disabled
-* Camera/lens not in Chloros profile database
-* Extreme vignetting beyond correction capability
-
-**Solutions:**
-
-1. Verify vignette correction was enabled in Project Settings
-2. Check camera model correctly detected
-3. Contact MAPIR support if vignetting persists
-
-### Issue: Incorrect Colors or Values
-
-**Possible causes:**
-
-* No calibration targets detected
-* Wrong calibration target model selected
-* Reflectance calibration disabled
-* Poor quality target images
-
-**Solutions:**
-
-1. Verify reflectance calibration was enabled
-2. Check "Target found" messages in Debug Log
-3. Review target image quality
-4. Reprocess with proper targets marked
-
-### Issue: NDVI Values Seem Wrong
-
-**Expected NDVI ranges:**
-
-* **Water, rocks, soil**: -0.1 to 0.2
-* **Sparse/unhealthy vegetation**: 0.2 to 0.4
-* **Moderate vegetation**: 0.4 to 0.6
-* **Healthy, dense vegetation**: 0.6 to 0.9
-
-**If values are outside these ranges:**
-
-1. Verify reflectance calibration was applied
-2. Verify light sensor log was included
-3. Check calibration targets were detected
-4. Ensure correct camera model was detected
-5. Review target image capture timing and conditions
+Katso [Kuvankatseluohjelma] (../image-viewer-gui/opening-an-image-full-screen.md) saadaksesi yksityiskohtaiset ohjeet.
 
 ***
 
-## Using Your Processed Images
+## Debug-lokin tarkistaminen
 
-### For Photogrammetry / Orthomosaic Creation
+### Tarkista varoitukset tai virheet
 
-**Recommended workflow:**
+1. Avaa **Debug Log** <img src="../.gitbook/assets/icon_log.JPG" alt="" data-size="line"> -välilehti
+2. Selaa viestejä
+3. Etsi keltaisia varoituksia tai punaisia virheitä
+4. Tarkista kaikki merkityt ongelmat
+5. Ota yhteyttä MAPIR-tukeen saadaksesi apua
 
-1. **Import calibrated reflectance images** into photogrammetry software:
+### Lokin tallentaminen
+
+Jotta voit säilyttää käsittelyn tiedot tai lähettää ne MAPIR-tukeen:
+
+1. Napsauta **&quot;Kopioi&quot;**- tai **&quot;Lataa&quot;**-painiketta
+2. Tallenna tekstitiedostona projektikansioon
+3. Liitä projektin dokumentaatioon
+4. Lähetä MAPIR-tukeen, jos ongelmia ilmenee
+
+***
+
+## Yleisiä tulostusongelmia ja ratkaisuja
+
+### Ongelma: Puuttuvat tulostustiedostot
+
+**Mahdolliset syyt:**
+
+* Tiedostot eivät täyttäneet käsittelykriteereitä.
+* Vain kohdekuvat (poissuljettu vientistä).
+* Levytila loppui viennin aikana.
+* Tiedostojen vioittuminen käsittelyn aikana.
+
+**Ratkaisut:**
+
+1. Tarkista virhe- ja ohitusviestit virheenkorjauslokista.
+2. Varmista, että levytilaa oli riittävästi.
+3. Laske tiedostot: Tuloksen tulisi vastata (alkuperäinen lukumäärä - kohdelukumäärä) × (indeksit + 1).
+4. Tuo puuttuvat tiedostot uudelleen ja käsittele ne uudelleen.
+
+### Ongelma: Tummat tai kirkkaat reunat (vignettia näkyy edelleen)
+
+**Mahdolliset syyt:**
+
+* Vignettikorjaus on poistettu käytöstä.
+* Kamera/objektiivi ei ole Chloros-profiilitietokannassa.
+* Korjauskyvyn ylittävä äärimmäinen vignettia.
+
+**Ratkaisut:**
+
+1. Varmista, että vinjetoinnin korjaus on otettu käyttöön projektin asetuksissa.
+2. Tarkista, että kameramalli on tunnistettu oikein.
+3. Ota yhteyttä MAPIR-tukeen, jos vinjetointi jatkuu.
+
+### Ongelma: Väärät värit tai arvot
+
+**Mahdolliset syyt:**
+
+* Kalibrointikohteita ei havaittu.
+* Valittu väärä kalibrointikohdemalli.
+* Heijastavuuden kalibrointi on poistettu käytöstä.
+* Kohdekuvien laatu on huono.
+
+**Ratkaisut:**
+
+1. Varmista, että heijastavuuden kalibrointi on käytössä.
+2. Tarkista Debug Log -lokista, onko kohde löydetty.
+3. Tarkista kohdekuvien laatu.
+4. Käsittele kuva uudelleen merkitsemällä oikeat kohteet.
+
+### Ongelma: NDVI-arvot näyttävät virheellisiltä
+
+**Odotetut NDVI-arvot:**
+
+* **Vesi, kivet, maaperä**: -0,1–0,2
+* **Harva/epäterve kasvillisuus**: 0,2–0,4
+* **Kohtalainen kasvillisuus**: 0,4–0,6
+* **Terve, tiheä kasvillisuus**: 0,6–0,9
+
+**Jos arvot ovat näiden alueiden ulkopuolella:**
+
+1. Varmista, että heijastavuuden kalibrointi on suoritettu.
+2. Varmista, että valosensorin loki on mukana.
+3. Tarkista, että kalibrointikohteet on havaittu.
+4. Varmista, että oikea kameramalli on havaittu.
+5. Tarkista kohteen kuvan ottamisen ajoitus ja olosuhteet.
+
+***
+
+## Käsiteltyjen kuvien käyttö
+
+### Fotogrammetria / ortomosaiikin luominen
+
+**Suositeltu työnkulku:**
+
+1. **Tuo kalibroidut heijastavuuskuvat** fotogrammetriaohjelmistoon:
    * Pix4Dmapper
    * Agisoft Metashape
    * DroneDeploy
    * WebODM
-2. **Keep EXIF metadata**: Ensure GPS data preserved for geotagging
-3. **Calibrated workflows**: Use reflectance images for scientific accuracy
-4. **Process index mosaics**: Create NDVI orthomosaics from individual index images
-5. **Export georeferenced GeoTIFF**: For use in GIS applications
+2. **Säilytä EXIF-metatiedot**: Varmista, että GPS-tiedot säilyvät geotaggaamista varten
+3. **Kalibroidut työnkulut**: Käytä heijastavuuskuvia tieteellisen tarkkuuden saavuttamiseksi
+4. **Käsittele indeksimosaiikit**: Luo NDVI-ortomosaiikit yksittäisistä indeksikuvista
+5. **Vie georeferenssoidut GeoTIFF**: Käytettäväksi GIS-sovelluksissa
 
-### For GIS Analysis
+### GIS-analyysiin
 
-**Recommended workflow:**
+**Suositeltava työnkulku:**
 
-1. **Load into QGIS, ArcGIS, or similar**
-2. **Use 16-bit TIFF** reflectance images for multi-band analysis
-3. **Use index images** (NDVI, NDRE) as ready-to-use vegetation layers
-4. **Raster calculator**: Combine bands for custom analysis
-5. **Export**: Create classification maps, change detection, vegetation health maps
+1. **Lataa QGIS-, ArcGIS- tai vastaavaan**
+2. **Käytä 16-bittisiä TIFF** heijastavuuskuvia monikaistaisessa analyysissä
+3. **Käytä indeksikuvia** (NDVI, NDRE) käyttövalmiina kasvillisuuskerroksina
+4. **Rasterilaskuri**: Yhdistä kaistat mukautettuun analyysiin
+5. **Vie**: Luo luokittelukarttoja, muutosten havaitsemista, kasvillisuuden terveyskarttoja
 
-### For Direct Analysis / Reporting
+### Suoraan analysointia / raportointia varten
 
-**Recommended workflow:**
+**Suositeltu työnkulku:**
 
-1. **Use index images with LUT colors** for visual reports
-2. **Extract statistics**: Mean NDVI per field/plot
-3. **Time series**: Compare indices across multiple sessions
-4. **Generate reports**: Include maps, statistics, and visualizations
-
-***
-
-## Archiving and Backup
-
-### Recommended Backup Strategy
-
-**What to save:**
-
-* ✅ **Original RAW/JPG images** - Archive on separate drive/cloud
-* ✅ **Processed outputs** - Keep calibrated images and indices
-* ✅ **Project file** - Contains all settings for reprocessing if needed
-* ✅ **Debug Log** - Documents processing details
-* ✅ **Calibration target images** - For verification and reprocessing
-
-**Storage recommendations:**
-
-* **Immediate backup**: External hard drive
-* **Long-term archive**: Cloud storage (Google Drive, Dropbox, etc.)
-* **Critical data**: Keep 2-3 copies in different locations
+1. **Käytä indeksisuhteita LUT-väreillä** visuaalisia raportteja varten
+2. **Pura tilastot**: Keskimääräinen NDVI kenttää/tonttia kohti
+3. **Aikasarja**: Vertaa indeksejä useiden istuntojen välillä
+4. **Luo raportteja**: Sisällytä kartat, tilastot ja visualisoinnit
 
 ***
 
-## Next Processing Runs
+## Arkistointi ja varmuuskopiointi
 
-### Reusing Project Settings
+### Suositeltava varmuuskopiointistrategia
 
-If processing similar datasets in the future:
+**Mitä tallentaa:**
 
-1. **Save Project Template** (if not already done)
-2. **Create new project** using saved template
-3. **Import new images**
-4. **Process** with identical settings for consistency
+* ✅ **Alkuperäiset RAW/JPG-kuvat** – Arkistoi erilliselle levylle/pilvipalveluun
+* ✅ **Käsitellyt tulokset** – Säilytä kalibroidut kuvat ja indeksit
+* ✅ **Projektitiedosto** – Sisältää kaikki asetukset uudelleen käsittelyä varten tarvittaessa
+* ✅ **Virheenkorjausloki** – Dokumentoi käsittelyn yksityiskohdat
+* ✅ **Kalibrointikohdekuvat** – Tarkistusta ja uudelleen käsittelyä varten
 
-### Batch Processing Multiple Sessions
+**Säilytyssuositukset:**
 
-For multiple sessions/datasets:
-
-**Option 1: GUI - Multiple Projects**
-
-* Create separate project for each session
-* Use consistent template settings
-* Process one at a time
-
-**Option 2: Chloros CLI (Chloros+ only)**
-
-* Automate batch processing
-* Process multiple folders with scripts
-* See [CLI Documentation](../CLI.md)
-
-**Option 3: Python SDK (Chloros+ only)**
-
-* Programmatic control
-* Integration with analysis pipelines
-* See [API Documentation](../api-python-sdk.md)
+* **Välitön varmuuskopiointi**: Ulkoinen kiintolevy
+* **Pitkäaikainen arkistointi**: Pilvitallennus (Google Drive, Dropbox jne.)
+* **Kriittiset tiedot**: Säilytä 2–3 kopiota eri paikoissa
 
 ***
 
-## Troubleshooting Post-Processing
+## Seuraavat käsittelyt
 
-### Re-Processing with Different Settings
+### Projektin asetusten uudelleenkäyttö
 
-If results aren't satisfactory:
+Jos käsittelet vastaavia tietojoukkoja tulevaisuudessa:
 
-1. Keep original images (never delete)
-2. Open same project in Chloros
-3. Adjust settings in Project Settings panel
-4. Process again - outputs will overwrite previous results
+1. **Tallenna projektimalli** (jos et ole vielä tehnyt niin)
+2. **Luo uusi projekti** tallennetun mallin avulla
+3. **Tuo uudet kuvat**
+4. **Käsittele** samoilla asetuksilla yhdenmukaisuuden varmistamiseksi
 
-### Processing Subset of Images
+### Useiden istuntojen eräprosessointi
 
-To reprocess only specific images:
+Useita istuntoja/tietojoukkoja varten:
 
-1. Create new project
-2. Import only the images needing reprocessing
-3. Use same settings template
-4. Process smaller dataset
+**Vaihtoehto 1: GUI – Useita projekteja**
 
-### Getting Help
+* Luo erillinen projekti jokaiselle istunnolle
+* Käytä yhdenmukaisia malliasetuksia
+* Käsittele yksi kerrallaan
 
-If you encounter issues:
+**Vaihtoehto 2: Chloros CLI (vain Chloros+)**
 
-* 📧 **Email**: info@mapir.camera (include Debug Log)
-* 🌐 **Support**: [https://www.mapir.camera/community/contact](https://www.mapir.camera/community/contact)
-* 📚 **FAQ**: [Frequently Asked Questions](../faq.md)
-* 📖 **Documentation**: [Chloros Manual](../)
+* Automatisoi eräprosessointi
+* Käsittele useita kansioita skripteillä
+* Katso [CLI-dokumentaatio](../CLI.md)
 
-***
+**Vaihtoehto 3: Python SDK (vain Chloros+)**
 
-## Summary: Complete Workflow
-
-You've now completed the full Chloros processing workflow:
-
-1. ✅ **Created project** - See [Projects](../projects.md)
-2. ✅ **Added files** - See [Adding Files](page-1.md)
-3. ✅ **Adjusted settings** - See [Adjusting Project Settings](adjusting-project-settings.md)
-4. ✅ **Marked targets** - See [Choosing Target Images](choosing-target-images.md)
-5. ✅ **Started processing** - See [Starting the Processing](starting-the-processing.md)
-6. ✅ **Monitored progress** - See [Monitoring the Processing](monitoring-the-processing.md)
-7. ✅ **Reviewed results** - This page
-
-**Your calibrated, reflectance-corrected multispectral images are ready for analysis!**
+* Ohjelmoitu ohjaus
+* Integrointi analyysiputkiin
+* Katso [API-dokumentaatio](../api-python-sdk.md)
 
 ***
 
-## Additional Resources
+## Jälkikäsittelyn vianmääritys
 
-### Advanced Features
+### Uudelleenkäsittely eri asetuksilla
 
-* [**Image Viewer**](../image-viewer-gui/page-3.md) - Interactive visualization and analysis
-* [**Index/LUT Sandbox**](../image-viewer-gui/index-lut-sandbox.md) - Custom index testing
-* [**Multispectral Index Formulas**](../project-settings/multispectral-index-formulas.md) - Complete index reference
+Jos tulokset eivät ole tyydyttäviä:
 
-### Automation & Integration
+1. Säilytä alkuperäiset kuvat (älä koskaan poista niitä)
+2. Avaa sama projekti Chloros:ssä
+3. Säädä asetuksia Projektin asetukset -paneelissa
+4. Käsittele uudelleen – tulokset korvaavat aiemmat tulokset
 
-* [**CLI Documentation**](../CLI.md) - Command-line batch processing
-* [**Python SDK**](../api-python-sdk.md) - Programmatic automation
-* [**Chloros+ Features**](../#chloros) - Advanced processing capabilities
+### Kuvien osajoukon käsittely
 
-### Support & Learning
+Vain tiettyjen kuvien uudelleenkäsittely:
 
-* [**FAQ**](../faq.md) - Common questions answered
-* [**Calibration Targets**](../calibration-targets.md) - Understanding reflectance calibration
-* [**Supported Cameras**](../supported-cameras.md) - Compatible hardware
+1. Luo uusi projekti
+2. Tuo vain uudelleenkäsittelyä vaativat kuvat
+3. Käytä samaa asetusmallia
+4. Käsittele pienempiä tietojoukkoja
+
+### Ohje
+
+Jos kohtaat ongelmia:
+
+* 📧 **Sähköposti**: info@mapir.camera (liitä mukaan vianmäärityslogi)
+* 🌐 **Tuki**: [https://www.mapir.camera/community/contact](https://www.mapir.camera/community/contact)
+* 📚 **UKK**: [Usein kysytyt kysymykset](../faq.md)
+* 📖 **Dokumentaatio**: [Chloros-käsikirja](../)
+
+***
+
+## Yhteenveto: Koko työnkulku
+
+Olet nyt suorittanut Chloros-käsittelyn koko työnkulun:
+
+1. ✅ **Luotu projekti** - Katso [Projektit](../projects.md)
+2. ✅ **Lisätty tiedostoja** - Katso [Tiedostojen lisääminen](adding-files-to-a-project.md)
+3. ✅ **Säädetty asetuksia** - Katso [Projektin asetusten säätäminen](adjusting-project-settings.md)
+4. ✅ **Merkitty kohteet** - Katso [Kohdekuvien valitseminen](choosing-target-images.md)
+5. ✅ **Käsittely käynnistetty** - Katso [Käsittelyn käynnistäminen](starting-the-processing.md)
+6. ✅ **Seurattu edistymistä** - Katso [Käsittelyn seuranta](monitoring-the-processing.md)
+7. ✅ **Tarkistettu tuloksia** - Tämä sivu
+
+**Kalibroidut, heijastavuudeltaan korjatut monispektrikuvasi ovat valmiina analysoitavaksi!**
+
+***
+
+## Lisäresurssit
+
+### Lisäominaisuudet
+
+* [**Kuvankatseluohjelma**](../image-viewer-gui/opening-an-image-full-screen.md) - Interaktiivinen visualisointi ja analysointi
+* [**Indeksi/LUT-hiekkalaatikko**](../image-viewer-gui/index-lut-sandbox.md) - Mukautetun indeksin testaus
+* [**Monispektriset indeksikaavat**](../project-settings/multispectral-index-formulas.md) - Täydellinen indeksin viite
+
+### Automaatio ja integraatio
+
+* [**CLI-dokumentaatio**](../CLI.md) - Komentoriviltä suoritettava eräprosessointi
+* [**Python SDK**](../api-python-sdk.md) - Ohjelmoitu automaatio
+* [**Chloros+ Ominaisuudet**](../#chloros) - Edistyneet käsittelyominaisuudet
+
+### Tuki ja oppiminen
+
+* [**UKK**](../faq.md) - Vastauksia yleisiin kysymyksiin
+* [**Kalibrointikohteet**](../calibration-targets.md) - Heijastavuuden kalibroinnin ymmärtäminen
+* [**Tuetut kamerat**](../supported-cameras.md) - Yhteensopiva laitteisto

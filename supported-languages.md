@@ -1,6 +1,6 @@
 # Tuetut kielet
 
-Chloros tarjoaa täyden käyttöliittymätuen **38 kielellä maailmanlaajuisesti**, joten se on käyttäjien käytettävissä kaikkialla maailmassa. Voit vaihtaa kieliä välittömästi kaikissa käyttöliittymissä: työpöytä, selain, CLI ja Python SDK.
+Chloros tarjoaa täyden käyttöliittymätuen **38 kielellä ympäri maailmaa**, joten se on käytettävissä käyttäjille kaikkialla maailmassa. Voit vaihtaa kieltä välittömästi kaikissa käyttöliittymissä: Desktop, Browser, CLI ja Python SDK.
 
 Chloros tukee seuraavia kieliä:
 
@@ -17,56 +17,56 @@ Chloros tukee seuraavia kieliä:
 11. 🇷🇺 **Русский** (venäjä)
 12. 🇳🇱 **Nederlands** (hollanti)
 13. 🇸🇦 **العربية** (arabia)
-14. 🇵🇱 **Polski** (puola)
-15. 🇹🇷 **Türkçe** (turkki)
-16. 🇮🇳 **हिंदी** (hindi)
+14. 🇵🇱 **Polski** (puolaksi)
+15. 🇹🇷 **Türkçe** (turkiksi)
+16. 🇮🇳 **हिंदी** (hindiksi)
 17. 🇮🇩 **Bahasa Indonesia** (indonesia)
-18. 🇻🇳 **Tiếng Việt** (vietnami)
+18. 🇻🇳 **Tiếng Việt** (vietnam)
 19. 🇹🇭 **ไทย** (thai)
 20. 🇸🇪 **Svenska** (ruotsi)
 21. 🇩🇰 **Dansk** (tanska)
 22. 🇳🇴 **Norsk** (norja)
 23. 🇫🇮 **Suomi** (suomi)
 24. 🇬🇷 **Ελληνικά** (kreikka)
-25. 🇨🇿 **Čeština** (Tšekki)
-26. 🇭🇺 **Magyar** (Unkari)
+25. 🇨🇿 **Čeština** (tšekki)
+26. 🇭🇺 **Magyar** (unkari)
 27. 🇷🇴 **Română** (romania)
 28. 🇺🇦 **Українська** (ukraina)
-29. 🇧🇷 **Português Brasileiro** (Brasilian portugali)
-30. 🇭🇰 **粵語** (kantoni)
+29. 🇧🇷 **Português Brasileiro** (brasilianportugali)
+30. 🇭🇰 **粵語** (kantoninkiina)
 31. 🇲🇾 **Bahasa Melayu** (malaiji)
 32. 🇸🇰 **Slovenčina** (slovakki)
 33. 🇧🇬 **Български** (bulgaria)
 34. 🇭🇷 **Hrvatski** (kroatia)
-35. 🇱🇹 **Lietuvių** (Liettua)
+35. 🇱🇹 **Lietuvių** (liettua)
 36. 🇱🇻 **Latviešu** (latvia)
 37. 🇪🇪 **Eesti** (viro)
-38. 🇸🇮 **Slovenščina** (slovenia)
+38. 🇸🇮 **Slovenščina** (sloveeni)
 
-## Kuinka vaihtaa kieltä
+## Kielen vaihtaminen
 
-### Chloros-työpöydällä/selaimella
+### Chloros-työpöydällä/selaimessa
 
 1. Avaa sovelluksen asetukset
-2. Siirry kielen valintavalikkoon
+2. Siirry kielivalikkoon
 3. Valitse haluamasi kieli luettelosta
 4. Käyttöliittymä päivittyy välittömästi
 
-### Julkaisussa Chloros CLI
+### Chloros CLI
 
-Käytä kieliparametria komentojesi kanssa asettaaksesi käyttöliittymän kielen.
+Käytä kieliparametria komentojen kanssa käyttöliittymän kielen asettamiseen.
 
-### Chloros Python SDK:ssa
+### Chloros Python SDK
 
-Aseta kieliparametri SDK:ta alustaessasi saadaksesi viestit ja tulosteet haluamallasi kielellä.
+Aseta kieliparametri, kun alustat SDK, jotta saat viestit ja tulosteet haluamallasi kielellä.
 
 ## Kattavuus
 
-Kaikki 38 kieltä ovat täysin tuettuja:
+Kaikki 38 kieltä ovat täysin tuettuja seuraavissa:
 
 * **Chloros Desktop** - Täydellinen GUI-käännös
 * **Chloros Browser** - Verkkokäyttöliittymä kaikilla kielillä
-* **Chloros CLI** - Komentoriviliitäntä ja lähtöviestit
+* **Chloros CLI** - Komentoriviliittymä ja tulostusviestit
 * **Chloros Python SDK** - API-viestit ja dokumentaatio
 
-Kielituki varmistaa, että käyttäjät ympäri maailmaa voivat työskennellä tehokkaasti äidinkielellään ilman esteitä.
+Kielituki varmistaa, että käyttäjät ympäri maailmaa voivat työskennellä tehokkaasti omalla äidinkielellään ilman esteitä.

@@ -4,169 +4,165 @@ metaLinks:
     - https://app.gitbook.com/s/o044KN3Ws0uIDvOmSkcR/download
 ---
 
-# Download
+# Lataa
 
-Download the latest version of Chloros for Windows to get started with multispectral image processing.
+Lataa uusin versio Chloros:stä Windows:lle, jotta voit aloittaa monispektrisen kuvankäsittelyn.
 
-### System Requirements
+### Järjestelmävaatimukset
 
-| Requirement          | Minimum                         | Recommended                     |
+| Vaatimus          | Vähimmäisvaatimukset                         | Suositellut vaatimukset                     |
 | -------------------- | ------------------------------- | ------------------------------- |
-| **Operating System** | Windows 10 (64-bit)             | Windows 11 (64-bit)             |
-| **Processor**        | Intel Core i5 or equivalent     | Intel Core i7 or better         |
-| **Memory (RAM)**     | 8GB                             | 16GB or more                    |
-| **Graphics Card**    | DirectX 11 compatible           | NVIDIA GPU with 4GB+ VRAM       |
-| **Storage**          | 2GB free space                  | SSD with 10GB+ free space       |
-| **Display**          | 1920x1080                       | 2560x1440 or higher             |
-| **Internet**         | Required for license activation | Required for license activation |
+| **Käyttöjärjestelmä** | Windows 10 (64-bittinen)             | Windows 11 (64-bittinen)             |
+| **Prosessori**        | Intel Core i5 tai vastaava     | Intel Core i7 tai parempi         |
+| **Muisti (RAM)**     | 8 Gt                             | 16 Gt tai enemmän                    |
+| **Näytönohjain**    | DirectX 11 -yhteensopiva           | NVIDIA GPU, 4 Gt+ VRAM       |
+| **Tallennustila**          | 2 Gt vapaata tilaa                  | SSD, 10 Gt+ vapaata tilaa       |
+| **Näyttö**          | 1920x1080                       | 2560x1440 tai parempi             |
+| **Internet**         | Vaaditaan lisenssin aktivointiin | Vaaditaan lisenssin aktivointiin |
 
-{% hint style="info" %}
-**GPU Acceleration**: Chloros+ users with NVIDIA GPUs (4GB+ VRAM) can use CUDA acceleration for significantly faster processing.
+{% vihje style=&quot;info&quot; %}
+**GPU-kiihdytys**: Chloros+ -käyttäjät, joilla on NVIDIA-GPU (4 Gt+ VRAM), voivat käyttää CUDA-kiihdytystä huomattavasti nopeampaan käsittelyyn.
 {% endhint %}
 
 ***
 
-## Download Chloros
+## Lataa Chloros
 
-### <a href="https://drive.google.com/file/d/1HjwrUY4M7HGxDbMybO7iPe_6JoHnUGr4/view?usp=drive_link" class="button primary">Download Chloros Here</a>
+### <a href="https://drive.google.com/file/d/1HjwrUY4M7HGxDbMybO7iPe_6JoHnUGr4/view?usp=drive_link" class="button primary">Lataa Chloros täältä</a>
 
-### Latest Stable Release
+### Uusin vakaa versio
 
-**Chloros Installer for Windows**
+**Chloros-asennusohjelma Windows:lle**
 
-* **Version**: 1.0.3
-* **Release Date**: December ?, 2025
-* **File Size**: 1.6GB
-* **File Type**: .exe (Windows Installer)
+* **Versio**: 1.0.3
+* **Julkaisupäivä**: Joulukuu ?, 2025
+* **Tiedoston koko**: 1,6 Gt
+* **Tiedostotyyppi**: .exe (Windows-asennusohjelma)
 
-#### **Installation Steps:**
+#### **Asennusohjeet:**
 
-1. Download the `CHLOROS INSTALLER - CURRENT VERSION.exe` file
-2. Double-click the installer to begin installation
-3. Follow the installation wizard prompts
-4. Choose installation directory (default: `C:\Program Files\Chloros\`)
-5. Complete installation and launch Chloros
-6. Sign in with your MAPIR Cloud Chloros+ account (or continue with free version)
+1. Lataa `CHLOROS INSTALLER - CURRENT VERSION.exe`-tiedosto.
+2. Kaksoisnapsauta asennusohjelmaa aloittaaksesi asennuksen.
+3. Noudata asennusohjeiden ohjeita.
+4. Valitse asennuskansio (oletus: `C:\Program Files\Chloros\`).
+5. Viimeistele asennus ja käynnistä Chloros.
+6. Kirjaudu sisään MAPIR Cloud Chloros+ -tililläsi (tai jatka ilmaisella versiolla).
 
-{% hint style="success" %}
-The installer automatically adds `chloros-cli` to your system PATH for command-line access.
+{% hint style=&quot;success&quot; %}
+Asennusohjelma lisää `chloros-cli` automaattisesti järjestelmän PATH-polkuun komentorivikäyttöä varten.
 {% endhint %}
 
 ***
 
-## Additional Resources
+## Lisäresurssit
 
 ### Python SDK
 
-For developers and automation workflows, install the Chloros Python SDK:
+Kehittäjille ja automaatiotyönkulkuja varten asenna Chloros Python SDK:
 
 ```bash
 pip install chloros-sdk
 ```
 
-**Documentation**: [API: Python SDK](api-python-sdk.md)
+**Dokumentaatio**: [API: Python SDK](api-python-sdk.md)
 
-**Requirements**: Chloros Desktop must be installed, Chloros+ license required
-
-***
-
-## What's Included
-
-The Chloros installation includes:
-
-* ✅ **Chloros Desktop GUI** - Full-featured graphical interface
-* ✅ **Chloros (Browser)** - Web-based interface for lower-spec systems
-* ✅ **Chloros CLI** - Command-line interface (requires Chloros+ license)
-* ✅ **Backend Engine** - Image processing pipeline
-* ✅ **Camera Profiles** - Pre-configured MAPIR camera templates
+**Vaatimukset**: Chloros Desktop on oltava asennettuna, Chloros+ -lisenssi vaaditaan.
 
 ***
 
-## Upgrade to Chloros+
+## Sisältö
 
-Unlock advanced features with a Chloros+ subscription:
+Chloros-asennukseen sisältyy:
 
-* 🚀 **Multi-threaded Processing** - Process images in parallel
-* ⚡ **GPU (CUDA) Acceleration** - Leverage NVIDIA GPU power
-* 💻 **CLI Access** - Automate with command-line tools
-* 🐍 **Python SDK** - Programmatic API access
-* 📱 **Multiple Devices** - Use on 2-10+ devices (plan dependent)
-* 🧮 **Custom Formulas** - Create custom multispectral indices
-
-<p align="center"><a href="https://cloud.mapir.camera/pricing" class="button primary">View Chloros+ Plans &#x26; Pricing</a></p>
+* ✅ **Chloros Desktop GUI** - Täydellinen graafinen käyttöliittymä
+* ✅ **Chloros (selain)** - Verkkopohjainen käyttöliittymä heikompitehoisille järjestelmille
+* ✅ **Chloros CLI** - Komentoriviliittymä (vaatii Chloros+ -lisenssin)
+* ✅ **Backend Engine** - Kuvan käsittelyputki
+* ✅ **Kameraprofiilit** - Esiasetetut MAPIR-kameramallit
 
 ***
 
-## Installation Help
+## Päivitä Chloros+:aan
 
-### Troubleshooting
+Avaa lisäominaisuudet Chloros+-tilauksella:
 
-**Installation fails with error message:**
+* 🚀 **Monisäikeinen käsittely** - Käsittele kuvia rinnakkain
+* ⚡ **GPU (CUDA) -kiihdytys** - Hyödynnä NVIDIA GPU:n tehoa
+* 💻 **CLI-käyttö** - Automatisoi komentorivityökaluilla
+* 🐍 **Python SDK** - Ohjelmoitava API-käyttö
+* 📱 **Useita laitteita** - Käytä 2–10+ laitteella (riippuen paketista)
+* 🧮 **Mukautetut kaavat** - Luo mukautettuja monispektrisiä indeksejä
 
-* Ensure you have administrator rights
-* Temporarily disable antivirus software
-* Check that you meet minimum system requirements
+<p align="center"><a href="https://cloud.mapir.camera/pricing" class="button primary">Näytä Chloros+ -paketit ja hinnat</a></p>***
 
-**Application won't start:**
+## Asennuksen ohjeet
 
-* Try Chloros (Browser) version
-* Verify Windows 10/11 (64-bit) is installed
-* Update graphics drivers
-* Check Windows Event Viewer for error details
-* Contact support with error logs
+### Vianmääritys
 
-**License activation issues:**
+**Asennus epäonnistuu ja näyttöön tulee virheilmoitus:**
 
-* Ensure internet connection is active
-* Verify credentials at [https://cloud.mapir.camera](https://cloud.mapir.camera)
-* Check firewall isn't blocking Chloros
-* See [Chloros+ Login](chloros+-login.md) for detailed instructions
+* Varmista, että sinulla on järjestelmänvalvojan oikeudet.
+* Poista virustorjuntaohjelma väliaikaisesti käytöstä.
+* Tarkista, että järjestelmäsi täyttää vähimmäisvaatimukset.
 
-### Getting Support
+**Sovellus ei käynnisty:**
 
-Need help with installation or setup?
+* Kokeile Chloros (selain) -versiota
+* Varmista, että Windows 10/11 (64-bittinen) on asennettu
+* Päivitä grafiikkakortin ajurit
+* Tarkista Windows Event Viewer -tapahtumalokista virheen yksityiskohdat
+* Ota yhteyttä tukeen ja toimita virhelokit
 
-* 📧 **Email**: info@mapir.camera
-* 🌐 **Website**: [https://www.mapir.camera/community/contact](https://www.mapir.camera/community/contact)
-* 📚 **Documentation**: [Getting Started](./)
-* ❓ **FAQ**: [Frequently Asked Questions](faq.md)
+**Lisenssin aktivointiongelmat:**
+
+* Varmista, että internetyhteys on aktiivinen
+* Tarkista tunnistetiedot osoitteessa [https://cloud.mapir.camera](https://cloud.mapir.camera)
+* Tarkista, että palomuuri ei estä Chloros:ää
+* Katso yksityiskohtaiset ohjeet kohdasta [Chloros+ Kirjautuminen](chloros+-login.md)
+
+### Tukea
+
+Tarvitsetko apua asennuksessa tai asetusten määrittämisessä?
+
+* 📧 **Sähköposti**: info@mapir.camera
+* 🌐 **Verkkosivusto**: [https://www.mapir.camera/community/contact](https://www.mapir.camera/community/contact)
+* 📚 **Dokumentaatio**: [Aloittaminen](./)
+* ❓ **UKK**: [Usein kysytyt kysymykset](faq.md)
 
 ***
 
-## Change Log
+## Muutospäiväkirja
 
 <details>
 
-<summary>Version 1.0.3</summary>
+<summary>Versio 1.0.3</summary>
 
-### **Release Date**: December ?, 2025
+### **Julkaisupäivä**: Joulukuu ?, 2025
 
-#### New Features
+#### Uudet ominaisuudet
 
-* Initial Launch
+* Ensimmäinen julkaisu
 
-#### Improvements
+#### Parannukset
 
-* Initial Launch
+* Ensimmäinen julkaisu
 
-#### Bug Fixes
+#### Virhekorjaukset
 
-* Initial Launch
+* Ensimmäinen julkaisu
 
-#### Known Issues
+#### Tunnettuja ongelmia
 
-* Initial Launch
+* Ensimmäinen julkaisu
 
-</details>
+</details>***
 
-***
+## Lisenssisopimus
 
-## License Agreement
+**Omistusoikeudellinen ohjelmisto** - Copyright (c) 2025 MAPIR Inc.
 
-**Proprietary Software** - Copyright (c) 2025 MAPIR Inc.
+Luvaton käyttö, jakelu tai muokkaaminen on kielletty.
 
-Unauthorized use, distribution, or modification is prohibited.
+**Ilmainen versio**: Saatavilla henkilökohtaiseen ja kaupalliseen käyttöön rajoitetuin ominaisuuksin.
 
-**Free Version**: Available for personal and commercial use with feature limitations
-
-**Chloros+**: Subscription-based license for advanced features and commercial deployments
+**Chloros+**: Tilauspohjainen lisenssi edistyneille ominaisuuksille ja kaupalliseen käyttöön.

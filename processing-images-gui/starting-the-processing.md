@@ -1,366 +1,366 @@
-# Starting the Processing
+# Käsittelyn aloittaminen
 
-Once you've imported your images, marked your calibration targets, and configured your project settings, you're ready to begin processing. This page guides you through initiating the Chloros processing pipeline.
+Kun olet tuonut kuvat, merkinnyt kalibrointikohteet ja määrittänyt projektin asetukset, olet valmis aloittamaan käsittelyn. Tämä sivu opastaa sinua Chloros-käsittelyprosessin aloittamisessa.
 
-## Pre-Processing Checklist
+## Esikäsittelyn tarkistuslista
 
-Before clicking the Start button, verify that everything is ready:
+Ennen kuin napsautat Käynnistä-painiketta, varmista, että kaikki on valmista:
 
-* [ ] **Files imported** - All images appear in File Browser
-* [ ] **Target images marked** - Target column checked for calibration images
-* [ ] **Camera models detected** - Camera Model column shows correct cameras
-* [ ] **Settings configured** - Project Settings reviewed and adjusted
-* [ ] **Indices selected** - Desired multispectral indices added (if needed)
-* [ ] **Export format chosen** - Output format appropriate for your workflow
+* [ ] **Tiedostot tuotu** - Kaikki kuvat näkyvät tiedostoselaimessa
+* [ ] **Kohdekuvat merkitty** - Kohdesarake tarkistettu kalibrointikuvien osalta
+* [ ] **Kameramallit tunnistettu** - Kameramalli-sarakkeessa näkyy oikeat kamerat
+* [ ] **Asetukset määritetty** - Projektin asetukset tarkistettu ja säädetty
+* [ ] **Indeksit valittu** - Halutut monispektriset indeksit lisätty (tarvittaessa)
+* [ ] **Vientimuoto valittu** - Työnkulullesi sopiva tulostusmuoto
 
-{% hint style="info" %}
-**Tip**: Click through a few images in the File Browser to verify they loaded correctly before processing.
+{% vihje style=&quot;info&quot; %}
+**Vinkki**: Napsauta muutamaa kuvaa tiedostoselaimessa varmistaaksesi, että ne on ladattu oikein ennen käsittelyä.
 {% endhint %}
 
 ***
 
-## Starting the Processing
+## Käsittelyn aloittaminen
 
-### Locate the Start Button
+### Aloituspainikkeen sijainti
 
-The Start/Play button is located in the top header bar of Chloros:
+Aloitus-/Toistopainike sijaitsee Chloros:n yläreunan palkissa:
 
-* Position: Top center of the window
-* Icon: **Play/Start button** <img src="../.gitbook/assets/image (2).png" alt="" data-size="line">
-* Status: Button is enabled (bright) when ready to process
+* Sijainti: Ikkunan yläosassa keskellä
+* Kuvake: **Toisto-/Aloituspainike** <img src="../.gitbook/assets/image (2).png" alt="" data-size="line">
+* Tila: Painike on käytössä (kirkas), kun se on valmis käsittelyyn
 
-### Click to Start
+### Aloita napsauttamalla
 
-1. Click the **Play/Start button** in the top header
-2. Processing begins immediately
-3. The button becomes disabled (grayed out) during processing
-4. Progress bar updates, showing processing status
+1. Napsauta **Toisto/Käynnistä-painiketta** yläreunassa
+2. Käsittely alkaa välittömästi
+3. Painike poistuu käytöstä (harmaana) käsittelyn aikana
+4. Edistymispalkki päivittyy ja näyttää käsittelyn tilan
 
-{% hint style="success" %}
-**Processing Started**: Once clicked, Chloros automatically handles all processing steps - target detection, debayering, calibration, index calculation, and export.
+{% hint style=&quot;success&quot; %}
+**Käsittely aloitettu**: Kun painiketta on napsautettu, Chloros käsittelee automaattisesti kaikki käsittelyvaiheet – kohteen tunnistuksen, debayeroinnin, kalibroinnin, indeksin laskennan ja viennin.
 {% endhint %}
 
 ***
 
-## Understanding Processing Modes
+## Käsittelytilojen ymmärtäminen
 
-Chloros operates in two different processing modes depending on your license:
+Chloros toimii kahdessa eri käsittelytilassa lisenssistäsi riippuen:
 
-### Free Mode (Sequential Processing)
+### Ilmainen tila (peräkkäinen käsittely)
 
-**Available to all users**
+**Käytettävissä kaikille käyttäjille**
 
-**How it works:**
+**Kuinka se toimii:**
 
-* Processes images one at a time, sequentially
-* Single-threaded operation
-* Lower memory usage
+* Käsittelee kuvat yksi kerrallaan, peräkkäin
+* Yksisäikeinen toiminta
+* Pienempi muistin käyttö
 
-**Progress bar shows 2 stages:**
+**Edistymispalkki näyttää 2 vaihetta:**
 
-1. **Target Detect** - Scanning for calibration targets
-2. **Processing** - Applying calibration and exporting images
+1. **Kohteen tunnistus** - Kalibrointikohteiden skannaus
+2. **Käsittely** - Kalibroinnin soveltaminen ja kuvien vienti
 
-**Processing time:**
+**Käsittelyaika:**
 
-* Much slower than Chloros+ parallel mode
-* Suitable for small to medium datasets (< 200 images)
+* Paljon hitaampi kuin Chloros+ rinnakkaistila
+* Sopii pienille ja keskisuurille tietojoukoille (&lt; 200 kuvaa)
 
-### Chloros+ Mode (Parallel Processing)
+### Chloros+ -tila (rinnakkaiskäsittely)
 
-**Requires Chloros+ license**
+**Vaatii Chloros+ -lisenssin**
 
-**How it works:**
+**Kuinka se toimii:**
 
-* Processes multiple images simultaneously
-* Multi-threaded operation (up to 16 parallel workers)
-* Utilizes multiple CPU cores
-* Optional GPU (CUDA) acceleration with NVIDIA graphics cards
+* Käsittelee useita kuvia samanaikaisesti
+* Monisäikeinen toiminta (jopa 16 rinnakkaista työntekijää)
+* Hyödyntää useita CPU-ytimiä
+* Valinnainen GPU (CUDA) -kiihdytys NVIDIA-näytönohjaimilla
 
-**Progress bar shows 4 stages:**
+**Edistymispalkki näyttää 4 vaihetta:**
 
-1. **Detecting** - Finding calibration targets
-2. **Analyzing** - Examining image metadata and preparing pipeline
-3. **Calibrating** - Applying corrections and calibrations
-4. **Exporting** - Saving processed images and indices
+1. **Tunnistaminen** - Kalibrointikohteiden etsiminen
+2. **Analysointi** - Kuvan metatietojen tarkastelu ja putkilinjan valmistelu
+3. **Kalibrointi** – Korjausten ja kalibrointien soveltaminen
+4. **Vienti** – Käsiteltyjen kuvien ja indeksien tallentaminen
 
-**Progress bar interaction:**
+**Edistymispalkin käyttö:**
 
-* **Hover mouse** over bar to see detailed 4-stage dropdown panel
-* **Click** progress bar to freeze the dropdown panel in place
-* **Click again** to unfreeze and hide panel
+* **Vie hiiri** palkin päälle nähdäksesi yksityiskohtaisen 4-vaiheisen pudotusvalikon
+* **Napsauta** edistymispalkkia jäädyttääksesi pudotusvalikon paikalleen
+* **Napsauta uudelleen** vapauttaaksesi ja piilottaaksesi valikon
 
-**Processing time:**
+**Käsittelyaika:**
 
-* Significantly faster than free mode
-* Scales with CPU core count
-* GPU acceleration further improves speed
+* Huomattavasti nopeampi kuin vapaa tila
+* Skaalautuu CPU-ytimien määrän mukaan
+* GPU-kiihdytys parantaa nopeutta entisestään
 
-{% hint style="info" %}
-**Chloros+ Speed**: Parallel processing can be 5-10x faster than sequential mode for large datasets. A 500-image project that takes 2 hours in free mode may complete in 15-20 minutes with Chloros+.
+{% hint style=&quot;info&quot; %}
+**Chloros+ Nopeus**: Rinnakkaisprosessointi voi olla 5–10 kertaa nopeampi kuin peräkkäinen tila suurille tietojoukoille. 500 kuvan projekti, joka kestää 2 tuntia ilmaisessa tilassa, voi valmistua 15–20 minuutissa Chloros+:lla.
 {% endhint %}
 
 ***
 
-## What Happens During Processing
+## Mitä tapahtuu käsittelyn aikana
 
-### Stage 1: Target Detection
+### Vaihe 1: Kohteen tunnistus
 
-**What Chloros does:**
+**Mitä Chloros tekee:**
 
-* Scans marked target images (or all images if none marked)
-* Identifies the 4 calibration panels in each target
-* Extracts reflectance values from target panels
-* Records target timestamps for calibration scheduling
+* Skannaa merkityt kohdekuvat (tai kaikki kuvat, jos merkittyjä ei ole)
+* Tunnistaa 4 kalibrointipaneelia jokaisessa kohteessa
+* Poimii heijastavuusarvot kohdepaneeleista
+* Tallentaa kohteen aikaleimat kalibroinnin aikatauluttamista varten
 
-**Duration:** 1-30 seconds (with marked targets), 5-30+ minutes (unmarked)
+**Kesto:** 1–30 sekuntia (merkityillä kohteilla), 5–30+ minuuttia (merkitsemättömillä)
 
-### Stage 2: Debayering (RAW Conversion)
+### Vaihe 2: Debayering (RAW-muunnos)
 
-**What Chloros does:**
+**Chloros:n toiminnot:**
 
-* Converts RAW Bayer pattern data to full RGB images
-* Applies high-quality demosaicing algorithm
-* Preserves maximum image quality and detail
+* Muuntaa RAW-Bayer-kuvion tiedot täysiksi RGB-kuviksi
+* Soveltaa korkealaatuista demosaicing-algoritmia
+* Säilyttää kuvan laadun ja yksityiskohdat mahdollisimman hyvin
 
-**Duration:** Varies by image count and CPU speed
+**Kesto:** Vaihtelee kuvien määrän ja prosessorin nopeuden mukaan
 
-### Stage 3: Calibration
+### Vaihe 3: Kalibrointi
 
-**What Chloros does:**
+**Mitä Chloros tekee:**
 
-* **Vignette correction**: Removes lens darkening at edges
-* **Reflectance calibration**: Normalizes using target reflectance values
-* Applies corrections across all bands/channels
-* Uses appropriate calibration target for each image based on timestamp
+* **Vignette-korjaus**: Poistaa objektiivin tummenemisen reunoilla
+* **Heijastavuuskalibrointi**: Normalisoi käyttämällä kohteen heijastavuusarvoja
+* Soveltaa korjauksia kaikkiin kaistoihin/kanaviin
+* Käyttää sopivaa kalibrointikohdetta jokaiselle kuvalle aikaleiman perusteella
 
-**Duration:** Majority of processing time
+**Kesto:** Suurin osa käsittelyajasta
 
-### Stage 4: Index Calculation
+### Vaihe 4: Indeksin laskeminen
 
-**What Chloros does:**
+**Mitä Chloros tekee:**
 
-* Calculates configured multispectral indices (NDVI, NDRE, etc.)
-* Applies band math to calibrated images
-* Generates index images for each selected index
+* Laskee konfiguroidut monispektriset indeksit (NDVI, NDRE jne.)
+* Soveltaa kaistamatematiikkaa kalibroituihin kuviin
+* Luo indeksikuvat jokaiselle valitulle indeksille
 
-**Duration:** A few seconds per image
+**Kesto:** Muutama sekunti kuvaa kohti
 
-### Stage 5: Export
+### Vaihe 5: Vienti
 
-**What Chloros does:**
+**Mitä Chloros tekee:**
 
-* Saves calibrated images in selected format
-* Exports index images with configured LUT colors
-* Writes files to camera model subfolders
-* Preserves original filenames with suffixes
+* Tallentaa kalibroidut kuvat valitussa muodossa
+* Vie indeksikuvat konfiguroiduilla LUT-väreillä
+* Kirjoittaa tiedostot kameramallin alikansioihin
+* Säilyttää alkuperäiset tiedostonimet ja päätteet
 
-**Duration:** Varies by export format and file size
+**Kesto:** Vaihtelee vientimuodon ja tiedostokoon mukaan
 
 ***
 
-## Processing Behavior
+## Käsittelykäyttäytyminen
 
-### Automatic Processing Pipeline
+### Automaattinen käsittelyputki
 
-Once started, the entire pipeline runs automatically:
+Kun käsittely on aloitettu, koko putki toimii automaattisesti:
 
-* No user interaction needed
-* All configured steps execute in sequence
-* Progress updates shown in real-time
+* Käyttäjän toimia ei tarvita
+* Kaikki määritetyt vaiheet suoritetaan peräkkäin
+* Edistyspäivitykset näkyvät reaaliajassa
 
-### Computer Usage During Processing
+### Tietokoneen käyttö käsittelyn aikana
 
-**Free Mode:**
+**Vapaa tila:**
 
-* Relatively low CPU usage (single-threaded)
-* Computer remains responsive for other tasks
-* Safe to minimize Chloros and work in other applications
+* Suhteellisen alhainen CPU-käyttö (yksisäikeinen)
+* Tietokone pysyy reagoivana muihin tehtäviin
+* Chloros-ohjelman voi turvallisesti minimoida ja työskennellä muissa sovelluksissa
 
-**Chloros+ Parallel Mode:**
+**Chloros+ rinnakkaistila:**
 
-* High CPU usage (multi-threaded, up to 16 cores)
-* With GPU acceleration: High GPU usage
-* Computer may be less responsive during processing
-* Avoid starting other CPU-intensive tasks
+* Korkea CPU:n käyttö (monisäikeinen, jopa 16 ydintä)
+* GPU-kiihdytyksellä: Korkea GPU:n käyttö
+* Tietokone voi olla vähemmän reagoiva käsittelyn aikana
+* Vältä muiden CPU:ta kuormittavien tehtävien käynnistämistä
 
-{% hint style="warning" %}
-**Performance Tip**: For best Chloros+ performance, close other applications and let Chloros use full system resources.
+{% hint style=&quot;warning&quot; %}
+**Suorituskykyvinkki**: Parhaan suorituskyvyn saavuttamiseksi sulje muut sovellukset ja anna Chloros:n käyttää kaikkia järjestelmän resursseja.
 {% endhint %}
 
-### Processing Cannot Be Paused
+### Käsittelyä ei voi keskeyttää
 
-**Important limitations:**
+**Tärkeitä rajoituksia:**
 
-* Once started, processing cannot be paused
-* You can cancel processing, but progress is lost
-* Partial results are not saved
-* Must restart from beginning if canceled
+* Kun käsittely on aloitettu, sitä ei voi keskeyttää.
+* Voit peruuttaa käsittelyn, mutta edistys menetetään.
+* Osittaisia tuloksia ei tallenneta.
+* Peruutuksen jälkeen on aloitettava alusta.
 
-**Planning tip:** For very large projects, consider processing in batches or using CLI for better control.
-
-***
-
-## Monitoring Your Processing
-
-While processing runs, you can:
-
-* **Watch progress bar** - See overall completion percentage
-* **View current stage** - Detect, Analyze, Calibrate, or Export
-* **Check log tab** - See detailed processing messages and warnings
-* **Preview completed images** - Some export files may appear during processing
-
-For detailed information on monitoring, see [Monitoring the Processing](monitoring-the-processing.md).
+**Suunnitteluvinkki:** Erittäin suurissa projekteissa kannattaa harkita käsittelyä erissä tai CLI:n käyttöä paremman hallinnan saavuttamiseksi.
 
 ***
 
-## Canceling Processing
+## Käsittelyn seuranta
 
-If you need to stop processing:
+Käsittelyn aikana voit:
 
-### How to Cancel
+* **Tarkkailla edistymispalkkia** – Katso kokonaisvaltainen valmistumisprosentti
+* **Tarkastella nykyistä vaihetta** – Tunnista, analysoi, kalibroi tai vie
+* **Tarkastella lokivälilehteä** – Katso yksityiskohtaiset käsittelyviestit ja varoitukset
+* **Esikatsella valmiita kuvia** – Jotkin vientitiedostot voivat näkyä käsittelyn aikana
 
-1. Locate the **Stop/Cancel button** (replaces Start button during processing)
-2. Click the Stop button
-3. Processing halts immediately
-4. Partial results are discarded
+Yksityiskohtaiset tiedot seurannasta ovat kohdassa [Käsittelyn seuranta](monitoring-the-processing.md).
 
-### When to Cancel
+***
 
-**Valid reasons to cancel:**
+## Käsittelyn peruuttaminen
 
-* Realized incorrect settings were used
-* Forgot to mark target images
-* Wrong images imported
-* System running too slow or unresponsive
+Jos haluat lopettaa käsittelyn:
 
-**After canceling:**
+### Peruuttaminen
 
-* Review and fix any issues
-* Adjust settings as needed
-* Restart processing from the beginning
-* For the cleanest experience, completely close Chloros and restart
+1. Etsi **Lopeta/Peruuta-painike** (korvaa Käynnistä-painikkeen käsittelyn aikana)
+2. Napsauta Stop-painiketta
+3. Käsittely keskeytyy välittömästi
+4. Osittaiset tulokset hylätään
 
-{% hint style="warning" %}
-**No Partial Results**: Canceling discards all progress. Chloros does not save partially processed images.
+### Milloin peruuttaa
+
+**Perustellut syyt peruuttamiseen:**
+
+* Huomasit, että asetukset olivat virheelliset
+* Unohdit merkitä kohdekuvat
+* Tuotiin vääriä kuvia
+* Järjestelmä toimii liian hitaasti tai ei vastaa
+
+**Peruuttamisen jälkeen:**
+
+* Tarkista ja korjaa mahdolliset ongelmat
+* Säädä asetuksia tarpeen mukaan
+* Käynnistä käsittely alusta
+* Parhaan käyttökokemuksen saamiseksi sulje Chloros kokonaan ja käynnistä se uudelleen
+
+{% hint style=&quot;warning&quot; %}
+**Ei osittaisia tuloksia**: Peruuttaminen hylkää kaiken edistymisen. Chloros ei tallenna osittain käsiteltyjä kuvia.
 {% endhint %}
 
 ***
 
-## Processing Time Estimates
+## Käsittelyajan arviointi
 
-Actual processing time varies greatly based on:
+Todellinen käsittelyaika vaihtelee suuresti seuraavien tekijöiden mukaan:
 
-* Number of images
-* Image resolution
-* RAW vs JPG input format
-* Processing mode (Free vs Chloros+)
-* CPU speed and core count
-* GPU availability (Chloros+ only)
-* Number of indices to calculate
-* Export format complexity
+* Kuvien määrä
+* Kuvan resoluutio
+* RAW- tai JPG-tiedostomuoto
+* Käsittelytila (ilmainen vs. Chloros+)
+* CPU:n nopeus ja ytimien lukumäärä
+* GPU:n saatavuus (vain Chloros+)
+* Laskettavien indeksien lukumäärä
+* Vientimuodon monimutkaisuus
 
-### Rough Estimates (Chloros+, 12MP images, modern CPU)
+### Karkeat arviot (Chloros+, 12 MP:n kuvat, moderni CPU)
 
-| Image Count | Free Mode | Chloros+ (CPU) | Chloros+ (GPU) |
+| Kuvien lukumäärä | Ilmainen tila | Chloros+ (CPU) | Chloros+ (GPU) |
 | ----------- | --------- | -------------- | -------------- |
-| 50 images   | 15-20 min | 5-8 min        | 3-5 min        |
-| 100 images  | 30-40 min | 10-15 min      | 5-8 min        |
-| 200 images  | 1-1.5 hrs | 20-30 min      | 10-15 min      |
-| 500 images  | 2-3 hrs   | 45-60 min      | 20-30 min      |
-| 1000 images | 4-6 hrs   | 1.5-2 hrs      | 40-60 min      |
+| 50 kuvaa   | 15–20 min | 5–8 min        | 3–5 min        |
+| 100 kuvaa  | 30–40 min | 10–15 min      | 5–8 min        |
+| 200 kuvaa  | 1–1,5 tuntia | 20–30 min      | 10–15 min      |
+| 500 kuvaa  | 2–3 tuntia   | 45–60 min      | 20–30 min      |
+| 1000 kuvaa | 4–6 tuntia   | 1,5–2 tuntia      | 40–60 min      |
 
-{% hint style="info" %}
-**First Run**: Initial processing may take longer as Chloros builds caches and profiles. Subsequent processing of similar datasets will be faster.
+{% hint style=&quot;info&quot; %}
+**Ensimmäinen käyttökerta**: Alkuperäinen käsittely voi kestää kauemmin, koska Chloros luo välimuistit ja profiilit. Samanlaisten tietojoukkojen myöhempi käsittely on nopeampaa.
 {% endhint %}
 
 ***
 
-## Common Issues at Start
+## Yleisiä ongelmia käynnistyksen yhteydessä
 
-### Start Button Disabled (Grayed Out)
+### Käynnistyspainike ei ole käytettävissä (harmaana)
 
-**Possible causes:**
+**Mahdolliset syyt:**
 
-* No images imported
-* Backend not fully started
-* Previous processing still running
-* Project not fully loaded
+* Kuvia ei ole tuotu
+* Taustaprosessi ei ole käynnistynyt kokonaan
+* Edellinen käsittely on vielä käynnissä
+* Projekti ei ole ladattu kokonaan
 
-**Solutions:**
+**Ratkaisut:**
 
-1. Wait for backend to fully initialize (check main menu icon)
-2. Verify images are imported in File Browser
-3. Restart Chloros if button remains disabled
-4. Check Debug Log for error messages
+1. Odota, että taustaohjelma käynnistyy kokonaan (tarkista päävalikon kuvake)
+2. Varmista, että kuvat on tuotu tiedostoselaimessa
+3. Käynnistä Chloros uudelleen, jos painike on edelleen pois käytöstä
+4. Tarkista virheilmoitukset vianmäärityslogista
 
-### Processing Starts Then Immediately Fails
+### Käsittely alkaa, mutta epäonnistuu välittömästi
 
-**Possible causes:**
+**Mahdolliset syyt:**
 
-* No valid images in project
-* Corrupted image files
-* Insufficient disk space
-* Insufficient memory (RAM)
+* Projektissa ei ole kelvollisia kuvia
+* Vioittuneet kuvatiedostot
+* Riittämätön levytila
+* Riittämätön muisti (RAM)
 
-**Solutions:**
+**Ratkaisut:**
 
-1. Check Debug Log <img src="../.gitbook/assets/icon_log.JPG" alt="" data-size="line"> for error messages
-2. Verify disk space available
-3. Try processing a smaller subset of images
-4. Verify images are not corrupted
+1. Tarkista virheloki <img src="../.gitbook/assets/icon_log.JPG" alt="" data-size="line"> virheilmoitusten varalta
+2. Tarkista käytettävissä oleva levytila
+3. Yritä käsitellä pienempiä kuvajoukkoja
+4. Tarkista, että kuvat eivät ole vioittuneet
 
-### "No Targets Detected" Warning
+### Varoitus &quot;Kohteita ei havaittu&quot;
 
-**Possible causes:**
+**Mahdolliset syyt:**
 
-* Forgot to mark target images
-* Target images don't contain visible targets
-* Target detection settings too strict
+* Kohdekuvien merkitseminen on unohdettu
+* Kohdekuvat eivät sisällä näkyviä kohteita
+* Kohteiden tunnistuksen asetukset ovat liian tiukat
 
-**Solutions:**
+**Ratkaisut:**
 
-1. Review [Choosing Target Images](choosing-target-images.md)
-2. Mark appropriate images in Target column
-3. Verify targets are visible in marked images
-4. Adjust target detection settings if needed
-
-***
-
-## Tips for Successful Processing
-
-### Before Starting
-
-1. **Test with small subset first** - Process 10-20 images to verify settings
-2. **Check available disk space** - Ensure 2-3x dataset size free
-3. **Close unnecessary applications** - Free up system resources
-4. **Verify target images** - Preview marked targets to ensure quality
-5. **Save project** - Project auto-saves, but good practice to save manually
-
-### During Processing
-
-1. **Avoid system sleep** - Disable power saving modes
-2. **Keep Chloros in foreground** - Or at least visible in taskbar
-3. **Monitor progress occasionally** - Check for warnings or errors
-4. **Don't load other heavy applications** - Especially with Chloros+ parallel mode
-
-### Chloros+ GPU Acceleration
-
-If using NVIDIA GPU acceleration:
-
-1. Update NVIDIA drivers to latest version
-2. Ensure GPU has 4GB+ VRAM
-3. Close GPU-intensive applications (games, video editing)
-4. Monitor GPU temperature (ensure adequate cooling)
+1. Tarkista [Kohdekuvien valinta](choosing-target-images.md)
+2. Merkitse sopivat kuvat Kohde-sarakkeeseen
+3. Varmista, että kohteet ovat näkyvissä merkityissä kuvissa
+4. Säädä kohteen tunnistuksen asetuksia tarvittaessa
 
 ***
 
-## Next Steps
+## Vinkkejä onnistuneeseen käsittelyyn
 
-Once processing has started:
+### Ennen aloittamista
 
-1. **Monitor the progress** - See [Monitoring the Processing](monitoring-the-processing.md)
-2. **Wait for completion** - Processing runs automatically
-3. **Review results** - See [Finishing the Processing](finishing-the-processing.md)
+1. **Testaa ensin pienellä osajoukolla** - Käsittele 10–20 kuvaa asetusten tarkistamiseksi
+2. **Tarkista käytettävissä oleva levytila** - Varmista, että vapaata tilaa on 2–3 kertaa datajoukon koko
+3. **Sulje tarpeettomat sovellukset** - Vapauta järjestelmän resursseja
+4. **Tarkista kohdekuvat** - Esikatsele merkityt kohteet laadun varmistamiseksi
+5. **Tallenna projekti** – Projekti tallentuu automaattisesti, mutta on hyvä tallentaa se myös manuaalisesti.
 
-For information about what to do during processing, see [Monitoring the Processing](monitoring-the-processing.md).
+### Käsittelyn aikana
+
+1. **Vältä järjestelmän lepotilaa** – Poista virransäästötilat käytöstä.
+2. **Pidä Chloros etualalla** – Tai ainakin näkyvissä tehtäväpalkissa.
+3. **Seuraa edistymistä ajoittain** – Tarkista varoitukset tai virheet.
+4. **Älä lataa muita raskaita sovelluksia** - Erityisesti Chloros+ rinnakkaistilassa
+
+### Chloros+ GPU-kiihdytys
+
+Jos käytät NVIDIA GPU-kiihdytystä:
+
+1. Päivitä NVIDIA-ajurit uusimpaan versioon
+2. Varmista, että GPU:ssa on vähintään 4 Gt VRAM-muistia
+3. Sulje GPU:ta paljon kuormittavat sovellukset (pelit, videon editointi)
+4. Tarkkaile GPU:n lämpötilaa (varmista riittävä jäähdytys)
+
+***
+
+## Seuraavat vaiheet
+
+Kun käsittely on alkanut:
+
+1. **Seuraa edistymistä** - Katso [Käsittelyn seuraaminen](monitoring-the-processing.md)
+2. **Odota käsittelyn päättymistä** – Käsittely suoritetaan automaattisesti.
+3. **Tarkista tulokset** – Katso [Käsittelyn lopettaminen](finishing-the-processing.md).
+
+Lisätietoja käsittelyn aikana suoritettavista toimista on kohdassa [Käsittelyn seuranta](monitoring-the-processing.md).

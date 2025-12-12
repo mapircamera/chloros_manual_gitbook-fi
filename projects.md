@@ -1,17 +1,13 @@
-# Projektit
+# GUI : Projektit
 
-Chloros antaa sinun luoda projekteja, jotka voidaan avata uudelleen tulevaisuudessa.
+Chloros:n avulla voit luoda projekteja, jotka voidaan avata uudelleen myöhemmin.
 
 ## Uusi projekti
 
-<figure><img src=".gitbook/assets/project_new.JPG" alt=""><figcaption></figcaption></figure>
-
-Valitse päävalikosta "Uusi projekti" ja anna projektillesi yksilöllinen nimi.
+<figure><img src=".gitbook/assets/project_new.JPG" alt=""><figcaption></figcaption></figure>Valitse päävalikosta &quot;Uusi projekti&quot; ja anna projektillesi yksilöllinen nimi.
 
 ## Avaa projekti
 
-<figure><img src=".gitbook/assets/project_open.JPG" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/project_open.JPG" alt=""><figcaption></figcaption></figure>Valitse &quot;Avaa projekti&quot; nähdäksesi luettelon olemassa olevista projekteista projektikansiossa. Jos projekteja ei ole, toissijainen sivumenu ei avaudu. Yllä olevassa kuvassa näkyy joitakin GUI:n luomia projekteja (t1, t2, t3). DATE\_TIME-projektit on luotu CLI:llä käyttäen oletusprojektien nimeämissääntöjä. Klikkaamalla mitä tahansa projektin nimeä avaat sen.
 
-Valitse "Avaa projekti" nähdäksesi luettelon Projektikansiossa olevista projekteista. Jos projekteja ei ole, toissijainen sivuvalikko ei avaudu. Näet joitain GUI:lla luotuja projekteja (t1, t2, t3) yllä olevassa kuvassa. CLI loi projektit DATE\_TIME käyttämällä oletusarvoista projektin nimeämisjärjestelmää. Klikkaamalla minkä tahansa projektin nimeä se avautuu.
-
-Napsauttamalla "Avaa projektikansio" -painiketta avautuu tietokoneesi tiedostojen hallinta projektipolulle. Voit säätää projektin polkua osoitteessa [Projektiasetukset](project-settings/page-2.md).
+Kun napsautat &quot;Avaa projektikansio&quot; -painiketta, tietokoneesi tiedostoselain avautuu projektin polulle. Voit muokata projektin polkua [Projektin asetuksissa](project-settings/project-settings.md).

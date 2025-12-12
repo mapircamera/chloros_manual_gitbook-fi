@@ -1,221 +1,221 @@
-# Choosing Target Images
+# Kohdekuvien valinta
 
-Marking which images contain calibration targets is a crucial step that significantly speeds up the Chloros processing pipeline. By pre-selecting target images, you eliminate the need for Chloros to scan every image in your dataset for calibration targets.
+Kalibrointikohteita sisältävien kuvien merkitseminen on tärkeä vaihe, joka nopeuttaa merkittävästi Chloros-käsittelyprosessia. Valitsemalla kohdekuvat etukäteen, Chloros:n ei tarvitse skannata kaikkia datajoukon kuvia kalibrointikohteiden löytämiseksi.
 
-## Why Mark Target Images?
+## Miksi kohdekuvat on merkittävä?
 
-### Processing Speed
+### Käsittelynopeus
 
-Without marking target images, Chloros must:
+Ilman kohdekuvien merkitsemistä Chloros:n on:
 
-* Scan every single image in your project
-* Run target detection algorithms on each image
-* Check hundreds or thousands of images unnecessarily
+* Skannattava jokainen projektiisi kuuluva kuva
+* Suoritettava kohteen tunnistusalgoritmit jokaiselle kuvalle
+* Tarkistettava satoja tai tuhansia kuvia tarpeettomasti
 
-**Result**: Processing can take significantly longer, especially for large datasets.
+**Tulos**: Käsittely voi kestää huomattavasti kauemmin, etenkin suurten tietokokonaisuuksien kohdalla.
 
-### With Marked Target Images
+### Merkityt kohdekuvat
 
-When you check the Target column for specific images:
+Kun valitset kohdekuvat kohdesarakkeesta:
 
-* Chloros only scans the checked images for targets
-* Target detection completes much faster
-* Overall processing time is greatly reduced
+* Chloros skannaa vain valitut kuvat kohteiden löytämiseksi
+* Kohteiden tunnistus tapahtuu paljon nopeammin
+* Kokonaiskäsittelyaika lyhenee huomattavasti
 
-{% hint style="success" %}
-**Speed Improvement**: Marking 2-3 target images in a 500-image dataset can reduce target detection time from 30+ minutes to under 1 minute.
+{% hint style=&quot;success&quot; %}
+**Nopeuden parannus**: Merkitsemällä 2–3 kohdekuvaa 500 kuvan tietojoukosta voidaan kohteen tunnistusaika lyhentää yli 30 minuutista alle minuuttiin.
 {% endhint %}
 
 ***
 
-## How to Mark Target Images
+## Kohdekuvien merkitseminen
 
-### Step 1: Identify Your Target Images
+### Vaihe 1: Tunnista kohdekuvat
 
-Look through your imported images in the File Browser and identify which images contain calibration targets.
+Tarkista tuodut kuvat tiedostoselaimessa ja tunnista, mitkä kuvat sisältävät kalibrointikohteita.
 
-**Common scenarios:**
+**Yleisiä tilanteita:**
 
-* **Pre-capture target**: Captured before starting the session
-* **Post-capture target**: Captured after completing the session
-* **In-field targets**: Targets placed within the capture area
-* **Multiple targets**: 2-3 target images per session (recommended)
+* **Ennen kuvausta otettu kohde**: Otettu ennen istunnon aloittamista.
+* **Kuvauksen jälkeen otettu kohde**: Otettu istunnon päätyttyä.
+* **Kentällä olevat kohteet**: Kohteet, jotka on sijoitettu kuvausalueelle.
+* **Useita kohteita**: 2–3 kohdekuvaa istuntoa kohti (suositus).
 
-### Step 2: Check the Target Column
+### Vaihe 2: Tarkista kohdesarake
 
-For each image containing a calibration target:
+Jokaiselle kalibrointikohteen sisältävälle kuvalle:
 
-1. Locate the image in the File Browser table
-2. Find the **Target** column (rightmost column)
-3. Click the checkbox in the Target column for that image
-4. Repeat for all images containing targets
+1. Etsi kuva tiedostoselaimen taulukosta.
+2. Etsi **Kohde**-sarake (oikeanpuoleisin sarake).
+3. Napsauta kyseisen kuvan Kohde-sarakkeen valintaruutua.
+4. Toista tämä kaikille kohteita sisältäville kuville.
 
-### Step 3: Verify Your Selection
+### Vaihe 3: Vahvista valintasi
 
-Before processing, double-check:
+Tarkista ennen käsittelyä, että:
 
-* [ ] All images with calibration targets are checked
-* [ ] No non-target images are accidentally checked
-* [ ] Targets are clearly visible in checked images
-
-***
-
-## Best Practices for Target Images
-
-### Target Capture Guidelines
-
-**Timing:**
-
-* Capture target images immediately before and throughout your capture session
-* Within the same lighting conditions as your DAQ light sensor
-* Ideally capture target images as often as possible for the best results. Otherwise, the light sensor data will be used to adjust the calibration over time.
-
-**Camera Position:**
-
-* Hold camera above target such that is is centered and fills around 40-60% of the image center.
-* Keep camera parallel/nadir to target surface
-
-**Lighting:**
-
-* Same ambient lighting as your DAQ light sensor
-* Avoid shadows on the target surfaces
-* Don't block your light source with your body, vehicle or vegetation
-* Overcast conditions provide most consistent results
-
-**Target Condition:**
-
-* Keep target panels clean and dry
-* All 4 panels should be clearly visible and unobstructed
-* Targets perpendicular/nadir to the light source if possible
-
-### How Many Target Images?
-
-**Minimum:** 1 target image per session. **Recommended:** 3-5 target images per session.
-
-**Best practice schedule:**
-
-* 3-5 images captured shortly after the light sensor is recording
-* Rotate the camera between captures for the best results
-* Optional: periodically mid-session if lighting conditions change constantly
+* [ ] Kaikki kalibrointikohteita sisältävät kuvat on valittu.
+* [ ] Mitään muita kuin kohdekuvia ei ole valittu vahingossa.
+* [ ] Kohteet ovat selvästi näkyvissä valituissa kuvissa.
 
 ***
 
-## Working with Multiple Cameras
+## Kohdekuvien parhaat käytännöt
 
-### Dual-Camera Setups
+### Kohteiden kuvaamisen ohjeet
 
-If using two MAPIR cameras simultaneously (e.g., Survey3W RGN + Survey3N OCN):
+**Ajoitus:**
 
-1. Capture target images with **both cameras** at the same time
-2. Use the **same physical target** for both cameras
-3. Mark target images for **both camera types** in the File Browser
-4. Chloros will use appropriate targets for each camera's calibration
+* Ota kohdekuvat välittömästi ennen kuvaussessiota ja sen aikana.
+* Ota kuvat samoissa valaistusolosuhteissa kuin DAQ-valosensori.
+* Ihannetapauksessa ota kohdekuvia mahdollisimman usein, jotta saat parhaat tulokset. Muussa tapauksessa valosensorin tietoja käytetään kalibroinnin säätämiseen ajan mittaan.
 
-### Camera Model Column
+**Kameran sijainti:**
 
-The **Camera Model** column helps identify which images came from which camera:
+* Pidä kameraa kohteen yläpuolella siten, että se on keskellä ja täyttää noin 40–60 % kuvan keskikohdasta.
+* Pidä kamera yhdensuuntaisena/nadir-asennossa kohteen pintaan nähden
+
+**Valaistus:**
+
+* Sama ympäristön valaistus kuin DAQ-valosensorissa
+* Vältä varjoja kohteen pinnalla
+* Älä peitä valonlähdettä kehollasi, ajoneuvolla tai kasvillisuudella
+* Pilvinen sää tuottaa tasaisimmat tulokset
+
+**Kohteen kunto:**
+
+* Pidä kohdepaneelit puhtaina ja kuivina
+* Kaikkien neljän paneelin tulee olla selvästi näkyvissä ja esteettömiä
+* Kohteet kohtisuorassa/nadir-asennossa valonlähteeseen nähden, jos mahdollista
+
+### Kuinka monta kohdekuvaa?
+
+**Vähimmäismäärä:** 1 kohdekuva per istunto. **Suositeltava määrä:** 3–5 kohdekuvaa per istunto.
+
+**Paras käytäntö:**
+
+* Ota 3–5 kuvaa pian valosensorin tallennuksen aloittamisen jälkeen.
+* Kierrä kameraa kuvien välillä parhaan tuloksen saamiseksi.
+* Valinnainen: ota kuvia säännöllisesti istunnon aikana, jos valaistusolosuhteet muuttuvat jatkuvasti.
+
+***
+
+## Useiden kameroiden käyttö
+
+### Kaksi kameraa
+
+Jos käytät kahta MAPIR-kameraa samanaikaisesti (esim. Survey3W RGN + Survey3N OCN):
+
+1. Ota kohdekuvat **molemmilla kameroilla** samanaikaisesti.
+2. Käytä **samaa fyysistä kohdetta** molemmille kameroille.
+3. Merkitse kohdekuvat **molemmille kameratyypeille** tiedostoselaimessa.
+4. Chloros käyttää sopivia kohteita kunkin kameran kalibrointiin.
+
+### Kameramallipylväs
+
+**Kameramalli**-pylväs auttaa tunnistamaan, mitkä kuvat ovat peräisin mistäkin kamerasta:
 
 * Survey3W\_RGN
 * Survey3N\_OCN
 * Survey3W\_RGB
-* etc.
+* jne.
 
-Use this column to verify you've marked targets for each camera type in your project.
-
-***
-
-## Target Detection Settings
-
-### Adjusting Detection Sensitivity
-
-If Chloros isn't detecting your targets correctly, adjust these settings in [Project Settings](adjusting-project-settings.md):
-
-**Minimum calibration sample area:**
-
-* **Default**: 25 pixels
-* **Increase** if getting false detections on small artifacts
-* **Decrease** if targets aren't being detected
-
-**Minimum target clustering:**
-
-* **Default**: 60
-* **Increase** if targets are being split into multiple detections
-* **Decrease** if targets with color variation aren't fully detected
+Käytä tätä saraketta tarkistaaksesi, että olet merkinnyt kohteet jokaiselle kameratyypille projektissasi.
 
 ***
 
-## Common Target Image Issues
+## Kohteen tunnistuksen asetukset
 
-### Problem: No Targets Detected
+### Tunnistuksen herkkyyden säätäminen
 
-**Possible causes:**
+Jos Chloros ei tunnista kohteitasi oikein, säädä näitä asetuksia [Projektin asetuksissa](adjusting-project-settings.md):
 
-* Target images not marked in File Browser
-* Target too small in frame (< 30% of image)
-* Poor lighting (shadows, glare)
-* Target detection settings too strict
+**Vähimmäiskalibrointinäytealue:**
 
-**Solutions:**
+* **Oletus**: 25 pikseliä
+* **Lisää**, jos pienet esineet tunnistetaan virheellisesti
+* **Vähennä**, jos kohteita ei tunnisteta
 
-1. Verify Target column is checked for correct images
-2. Review target image quality in preview
-3. Recapture targets if quality is poor
-4. Adjust target detection settings if needed
+**Vähimmäiskohteiden klusterointi:**
 
-### Problem: False Target Detections
-
-**Possible causes:**
-
-* White buildings, vehicles, or ground cover mistaken for targets
-* Bright patches in vegetation
-* Detection sensitivity too low
-
-**Solutions:**
-
-1. Mark only actual target images to limit detection scope
-2. Increase minimum calibration sample area
-3. Increase minimum target clustering value
-4. Ensure target images show only the target (minimal background clutter)
+* **Oletus**: 60
+* **Lisää**, jos kohteet jaetaan useisiin tunnistuksiin
+* **Vähennä**, jos värivaihteluita sisältäviä kohteita ei tunnisteta kokonaan
 
 ***
 
-## Verification Checklist
+## Yleisiä kohdekuvaongelmia
 
-Before starting processing, verify your target image selection:
+### Ongelma: Kohteita ei tunnistettu
 
-* [ ] At least 1 target image marked per session
-* [ ] Target column checkboxes are checked for all target images
-* [ ] Target images captured within same timeframe as survey
-* [ ] Targets clearly visible in preview when clicked
-* [ ] All 4 calibration panels visible in each target image
-* [ ] No shadows or obstructions on targets
-* [ ] For dual-camera: Targets marked for both camera types
+**Mahdolliset syyt:**
+
+* Kohdekuvia ei ole merkitty tiedostoselaimessa
+* Kohde on liian pieni kehyksessä (&lt; 30 % kuvasta)
+* Huono valaistus (varjot, häikäisy)
+* Kohteen havaitsemisen asetukset liian tiukat
+
+**Ratkaisut:**
+
+1. Varmista, että Kohde-sarakkeessa on valittu oikeat kuvat
+2. Tarkista kohteen kuvanlaatu esikatselussa
+3. Ota kohteet uudelleen, jos laatu on huono
+4. Säädä kohteen havaitsemisen asetuksia tarvittaessa
+
+### Ongelma: Vääriä kohteen havaitsemisia
+
+**Mahdolliset syyt:**
+
+* Valkoiset rakennukset, ajoneuvot tai maaperä peittävät kohteet
+* Kirkkaat kohdat kasvillisuudessa
+* Tunnistuksen herkkyys liian alhainen
+
+**Ratkaisut:**
+
+1. Merkitse vain todelliset kohdekuvat tunnistuksen rajoittamiseksi
+2. Lisää kalibroinnin vähimmäisnäytealuetta
+3. Lisää kohteen vähimmäisklusterointiarvoa
+4. Varmista, että kohdekuvissa näkyy vain kohde (minimaalinen taustakohina)
 
 ***
 
-## Target-Free Processing
+## Tarkistuslista
 
-### Processing Without Calibration Targets
+Ennen käsittelyn aloittamista tarkista kohdekuvien valinta:
 
-While not recommended for scientific work, you can process without targets:
+* [ ] Vähintään 1 kohdekuva merkitty per istunto
+* [ ] Kohdesarakkeen valintaruudut on valittu kaikille kohdekuville
+* [ ] Kohdekuvat on otettu samanaikaisesti kuin mittaus
+* [ ] Kohteet näkyvät selvästi esikatselussa, kun niitä napsautetaan
+* [ ] Kaikki 4 kalibrointipaneelia näkyvät jokaisessa kohdekuvassa
+* [ ] Kohteissa ei ole varjoja tai esteitä
+* [ ] Kaksikamerajärjestelmässä: Kohteet on merkitty molemmille kameratyypeille
 
-1. Leave all Target column checkboxes unchecked
-2. **Disable** "Reflectance calibration" in Project Settings
-3. Vignette correction will still be applied
-4. Output will not be calibrated for absolute reflectance
+***
 
-{% hint style="warning" %}
-**Not Recommended**: Without reflectance calibration, pixel values represent relative brightness only, not scientific reflectance measurements. Use calibration targets for accurate, repeatable results.
+## Kohteettoman käsittelyn
+
+### Käsittely ilman kalibrointikohteita
+
+Vaikka sitä ei suositella tieteelliseen työhön, voit käsitellä ilman kohteita:
+
+1. Jätä kaikki Kohde-sarakkeen valintaruudut valitsematta
+2. **Poista käytöstä** &quot;Heijastavuuskalibrointi&quot; projektin asetuksissa
+3. Vignettikorjaus otetaan edelleen käyttöön.
+4. Tulostetta ei kalibroida absoluuttisen heijastavuuden osalta.
+
+{% hint style=&quot;warning&quot; %}
+**Ei suositella**: Ilman heijastavuuden kalibrointia pikseliarvot edustavat vain suhteellista kirkkautta, eivät tieteellisiä heijastavuusmittauksia. Käytä kalibrointikohteita tarkkojen, toistettavien tulosten saamiseksi.
 {% endhint %}
 
 ***
 
-## Next Steps
+## Seuraavat vaiheet
 
-Once you've marked your target images:
+Kun olet merkinnyt kohdekuvat:
 
-1. **Review your settings** - See [Adjusting Project Settings](adjusting-project-settings.md)
-2. **Start processing** - See [Starting the Processing](starting-the-processing.md)
-3. **Monitor progress** - See [Monitoring the Processing](monitoring-the-processing.md)
+1. **Tarkista asetukset** - Katso [Projektin asetusten säätäminen](adjusting-project-settings.md)
+2. **Aloita käsittely** - Katso [Käsittelyn aloittaminen](starting-the-processing.md)
+3. **Seuraa edistymistä** - Katso [Käsittelyn seuranta](monitoring-the-processing.md)
 
-For more information about calibration targets themselves, see [Calibration Targets](../calibration-targets.md).
+Lisätietoja kalibrointikohteista on kohdassa [Kalibrointikohteet](../calibration-targets.md).
