@@ -1,17 +1,17 @@
-# Projects
+# Projektit
 
-Chloros allows you to create projects which can be reopened in the future.
+Chloros antaa sinun luoda projekteja, jotka voidaan avata uudelleen tulevaisuudessa.
 
-## New Project
+## Uusi projekti
 
 <figure><img src=".gitbook/assets/project_new.JPG" alt=""><figcaption></figcaption></figure>
 
-Select "New Project" from the main menu and enter a unique name for your project.
+Valitse päävalikosta "Uusi projekti" ja anna projektillesi yksilöllinen nimi.
 
-## Open Project
+## Avaa projekti
 
 <figure><img src=".gitbook/assets/project_open.JPG" alt=""><figcaption></figcaption></figure>
 
-Select "Open Project" to see a list of existing projects in the Project Folder. If no projects exist the secondary side menu will not open. You can see some GUI created projects (t1, t2, t3) listed in the above photo. The DATE\_TIME projects were created by the CLI using the default project naming scheme. Clicking any project name will open it.
+Valitse "Avaa projekti" nähdäksesi luettelon Projektikansiossa olevista projekteista. Jos projekteja ei ole, toissijainen sivuvalikko ei avaudu. Näet joitain GUI:lla luotuja projekteja (t1, t2, t3) yllä olevassa kuvassa. CLI loi projektit DATE\_TIME käyttämällä oletusarvoista projektin nimeämisjärjestelmää. Klikkaamalla minkä tahansa projektin nimeä se avautuu.
 
-Clicking the "Open Project Folder" button opens your computer's file explorer at the project path. You can adjust the project path in the [Project Settings](project-settings/page-2.md).
+Napsauttamalla "Avaa projektikansio" -painiketta avautuu tietokoneesi tiedostojen hallinta projektipolulle. Voit säätää projektin polkua osoitteessa [Projektiasetukset](project-settings/page-2.md).
