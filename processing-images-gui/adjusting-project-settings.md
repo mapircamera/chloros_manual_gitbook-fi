@@ -18,7 +18,7 @@ Ennen kuvien käsittelyä on tärkeää määrittää projektin asetukset vastaa
 
 ### Oletusasetukset (suositellaan useimmille käyttäjille)
 
-Tyypillisissä MAPIR Survey3 kameratyönkulkuissa oletusasetukset toimivat hyvin:
+Tyypillisiin MAPIR Survey3 kameratyönkulkuihin oletusasetukset sopivat hyvin:
 
 * ✅ **Vignette-korjaus**: Käytössä
 * ✅ **Heijastavuuskalibrointi**: Käytössä (vaatii kuvia MAPIR kohteista)
@@ -90,13 +90,13 @@ Määritä, mitkä kasvillisuusindeksit lasketaan ja viedään.
 * Käytä kaistamatematiikkaa kaikilla kuvakanavilla
 * Tallenna mukautetut kaavat uudelleenkäyttöä varten
 
-Kaikki käytettävissä olevat indeksit ja kaavat ovat kohdassa [Monispektriset indeksikaavat](../project-settings/multispectral-index-formulas.md).
+Kaikki saatavilla olevat indeksit ja kaavat ovat kohdassa [Monispektriset indeksikaavat](../project-settings/multispectral-index-formulas.md).
 
 ### Vienti
 
-Hallitse tulostustiedoston muotoa ja laatua.
+Ohjaa tulostustiedoston muotoa ja laatua.
 
-**Käytettävissä olevat muodot:**
+**Saatavilla olevat muodot:**
 
 * **TIFF (16-bittinen)**: Suositellaan GIS- ja tieteelliseen analyysiin (alue 0–65 535)
 * **TIFF (32-bittinen, prosentti)**: Liukulukuisten heijastavuusarvojen (alue 0,0–1,0)
@@ -128,7 +128,7 @@ Kun luot uuden projektin:
 
 1. Valitse päävalikosta **&quot;Uusi projekti&quot;**.
 2. Valitse vaihtoehto **&quot;Lataa mallista&quot;**.
-3. Valitse tallennettu malli.
+3. Valitse tallentamasi malli.
 4. Kaikki asetukset otetaan käyttöön automaattisesti.
 
 ### Työkansio
@@ -136,8 +136,8 @@ Kun luot uuden projektin:
 **&quot;Tallenna projektikansio&quot;** -asetus määrittää, mihin uudet projektit luodaan oletuksena:
 
 * **Oletussijainti**: `C:\Users\[Username]\Chloros Projects`
-* **Vaihda sijainti**: Napsauta muokkauskuvaketta ja valitse uusi kansio
-* **Milloin vaihtaa**:
+* **Muuta sijaintia**: Napsauta muokkauskuvaketta ja valitse uusi kansio
+* **Milloin muuttaa**:
   * Verkkolevy tiimiyhteistyötä varten
   * Erilainen levy, jossa on enemmän tallennustilaa
   * Järjestetty kansiorakenne vuoden/asiakkaan mukaan
@@ -218,7 +218,7 @@ Ennen käsittelyn aloittamista tarkista nämä tärkeät asetukset:
 * [ ] Heijastavuuskalibrointi on käytössä
 * [ ] Vähintään yksi kalibrointikohdekuva on tuotu
 * [ ] Halutut monispektriset indeksit on lisätty
-* [ ] Vienti-muoto sopii työvirtaasi
+* [ ] Vienti-muoto sopii työnkulullesi
 * [ ] PPK-asetukset on määritetty (jos käytät .daq-tiedostoa valotustapahtumien kanssa)
 
 ***

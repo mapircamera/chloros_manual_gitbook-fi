@@ -1,12 +1,12 @@
 # Sisällysluettelo
 
-* [Aloitus](README.md)
+* [Aloittaminen](README.md)
 * [GUI : Navigointi](navigation.md)
 * [GUI : Projektit](projects.md)
 * [CLI : Komentorivi](CLI.md)
 * [API : Python SDK](api-python-sdk.md)
 * [Tuetut kamerat](supported-cameras.md)
-* [Tulostekuvamuodot](output-image-formats.md)
+* [Kuvien tulostusmuodot](output-image-formats.md)
 * [Chloros+ Kirjautuminen](chloros+-login.md)
 * [Kalibrointikohteet](calibration-targets.md)
 * [Tuetut kielet](supported-languages.md)

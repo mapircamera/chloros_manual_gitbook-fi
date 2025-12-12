@@ -1,6 +1,6 @@
 # Indeksi/LUT-hiekkalaatikko
 
-Indeksi/LUT-hiekkalaatikko on interaktiivinen työtila Chloros-kuvankatseluohjelmassa, jonka avulla voit kokeilla monispektrisen indeksin laskemista ja värien visualisointia reaaliajassa. Tämän tehokkaan työkalun avulla voit testata erilaisia indeksejä, tarkentaa arvoalueita ja luoda julkaisukelpoisia visualisointeja ilman, että sinun tarvitsee käsitellä koko tietojoukkoa uudelleen.
+Indeksi/LUT-hiekkalaatikko on interaktiivinen työtila Chloros-kuvankatseluohjelmassa, jonka avulla voit kokeilla monispektrisen indeksin laskemista ja värien visualisointia reaaliajassa. Tämän tehokkaan työkalun avulla voit testata erilaisia indeksejä, tarkentaa arvoalueita ja luoda julkaisukelpoisia visualisointeja ilman, että sinun tarvitsee käsitellä koko tietojoukkoasi uudelleen.
 
 ## Mikä on indeksi/LUT-hiekkalaatikko?
 
@@ -27,8 +27,8 @@ Hiekkalaatikko tarjoaa:
 * Koko tietojoukko kerralla
 * Esiasetetut asetukset
 * Pysyvät tulostustiedostot
-* Aikaavievä
-* Paras, kun asetukset on viimeistelty
+* Aikaa vievä
+* Paras, kun asetukset on vahvistettu
 
 {% hint style=&quot;success&quot; %}
 **Paras työnkulku**: Käytä Sandboxia kokeilemiseen ja optimaalisten indeksi- ja LUT-asetusten löytämiseen, ja käytä sitten näitä asetuksia projektin käsittelyn aikana koko tietojoukkoon.
@@ -96,7 +96,7 @@ Bare soil: 0.0 to 0.2
 Water: -0.1 to 0.1
 ```
 
-Täydellinen indeksin kaavan dokumentaatio on kohdassa [Monispektrinen indeksin kaava](../project-settings/multispectral-index-formulas.md).
+Täydelliset indeksikaavojen dokumentit ovat kohdassa [Multispektriset indeksikaavat](../project-settings/multispectral-index-formulas.md).
 
 ***
 
@@ -106,13 +106,13 @@ Täydellinen indeksin kaavan dokumentaatio on kohdassa [Monispektrinen indeksin 
 
 **Look-Up Table (LUT)** -taulukko yhdistää numeeriset indeksiarvot väreihin visualisointia varten:
 
-* **Syöte**: Indeksipikselin arvo (esim. NDVI 0,65)
-* **Lähtö**: RGB-väri (esim. kirkkaanvihreä)
+* **Syöte**: Indeksin pikseliarvo (esim. NDVI 0,65)
+* **Lähtö**: RGB väri (esim. kirkkaanvihreä)
 * **Tarkoitus**: Helpottaa kuvioiden näkemistä ja tulkintaa
 
 **Harmaasävy vs. väri-LUT:**
 
-* Harmaasävy: Tieteellinen ja neutraali, näyttää raakadataa
+* Harmaasävy: Tieteellinen ja neutraali, näyttää raakadatan
 * Väri-LUT: Intuitiivinen ja vaikuttava, korostaa kuvioita ja eroja
 
 {% hint style=&quot;success&quot; %}
@@ -127,16 +127,16 @@ Kun sinulla on indeksikuva, joka näyttää
 2. Valitse värigradientti
 3. Säädä leikkauksen minimi-/maksimipisteitä
 4. Säädä leikkausmoodia
-5. Valitse **Kuvankatseluohjelman** <img src="../.gitbook/assets/icon_image-viewer.JPG" alt="" data-size="line"> -välilehden sivupalkissa, jotta LUT otetaan käyttöön.
+5. Valitse **Kuvankatseluohjelman** <img src="../.gitbook/assets/icon_image-viewer.JPG" alt="" data-size="line"> -välilehden sivupalkissa LUT:n soveltamiseksi.
 
 ### Värigradientin valitseminen
 
 **Gradientin valitseminen:**
 
-1. Etsi LUT-paneelista **värillinen gradienttiviiva**
+1. Etsi LUT-paneelista **värillinen gradienttipalkki**
 2. Vie hiiri sen päälle nähdäksesi käytettävissä olevat gradienttivalinnat
 3. Valitse haluamasi gradientti
-4. Kuva **päivittyy välittömästi** uusilla väreillä, kun Index-ruutu on valittuna
+4. Kuva **päivittyy välittömästi** uusilla väreillä, kun Indeksi-ruutu on valittuna
 
 {% vihje style=&quot;success&quot; %}
 **Paras käytäntö**: Kasvillisuusindekseissä, kuten NDVI, Red-Yellow-Green-gradientti on intuitiivisin, koska se vastaa luonnollisia väriyhdistelmiä (vihreä = terve, keltainen = kohtalainen, punainen = stressaantunut).
@@ -168,7 +168,7 @@ Kun sinulla on indeksikuva, joka näyttää
 
 **Käyttötarkoitukset:**
 
-* **Vähän luokkia (3–5)**: Esityskalvot, luokittelukartat, yksinkertaiset raportit
+* **Vähän luokkia (3–5)**: Esitysdia, luokittelukartat, yksinkertaiset raportit
 * **Keskimääräinen määrä luokkia (6–10)**: Yleinen analyysi, tasapainoinen yksityiskohtaisuus, vakiomuotoiset raportit
 * **Monet luokat (15–20)**: Tieteellinen analyysi, yksityiskohtainen tarkastus, julkaisukelpoiset tulokset
 
@@ -179,7 +179,7 @@ Kun sinulla on indeksikuva, joka näyttää
 **Alueiden säätimet LUT-paneelissa:**
 
 * **Minimiarvo**: Väriskaalan alaraja
-* **Enimmäisarvo**: Väriskaalan yläraja
+* **Maksimiarvo**: Väriskaalan yläraja
 * **Välivärit**: Jaetaan automaattisesti minimin ja maksimiarvon välillä (luokkien lukumäärän perusteella)
 
 #### Minimi-/maksimiarvojen säätäminen
@@ -201,28 +201,28 @@ Kun sinulla on indeksikuva, joka näyttää
 
 * **Koko alue**: `-1.0` – `1.0` (näytä kaikki mahdolliset arvot)
 * **Kasvillisuuteen keskittynyt**: `0.2` – `0.9` (poista paljas maaperä ja vesi)
-* **Vain terve kasvillisuus**: `0.5` – `0.9` (korosta vain voimakkaat kasvit)
+* **Vain terve kasvillisuus**: `0.5` – `0.9` (korosta vain voimakkaasti kasvavat kasvit)
 * **Stressin havaitseminen**: `0.2` – `0.5` (korosta ongelma-alueet)
 * **Mukautettu alue**: Säädä havaittujen pikseliarvojen perusteella
 
 **Miksi alueita tulisi säätää?**
 
 * **Kontrastin lisääminen** kiinnostavalla alueella
-* **Epäolennaisten arvojen poissulkeminen** (esim. vesistöt, paljas maaperä)
-* **Visualisoinnin standardointi** useiden kuvien tai päivämäärien välillä
-* **Hienojen erojen korostaminen** kapealla arvoalueella
+* **Poista merkityksettömät arvot** (esim. vesistöt, paljas maaperä)
+* **Yhtenäistä visualisointi** useiden kuvien tai päivämäärien välillä
+* **Korosta hienovaraiset erot** kapealla arvoalueella
 
-### Alueen ulkopuolisten arvojen leikkaaminen
+### Leikkaa alueelle kuulumattomat arvot
 
-Kun pikseliarvot ovat määritellyn minimi-/maksimialueen ulkopuolella, voit hallita niiden näyttötapaa **leikkaustiloilla**.
+Kun pikseliarvot eivät kuulu määrittelemääsi minimi-/maksimialueeseen, voit hallita niiden näyttötapaa **leikkaustiloilla**.
 
 #### **Käytettävissä olevat leikkaustilan vaihtoehdot:**
 
 #### 1. Minimi ja maksimi
 
-* Pikselit **minimin alapuolella** → näytä käyttämällä **ensimmäistä väriä** gradientissa (esim. punainen)
-* Pikselit **maksimin yläpuolella** → näytetään gradientin **viimeisellä värillä** (esim. vihreä)
-* **Käyttötapaus**: Korosta ääripäät, näytä koko data-alue saturoiduilla väreillä rajoilla
+* Pikselit **minimin alapuolella** → näytetään gradientin **ensimmäisellä värillä** (esim. punaisella)
+* Pikselit **maksimin yläpuolella** → näytetään gradientin **viimeisellä värillä** (esim. vihreällä)
+* **Käyttötapaus**: Korosta ääripäät, näytä koko data-alue saturoiduilla väreillä rajoissa
 * **Esimerkki**: NDVI-arvot alle 0,2 näkyvät punaisina, arvot yli 0,9 näkyvät vihreinä
 
 #### 2. Läpinäkyvä tausta
@@ -239,7 +239,7 @@ Kun pikseliarvot ovat määritellyn minimi-/maksimialueen ulkopuolella, voit hal
 #### 3. Indeksin tausta
 
 * **Alueen ulkopuolella** olevat pikselit näkyvät **harmaasävyisinä** (näyttävät raakaindeksiarvot)
-* **Alueen sisällä** olevat pikselit näyttävät **värigradientin**
+* **Alueella** olevat pikselit näyttävät **värigradientin**
 * **Käyttötapaus**: Hienovarainen korostus, kontekstin säilyttäminen ja kiinnostavien alueiden korostaminen
 * **Esimerkki**: Korosta stressaantunut kasvillisuus värillä (NDVI 0,3–0,5) ja näytä terveet alueet harmaana
 
@@ -247,17 +247,17 @@ Kun pikseliarvot ovat määritellyn minimi-/maksimialueen ulkopuolella, voit hal
 
 * **Alueen ulkopuolella** olevat pikselit näyttävät **alkuperäisen monispektrikuvan**
 * **Alueella** olevat pikselit näyttävät **värigradientin**
-* **Käyttötapaus**: Intuitiivisin – yhdistää luonnollisen kuvakontekstin analyyttiseen väripeitteeseen
-* **Esimerkki**: Näe kentän/viljelyn todellinen ulkonäkö värikoodatuilla stressialueilla peitettynä
+* **Käyttötapaus**: Intuitiivisin – yhdistää luonnollisen kuvakontekstin analyyttiseen värikerrokseen
+* **Esimerkki**: Katso todellinen pellon/sadon ulkonäkö värikoodatuilla stressialueilla
 
-### Oikean leikkaustilan valitseminen
+### Oikean leikkaustilan valinta
 
 | Leikkaustila              | Paras käyttötarkoitus                                   | Visualisointityyli          |
 | -------------------------- | ------------------------------------------ | ---------------------------- |
 | **Minimi ja maksimi**    | Täydellinen tietojen näyttö, tieteellinen analyysi     | Kaikki pikselit värillisiä           |
-| **Läpinäkyvä tausta** | GIS-peittokuvat, tiettyjen alueiden erottaminen    | Väri alueella, tyhjä muualla |
-| **Indeksitausta**       | Hienovarainen korostus, datakontekstin säilyttäminen  | Väri alueella, harmaa muualla  |
-| **Alkuperäinen tausta**    | Raportit, esitykset, intuitiivinen analyysi | Väri alueella, valokuva muualla |
+| **Läpinäkyvä tausta** | GIS-peittokuvat, tiettyjen alueiden eristäminen    | Väri alueella, tyhjä sen ulkopuolella |
+| **Indeksitausta**       | Hienovarainen korostus, tietojen kontekstin säilyttäminen  | Väri alueella, harmaa sen ulkopuolella  |
+| **Alkuperäinen tausta**    | Raportit, esitykset, intuitiivinen analyysi | Väri alueella, valokuva sen ulkopuolella |
 
 ### Mukautettujen LUT-värien luominen
 
@@ -268,18 +268,18 @@ Voit hallita visualisointia täysin luomalla **mukautettuja värigradientteja** 
 1. Etsi LUT-paneelista **gradientin esikatselupalkki**
 2. Etsi **värinäytteen neliöt** gradientin alapuolelta
 3. **Napsauta väripysähdystä** valitaksesi sen
-4. **Värivalitsin** avautuu
+4. **Värivalitsin** avautuu.
 5. Valitse uusi väri käyttämällä:
-   * **Värirengasta**: Visuaalinen värivalinta
-   * **RGB/HSV-liukusäätimiä**: Tarkka värinhallinta
-   * **Hex-koodin syöttöä**: Tarkka värimäärittely (esim. `#FF0000` punaiselle)
+   * **Värirengasta**: Visuaalinen värivalinta.
+   * **RGB/HSV-liukusäätimiä**: Tarkka värinhallinta.
+   * **Hex-koodin syöttöä**: Tarkka värimäärittely (esim. `#FF0000` punaiselle).
 6. Napsauta värivalitsimen ulkopuolella **sovellaksesi uuden värin**
-7. Gradientti **päivittyy välittömästi** kuvassa
+7. Gradientti **päivittyy välittömästi** kuvaan
 
-**Väripysähdysten lisääminen tai poistaminen:**
+**Värin pysäytysten lisääminen tai poistaminen:**
 
-* **Lisää pysähdys**: Napsauta +-kuvaketta lisätäksesi uuden värinäytteen loppuun
-* **Poista pysähdys**: Kaksoisnapsauta väriruutua poistaaksesi värinäytteen
+* **Lisää pysäytys**: Napsauta +-kuvaketta lisätäksesi uuden värinäytteen loppuun
+* **Poista pysäytys**: Kaksoisnapsauta väriruutua poistaaksesi värinäytteen
 
 **Mukautusstrategiat:**
 
@@ -299,7 +299,7 @@ Voit hallita visualisointia täysin luomalla **mukautettuja värigradientteja** 
 
 ### Reaaliaikaiset päivitykset
 
-Kaikki LUT-säädöt hiekkalaatikossa päivittävät kuvan **välittömästi ja interaktiivisesti**:
+Kaikki sandboxin LUT-säädöt päivittävät kuvan **välittömästi ja interaktiivisesti**:
 
 * **Vaihda taso** → Kuva muuttuu välittömästi
 * **Valitse gradientti** → Värit päivittyvät välittömästi
@@ -308,7 +308,7 @@ Kaikki LUT-säädöt hiekkalaatikossa päivittävät kuvan **välittömästi ja 
 * **Muokkaa leikkausta** → Taustan näyttö muuttuu välittömästi
 * **Muokkaa värejä** → Mukautettu gradientti otetaan käyttöön välittömästi
 
-**Ei tarvita &quot;Käytä&quot;-painiketta** – kaikki muutokset ovat reaaliaikaisia ja interaktiivisia!
+**Ei tarvitse &quot;Käytä&quot;-painiketta** – kaikki muutokset ovat reaaliaikaisia ja interaktiivisia!
 
 {% hint style=&quot;success&quot; %}
 **Reaaliaikainen palaute**: Välittömän visuaalisen palautteen ansiosta voit kokeilla nopeasti erilaisia asetuksia, kunnes löydät analyysitarpeisiisi parhaiten sopivan visualisoinnin.
@@ -319,11 +319,11 @@ Kaikki LUT-säädöt hiekkalaatikossa päivittävät kuvan **välittömästi ja 
 **Tyypillinen LUT-optimoinnin työnkulku:**
 
 1. **Valitse indeksikerros** (esim. RAW (heijastavuus))
-2. **Käytä indeksiä** - Valitse kamerasuodatin ja indeksikaava, vedä värilliset ympyrät sopivaan kohtaan indeksikaavassa
-3. **Käytä LUT-gradienttia** - Aloita Red-Yellow-Green-esiasetuksella
+2. **Käytä indeksiä** – Valitse kamerasuodatin ja indeksikaava, vedä värilliset ympyrät sopivaan kohtaan indeksikaavassa
+3. **Käytä LUT-gradienttia** – Aloita Red-Yellow-Green-esiasetuksella
 4. **Tarkista pikseliarvot** - Siirrä kursoria ja merkitse muistiin arvoalueet
 5. **Säädä min/max** - Rajaa keskittymään kasvillisuuteen (esim. 0,2–0,9)
-6. **Valitse leikkaus** - Kokeile &quot;Original Background&quot; kontekstia varten
+6. **Valitse leikkaus** - Kokeile &quot;Original Background&quot; (Alkuperäinen tausta) kontekstia varten
 7. **Hio värejä** - Mukauta gradienttia tarvittaessa tiettyjen korostusten tekemiseksi
 8. **Viimeistele asetukset** - Dokumentoi asetukset ja kopioi ne projektin asetuksiin vientiä varten
 
@@ -333,10 +333,10 @@ Todellisten pikseliarvojen ymmärtäminen on tärkeää tehokkaiden LUT-alueiden
 
 **Arvojen tarkastaminen:**
 
-1. Pikseliarvot näkyvät, kun kuvassa on joko Indeksi- tai sekä Indeksi- että LUT-**ruudut valittuna**.
+1. Pikseliarvot näkyvät, kun kuvassa on joko indeksi tai sekä indeksi että LUT **valittuna**.
 2. **Siirrä kursori** kuvan eri alueiden päälle
 3. **Tarkkaile pikseliarvoja**, jotka näkyvät selitteessä, kun viet kursorin niiden päälle
-4. Suurenna kuvaa nähdäksesi yksittäiset pikselit, jotka on korostettu kelluvalla arvolla
+4. Zoomaa sisään nähdäksesi yksittäiset pikselit, jotka on korostettu kelluvalla arvolla
 5. **Tee muistiinpanoja** eri ominaisuuksien arvoalueista:
    * **Terve kasvillisuus**: esim. NDVI 0,55–0,85
    * **Stressaantunut kasvillisuus**: esim. NDVI 0,30–0,50
@@ -345,7 +345,7 @@ Todellisten pikseliarvojen ymmärtäminen on tärkeää tehokkaiden LUT-alueiden
 
 **Pikseliarvojen käyttäminen LUT-alueiden asettamiseen:**
 
-Tarkistettuasi pikseliarvot, säädä LUT:n minimi- ja maksimiarvot vastaavasti:
+Tarkastettuasi pikseliarvot, säädä LUT:n minimi- ja maksimiarvot vastaavasti:
 
 **Esimerkkitilanne:**
 
@@ -371,14 +371,14 @@ Tarkistettuasi pikseliarvot, säädä LUT:n minimi- ja maksimiarvot vastaavasti:
 
 **Mukautetun indeksin luominen:**
 
-1. **Avaa Projektin asetukset** (ennen käsittelyä) tai Image Viewer -sandboxin sivupalkki
+1. **Avaa Projektin asetukset** (ennen käsittelyä) tai Image Viewer -selaimen sivupalkki
 2. Siirry **Indeksikaavan pudotusvalikkoon**
-3. Etsi **&quot;Mukautettu&quot;**-vaihtoehto (sinun on oltava kirjautuneena sisään Chloros+ -lisenssillä)
+3. Etsi **&quot;Mukautettu&quot;**-vaihtoehto (sinun on oltava kirjautuneena sisään Chloros+-lisenssillä)
 4. **Määritä kaava** käyttämällä kaistamuuttujia:
-   * Kaistanimet: `NIR`, `Red`, `Green`, `Blue`, `RedEdge` jne.
+   * Kaistojen nimet: `NIR`, `Red`, `Green`, `Blue`, `RedEdge` jne.
    * Operaattorit: `+`, `-`, `*`, `/`, `^` (eksponentti)
    * Funktiot: `sqrt()`, `abs()` jne. (jos tuettu)
-   * Suluissa: `()` laskujen järjestykselle
+   * Suluissa: `()` laskujärjestyksen määrittämiseksi
 5. **Nimeä indeksi** (esim. &quot;MyIndex&quot; tai &quot;CustomNDVI&quot;)
 6. **Tallenna kokoonpano**
 
@@ -409,7 +409,7 @@ Exponential index:
 Nyt kun ymmärrät indeksi/LUT-hiekkalaatikon:
 
 * **Sovella käsittelyyn**: Käytä löydettyjä asetuksia [Projektin asetuksissa](../project-settings/project-settings.md)
-* **Eräkäsittely**: Käytä optimoituja indeksejä koko tietojoukkoon
+* **Erän käsittely**: Käytä optimoituja indeksejä koko tietojoukkoon
 * **Lisätietoja**: Lue [Monispektriset indeksikaavat](../project-settings/multispectral-index-formulas.md)
 
 Aiheeseen liittyvä dokumentaatio:

@@ -36,8 +36,8 @@ Käyttäjille, joilla on Chloros+ -lisenssi:
 
 * **Vie hiiri** edistymispalkin päälle nähdäksesi laajennetun 4-vaiheisen paneelin
 * **Napsauta** edistymispalkkia jäädyttääksesi/kiinnittääksesi laajennetun paneelin
-* **Napsauta uudelleen** vapauttaaksesi ja piilottaaksesi automaattisesti, kun hiiri poistuu
-* Jokainen vaihe näyttää yksilöllisen edistymisen (0-100 %)
+* **Napsauta uudelleen** vapauttaaksesi jäädytyksen ja piilottaaksesi paneelin automaattisesti, kun hiiri poistuu sen päältä
+* Jokainen vaihe näyttää yksilöllisen edistymisen (0–100 %)
 
 ***
 
@@ -57,7 +57,7 @@ Käyttäjille, joilla on Chloros+ -lisenssi:
 * Merkityillä kohteilla: 10–60 sekuntia
 * Ilman merkittyjä kohteita: 5–30+ minuuttia (skannaa kaikki kuvat)
 
-**Edistymisilmaisin:**
+**Edistymisen ilmaisin:**
 
 * Tunnistaminen: 0 % → 100 %
 * Skannattujen kuvien määrä
@@ -67,7 +67,7 @@ Käyttäjille, joilla on Chloros+ -lisenssi:
 
 * Pitäisi valmistua nopeasti, jos kohteet on merkitty oikein
 * Jos kestää liian kauan, kohteita ei ehkä ole merkitty
-* Tarkista virheenkorjauslokista, onko siinä viestejä ”Kohde löydetty”
+* Tarkista vianmäärityslogista, onko siinä viestejä ”Kohde löydetty”
 
 ### Vaihe 2: Analysointi
 
@@ -88,7 +88,7 @@ Käyttäjille, joilla on Chloros+ -lisenssi:
 **Mitä on syytä tarkkailla:**
 
 * Etenemisen tulisi olla tasaista ilman taukoja
-* Varoitukset puuttuvista metatiedoista näkyvät vianmäärityslogissa
+* Varoitukset puuttuvista metatiedoista näkyvät vianmääritysloogissa
 
 ### Vaihe 3: Kalibrointi
 
@@ -96,7 +96,7 @@ Käyttäjille, joilla on Chloros+ -lisenssi:
 
 * **Debayering**: RAW-Bayer-kuvion muuntaminen 3 kanavaksi
 * **Vignette-korjaus**: Poistaa objektiivin reunan tummenemisen
-* **Heijastavuuskalibrointi**: Normalisoi tavoitearvoilla
+* **Heijastavuuskalibrointi**: Normalisointi tavoitearvoilla
 * **Indeksilaskenta**: Laskee monispektriset indeksit
 * Käsittelee jokaisen kuvan koko prosessin läpi
 
@@ -131,7 +131,7 @@ Käyttäjille, joilla on Chloros+ -lisenssi:
 
 **Kesto:** 10–20 % kokonaiskäsittelyajasta
 
-**Edistymisen osoitin:**
+**Edistymisen ilmaisin:**
 
 * Vienti: 0 % → 100 %
 * Tiedostojen kirjoittaminen
@@ -199,7 +199,7 @@ Kriittiset ongelmat, jotka voivat aiheuttaa käsittelyn epäonnistumisen:
 | -------------------------------- | -------------------------------------- | ----------------------------------------------------- |
 | &quot;Kohde havaittu tiedostossa \[tiedostonimi]&quot; | Kalibrointikohde löydetty onnistuneesti  | Ei mitään - normaali                                         |
 | &quot;Käsitellään kuvaa X/Y&quot;        | Nykyisen edistymisen päivitys                | Ei mitään - normaali                                         |
-| &quot;Kohteita ei löydy&quot;               | Kalibrointikohteita ei havaittu        | Merkitse kohdekuvat tai poista heijastavuuden kalibrointi käytöstä |
+| &quot;Kohteita ei löytynyt&quot;               | Kalibrointikohteita ei havaittu        | Merkitse kohdekuvat tai poista heijastavuuden kalibrointi käytöstä |
 | &quot;Levytilaa ei riitä&quot;        | Tallennustilaa ei riitä tulostukseen          | Vapauta levytilaa                                    |
 | &quot;Ohitetaan vioittunut tiedosto&quot;        | Kuvatiedosto on vioittunut                  | Kopioi tiedosto uudelleen SD-kortilta                             |
 | &quot;PPK-tiedot sovellettu&quot;               | .daq-tiedoston GPS-korjaukset sovellettu | Ei mitään - normaali                                         |
@@ -215,7 +215,7 @@ Lokien kopiointi vianmääritystä tai tukea varten:
 
 ***
 
-## Järjestelmän resurssien valvonta
+## Järjestelmän resurssien seuranta
 
 ### CPU:n käyttö
 
@@ -288,7 +288,7 @@ Kun GPU-kiihdytys on käytössä:
 
 **Edistyminen pysähtyy (ei muutosta yli 5 minuuttiin):**
 
-* Tarkista virheistä virheloki
+* Tarkista virheistä virheenkorjauslokista
 * Tarkista levytilan saatavuus
 * Tarkista Tehtävienhallinnasta, että Chloros on käynnissä
 
@@ -296,7 +296,7 @@ Kun GPU-kiihdytys on käytössä:
 
 * Keskeytä käsittely ja tarkista virheet
 * Yleisiä syitä: levytila, vioittuneet tiedostot, muistiongelmat
-* Katso alla oleva Vianmääritys-osio
+* Katso alla oleva vianmääritysosio
 
 **Järjestelmä ei vastaa:**
 
@@ -329,7 +329,7 @@ Keskeytä käsittely, jos näet:
 **Mahdolliset syyt:**
 
 * Merkitsemättömät kohdekuvat (kaikkien kuvien skannaus)
-* HDD-levy SSD-levyn sijaan
+* HDD SSD-tallennustilan sijaan
 * Riittämättömät järjestelmäresurssit
 * Määritettyjä hakemistoja on paljon
 * Verkkolevyn käyttö
@@ -371,11 +371,11 @@ Keskeytä käsittely, jos näet:
 
 ## Ilmoitus käsittelyn päättymisestä
 
-Kun käsittely on valmis:
+Kun käsittely on päättynyt:
 
 * Edistymispalkki saavuttaa 100 %
-* **&quot;Käsittely valmis&quot;** -viesti näkyy virheenkorjauslokissa
-* Käynnistyspainike aktivoituu uudelleen
+* **&quot;Käsittely valmis&quot;** -viesti näkyy vianmäärityslogissa
+* Käynnistä-painike aktivoituu uudelleen
 * Kaikki tulostustiedostot ovat kameramallin alikansiossa
 
 ***
@@ -387,6 +387,6 @@ Kun käsittely on valmis:
 1. **Tarkista tulokset** - Katso [Käsittelyn lopettaminen](finishing-the-processing.md)
 2. **Tarkista tulostuskansio** - Varmista, että kaikki tiedostot on viety oikein
 3. **Tarkista virheenkorjausloki** - Tarkista, onko siinä varoituksia tai virheitä
-4. **Esikatsele käsitellyt kuvat** - Käytä kuvankatseluohjelmaa tai ulkoista ohjelmistoa
+4. **Esikatsele käsiteltyjä kuvia** - Käytä kuvankatseluohjelmaa tai ulkoista ohjelmistoa
 
 Lisätietoja käsiteltyjen tulosten tarkastelusta ja käytöstä on kohdassa [Käsittelyn lopettaminen](finishing-the-processing.md).

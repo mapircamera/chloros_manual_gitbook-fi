@@ -1,6 +1,6 @@
-# Kuvan avaaminen koko ruudulla
+# Kuvan avaaminen koko näytön tilassa
 
-Chloros Image Viewer tarjoaa erillisen koko ruudun käyttöliittymän monispektrikuvien katseluun, analysointiin ja muokkaamiseen. Image Viewer tarjoaa tehokkaat työkalut tarkasteluun ja analysointiin sekä alkuperäisten kuvien että käsiteltyjen tulosteiden katseluun.
+Chloros Image Viewer tarjoaa erillisen koko näytön käyttöliittymän monispektrikuvien katseluun, analysointiin ja muokkaamiseen. Image Viewer tarjoaa tehokkaat työkalut tarkasteluun ja analysointiin sekä alkuperäisten kuvien että käsiteltyjen tulosteiden katseluun.
 
 ## Kuvankatseluohjelman avaaminen
 
@@ -9,9 +9,9 @@ Chloros Image Viewer tarjoaa erillisen koko ruudun käyttöliittymän monispektr
 Yleisin tapa avata kuva kuvankatseluohjelmassa:
 
 1. Varmista, että olet **Tiedostoselain**-välilehdessä <img src="../.gitbook/assets/icon_file-browser.JPG" alt="" data-size="line">
-2. Napsauta mitä tahansa **kuvankokoelman pikkukuvaa**
+2. Napsauta mitä tahansa **kuvien pikkukuvaa** kuvaruudukossa
 3. Kuva avautuu **pääesikatselualueelle** (näytön keskelle)
-4. Kuva on nyt ladattu ja valmis täysikokoiseksi katseluun
+4. Kuva on nyt ladattu ja valmis koko näytön katseluun
 
 ### Image Viewer -välilehden avaaminen
 
@@ -19,7 +19,7 @@ Kun kuva on ladattu esikatselualueelle:
 
 1. Napsauta **Image Viewer** <img src="../.gitbook/assets/icon_image-viewer.JPG" alt="" data-size="line"> -kuvaketta vasemmassa sivupalkissa.
 2. Kuvankatseluohjelman välilehti avautuu ja näyttää valitun kuvan koko ruudulla.
-3. Lisäasetukset ja analyysityökalut ovat käytettävissä vasemmassa sivupalkissa.
+3. Lisäasetukset ja analyysityökalut tulevat saataville vasemmassa sivupalkissa.
 
 ***
 
@@ -31,14 +31,14 @@ Suurin osa ruudusta näyttää kuvan:
 
 * **Täysi resoluutio**: Kuvat näytetään alkuperäisellä resoluutiolla.
 * **Zoomattava**: Zoomaa käyttämällä säätimiä tai hiiren rullaa
-* **Panoroitava**: Siirrä kuvaa klikkaamalla ja vetämällä, kun olet zoomannut
+* **Panoroitava**: Siirrä kuvaa klikkaamalla ja vetämällä, kun kuva on zoomattu
 * **Kuvasuhde säilyy**: Kuvat skaalautuvat suhteessa
 
 ***
 
 ## Katseluvaihtoehdot
 
-### Peruskuvanavigointi
+### Peruskuvien selaus
 
 #### Selaa kuvia
 
@@ -56,13 +56,13 @@ Säädä suurennusta tarkastellaksesi kuvan yksityiskohtia:
 
 * Napsauta **+** (plus) -painiketta
 * Paina **+** tai **=** -näppäintä
-* Vieritä hiiren rullaa **ylöspäin**
+* Vieritä hiiren rullaa **ylös**
 
 **Kavenna:**
 
 * Napsauta **−** (miinus) -painiketta
 * Paina **−** (miinus) -näppäintä
-* Vieritä hiiren rullaa **alaspäin**
+* Vieritä hiiren rullaa **alas**
 
 **Sovita näyttöön:**
 
@@ -70,12 +70,12 @@ Säädä suurennusta tarkastellaksesi kuvan yksityiskohtia:
 * Paina **0** (nolla) -näppäintä.
 * Kaksoisnapsauta kuvaa.
 
-#### Panorointi zoomattuna
+#### Panoroida zoomattuna
 
 Kun kuva on zoomattu näytön kokoa suuremmaksi:
 
 1. Siirrä hiiren osoitin kuvan päälle.
-2. Napsauta ja **pidä hiiren vasen painike painettuna**.
+2. Napsauta ja **pidä hiiren vasenta painiketta painettuna**.
 3. **Vedä** siirtääksesi kuvaa
 4. Vapauta lopettaaksesi panoroinnin
 
@@ -135,7 +135,7 @@ Käytä monispektrisiä indeksejä ja väri-LUT-taulukoita:
 1. Etsi **Index/LUT Sandbox** **Image Viewer** <img src="../.gitbook/assets/icon_image-viewer.JPG" alt="" data-size="line"> sivupalkista
 2. Valitse kasvillisuusindeksi (NDVI, NDRE jne.)
 3. Valitse monispektrinen kaava tai luo oma mukautettu kaava (vain Chloros+)
-4. Käytä värilukutaulukon gradienttia visualisointia varten
+4. Käytä värilukutaulukon gradienttia visualisointiin
 5. Säädä arvoalueita ja kynnysarvoja
 
 Katso yksityiskohtaiset ohjeet kohdasta [Indeksi/LUT-hiekkalaatikko](index-lut-sandbox.md).
@@ -155,12 +155,12 @@ Katso yksityiskohtaiset ohjeet kohdasta [Indeksi/LUT-hiekkalaatikko](index-lut-s
 
 * **+** tai **=**: Lähennä
 * **−**: Loitonna
-* **0** (nolla): Sovita näyttöön
+* **0** (nolla): Sovita ruutuun
 * **Hiiren rulla**: Lähennä/loitonna
 
 ### Näytön hallinta
 
-* **P**: Vaihda pikseliprosenttitila
+* **P**: Vaihda pikseliprosenttimuoto
 * **L**: Vaihda tasopaneeli
 * **Esc**: Sulje koko näyttö tai palaa tiedostoselaimeen
 
@@ -198,9 +198,9 @@ Tarkista, että indeksit on laskettu oikein:
 
 **Ratkaisut:**
 
-1. Yritä avata tiedosto ulkoisella katseluohjelmalla ja tarkista tiedoston eheys.
+1. Yritä avata tiedosto ulkoisessa katseluohjelmassa tiedoston eheyden tarkistamiseksi.
 2. Tarkista, että tiedostomuoto vastaa odotettua tyyppiä.
-3. Sulje muut sovellukset vapauttaaksesi muistia.
+3. Sulje muut sovellukset muistin vapauttamiseksi.
 4. Kokeile pienempää/eri kuvaa.
 
 ### Musta tai valkoinen kuva
@@ -224,7 +224,7 @@ Tarkista, että indeksit on laskettu oikein:
 * Väärä kuva näkyvissä (alkuperäinen vs. käsitelty)
 * Kalibrointia ei sovellettu oikein
 * Valosensorin tietoja ei sisällytetty syötteeseen
-* Prosenttimuoto on vaihdettu väärin
+* Prosenttimuoto on kytketty väärin
 
 **Ratkaisut:**
 
@@ -236,12 +236,12 @@ Tarkista, että indeksit on laskettu oikein:
 
 ## Seuraavat vaiheet
 
-Nyt kun voit katsella kuvia koko näytön tilassa:
+Nyt kun voit tarkastella kuvia koko näytön tilassa:
 
 * [**Kuvakerrokset**](image-layers.md) – Lisätietoja monikaistaisesta visualisoinnista
 * [**Indeksi/LUT-hiekkalaatikko**](index-lut-sandbox.md) – Mukautettujen indeksien ja värikartoitusten soveltaminen
 * [**Monispektriset indeksikaavat**](../project-settings/multispectral-index-formulas.md) – Tutustu käytettävissä oleviin indekseihin
 
-Käsittelyn työnkulusta katso:
+Käsittelytyönkulusta katso:
 
-* [**Kuvien käsittely (GUI)**](../processing-images-gui/adding-files-to-a-project.md) – Kattava käsittelyopas
+* [**Kuvien käsittely (GUI)**](../processing-images-gui/adding-files-to-a-project.md) – Täydellinen käsittelyopas

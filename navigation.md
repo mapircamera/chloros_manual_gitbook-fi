@@ -1,6 +1,6 @@
 # GUI : Navigointi
 
-Kun käynnistät Chloros- ja Chloros-sovellukset (selain) ensimmäisen kerran, niiden taustaprosessi käynnistyy. Kun se on valmis, vasemmassa yläkulmassa oleva päävalikon kuvake tulee näkyviin <img src=".gitbook/assets/image (1).png" alt="" data-size="line"> .
+Kun käynnistät Chloros ja Chloros (selain) ensimmäisen kerran, niiden taustaprosessi käynnistyy. Kun se on valmis, vasemmassa yläkulmassa oleva päävalikon kuvake tulee näkyviin <img src=".gitbook/assets/image (1).png" alt="" data-size="line"> .
 
 <figure><img src=".gitbook/assets/header.JPG" alt=""><figcaption></figcaption></figure>
 
@@ -18,7 +18,7 @@ Kun tämä painike on käytössä, kuvankäsittelyprosessi käynnistyy.
 
 Ilmaisessa Chloros-tilassa, joka käsittelee kaikki tiedostot peräkkäin, edistymispalkki näyttää kaksi vaihetta: kohteen tunnistus ja käsittely.
 
-Maksullisessa Chloros+-lisenssitilassa, joka käsittelee kaikki tiedostot samanaikaisesti, edistymispalkki näyttää neljä vaihetta: tunnistus, analysointi, kalibrointi ja vienti. Jos viet hiiren osoittimen Chloros+ -etenemispalkin päälle, avautuu laajennettu neljän etenemispalkin paneeli, josta voit seurata prosessin etenemistä. Klikkaamalla ylintä etenemispalkkia voit jäädyttää avattavan paneelin, ja klikkaamalla uudelleen voit vapauttaa sen.
+Maksullisessa Chloros+-lisenssitilassa, joka käsittelee kaikki tiedostot samanaikaisesti, edistymispalkki näyttää neljä vaihetta: tunnistus, analysointi, kalibrointi ja vienti. Jos viet hiiren osoittimen Chloros+ -etenemispalkin päälle, avautuu laajennettu neljän etenemispalkin paneeli, josta voit seurata prosessia. Napsauttamalla ylintä etenemispalkkia voit jäädyttää avattavan paneelin, ja napsauttamalla uudelleen voit vapauttaa sen.
 
 <figure><img src=".gitbook/assets/plus_prog.JPG" alt=""><figcaption></figcaption></figure>
 
@@ -44,4 +44,4 @@ Tarkista loki virheenkorjausmerkintöjen varalta, kun ongelmia ilmenee. Kopioi/l
 
 #### <img src=".gitbook/assets/icon_user.JPG" alt="" data-size="line"> [Käyttäjän kirjautuminen](chloros+-login.md)
 
-Käyttäjän kirjautumissivupalkin avulla voit kirjautua Chloros+ -tiliisi ja avata lisäominaisuudet. Voit myös tarkastella sovelluksen nykyistä versiota sekä säätää Chloros GUI- ja CLI-käyttöliittymän tekstin kieltä.
+Käyttäjän kirjautumissivupalkin avulla voit kirjautua Chloros+-tiliisi ja avata lisäominaisuudet. Voit myös tarkastella sovelluksen nykyistä versiota sekä säätää Chloros GUI- ja CLI-käyttöliittymän tekstin kieltä.

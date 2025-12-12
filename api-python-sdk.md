@@ -9,7 +9,7 @@
 * 🚀 **Automaatio** - Rakenna mukautettuja eräkäsittelytyönkulkuja
 * 🔗 **Integrointi** - Upota Chloros olemassa oleviin Python-sovelluksiin
 * 📊 **Tutkimuskäyttöön valmis** - Täydellinen tieteellisiin analyysiputkiin
-* ⚡ **Rinnakkaiskäsittely** - Skaalautuu CPU-ytimien mukaan (Chloros+)
+* ⚡ **Rinnakkaiskäsittely** - Skaalautuu CPU-ytimiesi mukaan (Chloros+)
 
 ### Vaatimukset
 
@@ -19,18 +19,18 @@
 | **Lisenssi**          | Chloros+ ([maksullinen tilaus vaaditaan](https://cloud.mapir.camera/pricing)) |
 | **Käyttöjärjestelmä** | Windows 10/11 (64-bittinen)                                              |
 | **Python**           | Python 3.7 tai uudempi                                                |
-| **Muisti**           | Vähintään 8 Gt RAM-muistia (suositus 16 Gt)                                  |
+| **Muisti**           | Vähintään 8 Gt RAM-muistia (suositellaan 16 Gt)                                  |
 | **Internet**         | Vaaditaan lisenssin aktivointiin                                     |
 
 {% hint style=&quot;warning&quot; %}
-**Lisenssivaatimukset**: Python SDK edellyttää maksullista Chloros+ -tilausta API-käyttöoikeuden saamiseksi. Vakiomuotoisissa (ilmaisissa) paketeissa ei ole API/SDK-käyttöoikeutta. Käy osoitteessa [https://cloud.mapir.camera/pricing](https://cloud.mapir.camera/pricing) päivittääksesi pakettisi.
+**Lisenssivaatimukset**: Python SDK edellyttää maksullista Chloros+ -tilausta API-käyttöoikeuden saamiseksi. Vakiomuotoisissa (ilmaisissa) paketeissa ei ole pääsyä API/SDK:ään. Käy osoitteessa [https://cloud.mapir.camera/pricing](https://cloud.mapir.camera/pricing) päivittääksesi.
 {% endhint %}
 
 ## Pikaopas
 
 ### Asennus
 
-Asenna pip:n avulla:
+Asenna pip:n kautta:
 
 ```bash
 pip install chloros-sdk
@@ -88,7 +88,7 @@ Ennen kuin asennat SDK, varmista, että sinulla on:
 
 1. **Chloros Desktop** asennettuna ([lataa](download.md))
 2. **Python 3.7+** asennettuna ([python.org](https://www.python.org))
-3. **Voimassa oleva Chloros+ -lisenssi** ([päivitys](https://cloud.mapir.camera/pricing))
+3. **Voimassa oleva Chloros+ lisenssi** ([päivitys](https://cloud.mapir.camera/pricing))
 
 ### Asenna pip:n avulla
 
@@ -104,13 +104,13 @@ pip install chloros-sdk
 pip install chloros-sdk[progress]
 ```
 
-**Kehitystarkistuksen asennus:**
+**Kehitystarkoituksiin tarkoitettu asennus:**
 
 ```bash
 pip install chloros-sdk[dev]
 ```
 
-### Tarkista asennus
+### Asennuksen tarkistaminen
 
 Testaa, että SDK on asennettu oikein:
 
@@ -174,11 +174,11 @@ ChlorosLocal(
 
 | Parametri                 | Tyyppi | Oletusarvo                   | Kuvaus                           |
 | ------------------------- | ---- | ------------------------- | ------------------------------------- |
-| `api_url`                 | str  | `"http://localhost:5000"` | URL paikallisesta Chloros-taustaprosessista          |
+| `api_url`                 | str  | `"http://localhost:5000"` | URL paikallisen Chloros-taustaprosessin          |
 | `auto_start_backend`      | bool | `True`                    | Käynnistä backend automaattisesti tarvittaessa |
 | `backend_exe`             | str  | `None` (automaattinen tunnistus)      | Polku backend-suoritustiedostoon            |
 | `timeout`                 | int  | `30`                      | Pyynnön aikakatkaisu sekunteina            |
-| `backend_startup_timeout` | int  | `60`                      | Backendin käynnistymisen aikakatkaisu (sekunteina) |
+| `backend_startup_timeout` | int  | `60`                      | Backendin käynnistysaikakatkaisu (sekunteina) |
 
 **Esimerkkejä:**
 
@@ -234,7 +234,7 @@ Tuo kuvat kansiosta.
 | Parametri     | Tyyppi     | Vaadittu | Kuvaus                        |
 | ------------- | -------- | -------- | ---------------------------------- |
 | `folder_path` | str/Path | Kyllä      | Polku kuvien sisältävään kansioon         |
-| `recursive`   | bool     | Ei       | Etsi alikansiot (oletus: False) |
+| `recursive`   | bool     | Ei       | Hae alikansiot (oletus: False) |
 
 **Palauttaa:** `dict` - Tuontitulokset tiedostojen lukumäärän kanssa
 
@@ -271,7 +271,7 @@ Määritä käsittelyasetukset.
 * `"TIFF (16-bit)"` - Suositellaan GIS/fotogrammetriaan
 * `"TIFF (32-bit, Percent)"` - Tieteellinen analyysi
 * `"PNG (8-bit)"` - Silmämääräinen tarkastus
-* `"JPG (8-bit)"` - Pakattu tulostus
+* `"JPG (8-bit)"` - Pakattu tuloste
 
 **Käytettävissä olevat indeksit:**
 
@@ -310,13 +310,13 @@ Käsittele projektikuvat.
 | ------------------- | -------- | ------------ | ----------------------------------------- |
 | `mode`              | str      | `"parallel"` | Käsittelytila: &quot;parallel&quot; tai &quot;serial&quot;   |
 | `wait`              | bool     | `True`       | Odota valmistumista                       |
-| `progress_callback` | callable | `None`       | Edistymisen palautusfunktio (progress, msg) |
+| `progress_callback` | callable | `None`       | Edistymisen palautustoiminto (progress, msg) |
 | `poll_interval`     | float    | `2.0`        | Edistymisen kyselyväli (sekuntia)   |
 
-**Palauttaa:** `dict` - Käsittelytulokset
+**Palauttaa:** `dict` - Käsittelyn tulokset
 
 {% hint style=&quot;warning&quot; %}
-**Rinnakkaistila**: Vaatii Chloros+ -lisenssin. Skaalautuu automaattisesti CPU-ytimien mukaan (enintään 16 työntekijää).
+**Rinnakkaistila**: Vaatii Chloros+ -lisenssin. Skaalautuu automaattisesti CPU-ytimien määrään (enintään 16 työprosessia).
 {% endhint %}
 
 **Esimerkki:**
@@ -343,9 +343,9 @@ chloros.process(wait=False)
 
 #### `get_config()`
 
-Hae nykyinen projektin kokoonpano.
+Hae nykyisen projektin kokoonpano.
 
-**Palauttaa:** `dict` - Nykyinen projektin kokoonpano
+**Palauttaa:** `dict` - Nykyisen projektin kokoonpano
 
 **Esimerkki:**
 
@@ -358,9 +358,9 @@ print(config['Project Settings'])
 
 #### `get_status()`
 
-Hae taustaprosessin tilatiedot.
+Hae taustapalvelimen tilatiedot.
 
-**Palauttaa:** `dict` - Taustaprosessin tila
+**Palauttaa:** `dict` - Backend-tila
 
 **Esimerkki:**
 
@@ -374,7 +374,7 @@ print(f"URL: {status['url']}")
 
 #### `shutdown_backend()`
 
-Sammuta taustaprosessi (jos se on käynnistetty SDK:llä).
+Sammuttaa backendin (jos käynnistetty SDK:llä).
 
 **Esimerkki:**
 
@@ -384,7 +384,7 @@ chloros.shutdown_backend()
 
 ***
 
-### Käteviä toimintoja
+### Kätevät toiminnot
 
 #### `process_folder(folder_path, **options)`
 
@@ -394,7 +394,7 @@ Yhden rivin kätevä toiminto kansion käsittelyyn.
 
 | Parametri                 | Tyyppi     | Oletusarvo         | Kuvaus                    |
 | ------------------------- | -------- | --------------- | ------------------------------ |
-| `folder_path`             | str/Path | Pakollinen        | Polku kansioon, jossa kuvat ovat     |
+| `folder_path`             | str/Path | Pakollinen        | Polku kuvien sisältävään kansioon     |
 | `project_name`            | str      | Automaattisesti luotu  | Projektin nimi                   |
 | `camera`                  | str      | `None`          | Kameramalli                |
 | `indices`                 | list     | `["NDVI"]`      | Laskettavat indeksit           |
@@ -402,9 +402,9 @@ Yhden rivin kätevä toiminto kansion käsittelyyn.
 | `reflectance_calibration` | bool     | `True`          | Heijastavuuden kalibroinnin käyttöönotto |
 | `export_format`           | str      | &quot;TIFF (16-bittinen)&quot; | Tulostusmuoto                  |
 | `mode`                    | str      | `"parallel"`    | Käsittelytila                |
-| `progress_callback`       | kutsuttava | `None`          | Edistymisen palautus |
+| `progress_callback`       | kutsuttava | `None`          | Edistymisen palautuskutsu              |
 
-**Palauttaa:** `dict` - Käsittelyn tulokset
+**Palauttaa:** `dict` - Käsittelytulokset
 
 **Esimerkki:**
 
@@ -512,7 +512,7 @@ print("Processing complete!")
 
 ***
 
-### Esimerkki 3: Useiden kansioiden eräkäsittely
+### Esimerkki 3: Useiden kansioiden eräprosessointi
 
 Käsittele useita lentotietojoukkoja:
 
@@ -564,7 +564,7 @@ print("All flights processed!")
 
 ***
 
-### Esimerkki 4: Tutkimusprosessin integrointi
+### Esimerkki 4: Tutkimusputken integrointi
 
 Integroi Chloros data-analyysiin:
 
@@ -824,7 +824,7 @@ except ChlorosError as e:
 
 ***
 
-## Edistyneet aiheet
+## Edistyneitä aiheita
 
 ### Mukautettu taustakonfiguraatio
 
@@ -904,7 +904,7 @@ backend_path = r"C:\Program Files\MAPIR\Chloros\resources\backend\chloros-backen
 print(f"Backend exists: {os.path.exists(backend_path)}")
 ```
 
-2. Tarkista, että Windows-palomuuri ei estä yhteyttä
+2. Tarkista, että Windows-palomuuri ei estä yhteyttä.
 3. Kokeile manuaalista backend-polkua:
 
 ```python
@@ -915,7 +915,7 @@ chloros = ChlorosLocal(backend_exe="C:\\Path\\To\\chloros-backend.exe")
 
 ### Lisenssiä ei tunnistettu
 
-**Ongelma:** SDK varoittaa puuttuvasta lisenssistä
+**Ongelma:** SDK varoittaa puuttuvasta lisenssistä.
 
 **Ratkaisut:**
 
@@ -975,7 +975,7 @@ chloros = ChlorosLocal(timeout=120)  # 2 minutes
 
 ### Portti jo käytössä
 
-**Ongelma:** Backend-portti 5000 on varattu
+**Ongelma:** Backend-portti 5000 varattu
 
 **Ratkaisut:**
 
@@ -1142,7 +1142,7 @@ chloros.process(progress_callback=notebook_progress)
 | Ominaisuus         | Desktop GUI | CLI Komentorivi | Python SDK  |
 | --------------- | ----------- | ---------------- | ----------- |
 | **Käyttöliittymä**   | Piste-klikkaus | Komento          | Python API  |
-| **Sopii parhaiten**    | Visuaalinen työ | Skriptit        | Integraatio |
+| **Sopii parhaiten**    | Visuaalinen työ | Skriptien kirjoittaminen        | Integrointi |
 | **Automaatio**  | Rajoitettu     | Hyvä             | Erinomainen   |
 | **Joustavuus** | Perustaso       | Hyvä             | Maksimi     |
 | **Lisenssi**     | Chloros+    | Chloros+         | Chloros+    |
@@ -1183,7 +1183,7 @@ Project_Path/
 
 ### K: Voinko käsitellä kuvia Python-skripteillä, jotka suoritetaan aikataulun mukaisesti?
 
-**V:** Kyllä! Käytä Windows-tehtävien ajoitinta Python-skripteillä:
+**V:** Kyllä! Käytä Windows-tehtävien ajoitusta Python-skripteillä:
 
 ```python
 # scheduled_processing.py
@@ -1193,7 +1193,7 @@ from chloros_sdk import process_folder
 results = process_folder("C:\\Flights\\Today")
 ```
 
-Ajoita tehtävien ajoittimella päivittäinen suoritus.
+Aikatauluta Tehtävien ajoitusohjelman avulla päivittäiseksi ajoksi.
 
 ***
 

@@ -1,6 +1,6 @@
 # Kohdekuvien valinta
 
-Kalibrointikohteita sisältävien kuvien merkitseminen on tärkeä vaihe, joka nopeuttaa merkittävästi Chloros-käsittelyprosessia. Valitsemalla kohdekuvat etukäteen, Chloros:n ei tarvitse skannata kaikkia datajoukon kuvia kalibrointikohteiden löytämiseksi.
+Kuvien merkitseminen, jotka sisältävät kalibrointikohteita, on tärkeä vaihe, joka nopeuttaa merkittävästi Chloros-käsittelyprosessia. Valitsemalla kohdekuvat etukäteen, Chloros:n ei tarvitse skannata kaikkia datajoukon kuvia kalibrointikohteiden löytämiseksi.
 
 ## Miksi kohdekuvat on merkittävä?
 
@@ -16,7 +16,7 @@ Ilman kohdekuvien merkitsemistä Chloros:n on:
 
 ### Merkityt kohdekuvat
 
-Kun valitset kohdekuvat kohdesarakkeesta:
+Kun valitset kohdekuvat Kohde-sarakkeesta:
 
 * Chloros skannaa vain valitut kuvat kohteiden löytämiseksi
 * Kohteiden tunnistus tapahtuu paljon nopeammin
@@ -52,7 +52,7 @@ Jokaiselle kalibrointikohteen sisältävälle kuvalle:
 
 ### Vaihe 3: Vahvista valintasi
 
-Tarkista ennen käsittelyä:
+Tarkista ennen käsittelyä, että:
 
 * [ ] Kaikki kalibrointikohteita sisältävät kuvat on valittu.
 * [ ] Mitään muita kuin kohdekuvia ei ole valittu vahingossa.
@@ -102,7 +102,7 @@ Tarkista ennen käsittelyä:
 
 ## Useiden kameroiden käyttö
 
-### Kaksi kameraa
+### Kahden kameran asetukset
 
 Jos käytät kahta MAPIR-kameraa samanaikaisesti (esim. Survey3W RGN + Survey3N OCN):
 
@@ -174,8 +174,8 @@ Jos Chloros ei tunnista kohteitasi oikein, säädä näitä asetuksia [Projektin
 
 1. Merkitse vain todelliset kohdekuvat tunnistuksen rajoittamiseksi
 2. Lisää kalibroinnin vähimmäisnäytealuetta
-3. Lisää kohteen vähimmäisklusterointiarvoa
-4. Varmista, että kohdekuvissa näkyy vain kohde (minimaalinen taustakohina)
+3. Lisää kohteen klusterointiarvoa
+4. Varmista, että kohdekuvissa näkyy vain kohde (taustalla mahdollisimman vähän häiriöitä)
 
 ***
 
@@ -197,12 +197,12 @@ Ennen käsittelyn aloittamista tarkista kohdekuvien valinta:
 
 ### Käsittely ilman kalibrointikohteita
 
-Vaikka sitä ei suositella tieteelliseen työhön, voit käsitellä kuvia ilman kohteita:
+Vaikka sitä ei suositella tieteelliseen työhön, voit käsitellä ilman kohteita:
 
 1. Jätä kaikki kohdesarakkeen valintaruudut valitsematta
 2. **Poista käytöstä** &quot;Heijastavuuskalibrointi&quot; projektin asetuksissa
-3. Vignettikorjaus otetaan edelleen käyttöön.
-4. Tulostetta ei kalibroida absoluuttisen heijastavuuden osalta.
+3. Vignettikorjaus otetaan edelleen käyttöön
+4. Tulos ei kalibroida absoluuttisen heijastavuuden mukaan
 
 {% hint style=&quot;warning&quot; %}
 **Ei suositella**: Ilman heijastavuuden kalibrointia pikseliarvot edustavat vain suhteellista kirkkautta, eivät tieteellisiä heijastavuusmittauksia. Käytä kalibrointikohteita tarkkojen, toistettavien tulosten saamiseksi.

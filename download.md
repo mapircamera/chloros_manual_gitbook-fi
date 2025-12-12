@@ -20,7 +20,7 @@ Lataa uusin versio Chloros:stä Windows:lle, jotta voit aloittaa monispektrisen 
 | **Näyttö**          | 1920x1080                       | 2560x1440 tai parempi             |
 | **Internet**         | Vaaditaan lisenssin aktivointiin | Vaaditaan lisenssin aktivointiin |
 
-{% vihje style=&quot;info&quot; %}
+{% hint style=&quot;info&quot; %}
 **GPU-kiihdytys**: Chloros+ -käyttäjät, joilla on NVIDIA-GPU (4 Gt+ VRAM), voivat käyttää CUDA-kiihdytystä huomattavasti nopeampaan käsittelyyn.
 {% endhint %}
 
@@ -44,7 +44,7 @@ Lataa uusin versio Chloros:stä Windows:lle, jotta voit aloittaa monispektrisen 
 1. Lataa `CHLOROS INSTALLER - CURRENT VERSION.exe`-tiedosto.
 2. Kaksoisnapsauta asennusohjelmaa aloittaaksesi asennuksen.
 3. Noudata asennusohjeiden ohjeita.
-4. Valitse asennushakemisto (oletus: `C:\Program Files\Chloros\`).
+4. Valitse asennuskansio (oletus: `C:\Program Files\Chloros\`).
 5. Viimeistele asennus ja käynnistä Chloros.
 6. Kirjaudu sisään MAPIR Cloud Chloros+ -tililläsi (tai jatka ilmaisella versiolla)
 
@@ -75,7 +75,7 @@ pip install chloros-sdk
 Chloros-asennus sisältää:
 
 * ✅ **Chloros Desktop GUI** - Täydellinen graafinen käyttöliittymä
-* ✅ **Chloros (selain)** - Verkkopohjainen käyttöliittymä heikommille järjestelmille
+* ✅ **Chloros (selain)** - Verkkopohjainen käyttöliittymä heikompitehoisille järjestelmille
 * ✅ **Chloros CLI** - Komentoriviliittymä (vaatii Chloros+ -lisenssin)
 * ✅ **Backend Engine** - Kuvan käsittelyputki
 * ✅ **Kameraprofiilit** - Esiasetetut MAPIR-kameramallit
@@ -88,7 +88,7 @@ Avaa lisäominaisuudet Chloros+-tilauksella:
 
 * 🚀 **Monisäikeinen käsittely** - Käsittele kuvia rinnakkain
 * ⚡ **GPU (CUDA) -kiihdytys** - Hyödynnä NVIDIA GPU:n tehoa
-* 💻 **CLI-käyttö** - Automatisoi komentorivityökaluilla
+* 💻 **CLI-käyttöoikeus** - Automatisoi komentorivityökaluilla
 * 🐍 **Python SDK** - Ohjelmoitava API-käyttö
 * 📱 **Useita laitteita** - Käytä 2–10+ laitteella (riippuen paketista)
 * 🧮 **Mukautetut kaavat** - Luo mukautettuja monispektrisiä indeksejä
@@ -110,7 +110,7 @@ Avaa lisäominaisuudet Chloros+-tilauksella:
 * Kokeile Chloros (selain) -versiota
 * Varmista, että Windows 10/11 (64-bittinen) on asennettu
 * Päivitä grafiikkakortin ajurit
-* Tarkista Windows Tapahtumienvalvonnasta virheen yksityiskohdat
+* Tarkista Windows Tapahtumienvalvonta virheiden yksityiskohdista
 * Ota yhteyttä tukeen ja toimita virhelokit
 
 **Lisenssin aktivointiongelmat:**
@@ -120,7 +120,7 @@ Avaa lisäominaisuudet Chloros+-tilauksella:
 * Tarkista, että palomuuri ei estä Chloros:ää
 * Katso yksityiskohtaiset ohjeet kohdasta [Chloros+ Kirjautuminen](chloros+-login.md)
 
-### Tukea
+### Tuen saaminen
 
 Tarvitsetko apua asennuksessa tai asetusten määrittämisessä?
 

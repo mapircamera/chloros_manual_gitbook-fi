@@ -20,9 +20,9 @@ Kuvia voi lisätä projektiin pääasiassa kahdella tavalla:
 
 ### Tapa 1: Lisää tiedostot
 
-Käytä tätä vaihtoehtoa, jos haluat tuoda yksittäisiä kuvatiedostoja tai pienen valikoiman tiedostoja.
+Käytä tätä vaihtoehtoa yksittäisten kuvatiedostojen tai pienen tiedostovalikoiman tuomiseen.
 
-1. Napsauta **&quot;Lisää tiedostoja&quot;**-painiketta tiedostoselaimen paneelin yläosassa.
+1. Napsauta **&quot;Lisää tiedostoja&quot;** -painiketta tiedostoselaimen paneelin yläosassa.
 2. Siirry kansioon, joka sisältää kuvasi.
 3. Valitse yksi tai useampi kuvatiedosto (pidä **Ctrl**-näppäintä painettuna valitaksesi useita tiedostoja).
 4. Napsauta **&quot;Avaa&quot;** tuodaksesi valitut tiedostot.
@@ -84,7 +84,7 @@ Poista projektista tarpeettomat kuvat seuraavasti:
 ### Lajittelu ja suodatus
 
 * **Lajittele sarakkeen mukaan**: Lajittele kuvat napsauttamalla minkä tahansa sarakkeen otsikkoa
-* **Aikaleimasorointi**: Hyödyllinen kronologisten kuvaussekvenssien järjestämisessä
+* **Aikaleimasorointi**: Hyödyllinen kronologisten kuvaussekvenssien järjestämiseen
 * **Kameramallisuodatin**: Ryhmitä kuvat kameratyypin mukaan, jos käytät useita kameroita
 
 ***
@@ -104,7 +104,7 @@ Napsauta mitä tahansa kuvan pikkukuvaa tiedostoselaimessa, jotta se näkyy pä�
 * **Edellinen kuva**: Napsauta vasenta nuolta tai paina ←-näppäintä
 * **Seuraava kuva**: Napsauta oikeaa nuolta tai paina →-näppäintä
 * **Lähennä/loitonna**: Käytä hiiren rullaa tai zoomauspainikkeita
-* **Panoroida**: Napsauta ja vedä kuvaa, kun se on lähennetty
+* **Panoroi**: Napsauta ja vedä kuvaa, kun se on lähennetty
 
 ***
 
@@ -114,7 +114,7 @@ Chloros tunnistaa ja ohittaa automaattisesti kaksoiskappaleet:
 
 * Tiedostot, joilla on identtiset tiedostonimet, ohitetaan.
 * Estää vahingossa tapahtuvan kaksinkertaisen käsittelyn.
-* Kaksoiskappaleiden havaitseminen aiheuttaa varoituksen.
+* Kaksoiskappaleiden havaitsemisen yhteydessä näytetään varoitusviesti.
 
 {% hint style=&quot;warning&quot; %}
 **Tärkeää**: Älä nimeä uudelleen tai muokkaa alkuperäisiä kuvatiedostoja ennen tuontia. Chloros käyttää alkuperäisiä tiedostonimiä ja metatietoja oikean käsittelyn varmistamiseksi.
@@ -126,12 +126,12 @@ Chloros tunnistaa ja ohittaa automaattisesti kaksoiskappaleet:
 
 Jos projektisi sisältää kuvia useista MAPIR-kameroista:
 
-1. Chloros tunnistaa automaattisesti kunkin kameramallin.
-2. Kukin kameratyyppi käsitellään sen sopivalla kalibrointiprofiililla.
-3. Tiedostoselain näyttää kameramallin Kameramalli-sarakkeessa.
-4. Käsittely soveltaa oikeita asetuksia kuhunkin kameratyyppiin.
+1. Chloros tunnistaa automaattisesti kunkin kameramallin
+2. Kukin kameratyyppi käsitellään sen sopivalla kalibrointiprofiililla
+3. Tiedostoselain näyttää kameramallin Kameramalli-sarakkeessa
+4. Käsittely soveltaa oikeita asetuksia kuhunkin kameratyyppiin
 
-**Esimerkkiskenaario**: Survey3W RGN + Survey3N OCN kaksoiskamerajärjestelmä
+**Esimerkkiskenaario**: Survey3W RGN + Survey3N OCN kaksoiskamerajärjestelmä.
 
 ***
 
@@ -141,7 +141,7 @@ Jos projektisi sisältää kuvia useista MAPIR-kameroista:
 
 * Säilytä kalibrointikohdekuvat samassa kansiossa kuin mittauskuvat
 * Säilytä kameran/SD-kortin alkuperäinen kansiorakenne
-* Älä sekoita eri istuntojen tietojoukkoja yhteen projektiin
+* Älä sekoita eri istuntojen tietojoukkoja samassa projektissa
 
 ### Tiedostojen nimeäminen
 
@@ -175,7 +175,7 @@ Jos projektisi sisältää kuvia useista MAPIR-kameroista:
 **Mahdolliset syyt:**
 
 * Muokatut EXIF-metatiedot
-* Ulkopuolisella ohjelmistolla muokatut kuvat
+* Ulkoisella ohjelmistolla muokatut kuvat
 * Puutteellinen tiedostojen siirto
 
 **Ratkaisu**: Tuo alkuperäiset, muokkaamattomat tiedostot uudelleen kamerasta/SD-kortilta.

@@ -22,7 +22,7 @@ Toimii verkkoselaimessa (Chrome/Edge). Sopii parhaiten hitaammille tietokoneille
 
 ## [Chloros CLI: Komentoriviliittymä](CLI.md)
 
-Komentoriviltä suoritettava eräprosessointi. Sopii erinomaisesti automaatioon, skriptaukseen ja edistyneisiin työnkulkuihin. _CLI vaatii Chloros+ -lisenssin käytettäväksi._
+Komentorivipohjainen eräprosessointi. Sopii erinomaisesti automaatioon, skriptaukseen ja edistyneisiin työnkulkuihin. _CLI vaatii Chloros+ -lisenssin käytettäväksi._
 
 ## [Chloros API: Python SDK](api-python-sdk.md)
 

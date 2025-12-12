@@ -1,14 +1,14 @@
 # CLI : Komentorivi
 
-<figure><img src=".gitbook/assets/cli.JPG" alt=""><figcaption></figcaption></figure>**Chloros CLI** tarjoaa tehokkaan komentorivipääsyn Chloros-kuvankäsittelymoottoriin, mikä mahdollistaa automaation, skriptien käytön ja headless-toiminnon kuvankäsittelytyönkulkuissasi.
+<figure><img src=".gitbook/assets/cli.JPG" alt=""><figcaption></figcaption></figure>**Chloros CLI** tarjoaa tehokkaan komentoriviyhteyden Chloros-kuvankäsittelymoottoriin, mikä mahdollistaa automaation, skriptien käytön ja headless-toiminnon kuvankäsittelytyönkulkuissasi.
 
 ### Tärkeimmät ominaisuudet
 
 * 🚀 **Automaatio** – Useiden tietojoukkojen skriptien eräprosessointi
-* 🔗 **Integrointi** – Upota olemassa oleviin työnkulkuihin ja putkiin
+* 🔗 **Integraatio** – Upota olemassa oleviin työnkulkuihin ja prosesseihin
 * 💻 **Headless-käyttö** – Käytä ilman graafista käyttöliittymää
 * 🌍 **Monikielisyys** – Tuki 38 kielelle
-* ⚡ **Rinnakkaiskäsittely** – Skaalautuu dynaamisesti CPU:n mukaan (jopa 16 rinnakkaista työntekijää)
+* ⚡ **Rinnakkaiskäsittely** – Skaalautuu dynaamisesti CPU:hun (jopa 16 rinnakkaista työntekijää)
 
 ### Vaatimukset
 
@@ -209,7 +209,7 @@ chloros-cli export-status
 chloros-cli export-status
 ```
 
-**Käyttötapaus:** Kutsu tätä komentoa käsittelyn aikana tarkistaaksesi viennin etenemisen.
+**Käyttötapaus:** Kutsu tämä komento käsittelyn aikana tarkistaaksesi viennin etenemisen.
 
 ***
 
@@ -268,10 +268,10 @@ chloros-cli language ja
 | `hi`    | Hindi                 | हिंदी            |
 | `id`    | Indonesia            | Bahasa Indonesia |
 | `vi`    | Vietnam            | Tiếng Việt       |
-| `th`    | Thai                  | ไทย              |
-| `sv`    | Ruotsin kieli               | Svenska          |
-| `da`    | Tanskan kieli                | Dansk            |
-| `no`    | Norjan kieli             | Norsk            |
+| `th`    | Thaimaalainen                  | ไทย              |
+| `sv`    | Ruotsalainen               | Svenska          |
+| `da`    | Tanskalainen                | Dansk            |
+| `no`    | Norjalainen             | Norsk            |
 | `fi`    | Suomi               | Suomi            |
 | `el`    | Kreikka                 | Ελληνικά         |
 | `cs`    | Tšekki                 | Čeština          |
@@ -279,7 +279,7 @@ chloros-cli language ja
 | `ro`    | Romania              | Română           |
 | `uk`    | Ukraina             | Українська       |
 | `pt-BR` | Brasilian portugali  | Português Brasileiro |
-| `zh-HK` | Kantoninkiina             | 粵語             |
+| `zh-HK` | Kantoni             | 粵語             |
 | `ms`    | Malaiji                 | Bahasa Melayu    |
 | `sk`    | Slovakki                | Slovenčina       |
 | `bg`    | Bulgarian             | Български        |
@@ -378,19 +378,19 @@ Chloros+ CLI **skaalaa automaattisesti** rinnakkaiskäsittelyn tietokoneesi suor
 **Kuinka se toimii:**
 
 * Tunnistaa CPU-ytimet ja RAM-muistin
-* Määrittää työntekijät: **2× CPU-ytimet** (käyttää hyperthreading-tekniikkaa)
-* **Enintään: 16 rinnakkaista työntekijää** (vakauden takaamiseksi)
+* Jakaa työt: **2× CPU-ytimet** (käyttää hyperthreading-tekniikkaa)
+* **Enintään: 16 rinnakkaista työtä** (vakauden takaamiseksi)
 
 **Järjestelmätasot:**
 
-| Järjestelmätyyppi   | CPU        | RAM      | Työntekijät  | Suorituskyky     |
+| Järjestelmätyyppi   | CPU        | RAM      | Työt  | Suorituskyky     |
 | ------------- | ---------- | -------- | -------- | --------------- |
 | **Huippuluokka**  | 16+ ydintä  | 32+ Gt   | Jopa 16 | Maksiminopeus   |
 | **Keskitaso** | 8–15 ydintä | 16–31 Gt | 8–16     | Erinomainen nopeus |
 | **Alataso**   | 4–7 ydintä  | 8–15 Gt  | 4–8      | Hyvä nopeus      |
 
 {% hint style=&quot;success&quot; %}
-**Automaattinen optimointi**: CLI tunnistaa automaattisesti järjestelmän tekniset tiedot ja määrittää optimaalisen rinnakkaiskäsittelyn. Manuaalista määritystä ei tarvita!
+**Automaattinen optimointi**: CLI tunnistaa automaattisesti järjestelmän tekniset tiedot ja määrittää optimaalisen rinnakkaisprosessoinnin. Manuaalista määritystä ei tarvita!
 {% endhint %}
 
 ### Debayer-menetelmät
@@ -412,11 +412,11 @@ CLI käyttää oletusarvoisesti ja suositeltuna debayer-algoritmina **High Quali
 **Suositus**: Ota vignettikorjaus aina käyttöön, jotta kuvan kirkkauden tasaisuus varmistetaan.
 {% endhint %}
 
-### Heijastavuuden kalibrointi
+### Heijastavuuskalibrointi
 
-Muuntaa raakojen anturiarvot standardoiduiksi heijastavuusprosenttiosuuksiksi kalibrointipaneelien avulla.
+Muuntaa raakatietojen arvot standardoiduiksi heijastavuusprosentteiksi kalibrointipaneelien avulla.
 
-* **Oletusarvoisesti käytössä** – välttämätön kasvillisuuden analysoinnille.
+* **Oletusarvoisesti käytössä** – välttämätön kasvillisuuden analysoinnissa.
 * Vaatii kalibrointikohdepaneelit kuvissa.
 * Poista käytöstä `--no-reflectance`:llä.
 
@@ -430,11 +430,11 @@ Muuntaa raakojen anturiarvot standardoiduiksi heijastavuusprosenttiosuuksiksi ka
 
 * **Oletusarvoisesti pois käytöstä**
 * Käytä `--ppk`:ää ottaaksesi käyttöön
-* Vaatii .daq-tiedostoja projektikansiossa MAPIR DAQ-A-SD -valosensorista.
+* Vaatii .daq-tiedostot projektikansiosta MAPIR DAQ-A-SD -valosensorista.
 
 ### Tulostusmuodot
 
-<table><thead><tr><th width="197">Muoto</th><th width="130.20001220703125">Bittisyvyys</th><th width="116.5999755859375">Tiedostokoko</th><th>Sopii parhaiten</th></tr></thead><tbody><tr><td><strong>TIFF (16-bittinen)</strong> ⭐</td><td>16-bittinen kokonaisluku</td><td>Suuri</td><td>GIS-analyysi, fotogrammetria (suositeltava)</td></tr><tr><td><strong>TIFF (32-bittinen, prosentti)</strong></td><td>32-bittinen liukuluku</td><td>Erittäin suuri</td><td>Tieteellinen analyysi, tutkimus</td></tr><tr><td><strong>PNG (8-bittinen)</strong></td><td>8-bittinen kokonaisluku</td><td>Keskikokoinen</td><td>Silmämääräinen tarkastus, verkkopohjainen jakaminen</td></tr><tr><td><strong>JPG (8-bittinen)</strong></td><td>8-bittinen kokonaisluku</td><td>Pieni</td><td>Nopea esikatselu, pakattu tulostus</td></tr></tbody></table>***
+<table><thead><tr><th width="197">Muoto</th><th width="130.20001220703125">Bittisyvyys</th><th width="116.5999755859375">Tiedostokoko</th><th>Sopii parhaiten</th></tr></thead><tbody><tr><td><strong>TIFF (16-bittinen)</strong> ⭐</td><td>16-bittinen kokonaisluku</td><td>Suuri</td><td>GIS-analyysi, fotogrammetria (suositeltava)</td></tr><tr><td><strong>TIFF (32-bittinen, prosentti)</strong></td><td>32-bittinen liukuluku</td><td>Erittäin suuri</td><td>Tieteellinen analyysi, tutkimus</td></tr><tr><td><strong>PNG (8-bittinen)</strong></td><td>8-bittinen kokonaisluku</td><td>Keskikokoinen</td><td>Silmämääräinen tarkastus, verkkopohjainen jakaminen</td></tr><tr><td><strong>JPG (8-bittinen)</strong></td><td>8-bittinen kokonaisluku</td><td>Pieni</td><td>Nopea esikatselu, pakattu tulos</td></tr></tbody></table>***
 
 ## Automaatio ja skriptit
 
@@ -576,7 +576,7 @@ if __name__ == '__main__':
 
 ### Vakiotyönkulku
 
-1. **Syöttö**: Kansio, joka sisältää RAW/JPG-kuvapareja
+1. **Syöte**: Kansio, joka sisältää RAW/JPG-kuvapareja
 2. **Haku**: CLI etsii automaattisesti tuetut kuvatiedostot
 3. **Käsittely**: Rinnakkaistila skaalautuu CPU-ytimien mukaan (Chloros+)
 4. **Tulos**: Luo kameramallin alikansiot käsitellyillä kuvilla
@@ -594,9 +594,9 @@ MyProject/
     └── ...
 ```
 
-### Arvioitu käsittelyaika
+### Arvioidut käsittelyajat
 
-Tyypillinen käsittelyaika 100 kuvalle (kukin 12 MP):
+Tyypilliset käsittelyajat 100 kuvalle (kukin 12 MP):
 
 | Tila              | Aika      | Laitteisto                                     |
 | ----------------- | --------- | -------------------------------------------- |
@@ -652,7 +652,7 @@ Backend failed to start within 30 seconds
 **Ratkaisut:**
 
 1. Tarkista, onko backend-palvelu jo käynnissä (sulje se ensin)
-2. Tarkista, ettei Windows-palomuuri estä sitä
+2. Tarkista, ettei Windows palomuuri estä sitä
 3. Kokeile eri porttia:
 
 ```powershell
@@ -667,7 +667,7 @@ chloros-cli --restart process "C:\Datasets\Field_A"
 
 ***
 
-### Lisenssi-/todentamisongelmat
+### Lisenssi-/todennusongelmat
 
 **Virhe:**
 
@@ -731,7 +731,7 @@ Port 5000 is already in use
 
 **Ratkaisu:**
 
-Määritä eri portti:
+Määritä toinen portti:
 
 ```powershell
 chloros-cli --port 5001 process "C:\Datasets\Field_A"
@@ -919,7 +919,7 @@ chloros-cli process "C:\Input\Raw_Images" ^
 
 ### Esimerkki 6: Todentamisen työnkulku
 
-Suorita todentamisen työnkulku:
+Suorita todentamisen työnkulku loppuun:
 
 ```powershell
 # Step 1: Login
