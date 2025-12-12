@@ -9,11 +9,15 @@ metaLinks:
 
 MAPIR tarjoaa erilaisia kalibrointikohteita monenlaisiin sovelluksiin. Alla näkyvä kompakti T4-R50 sisältää 4 paneelia, joiden valonheijastavuus on mitattu välillä 250–2 500 nm.
 
-<figure><img src=".gitbook/assets/t4-r50_2.jpg" alt=""><figcaption><p>MAPIR T4-R50</p></figcaption></figure>T4-diffuusioviitekohteilla on seuraavat heijastavuuskäyrät, [tiedot ladattavissa täältä](https://cdn.shopify.com/s/files/1/0972/5566/files/MAPIR_Diffuse_Reflectance_Standard_Calibration_Target_Data_T4.xlsx?v=1741759157):
+<figure><img src=".gitbook/assets/t4-r50_2.jpg" alt=""><figcaption><p>MAPIR T4-R50</p></figcaption></figure>
+
+T4-diffuusioviitekohteilla on seuraavat heijastavuuskäyrät, [tiedot ladattavissa täältä](https://cdn.shopify.com/s/files/1/0972/5566/files/MAPIR_Diffuse_Reflectance_Standard_Calibration_Target_Data_T4.xlsx?v=1741759157):
 
 <figure><img src=".gitbook/assets/MAPIR Diffuse Reflectance Standard Calibration Target Data T4 (250-2500nm).png" alt=""><figcaption><p>MAPIR T4-heijastavuus :: 250–2500 nm</p></figcaption></figure>
 
-<figure><img src=".gitbook/assets/MAPIR Diffuse Reflectance Standard Calibration Target Data T4 (400-1000nm).png" alt=""><figcaption><p>MAPIR T4 Heijastavuus :: 400–1000 nm</p></figcaption></figure>Heijastavuusgraafista näet, että arvot ovat aallonpituus (x-akseli) suhteessa heijastavuusprosenttiin (y-akseli). Kun otamme kuvan kalibrointikohteesta, luomme suhteen pikseliarvon ja heijastavuusprosentin välillä kameran kunkin anturikaistan herkkyysalueella.
+<figure><img src=".gitbook/assets/MAPIR Diffuse Reflectance Standard Calibration Target Data T4 (400-1000nm).png" alt=""><figcaption><p>MAPIR T4 Heijastavuus :: 400–1000 nm</p></figcaption></figure>
+
+Heijastavuusgraafista näet, että arvot ovat aallonpituus (x-akseli) suhteessa heijastavuusprosenttiin (y-akseli). Kun otamme kuvan kalibrointikohteesta, luomme suhteen pikseliarvon ja heijastavuusprosentin välillä kameran kunkin anturikaistan herkkyysalueella.
 
 Tämä tarkoittaa, että jokaisessa kamerallamme ottamassasi kuvassa voit käyttää valokuvaa heijastavuuskohteistamme, kuten [T4-R50](https://www.mapir.camera/collections/calibration-targets/products/diffuse-reflectance-standard-calibration-target-package-t3-r50) tai [T4-R125](https://www.mapir.camera/collections/multispectral-reflectance-reference-calibration-targets/products/diffuse-reflectance-standard-calibration-target-package-t4-r125), kuvien heijastavuuden kalibroimiseksi. Kalibroinnin jälkeen kuvan jokainen pikseli vastaa heijastavuusprosenttia.
 

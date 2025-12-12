@@ -4,7 +4,9 @@ metaLinks: {}
 
 # Aloittaminen
 
-<div data-full-width="false"><figure><img src=".gitbook/assets/chloros_logo_transparent.png" alt=""><figcaption></figcaption></figure></div>Chloros on [MAPIR](https://www.mapir.camera) -ohjelmisto, jolla käsitellään kuvia ja muita anturitietoja.
+<div data-full-width="false"><figure><img src=".gitbook/assets/chloros_logo_transparent.png" alt=""><figcaption></figcaption></figure></div>
+
+Chloros on [MAPIR](https://www.mapir.camera) -ohjelmisto, jolla käsitellään kuvia ja muita anturitietoja.
 
 ***
 
