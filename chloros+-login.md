@@ -6,7 +6,9 @@ Käyttäjän <img src=".gitbook/assets/icon_user.JPG" alt="" data-size="line"> s
 
 Kun olet kirjautunut sisään, tilisi tiedot näkyvät:
 
-<figure><img src=".gitbook/assets/user_account.JPG" alt="" width="375"><figcaption></figcaption></figure>## CLI Kirjaudu sisään
+<figure><img src=".gitbook/assets/user_account.JPG" alt="" width="375"><figcaption></figcaption></figure>
+
+## CLI Kirjaudu sisään
 
 Kirjaudu sisään Chloros+ -tunnuksillasi, jotta CLI-käsittely voidaan ottaa käyttöön.
 
@@ -28,7 +30,9 @@ chloros-cli login user@example.com 'MyP@ssw0rd123'
 
 **Tulos:**
 
-<figure><img src=".gitbook/assets/cli login_w.JPG" alt=""><figcaption></figcaption></figure>### Suunnitelman voimassaolon päättyminen
+<figure><img src=".gitbook/assets/cli login_w.JPG" alt=""><figcaption></figcaption></figure>
+
+### Suunnitelman voimassaolon päättyminen
 
 GUI:ssa näkyvä suunnitelman voimassaolon päättyminen osoittaa, milloin lisenssisi vanhenee. Kuukausittain toistuvien tilausten voimassaolo päättyy kuukauden lopussa. Vuosittaisten tilausten voimassaolo päättyy vuoden kuluttua tilauksen aloittamisesta. Lisenssin tarkistaminen edellyttää kuukausittaista internetyhteyttä, ja sen tarkistamiseen on 30 päivän lisäaika.
 

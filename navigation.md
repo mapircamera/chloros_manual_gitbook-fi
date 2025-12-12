@@ -14,7 +14,9 @@ Päävalikosta voit aloittaa uuden projektin, avata olemassa olevan projektin ta
 
 Kun tämä painike on käytössä, kuvankäsittelyprosessi käynnistyy.
 
-### <img src=".gitbook/assets/image (4).png" alt="" data-size="line"> Edistymispalkki <img src=".gitbook/assets/image (5).png" alt="" data-size="line">Ilmaisessa Chloros-tilassa, joka käsittelee kaikki tiedostot peräkkäin, edistymispalkki näyttää kaksi vaihetta: kohteen tunnistus ja käsittely.
+### <img src=".gitbook/assets/image (4).png" alt="" data-size="line"> Edistymispalkki <img src=".gitbook/assets/image (5).png" alt="" data-size="line">
+
+Ilmaisessa Chloros-tilassa, joka käsittelee kaikki tiedostot peräkkäin, edistymispalkki näyttää kaksi vaihetta: kohteen tunnistus ja käsittely.
 
 Maksullisessa Chloros+-lisenssitilassa, joka käsittelee kaikki tiedostot samanaikaisesti, edistymispalkki näyttää neljä vaihetta: tunnistus, analysointi, kalibrointi ja vienti. Jos viet hiiren osoittimen Chloros+ -etenemispalkin päälle, avautuu laajennettu neljän etenemispalkin paneeli, josta voit seurata prosessin etenemistä. Klikkaamalla ylintä etenemispalkkia voit jäädyttää avattavan paneelin, ja klikkaamalla uudelleen voit vapauttaa sen.
 
