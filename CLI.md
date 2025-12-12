@@ -5,22 +5,22 @@
 ### Tärkeimmät ominaisuudet
 
 * 🚀 **Automaatio** – Useiden tietojoukkojen skriptien eräprosessointi
-* 🔗 **Integraatio** – Upotus olemassa oleviin työnkulkuihin ja putkistoihin
-* 💻 **Headless-käyttö** – Käyttö ilman graafista käyttöliittymää
+* 🔗 **Integrointi** – Upota olemassa oleviin työnkulkuihin ja putkiin
+* 💻 **Headless-käyttö** – Käytä ilman graafista käyttöliittymää
 * 🌍 **Monikielisyys** – Tuki 38 kielelle
-* ⚡ **Rinnakkaiskäsittely** – Skaalautuu dynaamisesti CPU:hun (jopa 16 rinnakkaista työntekijää)
+* ⚡ **Rinnakkaiskäsittely** – Skaalautuu dynaamisesti CPU:n mukaan (jopa 16 rinnakkaista työntekijää)
 
 ### Vaatimukset
 
 | Vaatimus          | Tiedot                                                             |
 | -------------------- | ------------------------------------------------------------------- |
 | **Käyttöjärjestelmä** | Windows 10/11 (64-bittinen)                                              |
-| **Lisenssi**          | Chloros+ ([maksullinen paketti vaaditaan](https://cloud.mapir.camera/pricing)) |
+| **Lisenssi**          | Chloros+ ([maksullinen tilaus vaaditaan](https://cloud.mapir.camera/pricing)) |
 | **Muisti**           | Vähintään 8 Gt RAM-muistia (suositellaan 16 Gt)                                  |
 | **Internet**         | Vaaditaan lisenssin aktivoimiseksi                                     |
 | **Levytila**       | Vaihtelee projektin koon mukaan                                              |
 
-{% hint style=&quot;warning&quot; %}
+{% vihje style=&quot;warning&quot; %}
 **Lisenssivaatimus**: CLI edellyttää maksullista Chloros+ -tilausta. Standard (ilmainen) -paketeissa ei ole CLI-käyttöoikeutta. Käy osoitteessa [https://cloud.mapir.camera/pricing](https://cloud.mapir.camera/pricing) päivittääksesi.
 {% endhint %}
 
@@ -113,7 +113,7 @@ chloros-cli process "C:\Datasets\Survey_001" --vignette --reflectance
 
 ***
 
-### `login` - Todennetaan tili
+### `login` - Todenna tili
 
 Kirjaudu sisään Chloros+ -tunnuksillasi, jotta CLI-käsittely voidaan ottaa käyttöön.
 
@@ -133,7 +133,7 @@ chloros-cli login user@example.com 'MyP@ssw0rd123'
 **Erikoismerkit**: Käytä yksittäisiä lainausmerkkejä salasanojen ympärillä, jotka sisältävät merkkejä kuten `$`, `!` tai välilyöntejä.
 {% endhint %}
 
-**Tulos:**
+**Tulostus:**
 
 <figure><img src=".gitbook/assets/cli login_w.JPG" alt=""><figcaption></figcaption></figure>***
 
@@ -209,7 +209,7 @@ chloros-cli export-status
 chloros-cli export-status
 ```
 
-**Käyttötapaus:** Kutsu tämä komento käsittelyn aikana tarkistaaksesi viennin etenemisen.
+**Käyttötapaus:** Kutsu tätä komentoa käsittelyn aikana tarkistaaksesi viennin etenemisen.
 
 ***
 
@@ -279,7 +279,7 @@ chloros-cli language ja
 | `ro`    | Romania              | Română           |
 | `uk`    | Ukraina             | Українська       |
 | `pt-BR` | Brasilian portugali  | Português Brasileiro |
-| `zh-HK` | Kantoni             | 粵語             |
+| `zh-HK` | Kantoninkiina             | 粵語             |
 | `ms`    | Malaiji                 | Bahasa Melayu    |
 | `sk`    | Slovakki                | Slovenčina       |
 | `bg`    | Bulgarian             | Български        |
@@ -295,9 +295,9 @@ chloros-cli language ja
 
 ***
 
-### `set-project-folder` - Aseta oletusprojektikansio
+### `set-project-folder` - Aseta oletushankekansio
 
-Muuta oletusprojektikansion sijaintia (jaettu GUI:n kanssa).
+Muuta oletushankekansion sijaintia (jaettu GUI:n kanssa).
 
 **Syntaksi:**
 
@@ -378,7 +378,7 @@ Chloros+ CLI **skaalaa automaattisesti** rinnakkaiskäsittelyn tietokoneesi suor
 **Kuinka se toimii:**
 
 * Tunnistaa CPU-ytimet ja RAM-muistin
-* Allokoi työntekijät: **2× CPU-ytimet** (käyttää hyperthreading-tekniikkaa)
+* Määrittää työntekijät: **2× CPU-ytimet** (käyttää hyperthreading-tekniikkaa)
 * **Enintään: 16 rinnakkaista työntekijää** (vakauden takaamiseksi)
 
 **Järjestelmätasot:**
@@ -390,7 +390,7 @@ Chloros+ CLI **skaalaa automaattisesti** rinnakkaiskäsittelyn tietokoneesi suor
 | **Alataso**   | 4–7 ydintä  | 8–15 Gt  | 4–8      | Hyvä nopeus      |
 
 {% hint style=&quot;success&quot; %}
-**Automaattinen optimointi**: CLI tunnistaa automaattisesti järjestelmän tekniset tiedot ja määrittää optimaalisen rinnakkaisprosessoinnin. Manuaalista määritystä ei tarvita!
+**Automaattinen optimointi**: CLI tunnistaa automaattisesti järjestelmän tekniset tiedot ja määrittää optimaalisen rinnakkaiskäsittelyn. Manuaalista määritystä ei tarvita!
 {% endhint %}
 
 ### Debayer-menetelmät
@@ -405,7 +405,7 @@ CLI käyttää oletusarvoisesti ja suositeltuna debayer-algoritmina **High Quali
 
 **Toiminto:** Korjaa valon heikkenemisen kuvan reunoilla (kamerakuvissa yleiset tummemmat kulmat).
 
-* **Oletuksena käytössä** - Useimpien käyttäjien kannattaa pitää tämä käytössä
+* **Oletuksena käytössä** - Useimpien käyttäjien tulisi pitää tämä käytössä
 * Poista käytöstä `--no-vignette`:llä
 
 {% hint style=&quot;success&quot; %}
@@ -414,9 +414,9 @@ CLI käyttää oletusarvoisesti ja suositeltuna debayer-algoritmina **High Quali
 
 ### Heijastavuuden kalibrointi
 
-Muuntaa raakakuvausanturin arvot standardoiduiksi heijastavuusprosenttiosuuksiksi kalibrointipaneelien avulla.
+Muuntaa raakojen anturiarvot standardoiduiksi heijastavuusprosenttiosuuksiksi kalibrointipaneelien avulla.
 
-* **Oletusarvoisesti käytössä** – välttämätön kasvillisuuden analysoinnissa.
+* **Oletusarvoisesti käytössä** – välttämätön kasvillisuuden analysoinnille.
 * Vaatii kalibrointikohdepaneelit kuvissa.
 * Poista käytöstä `--no-reflectance`:llä.
 
@@ -430,7 +430,7 @@ Muuntaa raakakuvausanturin arvot standardoiduiksi heijastavuusprosenttiosuuksiks
 
 * **Oletusarvoisesti pois käytöstä**
 * Käytä `--ppk`:ää ottaaksesi käyttöön
-* Vaatii .daq-tiedostot projektikansiossa MAPIR DAQ-A-SD -valosensorista.
+* Vaatii .daq-tiedostoja projektikansiossa MAPIR DAQ-A-SD -valosensorista.
 
 ### Tulostusmuodot
 
@@ -572,11 +572,11 @@ if __name__ == '__main__':
 
 ***
 
-## Käsittelytyönkulku
+## Käsittelyn työnkulku
 
 ### Vakiotyönkulku
 
-1. **Syöte**: Kansio, joka sisältää RAW/JPG-kuvapareja
+1. **Syöttö**: Kansio, joka sisältää RAW/JPG-kuvapareja
 2. **Haku**: CLI etsii automaattisesti tuetut kuvatiedostot
 3. **Käsittely**: Rinnakkaistila skaalautuu CPU-ytimien mukaan (Chloros+)
 4. **Tulos**: Luo kameramallin alikansiot käsitellyillä kuvilla
@@ -604,7 +604,7 @@ Tyypillinen käsittelyaika 100 kuvalle (kukin 12 MP):
 | **Rinnakkaistila** | 10–15 min | i5/Ryzen 5, 8 Gt RAM-muistia, HDD (enintään 8 työntekijää)   |
 
 {% hint style=&quot;info&quot; %}
-**Suorituskykyvinkki**: Käsittelyaika vaihtelee kuvien määrän, tarkkuuden ja tietokoneen ominaisuuksien mukaan.
+**Suorituskykyvinkki**: Käsittelyaika vaihtelee kuvien lukumäärän, tarkkuuden ja tietokoneen ominaisuuksien mukaan.
 {% endhint %}
 
 ***
@@ -637,11 +637,11 @@ dir "C:\Program Files\Chloros\resources\cli\chloros-cli.exe"
    * Avaa Järjestelmän ominaisuudet → Ympäristömuuttujat
    * Muokkaa PATH-muuttujaa
    * Lisää: `C:\Program Files\Chloros\resources\cli`
-   * Käynnistä terminaali uudelleen.
+   * Käynnistä terminaali uudelleen
 
 ***
 
-### Backend-palvelun käynnistys epäonnistui.
+### Backend-palvelun käynnistys epäonnistui
 
 **Virhe:**
 
@@ -651,8 +651,8 @@ Backend failed to start within 30 seconds
 
 **Ratkaisut:**
 
-1. Tarkista, onko backend-palvelu jo käynnissä (sulje se ensin).
-2. Tarkista, ettei palomuuri estä Windows-palvelua.
+1. Tarkista, onko backend-palvelu jo käynnissä (sulje se ensin)
+2. Tarkista, ettei Windows-palomuuri estä sitä
 3. Kokeile eri porttia:
 
 ```powershell
@@ -667,7 +667,7 @@ chloros-cli --restart process "C:\Datasets\Field_A"
 
 ***
 
-### Lisenssi-/todennusongelmat
+### Lisenssi-/todentamisongelmat
 
 **Virhe:**
 
@@ -754,7 +754,7 @@ Tilaa osoitteesta: [https://cloud.mapir.camera/pricing](https://cloud.mapir.came
 
 ### K: Voinko käyttää CLI:ää palvelimella, jossa ei ole graafista käyttöliittymää?
 
-**V:** Kyllä! CLI toimii täysin ilman käyttöliittymää. Vaatimukset:
+**V:** Kyllä! CLI toimii täysin ilman graafista käyttöliittymää. Vaatimukset:
 
 * Windows Server 2016 tai uudempi
 * Visual C++ Redistributable asennettuna
@@ -919,7 +919,7 @@ chloros-cli process "C:\Input\Raw_Images" ^
 
 ### Esimerkki 6: Todentamisen työnkulku
 
-Suorita todentamisen työnkulku loppuun:
+Suorita todentamisen työnkulku:
 
 ```powershell
 # Step 1: Login

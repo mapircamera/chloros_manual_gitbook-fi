@@ -6,24 +6,24 @@
 
 * 🐍 **Natiivi Python** - Puhdas, Pythonic API kuvankäsittelyyn
 * 🔧 **Täysi API-pääsy** - Täydellinen hallinta Chloros-käsittelyyn
-* 🚀 **Automaatio** - Rakenna mukautettuja eräprosessointityönkulkuja
+* 🚀 **Automaatio** - Rakenna mukautettuja eräkäsittelytyönkulkuja
 * 🔗 **Integrointi** - Upota Chloros olemassa oleviin Python-sovelluksiin
 * 📊 **Tutkimuskäyttöön valmis** - Täydellinen tieteellisiin analyysiputkiin
-* ⚡ **Rinnakkaiskäsittely** - Skaalautuu CPU-ytimiesi mukaan (Chloros+)
+* ⚡ **Rinnakkaiskäsittely** - Skaalautuu CPU-ytimien mukaan (Chloros+)
 
 ### Vaatimukset
 
 | Vaatimus          | Tiedot                                                             |
 | -------------------- | ------------------------------------------------------------------- |
 | **Chloros Desktop**  | Täytyy olla asennettuna paikallisesti                                           |
-| **Lisenssi**          | Chloros+ ([maksullinen paketti vaaditaan](https://cloud.mapir.camera/pricing)) |
+| **Lisenssi**          | Chloros+ ([maksullinen tilaus vaaditaan](https://cloud.mapir.camera/pricing)) |
 | **Käyttöjärjestelmä** | Windows 10/11 (64-bittinen)                                              |
 | **Python**           | Python 3.7 tai uudempi                                                |
-| **Muisti**           | Vähintään 8 Gt RAM-muistia (suositellaan 16 Gt)                                  |
-| **Internet**         | Vaaditaan lisenssin aktivoimiseksi                                     |
+| **Muisti**           | Vähintään 8 Gt RAM-muistia (suositus 16 Gt)                                  |
+| **Internet**         | Vaaditaan lisenssin aktivointiin                                     |
 
 {% hint style=&quot;warning&quot; %}
-**Lisenssivaatimukset**: Python SDK edellyttää maksullista Chloros+ -tilausta API-käyttöoikeuden saamiseksi. Vakiomuotoisissa (ilmaisissa) paketeissa ei ole API/SDK-käyttöoikeutta. Käy osoitteessa [https://cloud.mapir.camera/pricing](https://cloud.mapir.camera/pricing) päivittääksesi paketin.
+**Lisenssivaatimukset**: Python SDK edellyttää maksullista Chloros+ -tilausta API-käyttöoikeuden saamiseksi. Vakiomuotoisissa (ilmaisissa) paketeissa ei ole API/SDK-käyttöoikeutta. Käy osoitteessa [https://cloud.mapir.camera/pricing](https://cloud.mapir.camera/pricing) päivittääksesi pakettisi.
 {% endhint %}
 
 ## Pikaopas
@@ -37,7 +37,7 @@ pip install chloros-sdk
 ```
 
 {% hint style=&quot;info&quot; %}
-**Ensimmäinen asennus**: Ennen kuin käytät SDK:ää, aktivoi Chloros+ -lisenssisi avaamalla Chloros, Chloros (selain) tai Chloros CLI ja kirjautumalla sisään tunnuksillasi. Tämä tarvitsee tehdä vain kerran.
+**Ensimmäinen asennus**: Ennen kuin käytät SDK, aktivoi Chloros+ -lisenssisi avaamalla Chloros, Chloros (selain) tai Chloros CLI ja kirjautumalla sisään tunnuksillasi. Tämä tarvitsee tehdä vain kerran.
 {% endhint %}
 
 ### Peruskäyttö
@@ -84,7 +84,7 @@ chloros.process(mode="parallel", wait=True)
 
 ### Edellytykset
 
-Ennen kuin asennat SDK:n, varmista, että sinulla on:
+Ennen kuin asennat SDK, varmista, että sinulla on:
 
 1. **Chloros Desktop** asennettuna ([lataa](download.md))
 2. **Python 3.7+** asennettuna ([python.org](https://www.python.org))
@@ -104,13 +104,13 @@ pip install chloros-sdk
 pip install chloros-sdk[progress]
 ```
 
-**Kehitystarkoituksiin tarkoitettu asennus:**
+**Kehitystarkistuksen asennus:**
 
 ```bash
 pip install chloros-sdk[dev]
 ```
 
-### Asennuksen tarkistaminen
+### Tarkista asennus
 
 Testaa, että SDK on asennettu oikein:
 
@@ -236,7 +236,7 @@ Tuo kuvat kansiosta.
 | `folder_path` | str/Path | Kyllä      | Polku kuvien sisältävään kansioon         |
 | `recursive`   | bool     | Ei       | Etsi alikansiot (oletus: False) |
 
-**Palauttaa:** `dict` - Tuo tulokset tiedostojen lukumäärän kanssa
+**Palauttaa:** `dict` - Tuontitulokset tiedostojen lukumäärän kanssa
 
 **Esimerkki:**
 
@@ -256,7 +256,7 @@ Määritä käsittelyasetukset.
 
 **Parametrit:**
 
-| Parametri                 | Tyyppi | Oletusarvo                 | Kuvaus                     |
+| Parametri                 | Tyyppi | Oletus                 | Kuvaus                     |
 | ------------------------- | ---- | ----------------------- | ------------------------------- |
 | `debayer`                 | str  | &quot;Korkea laatu (nopeampi)&quot; | Debayer-menetelmä                  |
 | `vignette_correction`     | bool | `True`                  | Ota vignettikorjaus käyttöön      |
@@ -313,10 +313,10 @@ Käsittele projektikuvat.
 | `progress_callback` | callable | `None`       | Edistymisen palautusfunktio (progress, msg) |
 | `poll_interval`     | float    | `2.0`        | Edistymisen kyselyväli (sekuntia)   |
 
-**Palauttaa:** `dict` - Käsittelyn tulokset
+**Palauttaa:** `dict` - Käsittelytulokset
 
 {% hint style=&quot;warning&quot; %}
-**Rinnakkaistila**: Vaatii Chloros+ -lisenssin. Skaalautuu automaattisesti CPU-ytimien määrän mukaan (enintään 16 työprosessia).
+**Rinnakkaistila**: Vaatii Chloros+ -lisenssin. Skaalautuu automaattisesti CPU-ytimien mukaan (enintään 16 työntekijää).
 {% endhint %}
 
 **Esimerkki:**
@@ -343,9 +343,9 @@ chloros.process(wait=False)
 
 #### `get_config()`
 
-Hae nykyisen projektin kokoonpano.
+Hae nykyinen projektin kokoonpano.
 
-**Palauttaa:** `dict` - Nykyisen projektin kokoonpanon
+**Palauttaa:** `dict` - Nykyinen projektin kokoonpano
 
 **Esimerkki:**
 
@@ -358,9 +358,9 @@ print(config['Project Settings'])
 
 #### `get_status()`
 
-Hae taustapalvelimen tilatiedot.
+Hae taustaprosessin tilatiedot.
 
-**Palauttaa:** `dict` - Backend-tila
+**Palauttaa:** `dict` - Taustaprosessin tila
 
 **Esimerkki:**
 
@@ -374,7 +374,7 @@ print(f"URL: {status['url']}")
 
 #### `shutdown_backend()`
 
-Sammuta backend (jos se on käynnistetty SDK:llä).
+Sammuta taustaprosessi (jos se on käynnistetty SDK:llä).
 
 **Esimerkki:**
 
@@ -384,11 +384,11 @@ chloros.shutdown_backend()
 
 ***
 
-### Käytännölliset toiminnot
+### Käteviä toimintoja
 
 #### `process_folder(folder_path, **options)`
 
-Yhden rivin käytännöllinen toiminto kansion käsittelyyn.
+Yhden rivin kätevä toiminto kansion käsittelyyn.
 
 **Parametrit:**
 
@@ -564,7 +564,7 @@ print("All flights processed!")
 
 ***
 
-### Esimerkki 4: Tutkimusputken integrointi
+### Esimerkki 4: Tutkimusprosessin integrointi
 
 Integroi Chloros data-analyysiin:
 
@@ -799,7 +799,7 @@ ChlorosError                    # Base exception
 └── ChlorosConfigurationError  # Configuration errors
 ```
 
-### Poikkeusesimerkkejä
+### Poikkeusten esimerkkejä
 
 ```python
 from chloros_sdk import ChlorosLocal
@@ -828,7 +828,7 @@ except ChlorosError as e:
 
 ### Mukautettu taustakonfiguraatio
 
-Käytä mukautettua taustapaikkaa tai -konfiguraatiota:
+Käytä mukautettua taustasovelluksen sijaintia tai konfiguraatiota:
 
 ```python
 chloros = ChlorosLocal(
@@ -904,7 +904,7 @@ backend_path = r"C:\Program Files\MAPIR\Chloros\resources\backend\chloros-backen
 print(f"Backend exists: {os.path.exists(backend_path)}")
 ```
 
-2. Tarkista, että Windows-palomuuri ei estä yhteyttä.
+2. Tarkista, että Windows-palomuuri ei estä yhteyttä
 3. Kokeile manuaalista backend-polkua:
 
 ```python
@@ -915,7 +915,7 @@ chloros = ChlorosLocal(backend_exe="C:\\Path\\To\\chloros-backend.exe")
 
 ### Lisenssiä ei tunnistettu
 
-**Ongelma:** SDK varoittaa puuttuvasta lisenssistä.
+**Ongelma:** SDK varoittaa puuttuvasta lisenssistä
 
 **Ratkaisut:**
 
@@ -975,7 +975,7 @@ chloros = ChlorosLocal(timeout=120)  # 2 minutes
 
 ### Portti jo käytössä
 
-**Ongelma:** Backend-portti 5000 varattu
+**Ongelma:** Backend-portti 5000 on varattu
 
 **Ratkaisut:**
 
@@ -1033,7 +1033,7 @@ Suurille tietojoukoille:
 
 ### Taustakäsittely
 
-Vapauta Python muihin tehtäviin:
+Vapauta Python muille tehtäville:
 
 ```python
 chloros.process(wait=False)  # Non-blocking
@@ -1123,11 +1123,11 @@ chloros.process(progress_callback=notebook_progress)
 
 ### K: Tarvitseeko SDK internetyhteyden?
 
-**V:** Vain ensimmäisen lisenssin aktivoinnin yhteydessä. Kun olet kirjautunut sisään Chloros:n, Chloros:n (selain) tai Chloros:n kautta, lisenssi tallennetaan paikallisesti välimuistiin ja toimii offline-tilassa 30 päivän ajan.
+**V:** Vain ensimmäisen lisenssin aktivoinnin yhteydessä. Kun olet kirjautunut sisään Chloros:n, Chloros:n (selain) tai Chloros:n CLI:n kautta, lisenssi tallennetaan paikallisesti välimuistiin ja toimii offline-tilassa 30 päivän ajan.
 
 ***
 
-### K: Voinko käyttää SDK-ohjelmaa palvelimella, jossa ei ole graafista käyttöliittymää?
+### K: Voinko käyttää SDK:ää palvelimella, jossa ei ole graafista käyttöliittymää?
 
 **V:** Kyllä! Vaatimukset:
 
@@ -1153,9 +1153,9 @@ chloros.process(progress_callback=notebook_progress)
 
 **V:** SDK-koodi voidaan integroida sovelluksiisi, mutta:
 
-* Loppukäyttäjillä on oltava asennettuna Chloros.
-* Loppukäyttäjillä on oltava aktiiviset Chloros+-lisenssit.
-* Kaupallinen jakelu edellyttää OEM-lisensointia.
+* Loppukäyttäjillä on oltava asennettuna Chloros
+* Loppukäyttäjillä on oltava aktiiviset Chloros+-lisenssit
+* Kaupallinen jakelu edellyttää OEM-lisensointia
 
 Ota yhteyttä info@mapir.camera:ään OEM-kyselyjen osalta.
 
@@ -1193,7 +1193,7 @@ from chloros_sdk import process_folder
 results = process_folder("C:\\Flights\\Today")
 ```
 
-Aikatauluta tehtävien ajoitusohjelman avulla päivittäiseksi ajoksi.
+Ajoita tehtävien ajoittimella päivittäinen suoritus.
 
 ***
 

@@ -18,7 +18,7 @@ Kun näitä kaavoja käytetään, nimi voi päättyä merkkiin &quot;\_1&quot; t
 
 ## EVI - Parannettu kasvillisuusindeksi
 
-Tämä indeksi kehitettiin alun perin käytettäväksi MODIS-datan kanssa parannuksena NDVI:ään optimoimalla kasvillisuussignaali alueilla, joilla lehtipinta-ala-indeksi (LAI) on korkea. Se on hyödyllisin alueilla, joilla LAI-arvo on korkea ja NDVI-arvo saattaa olla saturoitunut. Se käyttää sinisen heijastavuusalueen korjaamaan maaperän taustasignaaleja ja vähentämään ilmakehän vaikutuksia, mukaan lukien aerosolien sironta.
+Tämä indeksi kehitettiin alun perin käytettäväksi MODIS-datan kanssa parannuksena NDVI:ään optimoimalla kasvillisuussignaali alueilla, joilla lehtien pinta-ala-indeksi (LAI) on suuri. Se on hyödyllisin alueilla, joilla LAI-arvo on korkea ja NDVI-arvo voi olla saturoitunut. Se käyttää sinisen heijastavuusalueen korjaamaan maaperän taustasignaaleja ja vähentämään ilmakehän vaikutuksia, mukaan lukien aerosolien sironta.
 
 $$
 EVI = 2.5 *  {(NIR - Red) \over (NIR + 6 * Red - 7.5 * Blue + 1)}
@@ -58,9 +58,9 @@ _Viite: Becker, Sarah J., Craig S.T. Daughtry ja Andrew L. Russ. &quot;Robust fo
 
 ***
 
-## GEMI - Globaali ympäristönseuranta-indeksi
+## GEMI – Globaali ympäristönseurantaindeksi
 
-Tätä epälineaarista kasvillisuusindeksiä käytetään globaaliin ympäristönseurantaan satelliittikuvien avulla, ja sen avulla pyritään korjaamaan ilmakehän vaikutukset. Se on samanlainen kuin NDVI, mutta vähemmän herkkä ilmakehän vaikutuksille. Se on alttiina paljaan maaperän vaikutuksille, joten sitä ei suositella käytettäväksi alueilla, joilla kasvillisuus on harvaa tai kohtalaisen tiheää.
+Tätä epälineaarista kasvillisuusindeksiä käytetään globaalissa ympäristön seurannassa satelliittikuvien avulla, ja sen avulla pyritään korjaamaan ilmakehän vaikutukset. Se on samanlainen kuin NDVI, mutta vähemmän herkkä ilmakehän vaikutuksille. Se on herkkä paljaalle maaperälle, joten sitä ei suositella käytettäväksi alueilla, joilla kasvillisuus on harvaa tai kohtalaisen tiheää.
 
 $$
 GEMI = eta (1 - 0.25 * eta) - {Red - 0.125 \over 1 - Red}
@@ -86,13 +86,13 @@ $$
 
 Gamma-vakio on painotusfunktio, joka riippuu ilmakehän aerosoliolosuhteista. ENVI käyttää arvoa 1,7, joka on Gitelsonin, Kaufmanin ja Merzylakin (1996, sivu 296) suosittelema arvo.
 
-_Viite: Gitelson, A., Y. Kaufman ja M. Merzylak. &quot;Green-kanavan käyttö EOS-MODIS:n globaalin kasvillisuuden kaukokartoituksessa.&quot; Remote Sensing of Environment 58 (1996): 289-298._
+_Viite: Gitelson, A., Y. Kaufman ja M. Merzylak. &quot;Green-kanavan käyttö EOS-MODIS:n kaukokartoituksessa maailman kasvillisuudesta.&quot; Remote Sensing of Environment 58 (1996): 289-298._
 
 ***
 
 ## GCI - Green Klorofylli-indeksi
 
-Tätä indeksiä käytetään lehtien klorofyllipitoisuuden arvioimiseen monissa eri kasvilajeissa.
+Tätä indeksiä käytetään arvioimaan lehtien klorofyllipitoisuutta monissa eri kasvilajeissa.
 
 $$
 GCI = {NIR \over Green} - 1
@@ -142,15 +142,15 @@ _Viite: Sripada, R., et al. &quot;Determining In-Season Nitrogen Requirements fo
 
 ***
 
-## GRVI - Green-suhdekasvillisuusindeksi
+## GRVI - Green Suhdekasvillisuusindeksi
 
-Tämä indeksi on herkkä metsän latvuston fotosynteesinopeudelle, koska vihreän ja punaisen heijastavuus riippuu voimakkaasti lehtien pigmenttien muutoksista.
+Tämä indeksi on herkkä metsän latvuston fotosynteesinopeudelle, koska vihreän ja punaisen heijastavuus ovat voimakkaasti riippuvaisia lehtien pigmenttien muutoksista.
 
 $$
 GRVI = {NIR \over Green }
 $$
 
-_Viite: Sripada, R., et al. &quot;Ilmakuvaus infrapunaväreillä maissin alkukauden typpitarpeen määrittämiseksi.&quot; Agronomy Journal 98 (2006): 968-977._
+_Viite: Sripada, R., et al. &quot;Aerial Color Infrared Photography for Determining Early In-season Nitrogen Requirements in Corn.&quot; Agronomy Journal 98 (2006): 968-977._
 
 ***
 
@@ -168,7 +168,7 @@ _Viite: Sripada, R., et al. &quot;Determining In-Season Nitrogen Requirements fo
 
 ## LAI - Lehtipinta-ala-indeksi
 
-Tätä indeksiä käytetään lehtipeitteen arviointiin sekä sadon kasvun ja tuoton ennustamiseen. ENVI laskee vihreän LAI käyttämällä seuraavaa Boegh et al (2002) -tutkimuksen empiiristä kaavaa:
+Tätä indeksiä käytetään lehtien peittävyyden arviointiin sekä sadon kasvun ja tuoton ennustamiseen. ENVI laskee vihreän LAI käyttämällä seuraavaa Boegh et al (2002) -tutkimuksen empiiristä kaavaa:
 
 $$
 LAI = 3.618 * EVI - 0.118
@@ -200,19 +200,19 @@ _Viite: Datt, B. &quot;Eukalyptuslehtien vesipitoisuuden kaukokartoitus.&quot; J
 
 ## MNLI - Modifioitu epälineaarinen indeksi
 
-Tämä indeksi on parannus epälineaariseen indeksiin (NLI), joka sisältää maaperään mukautetun kasvillisuusindeksin (SAVI) maaperän taustan huomioon ottamiseksi. ENVI käyttää latvuston taustan säätökerrointa (_L_) arvolla 0,5.
+Tämä indeksi on parannettu versio epälineaarisesta indeksistä (NLI), joka sisältää maaperään mukautetun kasvillisuusindeksin (SAVI) maaperän taustan huomioon ottamiseksi. ENVI käyttää latvuston taustan säätökertoimen (_L_) arvoa 0,5.
 
 $$
 MNLI = {(NIR^{2} - Red) * (1 + L) \over (NIR^{2} + Red + L)  }
 $$
 
-_Viite: Yang, Z., P. Willis ja R. Mueller. &quot;Impact of Band-Ratio Enhanced AWIFS Image to Crop Classification Accuracy.&quot; Pecora 17 Remote Sensing Symposiumin (2008) julkaisut, Denver, CO._
+_Viite: Yang, Z., P. Willis ja R. Mueller. &quot;Impact of Band-Ratio Enhanced AWIFS Image to Crop Classification Accuracy.&quot; Pecora 17 Remote Sensing Symposiumin (2008) julkaisu, Denver, CO._
 
 ***
 
-## MSAVI2 - Modifioitu maaperään mukautettu kasvillisuusindeksi 2
+## MSAVI2 – Modifioitu maaperään mukautettu kasvillisuusindeksi 2
 
-Tämä indeksi on yksinkertaisempi versio Qi et al. (1994) ehdottamasta MSAVI-indeksistä, joka parantaa maaperään mukautettua kasvillisuusindeksiä (SAVI). Se vähentää maaperän kohinaa ja lisää kasvillisuuden signaalin dynaamista aluetta. MSAVI2 perustuu induktiiviseen menetelmään, joka ei käytä vakioarvoa _L_ (kuten SAVI) terveen kasvillisuuden korostamiseen.
+Tämä indeksi on yksinkertaisempi versio Qi et al. (1994) ehdottamasta MSAVI-indeksistä, joka parantaa maaperään mukautettua kasvillisuusindeksiä (SAVI). Se vähentää maaperän kohinaa ja lisää kasvillisuussignaalin dynaamista aluetta. MSAVI2 perustuu induktiiviseen menetelmään, joka ei käytä vakioarvoa _L_ (kuten SAVI) terveen kasvillisuuden korostamiseen.
 
 $$
 MSAVI2 = {2 * NIR + 1 - \sqrt{(2 * NIR + 1)^{2} - 8(NIR - Red)} \over 2}
@@ -260,7 +260,7 @@ _Viite: Goel, N., ja W. Qin. &quot;Canopy-arkkitehtuurin vaikutukset eri kasvill
 
 ## OSAVI – Optimoitu maaperään mukautettu kasvillisuusindeksi
 
-Tämä indeksi perustuu maaperään mukautettuun kasvillisuusindeksiin (SAVI). Se käyttää latvuston taustan säätökertoimena standardiarvoa 0,16. Rondeaux (1996) totesi, että tämä arvo tarjoaa suuremman maaperän vaihtelun kuin SAVI alhaisella kasvillisuuspeitteellä, samalla kun se osoittaa suuremman herkkyyden yli 50 %:n kasvillisuuspeitteelle. Tätä indeksiä käytetään parhaiten alueilla, joilla kasvillisuus on suhteellisen harvaa ja maaperä näkyy latvuston läpi.
+Tämä indeksi perustuu maaperään mukautettuun kasvillisuusindeksiin (SAVI). Se käyttää latvuston taustan säätökertoimena standardiarvoa 0,16. Rondeaux (1996) totesi, että tämä arvo tarjoaa suuremman maaperän vaihtelun kuin SAVI alhaisella kasvillisuustasolla, samalla kun se osoittaa suuremman herkkyyden yli 50 %:n kasvillisuustasolle. Tätä indeksiä voidaan parhaiten käyttää alueilla, joilla kasvillisuus on suhteellisen harvaa ja maaperä näkyy latvuston läpi.
 
 $$
 OSAVI = {(NIR - Red) \over (NIR + Red + 0.16)  }
@@ -282,9 +282,9 @@ _Viite: Roujean, J., ja F. Breon. &quot;Kasvillisuuden absorboiman PAR:n arvioin
 
 ***
 
-## SAVI - Maaperällä korjattu kasvillisuusindeksi
+## SAVI - Maaperän mukaan korjattu kasvillisuusindeksi
 
-Tämä indeksi on samanlainen kuin NDVI, mutta se vaimentaa maaperän pikselien vaikutuksia. Se käyttää latvuston taustan säätökerrointa _L_, joka on kasvillisuuden tiheyden funktio ja vaatii usein ennakkotietoa kasvillisuuden määristä. Huete (1988) ehdottaa optimaalista arvoa _L_=0,5 ensimmäisen asteen maaperän taustavaihteluiden huomioon ottamiseksi. Tätä indeksiä käytetään parhaiten alueilla, joilla kasvillisuus on suhteellisen harvaa ja maaperä näkyy latvuston läpi.
+Tämä indeksi on samanlainen kuin NDVI, mutta se vaimentaa maaperän pikselien vaikutuksia. Se käyttää latvuston taustan säätökerrointa _L_, joka on kasvillisuuden tiheyden funktio ja vaatii usein ennakkotietoa kasvillisuuden määristä. Huete (1988) ehdottaa optimaaliseksi arvoksi _L_=0,5, jotta voidaan ottaa huomioon ensimmäisen asteen maaperän taustavaihtelut. Tätä indeksiä voidaan parhaiten käyttää alueilla, joilla kasvillisuus on suhteellisen harvaa ja maaperä näkyy latvuston läpi.
 
 $$
 SAVI = {1.5 * (NIR- Red) \over (NIR + Red + 0.5)  }
@@ -302,7 +302,7 @@ $$
 TDVI = 1.5 * {(NIR- Red) \over \sqrt{NIR^{2} + Red + 0.5}  }
 $$
 
-_Viite: Bannari, A., H. Asalhi ja P. Teillet. &quot;Transformed Difference Vegetation Index (TDVI) for Vegetation Cover Mapping&quot; In Proceedings of the Geoscience and Remote Sensing Symposium, IGARSS &#x27;02, IEEE International, Volume 5 (2002)._
+_Viite: Bannari, A., H. Asalhi ja P. Teillet. &quot;Transformed Difference Vegetation Index (TDVI) for Vegetation Cover Mapping&quot; Julkaisussa Proceedings of the Geoscience and Remote Sensing Symposium, IGARSS &#x27;02, IEEE International, Volume 5 (2002)._
 
 ***
 
@@ -320,7 +320,7 @@ _Viite: Gitelson, A., et al. &quot;Vegetation and Soil Lines in Visible Spectral
 
 ## WDRVI - Laaja dynaaminen alue -kasvillisuusindeksi
 
-Tämä indeksi on samanlainen kuin NDVI, mutta siinä käytetään painotuskerrointa (_a_) vähentämään lähi-infrapuna- ja punaisen signaalin osuuksien eroa NDVI:ssa. WDRVI on erityisen tehokas kohteissa, joissa kasvillisuuden tiheys on kohtalainen tai suuri, kun NDVI ylittää 0,6. NDVI tasoittuu yleensä, kun kasvillisuusosuus ja lehtipinta-ala-indeksi (LAI) kasvavat, kun taas WDRVI on herkempi laajemmalle kasvillisuusosuuksien alueelle ja muutoksille LAI:ssä.
+Tämä indeksi on samanlainen kuin NDVI, mutta siinä käytetään painotuskerrointa (_a_) vähentämään lähi-infrapuna- ja punaisen signaalin osuuksien eroa NDVI:ssä. WDRVI on erityisen tehokas kohteissa, joissa kasvillisuuden tiheys on kohtalainen tai suuri, kun NDVI ylittää 0,6. NDVI tasoittuu yleensä, kun kasvillisuusosuus ja lehtipinta-ala-indeksi (LAI) kasvavat, kun taas WDRVI on herkempi laajemmalle kasvillisuusosuuksien alueelle ja muutoksille LAI:ssa.
 
 $$
 WDRVI = {(\alpha * NIR- Red) \over (\alpha * NIR + Red)}
@@ -332,4 +332,4 @@ _Viitteet_
 
 _Gitelson, A. &quot;Wide Dynamic Range Vegetation Index for Remote Quantification of Biophysical Characteristics of Vegetation.&quot; Journal of Plant Physiology 161, No. 2 (2004): 165-173._
 
-_Henebry, G., A. Viña ja A. Gitelson. &quot;Laaja dynaaminen alue -kasvillisuusindeksi ja sen potentiaalinen käyttökelpoisuus aukkoanalyysissä.&quot; Gap Analysis Bulletin 12: 50–56._
+_Henebry, G., A. Viña ja A. Gitelson. &quot;Laaja dynaaminen alue -kasvillisuusindeksi ja sen potentiaalinen käyttökelpoisuus aukkoanalyysissä.&quot; Gap Analysis Bulletin 12: 50-56._

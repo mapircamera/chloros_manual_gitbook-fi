@@ -28,11 +28,11 @@ Vasemmassa sivupalkissa on useita kuvakkeita, joiden avulla voit suorittaa erila
 
 #### <img src=".gitbook/assets/icon_project-settings.JPG" alt="" data-size="line"> [Projektin asetukset](project-settings/project-settings.md)
 
-Projektin asetukset -välilehdessä voit säätää projektin yleisiä ja käsittelyasetuksia. Säädä nämä ennen tiedostojen käsittelyn aloittamista.
+Projektin asetukset -välilehdessä voit säätää projektin yleisiä ja projektin käsittelyasetuksia. Säädä nämä ennen tiedostojen käsittelyn aloittamista.
 
 #### <img src=".gitbook/assets/icon_file-browser.JPG" alt="" data-size="line"> Tiedostoselain
 
-Lisää tiedostoja/kansioita ja poista tiedostoja projektista. Duplikaattitiedostot ohitetaan. Valitse kohdekuvakentän ruutu haluamallesi kuvalle, jolloin käsittely tarkastelee vain valittuja kuvia, mikä nopeuttaa käsittelyaikaa huomattavasti.
+Lisää tiedostoja/kansioita ja poista tiedostoja projektista. Duplikaattitiedostot ohitetaan. Valitse kohdekuvakentän ruutu haluamallesi kohdekuvalle, jolloin käsittely tarkastelee vain valittuja kuvia, mikä nopeuttaa käsittelyaikaa huomattavasti.
 
 #### <img src=".gitbook/assets/icon_image-viewer.JPG" alt="" data-size="line"> [Kuvankatseluohjelma](image-viewer-gui/opening-an-image-full-screen.md)
 

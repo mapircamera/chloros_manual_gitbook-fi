@@ -44,9 +44,9 @@ Lataa uusin versio Chloros:stä Windows:lle, jotta voit aloittaa monispektrisen 
 1. Lataa `CHLOROS INSTALLER - CURRENT VERSION.exe`-tiedosto.
 2. Kaksoisnapsauta asennusohjelmaa aloittaaksesi asennuksen.
 3. Noudata asennusohjeiden ohjeita.
-4. Valitse asennuskansio (oletus: `C:\Program Files\Chloros\`).
+4. Valitse asennushakemisto (oletus: `C:\Program Files\Chloros\`).
 5. Viimeistele asennus ja käynnistä Chloros.
-6. Kirjaudu sisään MAPIR Cloud Chloros+ -tililläsi (tai jatka ilmaisella versiolla).
+6. Kirjaudu sisään MAPIR Cloud Chloros+ -tililläsi (tai jatka ilmaisella versiolla)
 
 {% hint style=&quot;success&quot; %}
 Asennusohjelma lisää `chloros-cli` automaattisesti järjestelmän PATH-polkuun komentorivikäyttöä varten.
@@ -66,16 +66,16 @@ pip install chloros-sdk
 
 **Dokumentaatio**: [API: Python SDK](api-python-sdk.md)
 
-**Vaatimukset**: Chloros Desktop on oltava asennettuna, Chloros+ -lisenssi vaaditaan.
+**Vaatimukset**: Chloros Desktop on asennettava, Chloros+ -lisenssi vaaditaan.
 
 ***
 
 ## Sisältö
 
-Chloros-asennukseen sisältyy:
+Chloros-asennus sisältää:
 
 * ✅ **Chloros Desktop GUI** - Täydellinen graafinen käyttöliittymä
-* ✅ **Chloros (selain)** - Verkkopohjainen käyttöliittymä heikompitehoisille järjestelmille
+* ✅ **Chloros (selain)** - Verkkopohjainen käyttöliittymä heikommille järjestelmille
 * ✅ **Chloros CLI** - Komentoriviliittymä (vaatii Chloros+ -lisenssin)
 * ✅ **Backend Engine** - Kuvan käsittelyputki
 * ✅ **Kameraprofiilit** - Esiasetetut MAPIR-kameramallit
@@ -110,7 +110,7 @@ Avaa lisäominaisuudet Chloros+-tilauksella:
 * Kokeile Chloros (selain) -versiota
 * Varmista, että Windows 10/11 (64-bittinen) on asennettu
 * Päivitä grafiikkakortin ajurit
-* Tarkista Windows Event Viewer -tapahtumalokista virheen yksityiskohdat
+* Tarkista Windows Tapahtumienvalvonnasta virheen yksityiskohdat
 * Ota yhteyttä tukeen ja toimita virhelokit
 
 **Lisenssin aktivointiongelmat:**

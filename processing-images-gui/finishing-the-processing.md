@@ -1,12 +1,12 @@
 # Käsittelyn loppuun saattaminen
 
-Kun Chloros on suorittanut käsittelyn, on aika tarkistaa tulokset, varmistaa tulostuksen laatu ja valmistella käsitellyt kuvat käytettäväksi työnkulussasi. Tämä sivu opastaa sinut viimeisten vaiheiden ja seuraavien toimien läpi.
+Kun Chloros on suorittanut käsittelyn, on aika tarkistaa tulokset, varmistaa tulostuksen laatu ja valmistella käsitellyt kuvat käytettäväksi työnkulussasi. Tällä sivulla opastetaan sinua viimeisten vaiheiden ja seuraavien toimien läpi.
 
 ## Käsittelyn valmistumisen merkki
 
 Kun käsittely on suoritettu onnistuneesti, näet useita merkkejä:
 
-* ✅ **Edistymispalkki**: Saavuttaa 100 %:n valmiuden
+* ✅ **Edistymispalkki**: Saavuttaa 100 %:n valmistumisasteen
 * ✅ **Debug-loki**: Näyttää viestin &quot;Käsittely valmis&quot;
 * ✅ **Käynnistyspainike**: Aktivoituu uudelleen (valmis seuraavaan käsittelyyn)
 * ✅ **Tulostustiedostot**: Kaikki käsitellyt kuvat tallennetaan kameramallin alikansioon
@@ -37,7 +37,7 @@ Kun käsittely on suoritettu onnistuneesti, näet useita merkkejä:
 
 ### Esikatselu ulkoisissa kuvankatseluohjelmissa
 
-**Suositellut katseluohjelmat:**
+**Suositeltavat katseluohjelmat:**
 
 * **QGIS** – ilmainen GIS-ohjelmisto (paras georeferenssoituun monispektriseen analyysiin)
 * **IrfanView** – nopea, kevyt kuvankatseluohjelma (tukee TIFF)
@@ -92,7 +92,7 @@ Jotta voit säilyttää käsittelyn tiedot tai lähettää ne MAPIR-tukeen:
 
 **Ratkaisut:**
 
-1. Tarkista virhe- ja ohitusviestit virheenkorjauslokista.
+1. Tarkista vianmääritysloogista ohitus-/virheilmoitukset.
 2. Varmista, että levytilaa oli riittävästi.
 3. Laske tiedostot: Tuloksen tulisi vastata (alkuperäinen lukumäärä - kohdelukumäärä) × (indeksit + 1).
 4. Tuo puuttuvat tiedostot uudelleen ja käsittele ne uudelleen.
@@ -118,18 +118,18 @@ Jotta voit säilyttää käsittelyn tiedot tai lähettää ne MAPIR-tukeen:
 * Kalibrointikohteita ei havaittu.
 * Valittu väärä kalibrointikohdemalli.
 * Heijastavuuden kalibrointi on poistettu käytöstä.
-* Kohdekuvien laatu on huono.
+* Kohdekuvien laatu on heikko.
 
 **Ratkaisut:**
 
 1. Varmista, että heijastavuuden kalibrointi on käytössä.
-2. Tarkista Debug Log -lokista, onko kohde löydetty.
+2. Tarkista Debug Log -lokista, onko kohdassa &quot;Target found&quot; (Kohde löydetty) -viesti.
 3. Tarkista kohdekuvien laatu.
-4. Käsittele kuva uudelleen merkitsemällä oikeat kohteet.
+4. Käsittele uudelleen merkitsemällä oikeat kohteet.
 
 ### Ongelma: NDVI-arvot näyttävät virheellisiltä
 
-**Odotetut NDVI-arvot:**
+**Odotetut NDVI-alueet:**
 
 * **Vesi, kivet, maaperä**: -0,1–0,2
 * **Harva/epäterve kasvillisuus**: 0,2–0,4
@@ -148,7 +148,7 @@ Jotta voit säilyttää käsittelyn tiedot tai lähettää ne MAPIR-tukeen:
 
 ## Käsiteltyjen kuvien käyttö
 
-### Fotogrammetria / ortomosaiikin luominen
+### Fotogrammetriaan / ortomosaiikin luomiseen
 
 **Suositeltu työnkulku:**
 
@@ -158,7 +158,7 @@ Jotta voit säilyttää käsittelyn tiedot tai lähettää ne MAPIR-tukeen:
    * DroneDeploy
    * WebODM
 2. **Säilytä EXIF-metatiedot**: Varmista, että GPS-tiedot säilyvät geotaggaamista varten
-3. **Kalibroidut työnkulut**: Käytä heijastavuuskuvia tieteellisen tarkkuuden saavuttamiseksi
+3. **Kalibroidut työnkulut**: Käytä heijastavuuskuvia tieteellisen tarkkuuden varmistamiseksi
 4. **Käsittele indeksimosaiikit**: Luo NDVI-ortomosaiikit yksittäisistä indeksikuvista
 5. **Vie georeferenssoidut GeoTIFF**: Käytettäväksi GIS-sovelluksissa
 
@@ -166,7 +166,7 @@ Jotta voit säilyttää käsittelyn tiedot tai lähettää ne MAPIR-tukeen:
 
 **Suositeltava työnkulku:**
 
-1. **Lataa QGIS-, ArcGIS- tai vastaavaan**
+1. **Lataa QGIS-, ArcGIS- tai vastaavaan ohjelmaan**
 2. **Käytä 16-bittisiä TIFF** heijastavuuskuvia monikaistaisessa analyysissä
 3. **Käytä indeksikuvia** (NDVI, NDRE) käyttövalmiina kasvillisuuskerroksina
 4. **Rasterilaskuri**: Yhdistä kaistat mukautettuun analyysiin
@@ -195,7 +195,7 @@ Jotta voit säilyttää käsittelyn tiedot tai lähettää ne MAPIR-tukeen:
 * ✅ **Virheenkorjausloki** – Dokumentoi käsittelyn yksityiskohdat
 * ✅ **Kalibrointikohdekuvat** – Tarkistusta ja uudelleen käsittelyä varten
 
-**Säilytyssuositukset:**
+**Tallennussuositukset:**
 
 * **Välitön varmuuskopiointi**: Ulkoinen kiintolevy
 * **Pitkäaikainen arkistointi**: Pilvitallennus (Google Drive, Dropbox jne.)
@@ -212,7 +212,7 @@ Jos käsittelet vastaavia tietojoukkoja tulevaisuudessa:
 1. **Tallenna projektimalli** (jos et ole vielä tehnyt niin)
 2. **Luo uusi projekti** tallennetun mallin avulla
 3. **Tuo uudet kuvat**
-4. **Käsittele** samoilla asetuksilla yhdenmukaisuuden varmistamiseksi
+4. **Käsittele** samoilla asetuksilla johdonmukaisuuden varmistamiseksi
 
 ### Useiden istuntojen eräprosessointi
 
@@ -244,7 +244,7 @@ Useita istuntoja/tietojoukkoja varten:
 
 Jos tulokset eivät ole tyydyttäviä:
 
-1. Säilytä alkuperäiset kuvat (älä koskaan poista niitä)
+1. Säilytä alkuperäiset kuvat (älä koskaan poista)
 2. Avaa sama projekti Chloros:ssä
 3. Säädä asetuksia Projektin asetukset -paneelissa
 4. Käsittele uudelleen – tulokset korvaavat aiemmat tulokset
@@ -254,11 +254,11 @@ Jos tulokset eivät ole tyydyttäviä:
 Vain tiettyjen kuvien uudelleenkäsittely:
 
 1. Luo uusi projekti
-2. Tuo vain uudelleenkäsittelyä vaativat kuvat
+2. Tuo vain uudelleenkäsittelyä tarvitsevat kuvat
 3. Käytä samaa asetusmallia
 4. Käsittele pienempiä tietojoukkoja
 
-### Ohje
+### Ohjeen saaminen
 
 Jos kohtaat ongelmia:
 
@@ -281,7 +281,7 @@ Olet nyt suorittanut Chloros-käsittelyn koko työnkulun:
 6. ✅ **Seurattu edistymistä** - Katso [Käsittelyn seuranta](monitoring-the-processing.md)
 7. ✅ **Tarkistettu tuloksia** - Tämä sivu
 
-**Kalibroidut, heijastavuudeltaan korjatut monispektrikuvasi ovat valmiina analysoitavaksi!**
+**Kalibroidut, heijastavuudeltaan korjatut monispektrikuvat ovat valmiina analysoitavaksi!**
 
 ***
 
@@ -291,7 +291,7 @@ Olet nyt suorittanut Chloros-käsittelyn koko työnkulun:
 
 * [**Kuvankatseluohjelma**](../image-viewer-gui/opening-an-image-full-screen.md) - Interaktiivinen visualisointi ja analysointi
 * [**Indeksi/LUT-hiekkalaatikko**](../image-viewer-gui/index-lut-sandbox.md) - Mukautetun indeksin testaus
-* [**Monispektriset indeksikaavat**](../project-settings/multispectral-index-formulas.md) - Täydellinen indeksin viite
+* [**Monispektriset indeksikaavat**](../project-settings/multispectral-index-formulas.md) - Täydellinen indeksiviite
 
 ### Automaatio ja integraatio
 

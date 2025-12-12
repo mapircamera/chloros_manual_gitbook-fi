@@ -12,7 +12,7 @@ Ilman kohdekuvien merkitsemistä Chloros:n on:
 * Suoritettava kohteen tunnistusalgoritmit jokaiselle kuvalle
 * Tarkistettava satoja tai tuhansia kuvia tarpeettomasti
 
-**Tulos**: Käsittely voi kestää huomattavasti kauemmin, etenkin suurten tietokokonaisuuksien kohdalla.
+**Tulos**: Käsittely voi kestää huomattavasti kauemmin, etenkin suurten tietojoukkojen kohdalla.
 
 ### Merkityt kohdekuvat
 
@@ -39,7 +39,7 @@ Tarkista tuodut kuvat tiedostoselaimessa ja tunnista, mitkä kuvat sisältävät
 * **Ennen kuvausta otettu kohde**: Otettu ennen istunnon aloittamista.
 * **Kuvauksen jälkeen otettu kohde**: Otettu istunnon päätyttyä.
 * **Kentällä olevat kohteet**: Kohteet, jotka on sijoitettu kuvausalueelle.
-* **Useita kohteita**: 2–3 kohdekuvaa istuntoa kohti (suositus).
+* **Useita kohteita**: 2–3 kohdekuvaa istuntoa kohti (suositeltava määrä).
 
 ### Vaihe 2: Tarkista kohdesarake
 
@@ -52,7 +52,7 @@ Jokaiselle kalibrointikohteen sisältävälle kuvalle:
 
 ### Vaihe 3: Vahvista valintasi
 
-Tarkista ennen käsittelyä, että:
+Tarkista ennen käsittelyä:
 
 * [ ] Kaikki kalibrointikohteita sisältävät kuvat on valittu.
 * [ ] Mitään muita kuin kohdekuvia ei ole valittu vahingossa.
@@ -136,7 +136,7 @@ Jos Chloros ei tunnista kohteitasi oikein, säädä näitä asetuksia [Projektin
 * **Lisää**, jos pienet esineet tunnistetaan virheellisesti
 * **Vähennä**, jos kohteita ei tunnisteta
 
-**Vähimmäiskohteiden klusterointi:**
+**Vähimmäiskohteiden ryhmittely:**
 
 * **Oletus**: 60
 * **Lisää**, jos kohteet jaetaan useisiin tunnistuksiin
@@ -197,9 +197,9 @@ Ennen käsittelyn aloittamista tarkista kohdekuvien valinta:
 
 ### Käsittely ilman kalibrointikohteita
 
-Vaikka sitä ei suositella tieteelliseen työhön, voit käsitellä ilman kohteita:
+Vaikka sitä ei suositella tieteelliseen työhön, voit käsitellä kuvia ilman kohteita:
 
-1. Jätä kaikki Kohde-sarakkeen valintaruudut valitsematta
+1. Jätä kaikki kohdesarakkeen valintaruudut valitsematta
 2. **Poista käytöstä** &quot;Heijastavuuskalibrointi&quot; projektin asetuksissa
 3. Vignettikorjaus otetaan edelleen käyttöön.
 4. Tulostetta ei kalibroida absoluuttisen heijastavuuden osalta.

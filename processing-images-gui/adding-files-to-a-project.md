@@ -1,6 +1,6 @@
 # Tiedostojen lisääminen projektiin
 
-Kun olet luonut tai avannut projektin Chloros:ssä, seuraava vaihe on lisätä monispektrikuvat käsittelyä varten. Tiedostoselaimen<img src="../.gitbook/assets/icon_file-browser.JPG" alt="" data-size="line"> -välilehti helpottaa kuvien tuomista ja tietojoukon hallintaa.
+Kun olet luonut tai avannut projektin Chloros:ssä, seuraava vaihe on lisätä monispektrikuvat käsittelyn aloittamiseksi. Tiedostoselaimen<img src="../.gitbook/assets/icon_file-browser.JPG" alt="" data-size="line"> -välilehti helpottaa kuvien tuomista ja tietojoukon hallintaa.
 
 ## Tiedostoselaimen avaaminen
 
@@ -83,7 +83,7 @@ Poista projektista tarpeettomat kuvat seuraavasti:
 
 ### Lajittelu ja suodatus
 
-* **Lajittele sarakkeen mukaan**: Lajittele kuvat napsauttamalla mitä tahansa sarakkeen otsikkoa
+* **Lajittele sarakkeen mukaan**: Lajittele kuvat napsauttamalla minkä tahansa sarakkeen otsikkoa
 * **Aikaleimasorointi**: Hyödyllinen kronologisten kuvaussekvenssien järjestämisessä
 * **Kameramallisuodatin**: Ryhmitä kuvat kameratyypin mukaan, jos käytät useita kameroita
 
@@ -126,10 +126,10 @@ Chloros tunnistaa ja ohittaa automaattisesti kaksoiskappaleet:
 
 Jos projektisi sisältää kuvia useista MAPIR-kameroista:
 
-1. Chloros tunnistaa automaattisesti kunkin kameramallin
-2. Kukin kameratyyppi käsitellään sen sopivalla kalibrointiprofiililla
-3. Tiedostoselain näyttää kameramallin Kameramalli-sarakkeessa
-4. Käsittely soveltaa oikeita asetuksia kuhunkin kameratyyppiin
+1. Chloros tunnistaa automaattisesti kunkin kameramallin.
+2. Kukin kameratyyppi käsitellään sen sopivalla kalibrointiprofiililla.
+3. Tiedostoselain näyttää kameramallin Kameramalli-sarakkeessa.
+4. Käsittely soveltaa oikeita asetuksia kuhunkin kameratyyppiin.
 
 **Esimerkkiskenaario**: Survey3W RGN + Survey3N OCN kaksoiskamerajärjestelmä
 
@@ -141,7 +141,7 @@ Jos projektisi sisältää kuvia useista MAPIR-kameroista:
 
 * Säilytä kalibrointikohdekuvat samassa kansiossa kuin mittauskuvat
 * Säilytä kameran/SD-kortin alkuperäinen kansiorakenne
-* Älä sekoita eri istuntojen tietojoukkoja samassa projektissa
+* Älä sekoita eri istuntojen tietojoukkoja yhteen projektiin
 
 ### Tiedostojen nimeäminen
 

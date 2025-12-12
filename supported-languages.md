@@ -38,8 +38,8 @@ Chloros tukee seuraavia kieliä:
 | 30 | 🇭🇰 Kantoni | 粵語 | `zh-HK` |
 | 31 | 🇲🇾 Malaiji | Bahasa Melayu | `ms` |
 | 32 | 🇸🇰 Slovakki | Slovenčina | `sk` |
-| 33 | 🇧🇬 Bulgaria | Български | `bg` |
-| 34 | 🇭🇷 Kroatia | Hrvatski | `hr` |
+| 33 | 🇧🇬 Bulgarian | Български | `bg` |
+| 34 | 🇭🇷 Croatian | Hrvatski | `hr` |
 | 35 | 🇱🇹 Liettua | Lietuvių | `lt` |
 | 36 | 🇱🇻 Latvia | Latviešu | `lv` |
 | 37 | 🇪🇪 Viron kieli | Eesti | `et` |

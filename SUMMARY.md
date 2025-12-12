@@ -6,7 +6,7 @@
 * [CLI : Komentorivi](CLI.md)
 * [API : Python SDK](api-python-sdk.md)
 * [Tuetut kamerat](supported-cameras.md)
-* [Kuvien tulostusmuodot](output-image-formats.md)
+* [Tulostekuvamuodot](output-image-formats.md)
 * [Chloros+ Kirjautuminen](chloros+-login.md)
 * [Kalibrointikohteet](calibration-targets.md)
 * [Tuetut kielet](supported-languages.md)
@@ -27,7 +27,7 @@
 * [Projektin asetukset](project-settings/project-settings.md)
 * [Monispektriset indeksikaavat](project-settings/multispectral-index-formulas.md)
 
-## KUVA-KATSELIJA (GUI)
+## KUVA-KATSELUOHJELMA (GUI)
 
 * [Kuvan avaaminen koko ruudulla](image-viewer-gui/opening-an-image-full-screen.md)
 * [Kuvakerrokset](image-viewer-gui/image-layers.md)

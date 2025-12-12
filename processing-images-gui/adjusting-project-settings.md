@@ -14,11 +14,11 @@ Ennen kuvien käsittelyä on tärkeää määrittää projektin asetukset vastaa
 
 ***
 
-## Nopea asetusten määrittäminen tavallisille työnkulkuille
+## Nopea asetusten määrittäminen tavallisille työnkuluille
 
 ### Oletusasetukset (suositellaan useimmille käyttäjille)
 
-Tyypillisiin MAPIR Survey3 kameratyönkulkuihin oletusasetukset sopivat hyvin:
+Tyypillisissä MAPIR Survey3 kameratyönkulkuissa oletusasetukset toimivat hyvin:
 
 * ✅ **Vignette-korjaus**: Käytössä
 * ✅ **Heijastavuuskalibrointi**: Käytössä (vaatii kuvia MAPIR kohteista)
@@ -54,14 +54,14 @@ Tärkeimmät kuvankäsittely- ja kalibrointivaihtoehdot.
 
 **Tärkeimmät asetukset:**
 
-* **Vignette-korjaus**: Kompensoi objektiivin tummenemisen reunoilla ✅ Suositellaan
+* **Vignettikorjaus**: Kompensoi objektiivin tummenemisen reunoilla ✅ Suositellaan
 * **Heijastavuuskalibrointi**: Normalisoi arvot kalibrointikohteiden avulla ✅ Suositellaan
 * **Debayer-menetelmä**: Algoritmi RAW-tiedostojen muuntamiseksi 3-kanavaisiksi monispektrisiksi tiedostoiksi
 * **Minimi kalibrointiväli**: Aika kalibrointikohteiden käytön välillä (0 = käytä kaikkia)
 
 **Lisäasetukset:**
 
-* **Valosensorin aikavyöhykkeen poikkeama**: PPK-ajan synkronointia varten (oletus: 0)
+* **Valosensorin aikavyöhykkeen siirtymä**: PPK-ajan synkronointia varten (oletus: 0)
 * **Käytä PPK-korjauksia**: Käyttää GPS-/valotuspin-tietoja .daq-tiedostoista
 * **Valotusnasta 1/2**: Määrittää kamerat valotusnastoihin kaksoiskamerajärjestelyissä
 
@@ -90,13 +90,13 @@ Määritä, mitkä kasvillisuusindeksit lasketaan ja viedään.
 * Käytä kaistamatematiikkaa kaikilla kuvakanavilla
 * Tallenna mukautetut kaavat uudelleenkäyttöä varten
 
-Kaikki saatavilla olevat indeksit ja kaavat ovat luettelossa [Monispektriset indeksikaavat](../project-settings/multispectral-index-formulas.md).
+Kaikki käytettävissä olevat indeksit ja kaavat ovat kohdassa [Monispektriset indeksikaavat](../project-settings/multispectral-index-formulas.md).
 
 ### Vienti
 
 Hallitse tulostustiedoston muotoa ja laatua.
 
-**Saatavilla olevat muodot:**
+**Käytettävissä olevat muodot:**
 
 * **TIFF (16-bittinen)**: Suositellaan GIS- ja tieteelliseen analyysiin (alue 0–65 535)
 * **TIFF (32-bittinen, prosentti)**: Liukulukuisten heijastavuusarvojen (alue 0,0–1,0)
@@ -128,7 +128,7 @@ Kun luot uuden projektin:
 
 1. Valitse päävalikosta **&quot;Uusi projekti&quot;**.
 2. Valitse vaihtoehto **&quot;Lataa mallista&quot;**.
-3. Valitse tallentamasi malli.
+3. Valitse tallennettu malli.
 4. Kaikki asetukset otetaan käyttöön automaattisesti.
 
 ### Työkansio
@@ -151,12 +151,12 @@ Jos käytät MAPIR DAQ -tallentimia GPS:n kanssa tarkkaan maantieteelliseen paik
 ### Edellytykset
 
 * MAPIR DAQ GPS (GNSS) -moduulilla
-* .daq-lokitiedosto, jossa on altistuspinnit
+* .daq-lokitiedosto, jossa on valotustappien merkinnät
 * Kamera kytketty DAQ-altistustappiin kuvausistunnon aikana
 
 ### Asetusten vaiheet
 
-1. Aseta .daq-lokitiedosto projektikansioon.
+1. Siirrä .daq-lokitiedosto projektikansioon.
 2. Valitse Projektin asetukset -kohdassa **&quot;Käytä PPK-korjauksia&quot;** -valintaruutu.
 3. Aseta tarvittaessa **&quot;Valosensorin aikavyöhykkeen poikkeama&quot;** (oletus: 0 UTC:lle).
 4. Määritä kamerat altistustappeihin:
@@ -190,7 +190,7 @@ Kun käsitellään useiden MAPIR-kameroiden kuvia yhdessä projektissa:
 
 ### Aikaväli- tai monipäiväiset tutkimukset
 
-Saman alueen toistuville tutkimuksille ajan kuluessa:
+Saman alueen toistuville tutkimuksille ajan mittaan:
 
 1. Luo malli vakioasetuksillasi
 2. Käytä jokaisessa istunnossa yhdenmukaista kalibrointikohteen asetusta
@@ -214,11 +214,11 @@ Projekteille, joissa on paljon kuvia (500+):
 Ennen käsittelyn aloittamista tarkista nämä tärkeät asetukset:
 
 * [ ] Kameramalli on tunnistettu oikein tiedostoselaimessa
-* [ ] Vignette-korjaus on käytössä
+* [ ] Vignettikorjaus on käytössä
 * [ ] Heijastavuuskalibrointi on käytössä
 * [ ] Vähintään yksi kalibrointikohdekuva on tuotu
 * [ ] Halutut monispektriset indeksit on lisätty
-* [ ] Vienti-muoto sopii työnkulkuusi
+* [ ] Vienti-muoto sopii työvirtaasi
 * [ ] PPK-asetukset on määritetty (jos käytät .daq-tiedostoa valotustapahtumien kanssa)
 
 ***
@@ -231,4 +231,4 @@ Kun asetukset on määritetty:
 2. **Aloita käsittely** - Katso [Käsittelyn aloittaminen](starting-the-processing.md)
 3. **Seuraa edistymistä** – Katso [Käsittelyn seuraaminen](monitoring-the-processing.md)
 
-Katso täydelliset tiedot kaikista käytettävissä olevista asetuksista [Projektin asetukset](../project-settings/project-settings.md) -viitedokumentaatiosta.
+Tarkemmat tiedot kaikista käytettävissä olevista asetuksista ovat [Projektin asetukset](../project-settings/project-settings.md) -viitedokumentaatiossa.

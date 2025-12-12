@@ -1,6 +1,6 @@
-# Kuvan avaaminen koko näytöllä
+# Kuvan avaaminen koko ruudulla
 
-Chloros Image Viewer tarjoaa erillisen koko näytön käyttöliittymän monispektrikuvien katseluun, analysointiin ja muokkaamiseen. Image Viewer tarjoaa tehokkaat työkalut tarkasteluun ja analysointiin sekä alkuperäisten kuvien että käsiteltyjen tulosteiden katseluun.
+Chloros Image Viewer tarjoaa erillisen koko ruudun käyttöliittymän monispektrikuvien katseluun, analysointiin ja muokkaamiseen. Image Viewer tarjoaa tehokkaat työkalut tarkasteluun ja analysointiin sekä alkuperäisten kuvien että käsiteltyjen tulosteiden katseluun.
 
 ## Kuvankatseluohjelman avaaminen
 
@@ -9,9 +9,9 @@ Chloros Image Viewer tarjoaa erillisen koko näytön käyttöliittymän monispek
 Yleisin tapa avata kuva kuvankatseluohjelmassa:
 
 1. Varmista, että olet **Tiedostoselain**-välilehdessä <img src="../.gitbook/assets/icon_file-browser.JPG" alt="" data-size="line">
-2. Napsauta mitä tahansa **kuvien pikkukuvaa** kuvaruudukossa
+2. Napsauta mitä tahansa **kuvankokoelman pikkukuvaa**
 3. Kuva avautuu **pääesikatselualueelle** (näytön keskelle)
-4. Kuva on nyt ladattu ja valmis koko näytön katseluun
+4. Kuva on nyt ladattu ja valmis täysikokoiseksi katseluun
 
 ### Image Viewer -välilehden avaaminen
 
@@ -29,18 +29,18 @@ Kun kuva on ladattu esikatselualueelle:
 
 Suurin osa ruudusta näyttää kuvan:
 
-* **Täysi tarkkuus**: Kuvat näytetään alkuperäisellä tarkkuudella.
+* **Täysi resoluutio**: Kuvat näytetään alkuperäisellä resoluutiolla.
 * **Zoomattava**: Zoomaa käyttämällä säätimiä tai hiiren rullaa
-* **Panoroitava**: Siirrä kuvaa zoomatussa tilassa napsauttamalla ja vetämällä
+* **Panoroitava**: Siirrä kuvaa klikkaamalla ja vetämällä, kun olet zoomannut
 * **Kuvasuhde säilyy**: Kuvat skaalautuvat suhteessa
 
 ***
 
 ## Katseluvaihtoehdot
 
-### Peruskuvien selaus
+### Peruskuvanavigointi
 
-#### Kuvien selaus
+#### Selaa kuvia
 
 Selaa kuvasarjaa näppäimistön pikanäppäimillä tai painikkeilla:
 
@@ -50,7 +50,7 @@ Selaa kuvasarjaa näppäimistön pikanäppäimillä tai painikkeilla:
 
 #### Zoomaustoiminnot
 
-Säädä suurennusta kuvan yksityiskohtien tarkastelemiseksi:
+Säädä suurennusta tarkastellaksesi kuvan yksityiskohtia:
 
 **Lähennä:**
 
@@ -64,18 +64,18 @@ Säädä suurennusta kuvan yksityiskohtien tarkastelemiseksi:
 * Paina **−** (miinus) -näppäintä
 * Vieritä hiiren rullaa **alaspäin**
 
-**Sovita ruutuun:**
+**Sovita näyttöön:**
 
 * Napsauta **↔** (Sovita) -painiketta.
 * Paina **0** (nolla) -näppäintä.
 * Kaksoisnapsauta kuvaa.
 
-#### Panoroida zoomattuna
+#### Panorointi zoomattuna
 
-Kun zoomaus on suurempi kuin ruudun koko:
+Kun kuva on zoomattu näytön kokoa suuremmaksi:
 
 1. Siirrä hiiren osoitin kuvan päälle.
-2. Napsauta ja **pidä hiiren vasenta painiketta painettuna**.
+2. Napsauta ja **pidä hiiren vasen painike painettuna**.
 3. **Vedä** siirtääksesi kuvaa
 4. Vapauta lopettaaksesi panoroinnin
 
@@ -92,9 +92,9 @@ Kun siirrät hiiren osoittimen kuvan päälle, pikseliarvot näkyvät reaaliajas
 **Arvon näyttöpaikka:**
 
 * **Kelluva luku ja punainen viiva oikeanpuoleisessa indeksi-LUT-gradienttilegendassa**
-* **Kun zoomataan edelleen, kelluva arvo hiiren osoittimen lähellä ja korostettu pikseli**
-* Näyttää pikselin arvot **hiiren osoittimen alla tai korostettuna**
-* Päivittyy, kun siirrät hiirtä
+* **Kun zoomaat edelleen, kelluva arvo kursorin lähellä ja korostettu pikseli**
+* Näyttää pikselin arvot **kursorin alla tai korostettuna**
+* Päivittyy, kun liikutat hiirtä
 
 ***
 
@@ -167,7 +167,7 @@ Katso yksityiskohtaiset ohjeet kohdasta [Indeksi/LUT-hiekkalaatikko](index-lut-s
 ### Muuta
 
 * **Ctrl+S**: Tallenna nykyinen kuva
-* **F**: Koko näyttötila (jos käytettävissä)
+* **F**: Koko näytön tila (jos käytettävissä)
 
 ***
 
@@ -198,18 +198,18 @@ Tarkista, että indeksit on laskettu oikein:
 
 **Ratkaisut:**
 
-1. Yritä avata tiedosto ulkoisella katseluohjelmalla tiedoston eheyden tarkistamiseksi
-2. Tarkista, että tiedostomuoto vastaa odotettua tyyppiä
-3. Sulje muut sovellukset muistin vapauttamiseksi
-4. Kokeile pienempää/eri kuvaa
+1. Yritä avata tiedosto ulkoisella katseluohjelmalla ja tarkista tiedoston eheys.
+2. Tarkista, että tiedostomuoto vastaa odotettua tyyppiä.
+3. Sulje muut sovellukset vapauttaaksesi muistia.
+4. Kokeile pienempää/eri kuvaa.
 
-### Musta tai valkoinen kuvanäyttö
+### Musta tai valkoinen kuva
 
 **Mahdolliset syyt:**
 
-* Arvoalue ylittää näytön kapasiteetin
-* 32-bittinen float-kuva, jossa on epätavallisia arvoja
-* Indeksin laskentavirhe
+* Arvoalue ylittää näytön kapasiteetin.
+* 32-bittinen float-kuva, jossa on epätavallisia arvoja.
+* Indeksin laskentavirhe.
 
 **Ratkaisut:**
 
@@ -224,7 +224,7 @@ Tarkista, että indeksit on laskettu oikein:
 * Väärä kuva näkyvissä (alkuperäinen vs. käsitelty)
 * Kalibrointia ei sovellettu oikein
 * Valosensorin tietoja ei sisällytetty syötteeseen
-* Prosenttimuoto on kytketty väärin
+* Prosenttimuoto on vaihdettu väärin
 
 **Ratkaisut:**
 
@@ -236,7 +236,7 @@ Tarkista, että indeksit on laskettu oikein:
 
 ## Seuraavat vaiheet
 
-Nyt kun voit tarkastella kuvia koko näytön tilassa:
+Nyt kun voit katsella kuvia koko näytön tilassa:
 
 * [**Kuvakerrokset**](image-layers.md) – Lisätietoja monikaistaisesta visualisoinnista
 * [**Indeksi/LUT-hiekkalaatikko**](index-lut-sandbox.md) – Mukautettujen indeksien ja värikartoitusten soveltaminen
