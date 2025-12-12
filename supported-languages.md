@@ -1,64 +1,85 @@
 # Tuetut kielet
 
-Chloros tarjoaa täyden käyttöliittymätuen **38 kielellä ympäri maailmaa**, joten se on käytettävissä käyttäjille kaikkialla maailmassa. Voit vaihtaa kieltä välittömästi kaikissa käyttöliittymissä: Desktop, Browser, CLI ja Python SDK.
+Chloros tarjoaa täyden käyttöliittymätuen **38 kielellä ympäri maailmaa**, joten se on käytettävissä käyttäjille kaikkialla maailmassa. Voit vaihtaa kieltä välittömästi kaikissa käyttöliittymissä: työpöytä, selain, CLI ja Python SDK.
 
 Chloros tukee seuraavia kieliä:
 
-1. 🇺🇸 **englanti**
-2. 🇪🇸 **Español** (espanja)
-3. 🇵🇹 **Português** (portugali)
-4. 🇫🇷 **Français** (ranska)
-5. 🇩🇪 **Deutsch** (saksa)
-6. 🇮🇹 **Italiano** (italia)
-7. 🇯🇵 **日本語** (japani)
-8. 🇰🇷 **한국어** (korea)
-9. 🇨🇳 **简体中文** (yksinkertaistettu kiina)
-10. 🇹🇼 **繁體中文** (perinteinen kiina)
-11. 🇷🇺 **Русский** (venäjä)
-12. 🇳🇱 **Nederlands** (hollanti)
-13. 🇸🇦 **العربية** (arabia)
-14. 🇵🇱 **Polski** (puolaksi)
-15. 🇹🇷 **Türkçe** (turkiksi)
-16. 🇮🇳 **हिंदी** (hindiksi)
-17. 🇮🇩 **Bahasa Indonesia** (indonesia)
-18. 🇻🇳 **Tiếng Việt** (vietnam)
-19. 🇹🇭 **ไทย** (thai)
-20. 🇸🇪 **Svenska** (ruotsi)
-21. 🇩🇰 **Dansk** (tanska)
-22. 🇳🇴 **Norsk** (norja)
-23. 🇫🇮 **Suomi** (suomi)
-24. 🇬🇷 **Ελληνικά** (kreikka)
-25. 🇨🇿 **Čeština** (tšekki)
-26. 🇭🇺 **Magyar** (unkari)
-27. 🇷🇴 **Română** (romania)
-28. 🇺🇦 **Українська** (ukraina)
-29. 🇧🇷 **Português Brasileiro** (brasilianportugali)
-30. 🇭🇰 **粵語** (kantoninkiina)
-31. 🇲🇾 **Bahasa Melayu** (malaiji)
-32. 🇸🇰 **Slovenčina** (slovakki)
-33. 🇧🇬 **Български** (bulgaria)
-34. 🇭🇷 **Hrvatski** (kroatia)
-35. 🇱🇹 **Lietuvių** (liettua)
-36. 🇱🇻 **Latviešu** (latvia)
-37. 🇪🇪 **Eesti** (viro)
-38. 🇸🇮 **Slovenščina** (sloveeni)
+| # | Kieli | Alkuperäinen nimi | CLI-koodi |
+|---|----------|-------------|----------|
+| 1 | 🇺🇸 Englanti | Englanti | `en` |
+| 2 | 🇪🇸 Espanja | Español | `es` |
+| 3 | 🇵🇹 Portugali | Português | `pt` |
+| 4 | 🇫🇷 Ranska | Français | `fr` |
+| 5 | 🇩🇪 Saksa | Deutsch | `de` |
+| 6 | 🇮🇹 Italia | Italiano | `it` |
+| 7 | 🇯🇵 Japani | 日本語 | `ja` |
+| 8 | 🇰🇷 Korea | 한국어 | `ko` |
+| 9 | 🇨🇳 Kiina (yksinkertaistettu) | 简体中文 | `zh` |
+| 10 | 🇹🇼 Kiina (perinteinen) | 繁體中文 | `zh-TW` |
+| 11 | 🇷🇺 Venäjä | Русский | `ru` |
+| 12 | 🇳🇱 Hollanti | Nederlands | `nl` |
+| 13 | 🇸🇦 Arabia | العربية | `ar` |
+| 14 | 🇵🇱 Puola | Polski | `pl` |
+| 15 | 🇹🇷 Turkki | Türkçe | `tr` |
+| 16 | 🇮🇳 Hindi | हिंदी | `hi` |
+| 17 | 🇮🇩 Indonesia | Bahasa Indonesia | `id` |
+| 18 | 🇻🇳 Vietnam | Tiếng Việt | `vi` |
+| 19 | 🇹🇭 Thaimaalainen | ไทย | `th` |
+| 20 | 🇸🇪 Ruotsalainen | Svenska | `sv` |
+| 21 | 🇩🇰 Tanskalainen | Dansk | `da` |
+| 22 | 🇳🇴 Norja | Norsk | `no` |
+| 23 | 🇫🇮 Suomi | Suomi | `fi` |
+| 24 | 🇬🇷 Kreikka | Ελληνικά | `el` |
+| 25 | 🇨🇿 Tšekki | Čeština | `cs` |
+| 26 | 🇭🇺 Unkari | Magyar | `hu` |
+| 27 | 🇷🇴 Romania | Română | `ro` |
+| 28 | 🇺🇦 Ukraina | Українська | `uk` |
+| 29 | 🇧🇷 Brasilian portugali | Português Brasileiro | `pt-BR` |
+| 30 | 🇭🇰 Kantoni | 粵語 | `zh-HK` |
+| 31 | 🇲🇾 Malaiji | Bahasa Melayu | `ms` |
+| 32 | 🇸🇰 Slovakki | Slovenčina | `sk` |
+| 33 | 🇧🇬 Bulgaria | Български | `bg` |
+| 34 | 🇭🇷 Kroatia | Hrvatski | `hr` |
+| 35 | 🇱🇹 Liettua | Lietuvių | `lt` |
+| 36 | 🇱🇻 Latvia | Latviešu | `lv` |
+| 37 | 🇪🇪 Viron kieli | Eesti | `et` |
+| 38 | 🇸🇮 Slovenian kieli | Slovenščina | `sl` |
 
 ## Kielen vaihtaminen
 
 ### Chloros-työpöydällä/selaimessa
 
-1. Avaa sovelluksen asetukset
-2. Siirry kielivalikkoon
-3. Valitse haluamasi kieli luettelosta
-4. Käyttöliittymä päivittyy välittömästi
+1. Avaa sovelluksen asetukset.
+2. Siirry kielivalikkoon.
+3. Valitse haluamasi kieli luettelosta.
+4. Käyttöliittymä päivittyy välittömästi.
 
 ### Chloros CLI
 
-Käytä kieliparametria komentojen kanssa käyttöliittymän kielen asettamiseen.
+Käytä `language`-komentoa CLI-käyttöliittymän kielen tarkastelemiseen tai muuttamiseen:
+
+```bash
+# View current language
+chloros-cli language
+
+# Change to Spanish
+chloros-cli language es
+
+# Change to Chinese (Simplified)
+chloros-cli language zh
+
+# Change to Brazilian Portuguese
+chloros-cli language pt-BR
+
+# List all available languages
+chloros-cli language --list
+```
+
+Lisätietoja on [CLI-dokumentaatiossa](CLI.md).
 
 ### Chloros Python SDK
 
-Aseta kieliparametri, kun alustat SDK, jotta saat viestit ja tulosteet haluamallasi kielellä.
+Aseta kieliparametri SDK:n alustuksen yhteydessä, jotta saat viestit ja tulosteet haluamallasi kielellä.
 
 ## Kattavuus
 
