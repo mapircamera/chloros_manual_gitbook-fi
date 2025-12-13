@@ -1,10 +1,9 @@
 ---
-description: Frequently Asked Questions
+description: Usein kysyttyjä kysymyksiä
 metaLinks:
   alternates:
     - https://app.gitbook.com/s/o044KN3Ws0uIDvOmSkcR/faq
 ---
-
 # UKK
 
 <details>
@@ -27,7 +26,7 @@ Ei. Ilman kalibrointikohteen kuvaa, joka on otettu samaan aikaan kuin muut kuvat
 
 <summary>Voinko muokata kuviani ennen niiden käsittelyä Chloros:ssä?</summary>
 
-Ei. Chloros olettaa, että syötettyjä tietoja ei ole muokattu. Älä muuta tiedostojen nimiä.
+Ei. Chloros olettaa, että syöttötietoja ei ole muokattu. Älä muuta tiedostojen nimiä.
 
 </details>
 
@@ -35,7 +34,7 @@ Ei. Chloros olettaa, että syötettyjä tietoja ei ole muokattu. Älä muuta tie
 
 <summary>Voinko asettaa MAPIR- ja Survey3-kamerani automaattiseen valotukseen ja käsitellä kuvat Chloros-ohjelmassa?</summary>
 
-Ei. Survey3-kuvadatajoukoissa on oltava kiinteä/lukittu valotus, joten automaattista suljinnopeutta tai automaattista ISO-arvoa ei voi käyttää. Kaikilla saman kameramallin kuvilla on oltava identtinen suljinnopeus ja ISO-arvo (valotus).
+Ei. Survey3-kuvadatasetin valotuksen on oltava kiinteä/lukittu, joten automaattista suljinnopeutta tai automaattista ISO-arvoa ei voi käyttää. Kaikilla saman kameramallin kuvilla on oltava sama suljinnopeus ja ISO-arvo (valotus).
 
 </details>
 
@@ -67,6 +66,6 @@ Jos aiot ladata kuvat online-käsittelyalustallemme [MAPIR Cloud](https://www.ma
 
 <summary>Tuleeko MAPIR koskaan tukemaan X-ominaisuutta? Toivon todella, että MAPIR tarjoaisi X:n.</summary>
 
-Olemme aina kiinnostuneita saamaan palautetta tuotteistamme. Jos huomaat ongelman tuotteissamme tai sinulla on ehdotuksia tuotteidemme parantamiseksi, ota yhteyttä [CONTACT US](https://www.mapir.camera/community/contact) ja kerro ajatuksesi. Suurin osa tuotekehityksestämme perustuu asiakkaidemme suurimpien tarpeiden kuuntelemiseen.
+Olemme aina kiinnostuneita saamaan palautetta tuotteistamme. Jos huomaat ongelman tuotteissamme tai sinulla on ehdotuksia tuotteidemme parantamiseksi, ota yhteyttä [CONTACT US](https://www.mapir.camera/community/contact) ja kerro ajatuksesi. Suurin osa tuotekehityksestämme perustuu asiakkaidemme tärkeimpien tarpeiden kuuntelemiseen.
 
 </details>
