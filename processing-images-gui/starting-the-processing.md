@@ -8,7 +8,7 @@ Ennen kuin napsautat Käynnistä-painiketta, varmista, että kaikki on valmista:
 
 * [ ] **Tiedostot tuotu** - Kaikki kuvat näkyvät tiedostoselaimessa
 * [ ] **Kohdekuvat merkitty** - Kohdesarakkeessa on tarkistettu kalibrointikuvat
-* [ ] **Kameramallit tunnistettu** - Kameramalli-sarakkeessa näkyvät oikeat kamerat
+* [ ] **Kameramallit tunnistettu** - Kameramalli-sarakkeessa näkyy oikeat kamerat
 * [ ] **Asetukset määritetty** - Projektin asetukset tarkistettu ja säädetty
 * [ ] **Indeksit valittu** - Halutut monispektriset indeksit lisätty (tarvittaessa)
 * [ ] **Vienti-muoto valittu** - Työnkulullesi sopiva tulostusmuoto
@@ -44,7 +44,7 @@ Käynnistä/Toista-painike sijaitsee Chloros:n yläreunan palkissa:
 
 ## Käsittelytilan ymmärtäminen
 
-Chloros toimii kahdessa eri käsittelytilassa lisenssistäsi riippuen:
+Chloros toimii kahdessa eri käsittelytilassa lisenssisi mukaan:
 
 ### Ilmainen tila (peräkkäinen käsittely)
 
@@ -93,7 +93,7 @@ Chloros toimii kahdessa eri käsittelytilassa lisenssistäsi riippuen:
 **Käsittelyaika:**
 
 * Huomattavasti nopeampi kuin vapaa tila
-* Skaalautuu CPU-ytimien määrän mukaan
+* Skaalautuu CPU-ytimien lukumäärän mukaan
 * GPU-kiihdytys parantaa nopeutta entisestään
 
 {% hint style=&quot;info&quot; %}
@@ -121,7 +121,7 @@ Chloros toimii kahdessa eri käsittelytilassa lisenssistäsi riippuen:
 
 * Muuntaa RAW-Bayer-kuvioidat täysiksi RGB-kuviksi
 * Soveltaa korkealaatuista demosaicing-algoritmia
-* Säilyttää kuvan laadun ja yksityiskohdat mahdollisimman hyvin
+* Säilyttää kuvan laadun ja yksityiskohdat parhaalla mahdollisella tavalla
 
 **Kesto:** Vaihtelee kuvien määrän ja prosessorin nopeuden mukaan
 
@@ -247,7 +247,7 @@ Jos haluat lopettaa käsittelyn:
 
 ***
 
-## Käsittelyajan arviot
+## Arvioitu käsittelyaika
 
 Todellinen käsittelyaika vaihtelee suuresti seuraavien tekijöiden mukaan:
 
@@ -271,7 +271,7 @@ Todellinen käsittelyaika vaihtelee suuresti seuraavien tekijöiden mukaan:
 | 1000 kuvaa | 4–6 tuntia   | 1,5–2 tuntia      | 40–60 min      |
 
 {% hint style=&quot;info&quot; %}
-**Ensimmäinen käyttökerta**: Alkuperäinen käsittely voi kestää kauemmin, koska Chloros rakentaa välimuistit ja profiilit. Samanlaisten tietojoukkojen myöhempi käsittely on nopeampaa.
+**Ensimmäinen käyttökerta**: Alkuperäinen käsittely voi kestää kauemmin, koska Chloros luo välimuistit ja profiilit. Samanlaisten tietojoukkojen myöhempi käsittely on nopeampaa.
 {% endhint %}
 
 ***
@@ -290,7 +290,7 @@ Todellinen käsittelyaika vaihtelee suuresti seuraavien tekijöiden mukaan:
 **Ratkaisut:**
 
 1. Odota, että taustaohjelma käynnistyy kokonaan (tarkista päävalikon kuvake)
-2. Varmista, että kuvat on tuotu tiedostoselaimessa
+2. Varmista, että kuvat on tuotu tiedostoselaimeen
 3. Käynnistä Chloros uudelleen, jos painike on edelleen pois käytöstä
 4. Tarkista virheilmoitukset vianmäärityslogista
 
@@ -308,7 +308,7 @@ Todellinen käsittelyaika vaihtelee suuresti seuraavien tekijöiden mukaan:
 1. Tarkista virheloki <img src="../.gitbook/assets/icon_log.JPG" alt="" data-size="line"> virheilmoitusten varalta
 2. Tarkista käytettävissä oleva levytila
 3. Yritä käsitellä pienempiä kuvajoukkoja
-4. Tarkista, että kuvat eivät ole vioittuneita
+4. Tarkista, että kuvat eivät ole vioittuneet
 
 ### Varoitus &quot;Kohteita ei havaittu&quot;
 
@@ -341,7 +341,7 @@ Todellinen käsittelyaika vaihtelee suuresti seuraavien tekijöiden mukaan:
 
 1. **Vältä järjestelmän lepotilaa** - Poista virransäästötilat käytöstä.
 2. **Pidä Chloros etualalla** - Tai ainakin näkyvissä tehtäväpalkissa.
-3. **Tarkista edistymistä ajoittain** - Tarkista varoitukset tai virheet.
+3. **Seuraa edistymistä ajoittain** - Tarkista varoitukset tai virheet.
 4. **Älä lataa muita raskaita sovelluksia** - Erityisesti Chloros+ rinnakkaistilassa
 
 ### Chloros+ GPU-kiihdytys
@@ -350,7 +350,7 @@ Jos käytät NVIDIA GPU-kiihdytystä:
 
 1. Päivitä NVIDIA-ajurit uusimpaan versioon
 2. Varmista, että GPU:ssa on vähintään 4 Gt VRAM-muistia
-3. Sulje GPU:ta paljon kuormittavat sovellukset (pelit, videonmuokkaus)
+3. Sulje GPU:ta paljon kuormittavat sovellukset (pelit, videon editointi)
 4. Tarkkaile GPU:n lämpötilaa (varmista riittävä jäähdytys)
 
 ***
@@ -363,4 +363,4 @@ Kun käsittely on alkanut:
 2. **Odota käsittelyn päättymistä** – Käsittely suoritetaan automaattisesti.
 3. **Tarkista tulokset** – Katso [Käsittelyn lopettaminen](finishing-the-processing.md).
 
-Tietoja käsittelyn aikana suoritettavista toimista on kohdassa [Käsittelyn seuranta](monitoring-the-processing.md).
+Lisätietoja käsittelyn aikana suoritettavista toimista on kohdassa [Käsittelyn seuranta](monitoring-the-processing.md).

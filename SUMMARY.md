@@ -1,6 +1,6 @@
 # Sisällysluettelo
 
-* [Aloittaminen](README.md)
+* [Aloitus](README.md)
 * [GUI : Navigointi](navigation.md)
 * [GUI : Projektit](projects.md)
 * [CLI : Komentorivi](CLI.md)

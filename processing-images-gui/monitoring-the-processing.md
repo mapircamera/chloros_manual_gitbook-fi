@@ -6,7 +6,7 @@ Kun käsittely on alkanut, Chloros tarjoaa useita tapoja seurata edistymistä, t
 
 Yläotsikon edistymispalkki näyttää reaaliaikaisen käsittelyn tilan ja valmistumisprosentin.
 
-### Ilmainen tila -edistymispalkki
+### Ilmainen tila - edistymispalkki
 
 Käyttäjille, joilla ei ole Chloros+ -lisenssiä:
 
@@ -27,7 +27,7 @@ Käyttäjille, joilla on Chloros+ -lisenssi:
 
 **4-vaiheinen edistymisen näyttö:**
 
-1. **Tunnistaminen** - Kalibrointikohteiden etsiminen
+1. **Havaitseminen** - Kalibrointikohteiden etsiminen
 2. **Analysointi** - Kuvien tarkastelu ja putkilinjan valmistelu
 3. **Kalibrointi** - Vignette- ja heijastavuuskorjausten soveltaminen
 4. **Vienti** - Käsiteltyjen tiedostojen tallentaminen
@@ -73,9 +73,9 @@ Käyttäjille, joilla on Chloros+ -lisenssi:
 
 **Mitä tapahtuu:**
 
-* Kuvien EXIF-metatietojen lukeminen (aikaleimat, valotusasetukset)
+* Kuvan EXIF-metatietojen lukeminen (aikaleimat, valotusasetukset)
 * Kalibrointistrategian määrittäminen kohteen aikaleimojen perusteella
-* Kuvankäsittelyjonon järjestäminen
+* Kuvan käsittelyjonon järjestäminen
 * Rinnakkaiskäsittelytyöntekijöiden valmistelu (vain Chloros+)
 
 **Kesto:** 5–30 sekuntia
@@ -83,7 +83,7 @@ Käyttäjille, joilla on Chloros+ -lisenssi:
 **Edistymisilmaisin:**
 
 * Analysointi: 0 % → 100 %
-* Nopea vaihe, valmistuu yleensä nopeasti
+* Nopea vaihe, yleensä valmistuu nopeasti
 
 **Mitä on syytä tarkkailla:**
 
@@ -153,7 +153,7 @@ Debug-loki tarjoaa yksityiskohtaista tietoa käsittelyn edistymisestä ja mahdol
 
 1. Napsauta **Debug-loki** <img src="../.gitbook/assets/icon_log.JPG" alt="" data-size="line"> -kuvaketta vasemmassa sivupalkissa.
 2. Lokipaneeli avautuu ja näyttää reaaliaikaiset käsittelyviestit.
-3. Vierittää automaattisesti uusimpia viestejä.
+3. Vierittää automaattisesti uusimmat viestit näkyviin.
 
 ### Lokiviestien ymmärtäminen
 
@@ -204,18 +204,18 @@ Kriittiset ongelmat, jotka voivat aiheuttaa käsittelyn epäonnistumisen:
 | &quot;Ohitetaan vioittunut tiedosto&quot;        | Kuvatiedosto on vioittunut                  | Kopioi tiedosto uudelleen SD-kortilta                             |
 | &quot;PPK-tiedot sovellettu&quot;               | .daq-tiedoston GPS-korjaukset sovellettu | Ei mitään - normaali                                         |
 
-### Lokitietojen kopiointi
+### Lokitietojen kopioiminen
 
-Lokien kopiointi vianmääritystä tai tukea varten:
+Lokien kopioiminen vianmääritystä tai tukea varten:
 
 1. Avaa Debug Log -paneeli.
-2. Napsauta **&quot;Copy Log&quot;**-painiketta (tai napsauta hiiren kakkospainikkeella → Valitse kaikki).
+2. Napsauta **&quot;Copy Log&quot;** -painiketta (tai napsauta hiiren kakkospainikkeella → Valitse kaikki).
 3. Liitä tekstitiedostoon tai sähköpostiin.
 4. Lähetä tarvittaessa MAPIR-tukeen.
 
 ***
 
-## Järjestelmän resurssien seuranta
+## Järjestelmän resurssien valvonta
 
 ### CPU:n käyttö
 
@@ -262,7 +262,7 @@ Kun GPU-kiihdytys on käytössä:
 
 **Seuranta:**
 
-* NVIDIA-kuvaketta järjestelmäpalkissa
+* NVIDIA-kuvaketta järjestelmälokerossa
 * Tehtävienhallinta → Suorituskyky → GPU
 * GPU-Z tai vastaava seurantatyökalu
 
@@ -336,8 +336,8 @@ Keskeytä käsittely, jos näet:
 
 **Ratkaisut:**
 
-1. Jos käsittely on juuri alkanut ja on tunnistamisvaiheessa: Peruuta, merkitse kohteet, aloita alusta
-2. Tulevaisuutta varten: Käytä SSD-levyä, vähennä hakemistojen määrää, päivitä laitteisto
+1. Jos käsittely on juuri alkanut ja on tunnistamisvaiheessa: Peruuta, merkitse kohteet, aloita uudelleen
+2. Tulevaisuutta varten: Käytä SSD-levyä, vähennä hakemistoja, päivitä laitteisto
 3. Harkitse CLI:n käyttöä suurten tietojoukkojen eräprosessointiin
 
 ### &quot;Levytila&quot; -varoitukset

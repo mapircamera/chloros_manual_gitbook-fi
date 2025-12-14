@@ -16,7 +16,7 @@ Ilman kohdekuvien merkitsemistä Chloros:n on:
 
 ### Merkityt kohdekuvat
 
-Kun valitset kohdekuvat Kohde-sarakkeesta:
+Kun valitset kohdesarakkeesta tietyt kuvat:
 
 * Chloros skannaa vain valitut kuvat kohteiden löytämiseksi
 * Kohteiden tunnistus tapahtuu paljon nopeammin
@@ -85,7 +85,7 @@ Tarkista ennen käsittelyä, että:
 **Kohteen kunto:**
 
 * Pidä kohdepaneelit puhtaina ja kuivina
-* Kaikkien neljän paneelin tulee olla selvästi näkyvissä ja esteettömiä
+* Kaikkien neljän paneelin tulee olla selvästi näkyvissä ja esteettöminä
 * Kohteet kohtisuorassa/nadir-asennossa valonlähteeseen nähden, jos mahdollista
 
 ### Kuinka monta kohdekuvaa?
@@ -136,7 +136,7 @@ Jos Chloros ei tunnista kohteitasi oikein, säädä näitä asetuksia [Projektin
 * **Lisää**, jos pienet esineet tunnistetaan virheellisesti
 * **Vähennä**, jos kohteita ei tunnisteta
 
-**Vähimmäiskohteiden ryhmittely:**
+**Vähimmäiskohteiden klusterointi:**
 
 * **Oletus**: 60
 * **Lisää**, jos kohteet jaetaan useisiin tunnistuksiin
@@ -166,13 +166,13 @@ Jos Chloros ei tunnista kohteitasi oikein, säädä näitä asetuksia [Projektin
 
 **Mahdolliset syyt:**
 
-* Valkoiset rakennukset, ajoneuvot tai maaperä peittävät kohteet
+* Valkoiset rakennukset, ajoneuvot tai maaperän peite sekoitetaan kohteisiin
 * Kirkkaat kohdat kasvillisuudessa
 * Tunnistuksen herkkyys liian alhainen
 
 **Ratkaisut:**
 
-1. Merkitse vain todelliset kohdekuvat tunnistuksen rajoittamiseksi
+1. Merkitse vain todelliset kohdekuvat tunnistuksen laajuuden rajoittamiseksi
 2. Lisää kalibroinnin vähimmäisnäytealuetta
 3. Lisää kohteen klusterointiarvoa
 4. Varmista, että kohdekuvissa näkyy vain kohde (taustalla mahdollisimman vähän häiriöitä)
@@ -199,7 +199,7 @@ Ennen käsittelyn aloittamista tarkista kohdekuvien valinta:
 
 Vaikka sitä ei suositella tieteelliseen työhön, voit käsitellä ilman kohteita:
 
-1. Jätä kaikki kohdesarakkeen valintaruudut valitsematta
+1. Jätä kaikki Kohde-sarakkeen valintaruudut valitsematta
 2. **Poista käytöstä** &quot;Heijastavuuskalibrointi&quot; projektin asetuksissa
 3. Vignettikorjaus otetaan edelleen käyttöön
 4. Tulos ei kalibroida absoluuttisen heijastavuuden mukaan

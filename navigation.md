@@ -18,7 +18,7 @@ Kun tämä painike on käytössä, kuvankäsittelyprosessi käynnistyy.
 
 Ilmaisessa Chloros-tilassa, joka käsittelee kaikki tiedostot peräkkäin, edistymispalkki näyttää kaksi vaihetta: kohteen tunnistus ja käsittely.
 
-Maksullisessa Chloros+-lisenssitilassa, joka käsittelee kaikki tiedostot samanaikaisesti, edistymispalkki näyttää neljä vaihetta: tunnistus, analysointi, kalibrointi ja vienti. Jos viet hiiren osoittimen Chloros+ -etenemispalkin päälle, avautuu laajennettu neljän etenemispalkin paneeli, josta voit seurata prosessia. Napsauttamalla ylintä etenemispalkkia voit jäädyttää avattavan paneelin, ja napsauttamalla uudelleen voit vapauttaa sen.
+Maksullisessa Chloros+-lisenssitilassa, joka käsittelee kaikki tiedostot samanaikaisesti, edistymispalkki näyttää neljä vaihetta: tunnistus, analysointi, kalibrointi ja vienti. Jos viet hiiren osoittimen Chloros+ -etenemispalkin päälle, avautuu laajennettu neljän etenemispalkin paneeli, josta voit seurata prosessin etenemistä. Napsauttamalla ylintä etenemispalkkia voit jäädyttää avattavan paneelin, ja napsauttamalla uudelleen voit vapauttaa sen.
 
 <figure><img src=".gitbook/assets/plus_prog.JPG" alt=""><figcaption></figcaption></figure>
 
@@ -32,7 +32,7 @@ Projektin asetukset -välilehdessä voit säätää projektin yleisiä ja projek
 
 #### <img src=".gitbook/assets/icon_file-browser.JPG" alt="" data-size="line"> Tiedostoselain
 
-Lisää tiedostoja/kansioita ja poista tiedostoja projektista. Duplikaattitiedostot ohitetaan. Valitse kohdekuvakentän ruutu haluamallesi kohdekuvalle, jolloin käsittely tarkastelee vain valittuja kuvia, mikä nopeuttaa käsittelyaikaa huomattavasti.
+Lisää tiedostoja/kansioita ja poista tiedostoja projektista. Duplikaattitiedostot ohitetaan. Valitse kohdekuvakentän ruutu haluamallesi kuvalle, jolloin käsittely tarkastelee vain valittuja kuvia, mikä nopeuttaa käsittelyaikaa huomattavasti.
 
 #### <img src=".gitbook/assets/icon_image-viewer.JPG" alt="" data-size="line"> [Kuvankatseluohjelma](image-viewer-gui/opening-an-image-full-screen.md)
 
@@ -44,4 +44,4 @@ Tarkista loki virheenkorjausmerkintöjen varalta, kun ongelmia ilmenee. Kopioi/l
 
 #### <img src=".gitbook/assets/icon_user.JPG" alt="" data-size="line"> [Käyttäjän kirjautuminen](chloros+-login.md)
 
-Käyttäjän kirjautumissivupalkin avulla voit kirjautua Chloros+-tiliisi ja avata lisäominaisuudet. Voit myös tarkastella sovelluksen nykyistä versiota sekä säätää Chloros GUI- ja CLI-käyttöliittymän tekstin kieltä.
+Käyttäjän kirjautumissivupalkin avulla voit kirjautua Chloros+ -tiliisi ja avata lisäominaisuudet. Voit myös tarkastella sovelluksen nykyistä versiota sekä säätää Chloros GUI:n ja CLI:n tekstin kieltä.

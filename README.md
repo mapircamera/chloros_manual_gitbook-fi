@@ -1,7 +1,6 @@
 ---
 metaLinks: {}
 ---
-
 # Aloittaminen
 
 <div data-full-width="false"><figure><img src=".gitbook/assets/chloros_logo_transparent.png" alt=""><figcaption></figcaption></figure></div>
@@ -22,7 +21,7 @@ Toimii verkkoselaimessa (Chrome/Edge). Sopii parhaiten hitaammille tietokoneille
 
 ## [Chloros CLI: Komentoriviliittymä](CLI.md)
 
-Komentorivipohjainen eräprosessointi. Sopii erinomaisesti automaatioon, skriptaukseen ja edistyneisiin työnkulkuihin. _CLI vaatii Chloros+ -lisenssin käytettäväksi._
+Komentoriviltä suoritettava eräprosessointi. Sopii erinomaisesti automaatioon, skriptaukseen ja edistyneisiin työnkulkuihin. _CLI vaatii Chloros+ -lisenssin käytettäväksi._
 
 ## [Chloros API: Python SDK](api-python-sdk.md)
 
@@ -34,7 +33,7 @@ Ohjelmoitava Python-rajapinta automaatioon ja mukautettuihin työnkulkuihin. Sop
 
 Vaikka Chloros on ilmainen useimpiin tehtäviin, saatat haluta enemmän. Siinä tapauksessa Chloros+:n maksullinen lisenssi voi olla sinulle hyödyllinen. Chloros+-lisenssillä voit avata uusia ominaisuuksia, kuten:
 
-* **Monisäikeinen käsittely**: nopeuttaa huomattavasti kuvankäsittelyä suurissa projekteissa käsittelemällä kuvia samanaikaisesti putkistossa.
+* **Monisäikeinen käsittely**: nopeuttaa huomattavasti kuvankäsittelyä suuremmissa projekteissa käsittelemällä kuvia samanaikaisesti putkistossa.
 * **GPU (CUDA) -kiihdytys**: hyödynnä nykypäivän suurempia GPU-muistivaihtoehtoja kuvankäsittelyputken nopeuttamiseksi entisestään. Suosittelemme vähintään 4 Gt:n VRAM-muistia parhaan tuloksen saavuttamiseksi.
 * **Chloros+** [**CLI**](CLI.md) **Pääsy**: suorita Chloros+ komentoriviltä automatisoidaksesi ja integroidaksesi sen omaan ohjelmistoosi.
 * **Chloros+** [**API**](api-python-sdk.md) **Käyttö:** suorita Chloros+ Python:stä ohjelmoitua ohjausta varten, mikä mahdollistaa saumattoman integroinnin tutkimusputkiisi, data-analyysityönkulkuihisi ja mukautettuihin sovelluksiisi.

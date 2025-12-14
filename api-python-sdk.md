@@ -9,7 +9,7 @@
 * 🚀 **Automaatio** - Rakenna mukautettuja eräkäsittelytyönkulkuja
 * 🔗 **Integrointi** - Upota Chloros olemassa oleviin Python-sovelluksiin
 * 📊 **Tutkimuskäyttöön valmis** - Täydellinen tieteellisiin analyysiputkiin
-* ⚡ **Rinnakkaiskäsittely** - Skaalautuu CPU-ytimiesi mukaan (Chloros+)
+* ⚡ **Rinnakkaiskäsittely** - Skaalautuu CPU-ytimien mukaan (Chloros+)
 
 ### Vaatimukset
 
@@ -19,11 +19,11 @@
 | **Lisenssi**          | Chloros+ ([maksullinen tilaus vaaditaan](https://cloud.mapir.camera/pricing)) |
 | **Käyttöjärjestelmä** | Windows 10/11 (64-bittinen)                                              |
 | **Python**           | Python 3.7 tai uudempi                                                |
-| **Muisti**           | Vähintään 8 Gt RAM-muistia (suositellaan 16 Gt)                                  |
-| **Internet**         | Vaaditaan lisenssin aktivointiin                                     |
+| **Muisti**           | Vähintään 8 Gt RAM-muistia (suositus 16 Gt)                                  |
+| **Internet**         | Vaaditaan lisenssin aktivoimiseksi                                     |
 
 {% hint style=&quot;warning&quot; %}
-**Lisenssivaatimukset**: Python SDK edellyttää maksullista Chloros+ -tilausta API-käyttöoikeuden saamiseksi. Vakiomuotoisissa (ilmaisissa) paketeissa ei ole pääsyä API/SDK:ään. Käy osoitteessa [https://cloud.mapir.camera/pricing](https://cloud.mapir.camera/pricing) päivittääksesi.
+**Lisenssivaatimukset**: Python SDK edellyttää maksullista Chloros+ -tilausta API-käyttöoikeuden saamiseksi. Vakiomuotoisissa (ilmaisissa) paketeissa ei ole API/SDK-käyttöoikeutta. Käy osoitteessa [https://cloud.mapir.camera/pricing](https://cloud.mapir.camera/pricing) päivittääksesi paketin.
 {% endhint %}
 
 ## Pikaopas
@@ -174,11 +174,11 @@ ChlorosLocal(
 
 | Parametri                 | Tyyppi | Oletusarvo                   | Kuvaus                           |
 | ------------------------- | ---- | ------------------------- | ------------------------------------- |
-| `api_url`                 | str  | `"http://localhost:5000"` | URL paikallisen Chloros-taustaprosessin          |
+| `api_url`                 | str  | `"http://localhost:5000"` | URL paikallisesta Chloros-taustaprosessista          |
 | `auto_start_backend`      | bool | `True`                    | Käynnistä backend automaattisesti tarvittaessa |
 | `backend_exe`             | str  | `None` (automaattinen tunnistus)      | Polku backend-suoritustiedostoon            |
 | `timeout`                 | int  | `30`                      | Pyynnön aikakatkaisu sekunteina            |
-| `backend_startup_timeout` | int  | `60`                      | Backendin käynnistysaikakatkaisu (sekunteina) |
+| `backend_startup_timeout` | int  | `60`                      | Aikakatkaisu backendin käynnistämiselle (sekuntia) |
 
 **Esimerkkejä:**
 
@@ -234,9 +234,9 @@ Tuo kuvat kansiosta.
 | Parametri     | Tyyppi     | Vaadittu | Kuvaus                        |
 | ------------- | -------- | -------- | ---------------------------------- |
 | `folder_path` | str/Path | Kyllä      | Polku kuvien sisältävään kansioon         |
-| `recursive`   | bool     | Ei       | Hae alikansiot (oletus: False) |
+| `recursive`   | bool     | Ei       | Etsi alikansiot (oletus: False) |
 
-**Palauttaa:** `dict` - Tuontitulokset tiedostojen lukumäärän kanssa
+**Palauttaa:** `dict` - Tuo tulokset tiedostojen lukumäärän kanssa
 
 **Esimerkki:**
 
@@ -256,7 +256,7 @@ Määritä käsittelyasetukset.
 
 **Parametrit:**
 
-| Parametri                 | Tyyppi | Oletus                 | Kuvaus                     |
+| Parametri                 | Tyyppi | Oletusarvo                 | Kuvaus                     |
 | ------------------------- | ---- | ----------------------- | ------------------------------- |
 | `debayer`                 | str  | &quot;Korkea laatu (nopeampi)&quot; | Debayer-menetelmä                  |
 | `vignette_correction`     | bool | `True`                  | Ota vignettikorjaus käyttöön      |
@@ -271,7 +271,7 @@ Määritä käsittelyasetukset.
 * `"TIFF (16-bit)"` - Suositellaan GIS/fotogrammetriaan
 * `"TIFF (32-bit, Percent)"` - Tieteellinen analyysi
 * `"PNG (8-bit)"` - Silmämääräinen tarkastus
-* `"JPG (8-bit)"` - Pakattu tuloste
+* `"JPG (8-bit)"` - Pakattu tulostus
 
 **Käytettävissä olevat indeksit:**
 
@@ -313,10 +313,10 @@ Käsittele projektikuvat.
 | `progress_callback` | callable | `None`       | Edistymisen palautustoiminto (progress, msg) |
 | `poll_interval`     | float    | `2.0`        | Edistymisen kyselyväli (sekuntia)   |
 
-**Palauttaa:** `dict` - Käsittelyn tulokset
+**Palauttaa:** `dict` - Käsittelytulokset
 
 {% hint style=&quot;warning&quot; %}
-**Rinnakkaistila**: Vaatii Chloros+ -lisenssin. Skaalautuu automaattisesti CPU-ytimien määrään (enintään 16 työprosessia).
+**Rinnakkaistila**: Vaatii Chloros+ -lisenssin. Skaalautuu automaattisesti CPU-ytimien määrään (enintään 16 työntekijää).
 {% endhint %}
 
 **Esimerkki:**
@@ -343,9 +343,9 @@ chloros.process(wait=False)
 
 #### `get_config()`
 
-Hae nykyisen projektin kokoonpano.
+Hae nykyinen projektin kokoonpano.
 
-**Palauttaa:** `dict` - Nykyisen projektin kokoonpano
+**Palauttaa:** `dict` - Nykyisen projektin kokoonpanon
 
 **Esimerkki:**
 
@@ -374,7 +374,7 @@ print(f"URL: {status['url']}")
 
 #### `shutdown_backend()`
 
-Sammuttaa backendin (jos käynnistetty SDK:llä).
+Sammuta taustaohjelma (jos se on käynnistetty SDK:llä).
 
 **Esimerkki:**
 
@@ -384,25 +384,25 @@ chloros.shutdown_backend()
 
 ***
 
-### Kätevät toiminnot
+### Käytännölliset toiminnot
 
 #### `process_folder(folder_path, **options)`
 
-Yhden rivin kätevä toiminto kansion käsittelyyn.
+Yhden rivin käytännöllinen toiminto kansion käsittelyyn.
 
 **Parametrit:**
 
 | Parametri                 | Tyyppi     | Oletusarvo         | Kuvaus                    |
 | ------------------------- | -------- | --------------- | ------------------------------ |
-| `folder_path`             | str/Path | Pakollinen        | Polku kuvien sisältävään kansioon     |
+| `folder_path`             | str/Path | Pakollinen        | Polku kansioon, jossa kuvat ovat     |
 | `project_name`            | str      | Automaattisesti luotu  | Projektin nimi                   |
 | `camera`                  | str      | `None`          | Kameramalli                |
 | `indices`                 | list     | `["NDVI"]`      | Laskettavat indeksit           |
-| `vignette_correction`     | bool     | `True`          | Vignettikorjauksen käyttöönotto     |
-| `reflectance_calibration` | bool     | `True`          | Heijastavuuden kalibroinnin käyttöönotto |
+| `vignette_correction`     | bool     | `True`          | Ota vignettikorjaus käyttöön     |
+| `reflectance_calibration` | bool     | `True`          | Ota heijastavuuskalibrointi käyttöön |
 | `export_format`           | str      | &quot;TIFF (16-bittinen)&quot; | Tulostusmuoto                  |
 | `mode`                    | str      | `"parallel"`    | Käsittelytila                |
-| `progress_callback`       | kutsuttava | `None`          | Edistymisen palautuskutsu              |
+| `progress_callback`       | callable | `None`          | Edistymisen palautuskutsu              |
 
 **Palauttaa:** `dict` - Käsittelytulokset
 
@@ -993,7 +993,7 @@ Get-NetTCPConnection -LocalPort 5000
 
 ***
 
-## Suorituskykyvinkkejä
+## Suorituskykyvinkit
 
 ### Optimoi käsittelynopeus
 
@@ -1033,7 +1033,7 @@ Suurille tietojoukoille:
 
 ### Taustakäsittely
 
-Vapauta Python muille tehtäville:
+Vapauta Python muihin tehtäviin:
 
 ```python
 chloros.process(wait=False)  # Non-blocking
@@ -1123,11 +1123,11 @@ chloros.process(progress_callback=notebook_progress)
 
 ### K: Tarvitseeko SDK internetyhteyden?
 
-**V:** Vain ensimmäisen lisenssin aktivoinnin yhteydessä. Kun olet kirjautunut sisään Chloros:n, Chloros:n (selain) tai Chloros:n CLI:n kautta, lisenssi tallennetaan paikallisesti välimuistiin ja toimii offline-tilassa 30 päivän ajan.
+**V:** Vain ensimmäisen lisenssin aktivoinnin yhteydessä. Kun olet kirjautunut sisään Chloros:n, Chloros:n (selain) tai Chloros:n kautta, lisenssi tallennetaan paikallisesti välimuistiin ja toimii offline-tilassa 30 päivän ajan.
 
 ***
 
-### K: Voinko käyttää SDK:ää palvelimella, jossa ei ole graafista käyttöliittymää?
+### K: Voinko käyttää SDK-ohjelmaa palvelimella, jossa ei ole graafista käyttöliittymää?
 
 **V:** Kyllä! Vaatimukset:
 
@@ -1142,7 +1142,7 @@ chloros.process(progress_callback=notebook_progress)
 | Ominaisuus         | Desktop GUI | CLI Komentorivi | Python SDK  |
 | --------------- | ----------- | ---------------- | ----------- |
 | **Käyttöliittymä**   | Piste-klikkaus | Komento          | Python API  |
-| **Sopii parhaiten**    | Visuaalinen työ | Skriptien kirjoittaminen        | Integrointi |
+| **Sopii parhaiten**    | Visuaaliseen työhön | Skriptien kirjoittamiseen        | Integrointiin |
 | **Automaatio**  | Rajoitettu     | Hyvä             | Erinomainen   |
 | **Joustavuus** | Perustaso       | Hyvä             | Maksimi     |
 | **Lisenssi**     | Chloros+    | Chloros+         | Chloros+    |
@@ -1153,15 +1153,15 @@ chloros.process(progress_callback=notebook_progress)
 
 **V:** SDK-koodi voidaan integroida sovelluksiisi, mutta:
 
-* Loppukäyttäjillä on oltava asennettuna Chloros
-* Loppukäyttäjillä on oltava aktiiviset Chloros+-lisenssit
+* Loppukäyttäjillä on oltava Chloros asennettuna
+* Loppukäyttäjillä on oltava aktiiviset Chloros+ -lisenssit
 * Kaupallinen jakelu edellyttää OEM-lisensointia
 
-Ota yhteyttä info@mapir.camera:ään OEM-kyselyjen osalta.
+Ota yhteyttä info@mapir.camera:ään, jos sinulla on kysyttävää OEM-lisensoinnista.
 
 ***
 
-### K: Kuinka päivitän SDK:n?
+### K: Miten päivitän SDK:n?
 
 ```bash
 pip install --upgrade chloros-sdk
@@ -1183,7 +1183,7 @@ Project_Path/
 
 ### K: Voinko käsitellä kuvia Python-skripteillä, jotka suoritetaan aikataulun mukaisesti?
 
-**V:** Kyllä! Käytä Windows-tehtävien ajoitusta Python-skripteillä:
+**V:** Kyllä! Käytä Windows-tehtävien ajoitinta Python-skripteillä:
 
 ```python
 # scheduled_processing.py
@@ -1193,7 +1193,7 @@ from chloros_sdk import process_folder
 results = process_folder("C:\\Flights\\Today")
 ```
 
-Aikatauluta Tehtävien ajoitusohjelman avulla päivittäiseksi ajoksi.
+Ajoita tehtävien ajoittimella päivittäinen suoritus.
 
 ***
 
@@ -1215,7 +1215,7 @@ thread.start()
 
 ***
 
-## Ohjeen saaminen
+## Ohje
 
 ### Dokumentaatio
 
@@ -1229,7 +1229,7 @@ thread.start()
 
 ### Esimerkkikoodi
 
-Kaikki tässä luetellut esimerkit on testattu ja ne ovat tuotantokäyttöön valmiita. Kopioi ja muokkaa niitä omaan käyttötarkoitukseesi sopiviksi.
+Kaikki tässä luetellut esimerkit on testattu ja ne ovat käyttövalmiita. Kopioi ja muokkaa niitä omaan käyttötarkoitukseesi sopiviksi.
 
 ***
 

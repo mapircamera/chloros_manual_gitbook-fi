@@ -1,6 +1,6 @@
 # Käsittelyn loppuun saattaminen
 
-Kun Chloros on saanut käsittelyn valmiiksi, on aika tarkistaa tulokset, varmistaa tulostuksen laatu ja valmistella käsitellyt kuvat käytettäväksi työnkulussa. Tällä sivulla opastetaan viimeiset vaiheet ja seuraavat toimet.
+Kun Chloros on suorittanut käsittelyn, on aika tarkistaa tulokset, varmistaa tulostuksen laatu ja valmistella käsitellyt kuvat käytettäväksi työnkulussasi. Tämä sivu opastaa sinut viimeisten vaiheiden ja seuraavien toimien läpi.
 
 ## Käsittelyn valmistumisen merkki
 
@@ -8,7 +8,7 @@ Kun käsittely on suoritettu onnistuneesti, näet useita merkkejä:
 
 * ✅ **Edistymispalkki**: Saavuttaa 100 %:n valmiuden
 * ✅ **Debug-loki**: Näyttää viestin &quot;Käsittely valmis&quot;
-* ✅ **Käynnistyspainike**: Aktivoituu uudelleen (valmis seuraavaan käsittelyyn)
+* ✅ **Käynnistyspainike**: Aktivoituu uudelleen (valmis seuraavaa käsittelyä varten)
 * ✅ **Tulostustiedostot**: Kaikki käsitellyt kuvat tallennetaan kameramallin alikansioon
 
 ***
@@ -40,7 +40,7 @@ Kun käsittely on suoritettu onnistuneesti, näet useita merkkejä:
 **Suositellut katseluohjelmat:**
 
 * **QGIS** – ilmainen GIS-ohjelmisto (paras georeferenssoituun monispektriseen analyysiin)
-* **IrfanView** – nopea, kevyt kuvankatseluohjelma (tukee TIFF)
+* **IrfanView** – nopea, kevyt kuvankatseluohjelma (tukee TIFF:ää)
 * **Adobe Photoshop** - Ammattimainen kuvankäsittely (tukee TIFF)
 * **GIMP** - Ilmainen vaihtoehto Photoshopille
 * **Windows Photos** - Perustason katselu (ei välttämättä tue 16-bittistä TIFF)
@@ -85,25 +85,25 @@ Jotta voit säilyttää käsittelyn tiedot tai lähettää ne MAPIR-tukeen:
 
 **Mahdolliset syyt:**
 
-* Tiedostot eivät täyttäneet käsittelykriteereitä.
+* Tiedostot eivät täyttäneet käsittelykriteerejä.
 * Vain kohdekuvat (poissuljettu vientistä).
 * Levytila loppui viennin aikana.
 * Tiedostojen vioittuminen käsittelyn aikana.
 
 **Ratkaisut:**
 
-1. Tarkista vianmääritysloogista ohitus-/virheilmoitukset.
+1. Tarkista virheenkorjauslokista ohitus-/virheilmoitukset.
 2. Varmista, että levytilaa oli riittävästi.
-3. Laske tiedostot: Pitäisi vastata (alkuperäinen lukumäärä - kohdelukumäärä) × (indeksit + 1)
-4. Tuo puuttuvat tiedostot uudelleen ja käsittele ne uudelleen.
+3. Laske tiedostot: Tuloksen tulisi vastata (alkuperäinen lukumäärä - kohdelukumäärä) × (indeksit + 1)
+4. Tuo puuttuvat tiedostot uudelleen ja käsittele ne uudelleen
 
 ### Ongelma: Tummat tai kirkkaat reunat (vignettia näkyy edelleen)
 
 **Mahdolliset syyt:**
 
-* Vignettikorjaus on poistettu käytöstä.
-* Kamera/objektiivi ei ole Chloros-profiilitietokannassa.
-* Korjauskyvyn ylittävä äärimmäinen vignettia.
+* Vignettikorjaus on poistettu käytöstä
+* Kamera/objektiivi ei ole Chloros-profiilitietokannassa
+* Korjauskyvyn ylittävä äärimmäinen vignettia
 
 **Ratkaisut:**
 
@@ -116,14 +116,14 @@ Jotta voit säilyttää käsittelyn tiedot tai lähettää ne MAPIR-tukeen:
 **Mahdolliset syyt:**
 
 * Kalibrointikohteita ei havaittu.
-* Valittu väärä kalibrointikohdemalli.
-* Heijastavuuden kalibrointi pois käytöstä.
-* Huonolaatuiset kohdekuvat.
+* Valittu kalibrointikohteen malli on väärä.
+* Heijastavuuden kalibrointi on pois käytöstä.
+* Kohdekuvien laatu on heikko.
 
 **Ratkaisut:**
 
 1. Varmista, että heijastavuuden kalibrointi on käytössä.
-2. Tarkista Debug Log -lokista, onko kohde löydetty.
+2. Tarkista Debug Log -lokista, onko kohdassa &quot;Target found&quot; (Kohde löydetty) -viesti.
 3. Tarkista kohdekuvien laatu.
 4. Käsittele uudelleen merkitsemällä oikeat kohteet.
 
@@ -139,7 +139,7 @@ Jotta voit säilyttää käsittelyn tiedot tai lähettää ne MAPIR-tukeen:
 **Jos arvot ovat näiden alueiden ulkopuolella:**
 
 1. Varmista, että heijastavuuden kalibrointi on suoritettu.
-2. Varmista, että valosensoriloki on mukana.
+2. Varmista, että valosensorin loki on mukana.
 3. Tarkista, että kalibrointikohteet on havaittu.
 4. Varmista, että oikea kameramalli on havaittu.
 5. Tarkista kohteen kuvan ottamisen ajoitus ja olosuhteet.
@@ -159,27 +159,27 @@ Jotta voit säilyttää käsittelyn tiedot tai lähettää ne MAPIR-tukeen:
    * WebODM
 2. **Säilytä EXIF-metatiedot**: Varmista, että GPS-tiedot säilyvät geotaggaamista varten
 3. **Kalibroidut työnkulut**: Käytä heijastavuuskuvia tieteellisen tarkkuuden varmistamiseksi
-4. **Käsittele indeksimosaiikit**: Luo NDVI-ortomosaiikit yksittäisistä indeksikuvista
-5. **Vie georeferensoidut GeoTIFF**: Käytettäväksi GIS-sovelluksissa
+4. **Käsittele indeksimosaiikkeja**: Luo NDVI-ortomosaiikkeja yksittäisistä indeksikuvista
+5. **Vie georeferenssoitu GeoTIFF**: Käytettäväksi GIS-sovelluksissa
 
-### GIS-analyysiin
+### GIS-analyysia varten
 
-**Suositeltava työnkulku:**
+**Suositeltu työnkulku:**
 
 1. **Lataa QGIS-, ArcGIS- tai vastaavaan ohjelmaan**
 2. **Käytä 16-bittisiä TIFF** heijastavuuskuvia monikaistaisessa analyysissä
 3. **Käytä indeksikuvia** (NDVI, NDRE) käyttövalmiina kasvillisuuskerroksina
 4. **Rasterilaskuri**: Yhdistä kaistat mukautettuun analyysiin
-5. **Vie**: Luo luokittelukarttoja, muutosten havaitsemista, kasvillisuuden terveyskarttoja
+5. **Vie**: Luo luokittelukartat, muutosten havaitseminen, kasvillisuuden terveyskartat
 
-### Suoraan analysointia / raportointia varten
+### Suoraan analysointiin / raportointiin
 
-**Suositeltu työnkulku:**
+**Suositeltava työnkulku:**
 
-1. **Käytä indeksisuhteita LUT-väreillä** visuaalisia raportteja varten
-2. **Pura tilastot**: Keskimääräinen NDVI kenttää/tonttia kohti
-3. **Aikasarja**: Vertaa indeksejä useiden istuntojen välillä
-4. **Luo raportteja**: Sisällytä kartat, tilastot ja visualisoinnit
+1. **Käytä indeksisuhteita LUT-väreillä** visuaalisiin raportteihin
+2. **Poimi tilastot**: Keskimääräinen NDVI kenttää/tonttia kohti
+3. **Aikasarjat**: Vertaa indeksejä useiden istuntojen välillä
+4. **Luo raportit**: Sisällytä kartat, tilastot ja visualisoinnit
 
 ***
 
@@ -191,11 +191,11 @@ Jotta voit säilyttää käsittelyn tiedot tai lähettää ne MAPIR-tukeen:
 
 * ✅ **Alkuperäiset RAW/JPG-kuvat** – Arkistoi erilliselle levylle/pilvipalveluun
 * ✅ **Käsitellyt tulokset** – Säilytä kalibroidut kuvat ja indeksit
-* ✅ **Projektitiedosto** – Sisältää kaikki asetukset uudelleen käsittelyä varten tarvittaessa
-* ✅ **Virheenkorjausloki** – Dokumentoi käsittelyn yksityiskohdat
-* ✅ **Kalibrointikohdekuvat** – Tarkistusta ja uudelleen käsittelyä varten
+* ✅ **Projektitiedosto** – Sisältää kaikki asetukset uudelleen käsittelyä varten, jos tarpeen
+* ✅ **Debug-loki** – Dokumentoi käsittelyn yksityiskohdat
+* ✅ **Kalibrointikohdekuvat** - Tarkistusta ja uudelleenprosessointia varten
 
-**Säilytyssuositukset:**
+**Tallennussuositukset:**
 
 * **Välitön varmuuskopiointi**: Ulkoinen kiintolevy
 * **Pitkäaikainen arkistointi**: Pilvitallennus (Google Drive, Dropbox jne.)
@@ -203,7 +203,7 @@ Jotta voit säilyttää käsittelyn tiedot tai lähettää ne MAPIR-tukeen:
 
 ***
 
-## Seuraavat käsittelyt
+## Seuraavat prosessointikierrokset
 
 ### Projektin asetusten uudelleenkäyttö
 
@@ -216,9 +216,9 @@ Jos käsittelet vastaavia tietojoukkoja tulevaisuudessa:
 
 ### Useiden istuntojen eräprosessointi
 
-Useita istuntoja/tietojoukkoja varten:
+Useille istunnoille/tietojoukoille:
 
-**Vaihtoehto 1: GUI – Useita projekteja**
+**Vaihtoehto 1: GUI - Useita projekteja**
 
 * Luo erillinen projekti jokaiselle istunnolle
 * Käytä yhdenmukaisia malliasetuksia
@@ -269,19 +269,19 @@ Jos kohtaat ongelmia:
 
 ***
 
-## Yhteenveto: Valmis työnkulku
+## Yhteenveto: Koko työnkulku
 
-Olet nyt suorittanut Chloros-käsittelyn koko työnkulun:
+Olet nyt suorittanut koko Chloros-käsittelyn työnkulun:
 
 1. ✅ **Luotu projekti** - Katso [Projektit](../projects.md)
 2. ✅ **Lisätty tiedostoja** - Katso [Tiedostojen lisääminen](adding-files-to-a-project.md)
-3. ✅ **Säätöasetukset** - Katso [Projektin asetusten säätäminen](adjusting-project-settings.md)
-4. ✅ **Merkityt kohteet** - Katso [Kohdekuvien valitseminen](choosing-target-images.md)
-5. ✅ **Käsittely käynnistetty** - Katso [Käsittelyn käynnistäminen](starting-the-processing.md)
-6. ✅ **Edistymistä seurattu** - Katso [Käsittelyn seuranta](monitoring-the-processing.md)
-7. ✅ **Tulosten tarkastelu** - Tämä sivu
+3. ✅ **Säädetty asetuksia** - Katso [Projektin asetusten säätäminen](adjusting-project-settings.md)
+4. ✅ **Merkitty kohteet** - Katso [Kohdekuvien valitseminen](choosing-target-images.md)
+5. ✅ **Käsittely aloitettu** - Katso [Käsittelyn aloittaminen](starting-the-processing.md)
+6. ✅ **Seurattu etenemistä** - Katso [Käsittelyn seuranta](monitoring-the-processing.md)
+7. ✅ **Tarkistettu tuloksia** - Tämä sivu
 
-**Kalibroidut, heijastavuudeltaan korjatut monispektrikuvat ovat valmiina analysoitavaksi!**
+**Kalibroidut, heijastavuudeltaan korjatut monispektrikuvasi ovat valmiina analysoitavaksi!**
 
 ***
 
@@ -291,16 +291,16 @@ Olet nyt suorittanut Chloros-käsittelyn koko työnkulun:
 
 * [**Kuvankatseluohjelma**](../image-viewer-gui/opening-an-image-full-screen.md) - Interaktiivinen visualisointi ja analysointi
 * [**Indeksi/LUT-hiekkalaatikko**](../image-viewer-gui/index-lut-sandbox.md) - Mukautettu indeksitestaus
-* [**Monispektriset indeksikaavat**](../project-settings/multispectral-index-formulas.md) - Täydellinen indeksiviite
+* [**Monispektriset indeksikaavat**](../project-settings/multispectral-index-formulas.md) - Täydellinen indeksin viite
 
 ### Automaatio ja integraatio
 
-* [**CLI-dokumentaatio**](../CLI.md) – Komentoriviltä suoritettava eräprosessointi
+* [**CLI-dokumentaatio**](../CLI.md) - Komentoriviltä suoritettava eräprosessointi
 * [**Python SDK**](../api-python-sdk.md) - Ohjelmoitu automaatio
 * [**Chloros+ Ominaisuudet**](../#chloros) - Edistyneet käsittelyominaisuudet
 
 ### Tuki ja oppiminen
 
-* [**UKK**](../faq.md) - Vastauksia yleisiin kysymyksiin
-* [**Kalibrointikohteet**](../calibration-targets.md) - Heijastavuuden kalibroinnin ymmärtäminen
+* [**UKK**](../faq.md) – Vastauksia yleisiin kysymyksiin
+* [**Kalibrointikohteet**](../calibration-targets.md) – Heijastavuuden kalibroinnin ymmärtäminen
 * [**Tuetut kamerat**](../supported-cameras.md) - Yhteensopiva laitteisto

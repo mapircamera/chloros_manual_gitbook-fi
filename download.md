@@ -3,7 +3,6 @@ metaLinks:
   alternates:
     - https://app.gitbook.com/s/o044KN3Ws0uIDvOmSkcR/download
 ---
-
 # Lataa
 
 Lataa uusin versio Chloros:stä Windows:lle, jotta voit aloittaa monispektrisen kuvankäsittelyn.
@@ -88,7 +87,7 @@ Avaa lisäominaisuudet Chloros+-tilauksella:
 
 * 🚀 **Monisäikeinen käsittely** - Käsittele kuvia rinnakkain
 * ⚡ **GPU (CUDA) -kiihdytys** - Hyödynnä NVIDIA GPU:n tehoa
-* 💻 **CLI-käyttöoikeus** - Automatisoi komentorivityökaluilla
+* 💻 **CLI-käyttö** - Automatisoi komentorivityökaluilla
 * 🐍 **Python SDK** - Ohjelmoitava API-käyttö
 * 📱 **Useita laitteita** - Käytä 2–10+ laitteella (riippuen paketista)
 * 🧮 **Mukautetut kaavat** - Luo mukautettuja monispektrisiä indeksejä
@@ -109,8 +108,8 @@ Avaa lisäominaisuudet Chloros+-tilauksella:
 
 * Kokeile Chloros (selain) -versiota
 * Varmista, että Windows 10/11 (64-bittinen) on asennettu
-* Päivitä grafiikkakortin ajurit
-* Tarkista Windows Tapahtumienvalvonta virheiden yksityiskohdista
+* Päivitä grafiikkaohjaimet
+* Tarkista Windows Tapahtumienvalvonnasta virheen yksityiskohdat
 * Ota yhteyttä tukeen ja toimita virhelokit
 
 **Lisenssin aktivointiongelmat:**
@@ -118,9 +117,9 @@ Avaa lisäominaisuudet Chloros+-tilauksella:
 * Varmista, että internetyhteys on aktiivinen
 * Tarkista tunnistetiedot osoitteessa [https://cloud.mapir.camera](https://cloud.mapir.camera)
 * Tarkista, että palomuuri ei estä Chloros:ää
-* Katso yksityiskohtaiset ohjeet kohdasta [Chloros+ Kirjautuminen](chloros+-login.md)
+* Katso yksityiskohtaiset ohjeet osoitteesta [Chloros+ Kirjautuminen](chloros+-login.md)
 
-### Tuen saaminen
+### Tukipalvelut
 
 Tarvitsetko apua asennuksessa tai asetusten määrittämisessä?
 
@@ -157,7 +156,7 @@ Tarvitsetko apua asennuksessa tai asetusten määrittämisessä?
 
 </details>***
 
-## Lisenssisopimus
+## Käyttöoikeussopimus
 
 **Omistusoikeudellinen ohjelmisto** - Copyright (c) 2025 MAPIR Inc.
 
@@ -166,3 +165,5 @@ Luvaton käyttö, jakelu tai muokkaaminen on kielletty.
 **Ilmainen versio**: Saatavilla henkilökohtaiseen ja kaupalliseen käyttöön rajoitetuin ominaisuuksin.
 
 **Chloros+**: Tilauspohjainen lisenssi edistyneille ominaisuuksille ja kaupalliseen käyttöön.
+
+<figure><img src=".gitbook/assets/t3-125_2.jpg" alt=""><figcaption></figcaption></figure>

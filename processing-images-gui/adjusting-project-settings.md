@@ -14,16 +14,16 @@ Ennen kuvien käsittelyä on tärkeää määrittää projektin asetukset vastaa
 
 ***
 
-## Nopea asetusten määrittäminen tavallisille työnkuluille
+## Nopea asetusten määrittäminen yleisiä työnkulkuja varten
 
 ### Oletusasetukset (suositellaan useimmille käyttäjille)
 
 Tyypillisiin MAPIR Survey3 kameratyönkulkuihin oletusasetukset sopivat hyvin:
 
-* ✅ **Vignette-korjaus**: Käytössä
+* ✅ **Vignettikorjaus**: Käytössä
 * ✅ **Heijastavuuskalibrointi**: Käytössä (vaatii kuvia MAPIR kohteista)
 * ✅ **Debayer-menetelmä**: Korkea laatu (nopeampi)
-* ✅ **Vientimuoto**: TIFF (16-bittinen)
+* ✅ **Vienti-muoto**: TIFF (16-bittinen)
 
 Tuo kuvasi ja aloita käsittely näillä oletusasetuksilla.
 
@@ -54,14 +54,14 @@ Tärkeimmät kuvankäsittely- ja kalibrointivaihtoehdot.
 
 **Tärkeimmät asetukset:**
 
-* **Vignettikorjaus**: Kompensoi objektiivin tummenemisen reunoilla ✅ Suositellaan
-* **Heijastavuuskalibrointi**: Normalisoi arvot kalibrointikohteiden avulla ✅ Suositellaan
+* **Vignette-korjaus**: Kompensoi objektiivin tummenemista reunoilla ✅ Suositeltava
+* **Heijastavuuskalibrointi**: Normalisoi arvot kalibrointikohteiden avulla ✅ Suositeltava
 * **Debayer-menetelmä**: Algoritmi RAW-tiedostojen muuntamiseksi 3-kanavaisiksi monispektrisiksi tiedostoiksi
 * **Minimi kalibrointiväli**: Aika kalibrointikohteiden käytön välillä (0 = käytä kaikkia)
 
 **Lisäasetukset:**
 
-* **Valosensorin aikavyöhykkeen siirtymä**: PPK-ajan synkronointia varten (oletus: 0)
+* **Valosensorin aikavyöhykkeen poikkeama**: PPK-ajan synkronointia varten (oletus: 0)
 * **Käytä PPK-korjauksia**: Käyttää GPS-/valotuspin-tietoja .daq-tiedostoista
 * **Valotusnasta 1/2**: Määrittää kamerat valotusnastoihin kaksoiskamerajärjestelyissä
 
@@ -94,7 +94,7 @@ Kaikki saatavilla olevat indeksit ja kaavat ovat kohdassa [Monispektriset indeks
 
 ### Vienti
 
-Ohjaa tulostustiedoston muotoa ja laatua.
+Hallitse tulostustiedoston muotoa ja laatua.
 
 **Saatavilla olevat muodot:**
 
@@ -114,7 +114,7 @@ Luo uudelleenkäytettäviä malleja yhdenmukaisten työnkulkujen varmistamiseksi
 1. Määritä kaikki halutut asetukset Projektin asetukset -paneelissa.
 2. Vieritä alareunassa olevaan **&quot;Tallenna projektimalli&quot;** -osioon.
 3. Anna mallille kuvaava nimi (esim. &quot;Survey3N\_RGN\_Agriculture&quot;).
-4. Napsauta tallennuskuvaketta.
+4. Napsauta tallennuspainiketta.
 
 **Edut:**
 
@@ -151,7 +151,7 @@ Jos käytät MAPIR DAQ -tallentimia GPS:n kanssa tarkkaan maantieteelliseen paik
 ### Edellytykset
 
 * MAPIR DAQ GPS (GNSS) -moduulilla
-* .daq-lokitiedosto, jossa on valotustappien merkinnät
+* .daq-lokitiedosto, jossa on valotustulppamerkinnät
 * Kamera kytketty DAQ-altistustappiin kuvausistunnon aikana
 
 ### Asetusten vaiheet
@@ -194,7 +194,7 @@ Saman alueen toistuville tutkimuksille ajan mittaan:
 
 1. Luo malli vakioasetuksillasi
 2. Käytä jokaisessa istunnossa yhdenmukaista kalibrointikohteen asetusta
-3. Käsittele jokainen päivä erillisenä projektina
+3. Käsittele jokainen päivämäärä erillisenä projektina
 4. Käytä identtisiä asetuksia vertailukelpoisten tulosten saamiseksi
 5. Vie samassa muodossa ajallista analyysia varten
 
@@ -204,7 +204,7 @@ Projekteille, joissa on paljon kuvia (500+):
 
 * Harkitse jakamista pienempiin projekteihin päivämäärän tai alueen mukaan.
 * Käytä Chloros+ rinnakkaisprosessointia nopeampien tulosten saamiseksi.
-* Harkitse CLI tai API erän automatisointia varten.
+* Harkitse CLI tai API eräautomaatiota varten.
 * Säädä vähimmäiskalibrointiväliä kohteen havaitsemisajan lyhentämiseksi.
 
 ***
@@ -231,4 +231,4 @@ Kun asetukset on määritetty:
 2. **Aloita käsittely** - Katso [Käsittelyn aloittaminen](starting-the-processing.md)
 3. **Seuraa edistymistä** – Katso [Käsittelyn seuraaminen](monitoring-the-processing.md)
 
-Tarkemmat tiedot kaikista käytettävissä olevista asetuksista ovat [Projektin asetukset](../project-settings/project-settings.md) -viitedokumentaatiossa.
+Täydelliset tiedot kaikista käytettävissä olevista asetuksista ovat [Projektin asetukset](../project-settings/project-settings.md) -viitedokumentaatiossa.
