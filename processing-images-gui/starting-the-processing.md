@@ -1,6 +1,6 @@
 # Käsittelyn aloittaminen
 
-Kun olet tuonut kuvat, merkinnyt kalibrointikohteet ja määrittänyt projektin asetukset, olet valmis aloittamaan käsittelyn. Tällä sivulla opastetaan Chloros-käsittelyprosessin aloittamisessa.
+Kun olet tuonut kuvat, merkinnyt kalibrointikohteet ja määrittänyt projektin asetukset, olet valmis aloittamaan käsittelyn. Tällä sivulla opastetaan Chloros-käsittelyprosessin aloittaminen.
 
 ## Esikäsittelyn tarkistuslista
 
@@ -8,12 +8,12 @@ Ennen kuin napsautat Käynnistä-painiketta, varmista, että kaikki on valmista:
 
 * [ ] **Tiedostot tuotu** - Kaikki kuvat näkyvät tiedostoselaimessa
 * [ ] **Kohdekuvat merkitty** - Kohdesarakkeessa on tarkistettu kalibrointikuvat
-* [ ] **Kameramallit tunnistettu** - Kameramalli-sarakkeessa näkyy oikeat kamerat
+* [ ] **Kameramallit tunnistettu** - Kameramalli-sarakkeessa näkyvät oikeat kamerat
 * [ ] **Asetukset määritetty** - Projektin asetukset tarkistettu ja säädetty
 * [ ] **Indeksit valittu** - Halutut monispektriset indeksit lisätty (tarvittaessa)
 * [ ] **Vienti-muoto valittu** - Työnkulullesi sopiva tulostusmuoto
 
-{% hint style=&quot;info&quot; %}
+{% vihje style=&quot;info&quot; %}
 **Vinkki**: Napsauta muutamaa kuvaa tiedostoselaimessa varmistaaksesi, että ne on ladattu oikein ennen käsittelyä.
 {% endhint %}
 
@@ -26,7 +26,7 @@ Ennen kuin napsautat Käynnistä-painiketta, varmista, että kaikki on valmista:
 Käynnistä/Toista-painike sijaitsee Chloros:n yläreunan palkissa:
 
 * Sijainti: Ikkunan yläosassa keskellä
-* Kuvake: **Toista/Käynnistä-painike** <img src="../.gitbook/assets/image (2).png" alt="" data-size="line">
+* Kuvake: **Toista/Käynnistä-painike** <img src="../.gitbook/assets/image (2) (1).png" alt="" data-size="line">
 * Tila: Painike on käytössä (kirkas), kun se on valmis käsittelyyn
 
 ### Aloita napsauttamalla
@@ -42,9 +42,9 @@ Käynnistä/Toista-painike sijaitsee Chloros:n yläreunan palkissa:
 
 ***
 
-## Käsittelytilan ymmärtäminen
+## Käsittelytilojen ymmärtäminen
 
-Chloros toimii kahdessa eri käsittelytilassa lisenssisi mukaan:
+Chloros toimii kahdessa eri käsittelytilassa lisenssistäsi riippuen:
 
 ### Ilmainen tila (peräkkäinen käsittely)
 
@@ -58,10 +58,8 @@ Chloros toimii kahdessa eri käsittelytilassa lisenssisi mukaan:
 
 **Edistymispalkki näyttää 2 vaihetta:**
 
-1. **Kohteen tunnistus** - Kalibrointikohteiden skannaus
-2. **Käsittely** - Kalibroinnin soveltaminen ja kuvien vienti
-
-**Käsittelyaika:**
+1.**Kohteen tunnistus** - Kalibrointikohteiden skannaus
+2. **Käsittely** - Kalibroinnin soveltaminen ja kuvien vienti**Käsittelyaika:**
 
 * Paljon hitaampi kuin Chloros+ rinnakkaistila
 * Sopii pienille ja keskisuurille tietojoukoille (&lt; 200 kuvaa)
@@ -79,18 +77,12 @@ Chloros toimii kahdessa eri käsittelytilassa lisenssisi mukaan:
 
 **Edistymispalkki näyttää 4 vaihetta:**
 
-1. **Tunnistaminen** - Kalibrointikohteiden etsiminen
+1.**Tunnistaminen** - Kalibrointikohteiden etsiminen
 2. **Analysointi** - Kuvan metatietojen tarkastelu ja putkilinjan valmistelu
 3. **Kalibrointi** – Korjausten ja kalibrointien soveltaminen
-4. **Vienti** – Käsiteltyjen kuvien ja indeksien tallentaminen
-
-**Edistymispalkin käyttö:**
-
-* **Vie hiiri** palkin päälle nähdäksesi yksityiskohtaisen 4-vaiheisen pudotusvalikon
+4. **Vienti** – Käsiteltyjen kuvien ja indeksien tallentaminen**Edistymispalkin käyttö:*** **Vie hiiri** palkin päälle nähdäksesi yksityiskohtaisen 4-vaiheisen pudotusvalikon
 * **Napsauta** edistymispalkkia jäädyttääksesi pudotusvalikon paikalleen
-* **Napsauta uudelleen** vapauttaaksesi ja piilottaaksesi paneelin
-
-**Käsittelyaika:**
+* **Napsauta uudelleen** vapauttaaksesi ja piilottaaksesi valikon**Käsittelyaika:**
 
 * Huomattavasti nopeampi kuin vapaa tila
 * Skaalautuu CPU-ytimien lukumäärän mukaan
@@ -119,17 +111,15 @@ Chloros toimii kahdessa eri käsittelytilassa lisenssisi mukaan:
 
 **Chloros:n toiminnot:**
 
-* Muuntaa RAW-Bayer-kuvioidat täysiksi RGB-kuviksi
+* Muuntaa RAW-Bayer-kuvion tiedot täysiksi RGB-kuviksi
 * Soveltaa korkealaatuista demosaicing-algoritmia
-* Säilyttää kuvan laadun ja yksityiskohdat parhaalla mahdollisella tavalla
+* Säilyttää kuvan laadun ja yksityiskohdat mahdollisimman hyvin
 
 **Kesto:** Vaihtelee kuvien määrän ja prosessorin nopeuden mukaan
 
 ### Vaihe 3: Kalibrointi
 
-**Mitä Chloros tekee:**
-
-* **Vignette-korjaus**: Poistaa objektiivin tummenemisen reunoilla
+**Mitä Chloros tekee:*** **Vignette-korjaus**: Poistaa objektiivin tummenemisen reunoilla
 * **Heijastavuuskalibrointi**: Normalisoi käyttämällä kohteen heijastavuusarvoja
 * Soveltaa korjauksia kaikkiin kaistoihin/kanaviin
 * Käyttää sopivaa kalibrointikohdetta jokaiselle kuvalle aikaleiman perusteella
@@ -140,7 +130,7 @@ Chloros toimii kahdessa eri käsittelytilassa lisenssisi mukaan:
 
 **Mitä Chloros tekee:**
 
-* Laskee määritetyt monispektriset indeksit (NDVI, NDRE jne.)
+* Laskee konfiguroidut monispektriset indeksit (NDVI, NDRE jne.)
 * Soveltaa kaistamatematiikkaa kalibroituihin kuviin
 * Luo indeksikuvat jokaiselle valitulle indeksille
 
@@ -155,9 +145,7 @@ Chloros toimii kahdessa eri käsittelytilassa lisenssisi mukaan:
 * Kirjoittaa tiedostot kameramallin alikansioihin
 * Säilyttää alkuperäiset tiedostonimet ja päätteet
 
-**Kesto:** Vaihtelee vientimuodon ja tiedostokoon mukaan
-
-***
+**Kesto:** Vaihtelee vientimuodon ja tiedostokoon mukaan***
 
 ## Käsittelykäyttäytyminen
 
@@ -179,10 +167,10 @@ Kun käsittely on aloitettu, koko putki toimii automaattisesti:
 
 **Chloros+ rinnakkaistila:**
 
-* Korkea CPU:n käyttö (monisäikeinen, jopa 16 ydintä)
-* GPU-kiihdytyksellä: Korkea GPU:n käyttö
+* Korkea CPU-käyttö (monisäikeinen, jopa 16 ydintä)
+* GPU-kiihdytyksellä: Korkea GPU-käyttö
 * Tietokone voi olla vähemmän reagoiva käsittelyn aikana
-* Vältä muiden CPU:ta kuormittavien tehtävien käynnistämistä
+* Vältä muiden CPU-intensiivisten tehtävien käynnistämistä
 
 {% hint style=&quot;warning&quot; %}
 **Suorituskykyvinkki**: Parhaan suorituskyvyn saavuttamiseksi sulje muut sovellukset ja anna Chloros:n käyttää kaikkia järjestelmän resursseja.
@@ -197,9 +185,7 @@ Kun käsittely on aloitettu, koko putki toimii automaattisesti:
 * Osittaisia tuloksia ei tallenneta.
 * Peruutuksen jälkeen on aloitettava alusta.
 
-**Suunnitteluvinkki:** Hyvin suurissa projekteissa kannattaa harkita käsittelyä erissä tai CLI:n käyttöä paremman hallinnan saavuttamiseksi.
-
-***
+**Suunnitteluvinkki:** Erittäin suurissa projekteissa kannattaa harkita käsittelyä erissä tai CLI:n käyttöä paremman hallinnan saavuttamiseksi.***
 
 ## Käsittelyn seuranta
 
@@ -221,7 +207,7 @@ Jos haluat lopettaa käsittelyn:
 ### Peruuttaminen
 
 1. Etsi **Lopeta/Peruuta-painike** (korvaa Käynnistä-painikkeen käsittelyn aikana)
-2. Napsauta Lopeta-painiketta
+2. Napsauta Stop-painiketta
 3. Käsittely keskeytyy välittömästi
 4. Osittaiset tulokset hylätään
 
@@ -247,14 +233,14 @@ Jos haluat lopettaa käsittelyn:
 
 ***
 
-## Arvioitu käsittelyaika
+## Käsittelyajan arviointi
 
 Todellinen käsittelyaika vaihtelee suuresti seuraavien tekijöiden mukaan:
 
 * Kuvien määrä
 * Kuvan resoluutio
 * RAW- tai JPG-tiedostomuoto
-* Käsittelytila (Free tai Chloros+)
+* Käsittelytila (ilmainen vs. Chloros+)
 * CPU:n nopeus ja ytimien lukumäärä
 * GPU:n saatavuus (vain Chloros+)
 * Laskettavien indeksien lukumäärä
@@ -271,7 +257,7 @@ Todellinen käsittelyaika vaihtelee suuresti seuraavien tekijöiden mukaan:
 | 1000 kuvaa | 4–6 tuntia   | 1,5–2 tuntia      | 40–60 min      |
 
 {% hint style=&quot;info&quot; %}
-**Ensimmäinen käyttökerta**: Alkuperäinen käsittely voi kestää kauemmin, koska Chloros luo välimuistit ja profiilit. Samanlaisten tietojoukkojen myöhempi käsittely on nopeampaa.
+**Ensimmäinen käyttökerta**: Alustava käsittely voi kestää kauemmin, koska Chloros luo välimuistit ja profiilit. Samanlaisten tietojoukkojen myöhempi käsittely on nopeampaa.
 {% endhint %}
 
 ***
@@ -290,9 +276,9 @@ Todellinen käsittelyaika vaihtelee suuresti seuraavien tekijöiden mukaan:
 **Ratkaisut:**
 
 1. Odota, että taustaohjelma käynnistyy kokonaan (tarkista päävalikon kuvake)
-2. Varmista, että kuvat on tuotu tiedostoselaimeen
+2. Varmista, että kuvat on tuotu tiedostoselaimessa
 3. Käynnistä Chloros uudelleen, jos painike on edelleen pois käytöstä
-4. Tarkista virheilmoitukset vianmäärityslogista
+4. Tarkista virheilmoitukset virhelokista
 
 ### Käsittely alkaa, mutta epäonnistuu välittömästi
 
@@ -335,13 +321,13 @@ Todellinen käsittelyaika vaihtelee suuresti seuraavien tekijöiden mukaan:
 2. **Tarkista käytettävissä oleva levytila** - Varmista, että vapaata tilaa on 2–3 kertaa datajoukon koko
 3. **Sulje tarpeettomat sovellukset** - Vapauta järjestelmän resursseja
 4. **Tarkista kohdekuvat** - Esikatsele merkityt kohteet laadun varmistamiseksi
-5. **Tallenna projekti** - Projekti tallentuu automaattisesti, mutta on hyvä tallentaa se myös manuaalisesti.
+5. **Tallenna projekti** - Projekti tallentuu automaattisesti, mutta on hyvä tallentaa se manuaalisesti
 
 ### Käsittelyn aikana
 
-1. **Vältä järjestelmän lepotilaa** - Poista virransäästötilat käytöstä.
-2. **Pidä Chloros etualalla** - Tai ainakin näkyvissä tehtäväpalkissa.
-3. **Seuraa edistymistä ajoittain** - Tarkista varoitukset tai virheet.
+1. **Vältä järjestelmän lepotilaa** - Poista virransäästötilat käytöstä
+2. **Pidä Chloros etualalla** - Tai ainakin näkyvissä tehtäväpalkissa
+3. **Seuraa edistymistä ajoittain** - Tarkista varoitukset tai virheet
 4. **Älä lataa muita raskaita sovelluksia** - Erityisesti Chloros+ rinnakkaistilassa
 
 ### Chloros+ GPU-kiihdytys
@@ -350,7 +336,7 @@ Jos käytät NVIDIA GPU-kiihdytystä:
 
 1. Päivitä NVIDIA-ajurit uusimpaan versioon
 2. Varmista, että GPU:ssa on vähintään 4 Gt VRAM-muistia
-3. Sulje GPU:ta paljon kuormittavat sovellukset (pelit, videon editointi)
+3. Sulje GPU:ta paljon kuormittavat sovellukset (pelit, videonmuokkaus)
 4. Tarkkaile GPU:n lämpötilaa (varmista riittävä jäähdytys)
 
 ***

@@ -1,8 +1,8 @@
 # Sisällysluettelo
 
-* [Aloitus](README.md)
-* [GUI : Navigointi](navigation.md)
-* [GUI : Projektit](projects.md)
+* [Aloittaminen](README.md)
+* [GUI: Navigointi](navigation.md)
+* [GUI: Projektit](projects.md)
 * [CLI : Komentorivi](CLI.md)
 * [API : Python SDK](api-python-sdk.md)
 * [Tuetut kamerat](supported-cameras.md)
@@ -29,6 +29,8 @@
 
 ## KUVA-KATSELUOHJELMA (GUI)
 
+* [Kuvaruudukko](image-viewer-gui/image-grid.md)
 * [Kuvan avaaminen koko ruudulla](image-viewer-gui/opening-an-image-full-screen.md)
 * [Kuvakerrokset](image-viewer-gui/image-layers.md)
 * [Indeksi/LUT-hiekkalaatikko](image-viewer-gui/index-lut-sandbox.md)
+* [Karttamerkit](image-viewer-gui/map-markers.md)

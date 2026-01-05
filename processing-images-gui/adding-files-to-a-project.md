@@ -1,6 +1,6 @@
 # Tiedostojen lisääminen projektiin
 
-Kun olet luonut tai avannut projektin Chloros:ssä, seuraava vaihe on lisätä monispektrikuvat käsittelyn aloittamiseksi. Tiedostoselaimen<img src="../.gitbook/assets/icon_file-browser.JPG" alt="" data-size="line"> -välilehti helpottaa kuvien tuomista ja tietojoukon hallintaa.
+Kun olet luonut tai avannut projektin Chloros:ssä, seuraava vaihe on lisätä monispektrikuvat käsittelyä varten. Tiedostoselaimen<img src="../.gitbook/assets/icon_file-browser.JPG" alt="" data-size="line"> -välilehti helpottaa kuvien tuomista ja tietojoukon hallintaa.
 
 ## Tiedostoselaimen avaaminen
 
@@ -16,45 +16,38 @@ Kun olet luonut tai avannut projektin Chloros:ssä, seuraava vaihe on lisätä m
 
 ## Kuvien lisääminen projektiin
 
-Kuvia voi lisätä projektiin pääasiassa kahdella tavalla:
+Kuvia voi lisätä projektiin kahdella tavalla:
 
 ### Tapa 1: Lisää tiedostot
 
-Käytä tätä vaihtoehtoa yksittäisten kuvatiedostojen tai pienen tiedostovalikoiman tuomiseen.
+Käytä tätä vaihtoehtoa, jos haluat tuoda yksittäisiä kuvatiedostoja tai pienen valikoiman tiedostoja.
 
-1. Napsauta **&quot;Lisää tiedostoja&quot;** -painiketta tiedostoselaimen paneelin yläosassa.
-2. Siirry kansioon, joka sisältää kuvasi.
-3. Valitse yksi tai useampi kuvatiedosto (pidä **Ctrl**-näppäintä painettuna valitaksesi useita tiedostoja).
-4. Napsauta **&quot;Avaa&quot;** tuodaksesi valitut tiedostot.
+1. Napsauta **&quot;Lisää tiedostoja&quot;** <img src="../.gitbook/assets/image.png" alt="" data-size="line"> -painiketta tiedostoselaimen paneelin yläosassa
+2. Siirry kansioon, joka sisältää kuvasi
+3. Valitse yksi tai useampi kuvatiedosto (pidä **Ctrl**-näppäintä painettuna valitaksesi useita tiedostoja)
+4. Napsauta **&quot;Avaa&quot;** tuodaksesi valitut tiedostot
 
 ### Tapa 2: Lisää kansio
 
 Käytä tätä vaihtoehtoa tuodaksesi kaikki kuvat kansiosta kerralla.
 
-1. Napsauta **&quot;Lisää kansio&quot;** -painiketta tiedostoselaimen paneelin yläosassa.
+1. Napsauta **&quot;Lisää kansio&quot;** <img src="../.gitbook/assets/image (1).png" alt="" data-size="line"> -painiketta tiedostoselaimen paneelin yläosassa.
 2. Siirry kansioon, joka sisältää kuvausistunnon kuvat, ja valitse se.
-3. Napsauta **&quot;Valitse kansio&quot;** tuodaksesi kaikki tuetut kuvat kyseisestä kansiosta.
-
-***
+3. Napsauta **&quot;Valitse kansio&quot;** tuodaksesi kaikki tuetut kuvat kyseisestä kansiosta.***
 
 ## Tiedostoselaimen taulukon ymmärtäminen
 
 Kun kuvat on tuotu, ne näkyvät taulukossa, jossa on seuraavat sarakkeet:
 
-### Pikkukuva
-
-* Pieni esikatselu jokaisesta kuvasta.
-* Napsauta pikkukuvaa nähdäksesi koko kuvan pääesikatselualueella.
-
 ### Tiedostonimi
 
-* Alkuperäinen tiedostonimi kamerasta.
-* Säilyttää kameran nimeämiskäytännön (esim. IMG\_0001.RAW).
+* Alkuperäinen tiedostonimi kamerasta
+* Säilyttää kameran nimeämiskäytännön (esim. IMG\_0001.RAW)
 
 ### Aikaleima
 
-* Kuvan ottamisen päivämäärä ja kellonaika.
-* Otettu kuvan EXIF-metatiedoista.
+* Kuvan ottamisen päivämäärä ja kellonaika
+* Otettu kuvan EXIF-metatiedoista
 * Käytetään PPK-synkronointiin ja kalibrointikohteen tunnistamiseen
 
 ### Kameramalli
@@ -65,7 +58,7 @@ Kun kuvat on tuotu, ne näkyvät taulukossa, jossa on seuraavat sarakkeet:
 
 ### Kohdesarake (valintaruutu)
 
-* Valitse tämä ruutu, jos kuvat sisältävät kalibrointikohteita
+* Valitse tämä ruutu kuville, jotka sisältävät kalibrointikohteita
 * Nopeuttaa huomattavasti kohteen tunnistusta käsittelyn aikana
 * Katso lisätietoja kohdasta [Kohdekuvien valinta](choosing-target-images.md)
 
@@ -78,16 +71,14 @@ Kun kuvat on tuotu, ne näkyvät taulukossa, jossa on seuraavat sarakkeet:
 Poista projektista tarpeettomat kuvat seuraavasti:
 
 1. Valitse yksi tai useampi kuva tiedostoselaimen taulukosta
-2. Napsauta **&quot;Poista valitut&quot;** -painiketta
-3. Vahvista poisto (tiedostoja ei poisteta levyltä, vaan vain projektista)
+2. Napsauta **&quot;Poista valitut&quot;** <img src="../.gitbook/assets/image (2).png" alt="" data-size="line"> -painiketta.
+3. Vahvista poisto (tiedostot eivät poistu levyltä, vaan poistetaan vain projektista).
 
 ### Lajittelu ja suodatus
 
-* **Lajittele sarakkeen mukaan**: Lajittele kuvat napsauttamalla minkä tahansa sarakkeen otsikkoa
-* **Aikaleimasorointi**: Hyödyllinen kronologisten kuvaussekvenssien järjestämiseen
-* **Kameramallisuodatin**: Ryhmitä kuvat kameratyypin mukaan, jos käytät useita kameroita
-
-***
+* **Lajittele sarakkeen mukaan**: Lajittele kuvat napsauttamalla mitä tahansa sarakkeen otsikkoa.
+* **Lajittele aikaleiman mukaan**: Hyödyllinen kronologisten kuvaussekvenssien järjestämiseen.
+* **Kameramallisuodatin**: Ryhmitä kuvat kameratyypin mukaan, jos käytät useita kameroita.***
 
 ## Kuvan esikatselu
 
@@ -95,18 +86,16 @@ Poista projektista tarpeettomat kuvat seuraavasti:
 
 Napsauta mitä tahansa kuvan pikkukuvaa tiedostoselaimessa, jotta se näkyy pääesikatselualueella:
 
-1. Kuva näkyy keskimmäisessä esikatselupaneelissa
-2. Tarkista kuvan yksityiskohdat zoomauspainikkeilla
-3. Siirry kuvien välillä nuolinäppäimillä
+1. Kuva näkyy keskimmäisessä esikatselupaneelissa.
+2. Tarkista kuvan yksityiskohdat zoomauspainikkeilla.
+3. Siirry kuvien välillä nuolinäppäimillä.
 
-### Pikanavigointi
+### Pikaviestintä
 
 * **Edellinen kuva**: Napsauta vasenta nuolta tai paina ←-näppäintä
 * **Seuraava kuva**: Napsauta oikeaa nuolta tai paina →-näppäintä
 * **Lähennä/loitonna**: Käytä hiiren rullaa tai zoomauspainikkeita
-* **Panoroi**: Napsauta ja vedä kuvaa, kun se on lähennetty
-
-***
+* **Panorointi**: Napsauta ja vedä kuvaa, kun se on lähennetty***
 
 ## Duplikaattitiedostojen käsittely
 
@@ -129,11 +118,9 @@ Jos projektisi sisältää kuvia useista MAPIR-kameroista:
 1. Chloros tunnistaa automaattisesti kunkin kameramallin
 2. Kukin kameratyyppi käsitellään sen sopivalla kalibrointiprofiililla
 3. Tiedostoselain näyttää kameramallin Kameramalli-sarakkeessa
-4. Käsittely soveltaa oikeita asetuksia kuhunkin kameratyyppiin
+4. Käsittely soveltaa oikeita asetuksia kunkin kameratyypin osalta
 
-**Esimerkkiskenaario**: Survey3W RGN + Survey3N OCN kaksoiskamerajärjestelmä.
-
-***
+**Esimerkkiskenaario**: Survey3W RGN + Survey3N OCN kaksoiskamerajärjestelmä***
 
 ## Parhaat käytännöt
 
@@ -141,7 +128,7 @@ Jos projektisi sisältää kuvia useista MAPIR-kameroista:
 
 * Säilytä kalibrointikohdekuvat samassa kansiossa kuin mittauskuvat
 * Säilytä kameran/SD-kortin alkuperäinen kansiorakenne
-* Älä sekoita eri istuntojen tietojoukkoja samassa projektissa
+* Älä sekoita eri istuntojen tietojoukkoja yhteen projektiin
 
 ### Tiedostojen nimeäminen
 
@@ -175,7 +162,7 @@ Jos projektisi sisältää kuvia useista MAPIR-kameroista:
 **Mahdolliset syyt:**
 
 * Muokatut EXIF-metatiedot
-* Ulkoisella ohjelmistolla muokatut kuvat
+* Ulkopuolisella ohjelmistolla muokatut kuvat
 * Puutteellinen tiedostojen siirto
 
 **Ratkaisu**: Tuo alkuperäiset, muokkaamattomat tiedostot uudelleen kamerasta/SD-kortilta.
@@ -187,9 +174,7 @@ Jos projektisi sisältää kuvia useista MAPIR-kameroista:
 * Kameran kello ei ole asetettu oikein
 * EXIF-tiedot poistettu ulkoisella ohjelmistolla
 
-**Ratkaisu**: Tarkista, että kameran aika-asetukset olivat oikeat kuvauksen aikana
-
-***
+**Ratkaisu**: Tarkista, että kameran aika-asetukset olivat oikeat kuvan ottamisen aikana***
 
 ## Seuraavat vaiheet
 
