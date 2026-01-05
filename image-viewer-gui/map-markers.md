@@ -86,7 +86,7 @@ Kartta-välilehti tukee kahta karttapiirrosten palveluntarjoajaa taustakartan ku
 
 Voit valita karttakerroksen tyypin (vasemmalta oikealle):
 
- <img src="../.gitbook/assets/image (23).png" alt="" data-size="original">### Maasto
+ <img src="../.gitbook/assets/image (23).png" alt="" data-size="line">### Maasto
 
 Näyttää korkeusprofiilit ja karttalaatat yksityiskohdilla (tiet jne.)
 

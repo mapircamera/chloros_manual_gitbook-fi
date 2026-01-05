@@ -6,7 +6,7 @@ Käyttäjän <img src=".gitbook/assets/icon_user.JPG" alt="" data-size="line"> s
 
 Kun olet kirjautunut sisään, tilisi tiedot näkyvät:
 
-<figure><img src=".gitbook/assets/user_account.JPG" alt="" width="375"><figcaption></figcaption></figure>## CLI Kirjautuminen
+<figure><img src=".gitbook/assets/user_account.JPG" alt="" data-size="line"><figcaption></figcaption></figure>## CLI Kirjautuminen
 
 Kirjaudu sisään Chloros+ -tunnuksillasi, jotta CLI-käsittely voidaan ottaa käyttöön.
 
