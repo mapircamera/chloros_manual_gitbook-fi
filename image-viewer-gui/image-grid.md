@@ -6,13 +6,15 @@ Kun olet tuonut kuvat projektiin, ne näkyvät ruudukossa pääalueella.
 
 Voit säätää pikkukuvien kokoa oikeassa yläkulmassa olevalla zoomausliukusäätimellä. Voit myös pitää CTRL-näppäintä painettuna ja käyttää hiiren rullaa kuvien koon muuttamiseen.
 
-## Vienti-näkymän painikkeet
+<figure><img src="../.gitbook/assets/chloros_grid_zoom.gif" alt=""><figcaption></figcaption></figure>## Vienti-näkymän painikkeet
 
-Kun kuvat on käsitelty, ruudukon vasempaan yläkulmaan ilmestyy painikkeita. Näillä painikkeilla voit vaihtaa ruudukon pikkukuvien tyyppiä:
+Kun kuvat käsitellään, ruudukon vasempaan yläkulmaan ilmestyy painikkeita. Näillä painikkeilla voit vaihtaa ruudukon pikkukuvien tyyppiä:
 
-* **JPG** – Alkuperäiset kameran JPG-pikkukuvat
+* **JPG** – Alkuperäiset kameran JPG-pienoiskuvat
 * **Kohteet** – Kuvat, jotka sisältävät havaitut kalibrointikohteet
 * **Heijastavuus** – Kalibroidut heijastavuuskuvat
-* **Indeksi/LUT** – Lasketut monispektriset indeksikuvat, joissa on värillinen LUT-gradientti
+* **RWA (indeksi/LUT)** – Lasketut monispektriset indeksikuvat, joissa on värillinen LUT-gradientti
 
-Klikkaamalla ruudukon pikkukuvia avaat koko näytön [kuvankatseluohjelman](opening-an-image-full-screen.md). Jos ruudukon katselutila on asetettu tiettyyn vientiin, kuten &quot;Kohteet&quot;, ruudukon pikkukuvaa klikkaamalla avautuu viety kohdekuva koko näytöllä.
+Klikkaamalla ruudukon pikkukuvia avaat koko näytön [kuvankatseluohjelman](opening-an-image-full-screen.md). Jos ruudukon katselutila on asetettu tiettyyn vientiin, kuten &quot;Kohteet&quot;, ruudukon pikkukuvaa klikkaamalla avautuu viety kohdekuva koko näytön kokoisena.
+
+<figure><img src="../.gitbook/assets/chloros_grid_mode.gif" alt=""><figcaption></figcaption></figure>
