@@ -8,18 +8,16 @@ Kartta-välilehti näyttää kuvasi interaktiivisella 2D-kartalla niiden GPS-koo
 
 1. Avaa tai luo projekti Chloros:ssä.
 2. Tuo kuvat, jotka sisältävät GPS-metatietoja.
-3. Napsauta **Kartta** <img src="../.gitbook/assets/image (3).png" alt="" data-size="line"> -välilehteä vasemmassa sivupalkissa.
-4. Kartta näyttää merkit kunkin kuvan GPS-sijainnissa.
+3. Napsauta **Kartta** <img src="../.gitbook/assets/image (3).png" alt="" data-size="line"> -välilehteä vasemmassa sivupalkissa
+4. Kartta näyttää merkit kunkin kuvan GPS-sijainnissa
 
 {% hint style="info" %}
-**GPS vaaditaan**: Kartalla näkyvät vain kuvat, joiden EXIF-metatiedoissa on upotetut GPS-koordinaatit. Varmista, että kamerassasi on GPS käytössä kuvauksen aikana.
+**GPS vaaditaan**: Kartalle näkyvät vain kuvat, joiden EXIF-metatiedoissa on upotetut GPS-koordinaatit. Varmista, että kamerassasi on GPS käytössä kuvauksen aikana.
 {% endhint %}
 
 ***
 
-## Kuvien säätäminen Kartta-välilehdeltä
-
-**Kartta** <img src="../.gitbook/assets/image (3).png" alt="" data-size="line"> -välilehdessä on samat lisäys-  <img src="../.gitbook/assets/image.png" alt="" data-size="line">   <img src="../.gitbook/assets/image (1).png" alt="" data-size="line">  ja poisto  <img src="../.gitbook/assets/image (2).png" alt="" data-size="line">  -painikkeet kuin [**Tiedostoselain**](../processing-images-gui/adding-files-to-a-project.md) <img src="../.gitbook/assets/icon_file-browser.JPG" alt="" data-size="line"> -välilehdessä. Se näyttää myös saman projektitiedostotaulukon, mutta eri sarakkeiden otsikoilla:
+## Kuvien säätäminen Kartta-välilehdeltä**Kartta**<img src="../.gitbook/assets/image (3).png" alt="" data-size="line"> -välilehdessä on samat lisäys-  <img src="../.gitbook/assets/image.png" alt="" data-size="line">   <img src="../.gitbook/assets/image (1).png" alt="" data-size="line">  ja poisto  <img src="../.gitbook/assets/image (2).png" alt="" data-size="line">  -painikkeet kuin [**Tiedostoselain**](../processing-images-gui/adding-files-to-a-project.md) <img src="../.gitbook/assets/icon_file-browser.JPG" alt="" data-size="line"> -välilehdessä. Se näyttää myös saman projektitiedostotaulukon, mutta eri sarakkeiden otsikoilla:
 
 ### Tiedostonimi
 
@@ -50,12 +48,12 @@ Jokainen kuva, jossa on GPS-tietoja, on merkitty kartalle merkillä:
 
 ### Merkkien näyttö
 
-* Merkkien avulla näkyy kunkin kuvan tarkat GPS-koordinaatit
+* Merkkien avulla näkyy kunkin kuvan tarkka GPS-koordinaatti
 * Ryhmitetyt merkit voivat näkyä yhdessä, kun karttaa pienennetään
 * Zoomaa karttaa nähdäksesi yksittäisten kuvien sijainnit
 
 {% hint style="success" %}
-SUPERZOOM: Kun karttalaattojen tarjoajan suurin zoomausaste on saavutettu, laattaa suurennetaan edelleen, jolloin voit nähdä lähellä toisiaan olevat merkit.
+SUPERZOOM: Kun karttaruudun tarjoajan suurin zoomausaste on saavutettu, ruutu suurenee edelleen zoomattaessa, jolloin voit nähdä lähellä toisiaan olevat merkit.
 {% endhint %}
 
 ### Esikatselu hiiren osoittimella
@@ -66,10 +64,10 @@ SUPERZOOM: Kun karttalaattojen tarjoajan suurin zoomausaste on saavutettu, laatt
 
 ***
 
-## Karttatiilipalvelujen tarjoajat
+## Karttalaattojen tarjoajat
 
 {% hint style="success" %}
-**Automaattinen valinta**: Chloros valitsee automaattisesti ruutupalvelun, joka tarjoaa parhaan zoomausasteen nykyiselle kartan sijainnille. Voit vaihtaa palveluntarjoajaa manuaalisesti, jos haluat.
+**Automaattinen valinta**: Chloros valitsee automaattisesti ruutupalvelun, joka tarjoaa parhaan zoomausasteen nykyiselle kartan sijainnillesi. Voit vaihtaa palveluntarjoajaa manuaalisesti, jos haluat.
 {% endhint %}
 
 Kartta-välilehti tukee kahta ruutupalveluntarjoajaa taustakartan kuville:
@@ -90,17 +88,17 @@ Kartta-välilehti tukee kahta ruutupalveluntarjoajaa taustakartan kuville:
 
 Voit valita karttakerroksen tyypin (vasemmalta oikealle):
 
- <img src="../.gitbook/assets/image (23).png" alt="" data-size="line">### Maasto
+ <img src="../.gitbook/assets/image (23).png" alt="" data-size="original">### Maasto
 
 Näyttää korkeusprofiilit ja karttalaatat yksityiskohdilla (tiet jne.)
 
 ### Kartta
 
-Näyttää tavalliset (pienemmän kaistanleveyden) karttalaatat yksityiskohdilla (tiet jne.)
+Näyttää tavalliset (pienempi kaistanleveys) karttalaatat yksityiskohdilla (tiet jne.)
 
 ### Satelliitti
 
-Näyttää yksityiskohtaiset (suuremman kaistanleveyden) satelliittikarttalaatat
+Näyttää yksityiskohtaiset (suurempi kaistanleveys) satelliittikarttalaatat
 
 ### Hybridi
 
@@ -112,16 +110,14 @@ Näyttää satelliittikarttalaatat lisäyksillä (tiet jne.)
 
 ### Zoomaustoiminnot
 
-* **Lähennä/loitonna**: Käytä hiiren rullaa tai zoomauspainikkeita.
+* **Lähennä/loitonna**: Käytä hiiren rullapyörää tai zoomauspainikkeita.
 * **Koko näyttö**: Näytä kartta koko näytöllä.
 
-### Panoraamatoiminnot
+### Panoroinnin toiminnot
 
-* **Panoraama**: Napsauta ja vedä hiiren painikkeita liikutellaksesi karttaa.
+* **Panoroida**: Napsauta ja vedä hiiren painikkeita liikutellaksesi kartalla.***
 
-***
-
-## Käyttötapaukset
+## Käyttötapauksia
 
 ### Lentoreitin visualisointi
 

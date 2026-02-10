@@ -15,6 +15,6 @@ Kun kuvat käsitellään, ruudukon vasempaan yläkulmaan ilmestyy painikkeita. N
 * **Heijastavuus** – Kalibroidut heijastavuuskuvat
 * **RWA (indeksi/LUT)** – Lasketut monispektriset indeksikuvat, joissa on värillinen LUT-gradientti
 
-Klikkaamalla ruudukon pikkukuvia avaat koko näytön [kuvankatseluohjelman](opening-an-image-full-screen.md). Jos ruudukon katselutila on asetettu tiettyyn vientiin, kuten &quot;Kohteet&quot;, ruudukon pikkukuvaa klikkaamalla avautuu viety kohdekuva koko näytön kokoisena.
+Klikkaamalla ruudukon pikkukuvia avaat koko näytön [kuvankatseluohjelman](opening-an-image-full-screen.md). Jos ruudukon katselutila on asetettu tiettyyn vientiin, kuten &quot;Kohteet&quot;, ruudukon pikkukuvaa klikkaamalla avaat viedyn kohdekuvan koko näytöllä.
 
 <figure><img src="../.gitbook/assets/chloros_grid_mode.gif" alt=""><figcaption></figcaption></figure>

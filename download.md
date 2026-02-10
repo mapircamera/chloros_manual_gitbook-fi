@@ -10,18 +10,18 @@ Lataa uusin versio Chloros:stä, jotta voit aloittaa monispektrisen kuvankäsitt
 
 ### Järjestelmävaatimukset
 
-| Vaatimus          | Vähimmäisvaatimukset                         | Suositellut vaatimukset                     |
-| -------------------- | ------------------------------- | ------------------------------- |
-| **Käyttöjärjestelmä** | Windows 10 (64-bittinen)             | Windows 11 (64-bittinen)             |
-| **Prosessori**        | Intel Core i5 tai vastaava     | Intel Core i7 tai parempi         |
-| **Muisti (RAM)**     | 8 Gt                             | 16 Gt tai enemmän                    |
-| **Näytönohjain**    | DirectX 11 -yhteensopiva           | NVIDIA GPU, 4 Gt+ VRAM       |
-| **Tallennustila**          | 6 Gt vapaata tilaa                  | SSD, 10 Gt+ vapaata tilaa       |
-| **Näyttö**          | 1920x1080                       | 2560x1440 tai parempi             |
-| **Internet**         | Vaaditaan lisenssin aktivointiin | Vaaditaan lisenssin aktivointiin |
+| Vaatimus          | Vähimmäisvaatimukset                                              | Suositellut vaatimukset                                          |
+| -------------------- | ---------------------------------------------------- | ---------------------------------------------------- |
+| **Käyttöjärjestelmä** | Windows 10 (64-bittinen)                                  | Windows 11 (64-bittinen)                                  |
+| **Prosessori**        | Intel Core i5 tai vastaava                          | Intel Core i7 tai parempi                              |
+| **Muisti (RAM)**     | 8 Gt                                                  | 16 Gt tai enemmän                                         |
+| **Näytönohjain**    | DirectX 11 -yhteensopiva                                | NVIDIA GPU, jossa on vähintään 4 Gt VRAM-muistia                            |
+| **Tallennustila**          | 6 Gt vapaata tilaa                                       | SSD, jossa on vähintään 10 Gt vapaata tilaa                            |
+| **Näyttö**          | 1920x1080                                            | 2560x1440 tai parempi                                  |
+| **Internet**         | Vaaditaan \[valinnainen] Chloros+ -lisenssin aktivointiin | Vaaditaan \[valinnainen] Chloros+ -lisenssin aktivointiin |
 
-{% hint style=&quot;info&quot; %}
-**GPU-kiihdytys**: Chloros+ -käyttäjät, joilla on NVIDIA-GPU (4 Gt+ VRAM), voivat käyttää CUDA-kiihdytystä huomattavasti nopeampaan käsittelyyn. Chloros+ -käyttäjät saavat myös monisäikeisen käsittelyn maksimaalisen nopeuden saavuttamiseksi.
+{% hint style="info" %}
+**GPU-kiihdytys**: Chloros+-käyttäjät, joilla on NVIDIA-GPU, voivat käyttää CUDA-kiihdytystä huomattavasti nopeampaan käsittelyyn. Chloros+-käyttäjät saavat myös monisäikeisen käsittelyn maksimaalisen nopeuden saavuttamiseksi.
 {% endhint %}
 
 ***
@@ -32,23 +32,23 @@ Lataa uusin versio Chloros:stä, jotta voit aloittaa monispektrisen kuvankäsitt
 
 ### Uusin vakaa versio
 
-**Chloros-asennusohjelma Windows:lle*** **Versio**: 1.0.4
-* **Julkaisupäivä**: 5. tammikuuta 2026
-* **Tiedoston koko (lataus)**: 1,8 Gt
+**Chloros-asennusohjelma Windows:lle*** **Versio**: 1.0.5
+* **Julkaisupäivä**: 10. helmikuuta 2026
+* **Tiedoston koko (lataus)**: 1,6 Gt
 * **Tiedoston koko (asennettuna)**: 5,7 Gt
 * **Tiedostotyyppi**: .exe (Windows-asennusohjelma)
 
 #### **Asennusohjeet:**
 
-1. Lataa tiedosto `CHLOROS INSTALLER - CURRENT VERSION.exe`
+1. Lataa `CHLOROS INSTALLER - CURRENT VERSION.exe`-tiedosto
 2. Kaksoisnapsauta asennusohjelmaa aloittaaksesi asennuksen
 3. Noudata asennusohjeiden ohjeita
-4. Valitse asennuskansio (oletus: `C:\Program Files\[USER]\Chloros\`)
-5. Suorita asennus loppuun ja käynnistä Chloros, Chloros (selain) tai Chloros CLI
-6. Kirjaudu sisään [MAPIR Cloud Chloros+ -tililläsi](https://cloud.mapir.camera/pricing) (tai jatka ilmaisella versiolla)
+4. Valitse asennushakemisto (oletus: `C:\Program Files\[USER]\Chloros\`)
+5. Viimeistele asennus ja käynnistä Chloros tai Chloros CLI
+6. Kirjaudu sisään [MAPIR Cloud Chloros+ -tililläsi](https://cloud.mapir.camera/pricing) (tai jatka ilmaisella versiolla).
 
-{% vihje style=&quot;success&quot; %}
-Asennusohjelma lisää automaattisesti `chloros-cli` järjestelmän PATH-polkuun komentorivikäyttöä varten.
+{% hint style="success" %}
+Asennusohjelma lisää `chloros-cli` automaattisesti järjestelmän PATH-polkuun komentorivikäyttöä varten.
 {% endhint %}
 
 ***
@@ -69,24 +69,24 @@ pip install chloros-sdk
 
 Chloros-asennus sisältää:
 
-* ✅ **Chloros** - Täydellinen graafinen käyttöliittymä
-* ✅ **Chloros (selain)** - Verkkopohjainen käyttöliittymä heikompitehoisille järjestelmille
+* ✅ **Chloros** - Täydellinen graafinen käyttöliittymä (GUI)
 * ✅ **Chloros CLI** - Komentoriviliittymä (vaatii Chloros+ -lisenssin)
 * ✅ **Chloros SDK** - Python API (vaatii Chloros+ lisenssin)
-* ✅ **Kameraprofiilit** - Esiasetetut MAPIR kameramallit***
+* ✅ **Kameraprofiilit** - Esiasetetut MAPIR-kameramallit***
 
 ## Päivitä Chloros+:aan
 
-Avaa lisäominaisuudet Chloros+ -tilauksella:
+Avaa lisäominaisuudet Chloros+-tilauksella:
 
-* 🚀 **Monisäikeinen käsittely** - Käsittele kuvia rinnakkain
-* ⚡ **GPU (CUDA) -kiihdytys** - Hyödynnä NVIDIA GPU:n tehoa
+* 🚀 **Monisäikeinen käsittely** – Käsittele kuvia rinnakkain
+* ⚡ **GPU (CUDA) -kiihdytys** – Hyödynnä NVIDIA GPU:n tehoa
 * 💻 **CLI-käyttö** – Automatisoi komentorivityökaluilla
-* 🐍 **Python SDK** – Ohjelmoitava API-käyttö
-* 📱 **Useita laitteita** - Käytä 2–10+ laitteessa (riippuen paketista)
-* 🧮 **Mukautetut kaavat** - Luo mukautettuja monispektrisiä indeksejä
+* 🐍 **Python SDK** - Ohjelmoitava API-käyttö
+* 📱 **Useita laitteita** - Käytä 2–10+ laitteella (riippuu paketista)
+* **🐻 Kehittynyt tekstuuritietoinen debayer-menetelmä** – korkealaatuinen reunatietoinen debayer yhdistettynä AI/ML-kohinanpoistomalliin, joka poistaa lähes kaiken debayering-kohinan. 
+* 🧮 **Mukautetut kaavat** – Luo mukautettuja monispektrisiä indeksejä
 
-<p align="center"><a href="https://cloud.mapir.camera/pricing" class="button primary">Katso Chloros+ -paketit ja hinnat</a></p>***
+<p align="center"><a href="https://cloud.mapir.camera/pricing" class="button primary">Näytä Chloros+ -paketit ja hinnat</a></p>***
 
 ## Asennuksen ohjeet
 
@@ -100,11 +100,10 @@ Avaa lisäominaisuudet Chloros+ -tilauksella:
 
 **Sovellus ei käynnisty:**
 
-* Kokeile Chloros (selain) -versiota
 * Varmista, että Windows 10/11 (64-bittinen) on asennettu
-* Päivitä grafiikkakortin ajurit
-* Tarkista Windows Event Viewer -tapahtumalokista virheen yksityiskohdat
-* Ota yhteyttä tukeen ja toimita virhelokit
+* Päivitä grafiikkaohjaimet
+* Tarkista Windows Tapahtumienvalvonta virheiden yksityiskohdista
+* Ota yhteyttä tukeen virhelokien kanssa
 
 **Lisenssin aktivointiongelmat:**
 
@@ -126,6 +125,17 @@ Tarvitsetko apua asennuksessa tai asetusten määrittämisessä?
 
 <details>
 
+<summary>Versio 1.0.5</summary>
+
+#### **Julkaisupäivä**: 10. helmikuuta 2026**Uudet ominaisuudet*** **Texture Aware Debayer -menetelmä \[Chloros+ Only] -** Texture Aware käyttää korkealaatuista reunatietoista debayer-menetelmää yhdistettynä AI/ML-kohinanpoistomalliin, joka poistaa lähes kaiken debayering-kohinan.
+* **Tuki T4P-kalibrointikohteille*** **Nopeampi Chloros+ GPU-käsittely, parempi muistinhallinta**
+
+**Virhekorjaukset*** Täysin uusi käyttöliittymä (GUI), pitäisi nyt toimia kaikilla Windows-tietokoneilla.
+
+</details>
+
+<details>
+
 <summary>Versio 1.0.4</summary>
 
 #### **Julkaisupäivä**: 5. tammikuuta 2026**Uudet ominaisuudet*** **Kuva/metatieto-kytkin**: Lisätty kytkin tiedostoselaimeen, jotta valitun kuvan metatiedot voidaan tarkastella taulukossa kuvaruudukon sijaan
@@ -133,7 +143,7 @@ Tarvitsetko apua asennuksessa tai asetusten määrittämisessä?
 * **Kuvaruudukon vientipainikkeet**: Painikkeet ylärivillä pikkukuvien vaihtamiseksi JPG-muodosta käsiteltyihin vientimuotoihin (kohteet, heijastavuus, indeksi, LUT)
 * **Kartta-välilehti**: Uusi interaktiivinen 2D-kartta, joka näyttää kuvien GPS-sijaintimerkit.
   * Tukee Google Maps- ja ESRI-karttaruutuja (valitsee automaattisesti parhaan ruutupalvelun zoomausasteen saatavuuden perusteella).
-  * Pienoiskuvien esikatselu karttamerkkeillä hiiren osoittimen ollessa niiden päällä.
+  * Pienoiskuvien esikatselu karttamerkkeihin hiiren osoittimella.
 
 **Virhekorjaukset*** Parannettu tuki Chloros:n asentamiselle muunkielisille tietokoneille.
 
@@ -153,7 +163,7 @@ Tarvitsetko apua asennuksessa tai asetusten määrittämisessä?
 
 </details>***
 
-## Lisenssisopimus**Omistusoikeudellinen ohjelmisto** - Copyright (c) 2025 MAPIR Inc.
+## Käyttöoikeussopimus**Omistusoikeudellinen ohjelmisto** - Copyright (c) 2026 MAPIR Inc.
 
 Luvaton käyttö, jakelu tai muokkaaminen on kielletty.
 

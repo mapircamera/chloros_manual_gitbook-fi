@@ -2,11 +2,11 @@
 
 Chloros-kuvankatseluohjelma tarjoaa erillisen koko ruudun käyttöliittymän monispektrikuvien katseluun, analysointiin ja muokkaamiseen. Kuvankatseluohjelma tarjoaa tehokkaat työkalut tarkasteluun ja analysointiin sekä alkuperäisten kuvien että käsiteltyjen tulosteiden katseluun.
 
-## Kuvankatseluohjelman avaaminen
+## Image Viewerin avaaminen
 
 ### Tiedostoselaimesta
 
-Yleisin tapa avata kuva kuvankatseluohjelmassa:
+Yleisin tapa avata kuva Image Viewerissa:
 
 1. Varmista, että olet **Tiedostoselain**-välilehdessä <img src="../.gitbook/assets/icon_file-browser.JPG" alt="" data-size="line">
 2. Napsauta mitä tahansa **kuvien pikkukuvaa** kuvaruudukossa
@@ -30,65 +30,50 @@ Kun kuva on ladattu esikatselualueelle:
 Suurin osa ruudusta näyttää kuvan:
 
 * **Täysi resoluutio**: Kuvat näytetään alkuperäisellä resoluutiolla.
-* **Zoomattava**: Zoomaa säätimillä tai hiiren rullalla
+* **Zoomattava**: Zoomaa käyttämällä säätimiä tai hiiren rullaa
 * **Panoroitava**: Siirrä kuvaa zoomatussa tilassa napsauttamalla ja vetämällä
-* **Kuvasuhde säilyy**: Kuvat skaalautuvat suhteessa
+* **Kuvasuhde säilyy**: Kuvat skaalautuvat suhteessa***
 
-***
+## Katseluasetukset
 
-## Katseluvaihtoehdot
+### Peruskuvien selaus
 
-### Peruskuvanavigointi
-
-#### Selaa kuvia
+#### Kuvien selaus
 
 Selaa kuvasarjaa näppäimistön pikanäppäimillä tai painikkeilla:
 
-* **Seuraava kuva**: Napsauta →-painiketta tai paina **→** (oikea nuoli) -näppäintä
-* **Edellinen kuva**: Napsauta ←-painiketta tai paina **←** (vasen nuoli) -näppäintä
+* **Seuraava kuva**: Napsauta →-painiketta tai paina**→** (oikea nuoli) -näppäintä
+* **Edellinen kuva**: Napsauta ←-painiketta tai paina**←** (vasen nuoli) -näppäintä
 * **Siirry tiettyyn kuvaan**: Palaa tiedostoselaimeen ja napsauta haluamaasi pikkukuvaa
 
 #### Zoomaustoiminnot
 
 Säädä suurennusta kuvan yksityiskohtien tarkastelemiseksi:
 
-**Lähennä:**
-
-* Napsauta **+** (plus) -painiketta
-* Paina **+** tai **=** -näppäintä
+**Lähennä:*** Napsauta **+** (plus) -painiketta
+* Paina **+**tai**=** -näppäintä
 * Vieritä hiiren rullaa **ylöspäin**
 
-**Kavenna:**
-
-* Napsauta **−** (miinus) -painiketta
+**Kavenna:*** Napsauta **−** (miinus) -painiketta
 * Paina **−** (miinus) -näppäintä
 * Vieritä hiiren rullaa **alaspäin**
 
-#### Panorointi zoomattuna
+#### Panoroiminen zoomattuna
 
-Kun olet zoomannut yli näytön koon:
+Kun kuva on zoomattu näytön kokoa suuremmaksi:
 
-1. Siirrä hiiren osoitin kuvan päälle
-2. Napsauta ja **pidä hiiren vasen painike painettuna**
-3. **Vedä** siirtääksesi kuvaa
-4. Vapauta painike lopettaaksesi panoroinnin
+1. Siirrä hiiren osoitin kuvan päälle.
+2. Napsauta ja **pidä hiiren vasenta painiketta painettuna**.
+3. **Vedä** siirtääksesi kuvaa.
+4. Vapauta painike lopettaaksesi panoroimisen.
 
-**Vaihtoehto**: Käytä nuolinäppäimiä panoroidaksesi pienin askelin
-
-***
+**Vaihtoehto**: Panoroi pienin askelin nuolinäppäimillä.***
 
 ## Pikseliarvojen tarkastelu
 
-### Pikseliarvojen tarkastelu kursorilla
+### Pikseliarvojen tarkastelu kursorin kohdalla
 
-Kun siirrät hiiren osoittimen kuvan päälle, pikseliarvot näkyvät reaaliajassa:
-
-**Arvon näyttöpaikka:**
-
-* **Kelluva luku ja punainen viiva oikeanpuoleisessa indeksi-LUT-gradienttilegendassa**
-* **Kun zoomataan edelleen, kelluva arvo osoittimen lähellä ja korostettu pikseli**
-* Näyttää pikselin arvot **osoittimen alla tai korostettuna**
-* Päivittyy, kun siirrät hiirtä
+Kun siirrät hiiren osoittimen kuvan päälle, pikseliarvot näkyvät reaaliajassa:**Arvon näyttöpaikka:*** **Kelluva luku ja punainen viiva oikeanpuoleisessa indeksi-LUT-gradienttilegendassa*** **Kun zoomataan edelleen, kelluva arvo osoittimen lähellä ja korostettu pikseli*** Näyttää pikselin arvot **osoittimen alla tai korostettuna*** Päivittyy, kun siirrät hiirtä
 
 ***
 
@@ -131,7 +116,7 @@ Käytä monispektrisiä indeksejä ja väri-LUT-taulukoita:
 1. Etsi **Index/LUT Sandbox** **Image Viewer** <img src="../.gitbook/assets/icon_image-viewer.JPG" alt="" data-size="line"> sivupalkista
 2. Valitse kasvillisuusindeksi (NDVI, NDRE jne.)
 3. Valitse monispektrinen kaava tai luo oma mukautettu kaava (vain Chloros+)
-4. Käytä värilukutaulukon gradienttia visualisointia varten
+4. Käytä värilukutaulukon gradienttia visualisointiin
 5. Säädä arvoalueita ja kynnysarvoja
 
 Katso yksityiskohtaiset ohjeet kohdasta [Indeksi/LUT-hiekkalaatikko](index-lut-sandbox.md).
@@ -149,13 +134,11 @@ Katso yksityiskohtaiset ohjeet kohdasta [Indeksi/LUT-hiekkalaatikko](index-lut-s
 
 ### Zoomaaminen
 
-* **+** tai **=**: Lähennä
+* **+**tai**=**: Lähennä
 * **−**: Loitonna
-* **Hiiren rulla**: Lähennä/loitonna
+* **Hiiren rulla**: Lähennä/loitonna***
 
-***
-
-### Indeksilaskennan tarkistaminen
+### Indeksilaskelmien tarkistaminen
 
 Tarkista, että indeksit on laskettu oikein:
 
@@ -165,10 +148,8 @@ Tarkista, että indeksit on laskettu oikein:
    * **NDRE**: Voimakkaan kasvun arvojen tulisi olla korkeammat
    * **GNDVI**: Samanlainen kuin NDVI, mutta klorofylliherkkä
 3. Tarkista kasvillisuuden ulkopuoliset alueet:
-   * **Maaperä**: Lähes 0 tai hieman negatiivinen
-   * **Vesi**: Negatiiviset arvot (-0,5–0)
-
-***
+   * **Maaperä**: Lähellä 0 tai hieman negatiivinen
+   * **Vesi**: Negatiiviset arvot (-0,5–0)***
 
 ## Näyttöongelmien vianmääritys
 
@@ -192,12 +173,12 @@ Tarkista, että indeksit on laskettu oikein:
 **Mahdolliset syyt:**
 
 * Arvoalue ylittää näytön kapasiteetin.
-* 32-bittinen kelluva kuva, jossa on epätavallisia arvoja.
+* 32-bittinen float-kuva, jossa on epätavallisia arvoja.
 * Indeksin laskentavirhe.
 
 **Ratkaisut:**
 
-1. Tarkista pikseliarvot – jos ne ovat kaikki hyvin alhaisia tai korkeita, säädä näyttöaluetta.
+1. Tarkista pikseliarvot – jos ne ovat kaikki hyvin pieniä tai suuria, säädä näyttöaluetta.
 2. Yritä avata kuva QGIS:ssä tai vastaavassa ohjelmassa, jossa on automaattinen alueiden säätö.
 3. Tarkista käsittelyn virhelokista, onko siinä virheitä.
 
@@ -226,6 +207,6 @@ Nyt kun voit tarkastella kuvia koko näytön tilassa:
 * [**Indeksi/LUT-hiekkalaatikko**](index-lut-sandbox.md) – Mukautettujen indeksien ja värikartoitusten soveltaminen
 * [**Monispektriset indeksikaavat**](../project-settings/multispectral-index-formulas.md) – Tutustu käytettävissä oleviin indekseihin
 
-Käsittelyn työnkulusta katso:
+Käsittelyn työnkulku:
 
 * [**Kuvien käsittely (GUI)**](../processing-images-gui/adding-files-to-a-project.md) – Kattava käsittelyopas

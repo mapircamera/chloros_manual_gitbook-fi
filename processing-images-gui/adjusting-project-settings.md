@@ -8,7 +8,7 @@ Ennen kuvien käsittelyä on tärkeää määrittää projektin asetukset vastaa
 2. Napsauta **Projektin asetukset** <img src="../.gitbook/assets/icon_project-settings.JPG" alt="" data-size="line"> -kuvaketta vasemmassa sivupalkissa
 3. Projektin asetukset -paneeli näyttää kaikki määritysvaihtoehdot
 
-{% hint style=&quot;info&quot; %}
+{% hint style="info" %}
 **Asetukset tallennetaan automaattisesti** projektin mukana. Kun avaat projektin uudelleen, kaikki asetukset palautetaan.
 {% endhint %}
 
@@ -18,12 +18,12 @@ Ennen kuvien käsittelyä on tärkeää määrittää projektin asetukset vastaa
 
 ### Oletusasetukset (suositellaan useimmille käyttäjille)
 
-Tyypillisiin MAPIR Survey3 kameratyönkulkuihin oletusasetukset sopivat hyvin:
+Tyypillisissä MAPIR Survey3 kameran työnkuluissa oletusasetukset toimivat hyvin:
 
-* ✅ **Vignettikorjaus**: Käytössä
-* ✅ **Heijastavuuskalibrointi**: Käytössä (vaatii kuvia MAPIR kohteista)
-* ✅ **Debayer-menetelmä**: Korkea laatu (nopeampi)
-* ✅ **Vienti-muoto**: TIFF (16-bittinen)
+* ✅ **Vignettikorjaus**: käytössä
+* ✅ **Heijastavuuskalibrointi**: käytössä (vaatii kuvia MAPIR-kohteista)
+* ✅ **Debayer-menetelmä**: Vakio (nopea, keskitasoinen laatu)
+* ✅ **Vientimuoto**: TIFF (16-bittinen)
 
 Tuo kuvasi ja aloita käsittely näillä oletusasetuksilla.
 
@@ -37,33 +37,35 @@ Projektin asetukset -paneeli on jaettu useisiin luokkiin. Alla on yhteenveto kus
 
 Ohjaa sitä, miten Chloros tunnistaa kalibrointikohteet kuvissasi.
 
-**Tärkeimmät asetukset:**
+**Tärkeimmät asetukset:*** **Kalibroinnin vähimmäisnäytealue**: Kohteen tunnistuksen kokokynnys (oletus: 25 pikseliä)
+* **Kohteiden vähimmäisklusterointi**: Kohdealueiden ryhmittelyn samankaltaisuuskynnys (oletus: 60)**Milloin säätää:**
 
-* **Vähimmäiskalibrointinäytealue**: Kohteen tunnistuksen kokokynnys (oletus: 25 pikseliä)
-* **Vähimmäiskohteiden klusterointi**: Kohdealueiden ryhmittelyn samankaltaisuuskynnys (oletus: 60)
-
-**Milloin säätää:**
-
-* Lisää näytealuetta, jos saat vääriä tunnistuksia.
-* Vähennä, jos kohteita ei tunnisteta.
-* Säädä klusterointia, jos kohteet jaetaan useisiin tunnistuksiin.
+* Lisää näytteen aluetta, jos saat vääriä tunnistuksia
+* Vähennä, jos kohteita ei tunnisteta
+* Säädä klusterointia, jos kohteet jaetaan useisiin tunnistuksiin
 
 ### Käsittely
 
 Tärkeimmät kuvankäsittely- ja kalibrointivaihtoehdot.
 
-**Tärkeimmät asetukset:**
-
-* **Vignette-korjaus**: Kompensoi objektiivin tummenemista reunoilla ✅ Suositeltava
+**Tärkeimmät asetukset:*** **Vignette-korjaus**: Kompensoi objektiivin tummumisen reunoilla ✅ Suositeltava
 * **Heijastavuuskalibrointi**: Normalisoi arvot kalibrointikohteiden avulla ✅ Suositeltava
 * **Debayer-menetelmä**: Algoritmi RAW-tiedostojen muuntamiseksi 3-kanavaisiksi monispektrisiksi tiedostoiksi
-* **Minimi kalibrointiväli**: Aika kalibrointikohteiden käytön välillä (0 = käytä kaikkia)
+* **Vähimmäiskalibrointiväli**: Aika kalibrointikohteiden käytön välillä (0 = käytä kaikkia)**Lisäasetukset:*** **Valosensorin aikavyöhykkeen poikkeama**: PPK-ajan synkronointia varten (oletus: 0)
+* **Käytä PPK-korjauksia**: Käyttää .daq-tiedostojen GPS-/valotuspin-tietoja
+* **Valotuspin 1/2**: Määrittää kamerat valotuspineihin kaksoiskamerajärjestelyissä
 
-**Lisäasetukset:**
+### Debayer-menetelmä
 
-* **Valosensorin aikavyöhykkeen poikkeama**: PPK-ajan synkronointia varten (oletus: 0)
-* **Käytä PPK-korjauksia**: Käyttää GPS-/valotuspin-tietoja .daq-tiedostoista
-* **Valotusnasta 1/2**: Määrittää kamerat valotusnastoihin kaksoiskamerajärjestelyissä
+Tarjoamme tällä hetkellä 2 debayering-menetelmää Chloros:ssa:
+
+#### Vakio (nopea, keskinkertainen laatu)
+
+Vakio debayer-prosessi on nopea, mutta siinä esiintyy debayering-värikohinaa, mikä johtaa vähemmän tarkkoihin ja kohiseviin kuviin.
+
+#### Tekstuuritietoinen (hidas, korkein laatu) \[Chloros+ vain]
+
+Tekstuuritietoinen käyttää korkealaatuista reunatietoista debayer-menetelmää yhdistettynä AI/ML-kohinanpoistomalliin, joka poistaa lähes kaiken debayering-kohinan. Tekstuuritietoinen malli vaatii GPU-muistia (VRAM) toimiakseen. Suosittelemme sen käyttöä, kun käytettävissä on yli 4 Gt VRAM-muistia, jotta käsittely on nopeampaa.
 
 ### Indeksi (monispektriset indeksit)
 
@@ -71,39 +73,31 @@ Määritä, mitkä kasvillisuusindeksit lasketaan ja viedään.
 
 **Indeksien lisääminen:**
 
-1. Napsauta **&quot;Lisää indeksi&quot;**-painiketta
+1. Napsauta**&quot;Lisää indeksi&quot;**-painiketta
 2. Valitse indeksi avattavasta valikosta (NDVI, NDRE, GNDVI jne.)
 3. Määritä visualisointiasetukset (LUT-värit, arvoalueet)
 4. Lisää useita indeksejä tarpeen mukaan
 
-**Suosittuja indeksejä:**
-
-* **NDVI**: Kasvillisuuden yleinen terveys (yleisin)
+**Suosittuja indeksejä:*** **NDVI**: Kasvillisuuden yleinen terveys (yleisin)
 * **NDRE**: Stressin varhainen havaitseminen RedEdge:n avulla
-* **GNDVI**: Herkkä klorofyllipitoisuudelle
+* **GNDVI**: Klorofyllipitoisuudelle herkkä
 * **OSAVI**: Toimii hyvin näkyvän maaperän kanssa
-* **EVI**: Korkea lehtialaindeksi (LAI) alueet
-
-**Mukautetut kaavat (vain Chloros+):**
+* **EVI**: Korkea lehtialaindeksi (LAI) alueet**Mukautetut kaavat (vain Chloros+):**
 
 * Luo mukautettuja monispektrisiä indeksikaavoja
 * Käytä kaistamatematiikkaa kaikilla kuvakanavilla
 * Tallenna mukautetut kaavat uudelleenkäyttöä varten
 
-Kaikki saatavilla olevat indeksit ja kaavat ovat kohdassa [Monispektriset indeksikaavat](../project-settings/multispectral-index-formulas.md).
+Kaikki käytettävissä olevat indeksit ja kaavat ovat luettelossa [Monispektriset indeksikaavat](../project-settings/multispectral-index-formulas.md).
 
 ### Vienti
 
-Hallitse tulostustiedoston muotoa ja laatua.
+Hallitse tulostetiedoston muotoa ja laatua.
 
-**Saatavilla olevat muodot:**
-
-* **TIFF (16-bittinen)**: Suositellaan GIS- ja tieteelliseen analyysiin (alue 0–65 535)
-* **TIFF (32-bittinen, prosentti)**: Liukulukuisten heijastavuusarvojen (alue 0,0–1,0)
+**Käytettävissä olevat muodot:*** **TIFF (16-bittinen)**: Suositellaan GIS- ja tieteelliseen analyysiin (alue 0–65 535)
+* **TIFF (32-bittinen, prosentti)**: Kelluvat pisteet heijastavuusarvot (alue 0,0–1,0)
 * **PNG (8-bittinen)**: Häviötön pakkaus visualisointia varten (alue 0–255)
-* **JPG (8-bittinen)**: Pienimmät tiedostot, häviöllinen pakkaus (alue 0–255)
-
-***
+* **JPG (8-bittinen)**: Pienimmät tiedostot, häviöllinen pakkaus (alue 0–255)***
 
 ## Asetusten tallentaminen ja lataaminen
 
@@ -118,9 +112,9 @@ Luo uudelleenkäytettäviä malleja yhdenmukaisten työnkulkujen varmistamiseksi
 
 **Edut:**
 
-* Käytä samoja asetuksia useissa projekteissa.
-* Jaa asetukset tiimin jäsenten kanssa.
-* Säilytä johdonmukaisuus toistuvissa tutkimuksissa.
+* Sovelletaan identtisiä asetuksia useisiin projekteihin.
+* Jaetaan kokoonpanot tiimin jäsenten kanssa.
+* Säilytetään johdonmukaisuus toistuvissa tutkimuksissa.
 
 ### Mallin lataaminen uuteen projektiin
 
@@ -128,19 +122,19 @@ Kun luot uuden projektin:
 
 1. Valitse päävalikosta **&quot;Uusi projekti&quot;**.
 2. Valitse vaihtoehto **&quot;Lataa mallista&quot;**.
-3. Valitse tallentamasi malli.
-4. Kaikki asetukset otetaan käyttöön automaattisesti.
+3. Valitse tallennettu malli
+4. Kaikki asetukset otetaan käyttöön automaattisesti
 
 ### Työkansio
 
 **&quot;Tallenna projektikansio&quot;** -asetus määrittää, mihin uudet projektit luodaan oletuksena:
 
 * **Oletussijainti**: `C:\Users\[Username]\Chloros Projects`
-* **Muuta sijaintia**: Napsauta muokkauskuvaketta ja valitse uusi kansio
+* **Vaihda sijainti**: Napsauta muokkauskuvaketta ja valitse uusi kansio
 * **Milloin muuttaa**:
   * Verkkolevy tiimiyhteistyötä varten
   * Erilainen levy, jossa on enemmän tallennustilaa
-  * Järjestetty kansiorakenne vuoden/asiakkaan mukaan
+  * Vuoden/asiakkaan mukaan järjestetty kansiorakenne
 
 ***
 
@@ -151,26 +145,22 @@ Jos käytät MAPIR DAQ -tallentimia GPS:n kanssa tarkkaan maantieteelliseen paik
 ### Edellytykset
 
 * MAPIR DAQ GPS (GNSS) -moduulilla
-* .daq-lokitiedosto, jossa on valotustulppamerkinnät
-* Kamera kytketty DAQ-altistustappiin kuvausistunnon aikana
+* .daq-lokitiedosto, jossa on valotustappien merkinnät
+* Kamera kytketty DAQ-valotustappeihin tallennuksen aikana
 
 ### Asetusten vaiheet
 
-1. Siirrä .daq-lokitiedosto projektikansioon.
-2. Valitse Projektin asetukset -kohdassa **&quot;Käytä PPK-korjauksia&quot;** -valintaruutu.
-3. Aseta tarvittaessa **&quot;Valosensorin aikavyöhykkeen poikkeama&quot;** (oletus: 0 UTC:lle).
-4. Määritä kamerat altistustappeihin:
-   * **Yksi kamera**: Määritetään automaattisesti nastalle 1
-   * **Kaksi kameraa**: Määritä kukin kamera manuaalisesti oikealle nastalle
-
-**Valotusnastojen määrittäminen:**
-
-* **Valotusnasta 1**: Valitse kameramalli avattavasta valikosta
+1. Siirrä .daq-lokitiedosto projektikansioon
+2. Valitse Projektin asetukset -kohdassa **&quot;Käytä PPK-korjauksia&quot;** -valintaruutu
+3. Aseta tarvittaessa **&quot;Valosensorin aikavyöhykkeen poikkeama&quot;** (oletus: 0 UTC:lle)
+4. Määritä kamerat valotustarroille:
+   * **Yksi kamera**: Määritetään automaattisesti tarralle 1
+   * **Kaksi kameraa**: Määritä kukin kamera manuaalisesti oikealle tarralle**Valotustarran määritys:*** **Valotusnasta 1**: Valitse kameramalli avattavasta valikosta
 * **Valotusnasta 2**: Valitse toinen kamera tai &quot;Älä käytä&quot;
 * Samaa kameraa ei voi määrittää molemmille nastoille
 
-{% hint style=&quot;warning&quot; %}
-**Tärkeää**: Valotusnastat on määritettävä oikein vastaaville kameroille. Virheellinen määrittäminen johtaa virheellisiin maantieteellisiin sijaintitietoihin.
+{% hint style="warning" %}
+**Tärkeää**: Valotusnastat on määritettävä oikein vastaaville kameroille. Virheellinen määritys johtaa virheellisiin maantieteellisiin sijaintitietoihin.
 {% endhint %}
 
 ***
@@ -190,7 +180,7 @@ Kun käsitellään useiden MAPIR-kameroiden kuvia yhdessä projektissa:
 
 ### Aikaväli- tai monipäiväiset tutkimukset
 
-Saman alueen toistuville tutkimuksille ajan mittaan:
+Saman alueen toistuville tutkimuksille ajan kuluessa:
 
 1. Luo malli vakioasetuksillasi
 2. Käytä jokaisessa istunnossa yhdenmukaista kalibrointikohteen asetusta
@@ -204,8 +194,8 @@ Projekteille, joissa on paljon kuvia (500+):
 
 * Harkitse jakamista pienempiin projekteihin päivämäärän tai alueen mukaan.
 * Käytä Chloros+ rinnakkaisprosessointia nopeampien tulosten saamiseksi.
-* Harkitse CLI tai API eräautomaatiota varten.
-* Säädä vähimmäiskalibrointiväliä kohteen havaitsemisajan lyhentämiseksi.
+* Harkitse CLI tai API erän automatisointia varten.
+* Säädä vähimmäiskalibrointiväliä kohteen havaitsemisaikojen lyhentämiseksi.
 
 ***
 
@@ -214,7 +204,7 @@ Projekteille, joissa on paljon kuvia (500+):
 Ennen käsittelyn aloittamista tarkista nämä tärkeät asetukset:
 
 * [ ] Kameramalli on tunnistettu oikein tiedostoselaimessa
-* [ ] Vignettikorjaus on käytössä
+* [ ] Vignette-korjaus on käytössä
 * [ ] Heijastavuuskalibrointi on käytössä
 * [ ] Vähintään yksi kalibrointikohdekuva on tuotu
 * [ ] Halutut monispektriset indeksit on lisätty
