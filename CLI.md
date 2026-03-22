@@ -1,32 +1,34 @@
 # CLI : Komentorivi
 
-<figure><img src=".gitbook/assets/cli.JPG" alt=""><figcaption></figcaption></figure>**Chloros CLI** tarjoaa tehokkaan komentorivipääsyn Chloros-kuvankäsittelymoottoriin, mikä mahdollistaa automaation, skriptien käytön ja headless-toiminnon kuvankäsittelytyönkulkuissasi.
+<figure><img src=".gitbook/assets/cli.JPG" alt=""><figcaption></figcaption></figure>**Chloros CLI** tarjoaa tehokkaan komentorivipääsyn Chloros-kuvankäsittelymoottoriin, mikä mahdollistaa kuvankäsittelytyönkulkujen automatisoinnin, skriptien käytön ja päättömän käytön.
 
 ### Tärkeimmät ominaisuudet
 
-* 🚀 **Automaatio** – Useiden tietojoukkojen skriptien eräprosessointi
-* 🔗 **Integraatio** – Upotus olemassa oleviin työnkulkuihin ja putkistoihin
-* 💻 **Headless-käyttö** – Käyttö ilman graafista käyttöliittymää
+* 🚀 **Automaatio** – Useiden tietojoukkojen skriptipohjainen eräkäsittely
+* 🔗 **Integrointi** – Upotettavissa olemassa oleviin työnkulkuihin ja prosessiketjuihin
+* 💻 **Päättömät toiminto** – Käytettävissä ilman graafista käyttöliittymää
 * 🌍 **Monikielisyys** – Tuki 38 kielelle
-* ⚡ **Rinnakkaiskäsittely** – Skaalautuu dynaamisesti CPU:hun (jopa 16 rinnakkaista työntekijää)
+* ⚡ **Rinnakkaisprosessointi** – [Dynamic Compute Adaptation](processing-architecture/dynamic-compute-adaptation.md) optimoi automaattisesti laitteistosi mukaan
 
 ### Vaatimukset
 
 | Vaatimus          | Tiedot                                                             |
 | -------------------- | ------------------------------------------------------------------- |
-| **Käyttöjärjestelmä** | Windows 10/11 (64-bittinen)                                              |
-| **Lisenssi**          | Chloros+ ([maksullinen paketti vaaditaan](https://cloud.mapir.camera/pricing)) |
+| **Käyttöjärjestelmä** | Windows 10/11 (64-bittinen), Linux x86_64 (amd64), Linux arm64 (NVIDIA Jetson JetPack 6) |
+| **Lisenssi**          | Chloros+ ([vaatii maksullisen tilauksen](https://cloud.mapir.camera/pricing)) |
 | **Muisti**           | Vähintään 8 Gt RAM-muistia (suositellaan 16 Gt)                                  |
-| **Internet**         | Vaaditaan lisenssin aktivoimiseksi                                     |
+| **Internet**         | Vaaditaan lisenssin aktivointiin                                     |
 | **Levytila**       | Vaihtelee projektin koon mukaan                                              |
 
-{% hint style=&quot;warning&quot; %}
-**Lisenssivaatimus**: CLI edellyttää maksullista Chloros+ -tilausta. Vakiomuotoisissa (ilmaisissa) paketeissa ei ole CLI-käyttöoikeutta. Käy osoitteessa [https://cloud.mapir.camera/pricing](https://cloud.mapir.camera/pricing) päivittääksesi paketin.
+{% hint style="warning" %}
+**Lisenssivaatimus**: CLI vaatii maksullisen Chloros+-tilauksen. Standard- (ilmaiset) paketit eivät sisällä CLI-käyttöoikeutta. Siirry [https://cloud.mapir.camera/pricing](https://cloud.mapir.camera/pricing) päivittääksesi.
 {% endhint %}
 
 ## Pikaopas
 
 ### Asennus
+
+#### Windows
 
 CLI sisältyy automaattisesti Chloros-asennusohjelmaan:
 
@@ -35,15 +37,31 @@ CLI sisältyy automaattisesti Chloros-asennusohjelmaan:
 2. Suorita asennusohjeet loppuun
 3. CLI asennettu: `C:\Program Files\Chloros\resources\cli\chloros-cli.exe`
 
-{% hint style=&quot;success&quot; %}
-Asennusohjelma lisää `chloros-cli` automaattisesti järjestelmän PATH-polkuun. Käynnistä päätelaite uudelleen asennuksen jälkeen.
+{% hint style="success" %}
+Asennusohjelma lisää automaattisesti `chloros-cli` järjestelmän PATH-polkuun. Käynnistä terminaali uudelleen asennuksen jälkeen.
 {% endhint %}
+
+#### Linux
+
+Asenna arkkitehtuurillesi sopiva `.deb`-paketti:
+
+```bash
+# Linux amd64
+sudo dpkg -i chloros-amd64.deb
+
+# Linux arm64 (NVIDIA Jetson, JetPack 6)
+sudo dpkg -i chloros-arm64-jp6.deb
+```
+
+Yksityiskohtaiset ohjeet Linux:n asennuksesta löydät kohdasta [Linux:n asennus](linux/linux-installation.md).
 
 ### Ensimmäinen asennus
 
-Ennen kuin käytät CLI:ää, aktivoi Chloros+ -lisenssisi:
+Ennen kuin käytät CLI-ohjelmaa, aktivoi Chloros+-lisenssisi:
 
-```bash
+**Windows:**
+
+```powershell
 # Login with your Chloros+ account
 chloros-cli login user@example.com 'your_password'
 
@@ -54,17 +72,38 @@ chloros-cli status
 chloros-cli process "C:\Images\Dataset001"
 ```
 
+**Linux:**
+
+```bash
+# Login with your Chloros+ account
+chloros-cli login user@example.com 'your_password'
+
+# Check license status
+chloros-cli status
+
+# Process your first project
+chloros-cli process ~/images/dataset001
+```
+
 ### Peruskäyttö
 
 Käsittele kansio oletusasetuksilla:
+
+**Windows:**
 
 ```powershell
 chloros-cli process "C:\Images\Dataset001"
 ```
 
+**Linux:**
+
+```bash
+chloros-cli process ~/images/dataset001
+```
+
 ***
 
-## Komentojen viite
+## Komento-opas
 
 ### Yleinen syntaksi
 
@@ -78,7 +117,7 @@ chloros-cli [global-options] <command> [command-options]
 
 ### `process` - Käsittele kuvia
 
-Käsittele kansion kuvat kalibroimalla.
+Käsittele kansion kuvat kalibroinnin avulla.
 
 **Syntaksi:**
 
@@ -86,35 +125,42 @@ Käsittele kansion kuvat kalibroimalla.
 chloros-cli process <input-folder> [options]
 ```
 
-**Esimerkki:**
+**Esimerkkejä:**
 
-```powershell
+```bash
+# Windows
 chloros-cli process "C:\Datasets\Survey_001" --vignette --reflectance
+
+# Linux
+chloros-cli process ~/datasets/survey_001 --vignette --reflectance
 ```
 
-#### Käsittelykomennon vaihtoehdot
+#### Komennon käsittelyvaihtoehdot
 
 | Vaihtoehto                | Tyyppi    | Oletus        | Kuvaus                                                                            |
 | --------------------- | ------- | -------------- | -------------------------------------------------------------------------------------- |
-| `<input-folder>`      | Polku    | _Vaaditaan_     | Kansio, joka sisältää RAW/JPG-monispektrikuvia                                         |
+| `<input-folder>`      | Polku    | _Pakollinen_     | Kansio, joka sisältää RAW/JPG-monispektrikuvia                                         |
 | `-o, --output`        | Polku    | Sama kuin syöte  | Käsiteltyjen kuvien tulostuskansio                                                     |
-| `-n, --project-name`  | Merkkijono  | Automaattisesti luotu | Mukautettu projektin nimi                                                                    |
+| `-n, --project-name`  | Merkkijono  | Luodaan automaattisesti | Mukautettu projektin nimi                                                                    |
 | `--vignette`          | Lippu    | Käytössä        | Ota vignettikorjaus käyttöön                                                             |
 | `--no-vignette`       | Lippu    | -              | Poista vignettikorjaus käytöstä                                                            |
-| `--reflectance`       | Lippu    | Käytössä        | Ota heijastavuuden kalibrointi käyttöön                                                         |
-| `--no-reflectance`    | Lippu    | -              | Poista heijastavuuden kalibrointi käytöstä                                                        |
-| `--ppk`               | Lippu    | Pois käytöstä       | Käytä PPK-korjauksia .daq-valosensorin tiedoista                                      |
+| `--reflectance`       | Lippu    | Käytössä        | Ota heijastavuuskalibrointi käyttöön                                                         |
+| `--no-reflectance`    | Lippu    | -              | Poista heijastavuuskalibrointi käytöstä                                                        |
+| `--ppk`               | Lippu    | Poissa käytöstä       | Käytä PPK-korjauksia .daq-valosensorin tiedoista                                      |
 | `--format`            | Valinta  | TIFF (16-bittinen)  | Tulostusmuoto: `TIFF (16-bit)`, `TIFF (32-bit, Percent)`, `PNG (8-bit)`, `JPG (8-bit)` |
 | `--min-target-size`   | Kokonaisluku | Auto           | Kalibrointipaneelin tunnistuksen vähimmäiskohdekoko pikseleinä                          |
-| `--target-clustering` | Kokonaisluku | Auto           | Kohteiden ryhmittelyn kynnysarvo (0–100)                                                    |
-| `--exposure-pin-1`    | Merkkijono  | Ei mitään           | Lukitse kameramallin valotus (nasta 1)                                                 |
-| `--exposure-pin-2`    | Merkkijono  | Ei mitään           | Lukitse kameramallin valotus (nasta 2)                                                 |
-| `--recal-interval`    | Kokonaisluku | Auto           | Uudelleenkalibrointiväli sekunteina                                                      |
-| `--timezone-offset`   | Kokonaisluku | 0              | Aikavyöhykkeen ero tunteina                                                               |
+| `--target-clustering` | Kokonaisluku | Auto           | Kohteiden ryhmittelykynnys (0–100)                                                    |
+| `--debayer`           | Valinta  | `standard`     | Debayer-menetelmä: `standard` tai `texture-aware` (vain Chloros+)                          |
+| `--target`, `--targets` | Lippu  | Pois käytöstä       | Etsi kalibrointikohteita vain &quot;target&quot; tai &quot;targets&quot; -alikansiosta (nopeuttaa käsittelyä) |
+| `--indices`           | Lista    | Ei mitään           | Laskettavat kasvillisuusindeksit (esim. `--indices NDVI NDRE GNDVI`)                    |
+| `--exposure-pin-1`    | Merkkijono  | Ei mitään           | Lukitse valotus kameramallille (Pin 1)                                                 |
+| `--exposure-pin-2`    | Merkkijono  | Ei mitään           | Kameramallin valotuksen lukitus (nasta 2)                                                 |
+| `--recal-interval`    | Kokonaisluku | Automaattinen           | Uudelleenkalibrointiväli sekunteina                                                      |
+| `--timezone-offset`   | Kokonaisluku | 0              | Aikavyöhykkeen siirtymä tunteina                                                               |
 
 ***
 
-### `login` - Todennetaan tili
+### `login` - Tilin todennus
 
 Kirjaudu sisään Chloros+ -tunnuksillasi, jotta CLI-käsittely voidaan ottaa käyttöön.
 
@@ -126,15 +172,15 @@ chloros-cli login <email> <password>
 
 **Esimerkki:**
 
-```powershell
+```bash
 chloros-cli login user@example.com 'MyP@ssw0rd123'
 ```
 
-{% hint style=&quot;warning&quot; %}
-**Erikoismerkit**: Käytä yksittäisiä lainausmerkkejä salasanojen ympärillä, jotka sisältävät merkkejä kuten `$`, `!` tai välilyöntejä.
+{% hint style="warning" %}
+**Erikoismerkit**: Käytä yksinkertaisia lainausmerkkejä salasanojen ympärillä, jotka sisältävät merkkejä kuten `$`, `!` tai välilyöntejä.
 {% endhint %}
 
-**Tulos:**<figure><img src=".gitbook/assets/cli login_w.JPG" alt=""><figcaption></figcaption></figure>***
+**Tulostus:**<figure><img src=".gitbook/assets/cli login_w.JPG" alt=""><figcaption></figcaption></figure>***
 
 ### `logout` - Tyhjennä tunnistetiedot
 
@@ -148,26 +194,26 @@ chloros-cli logout
 
 **Esimerkki:**
 
-```powershell
+```bash
 chloros-cli logout
 ```
 
-**Tulos:**
+**Tulostus:**
 
 ```
 ✓ Logout successful
 ℹ Credentials cleared from cache
 ```
 
-{% hint style=&quot;info&quot; %}
-**SDK Käyttäjät**: Python SDK tarjoaa myös ohjelmoitavan `logout()`-menetelmän tunnistetietojen tyhjentämiseen Python-skripteissä. Katso lisätietoja [Python SDK-dokumentaatiosta](api-python-sdk.md#logout).
+{% hint style="info" %}
+**SDK-käyttäjät**: Python SDK tarjoaa myös ohjelmointimenetelmän `logout()` tunnistetietojen tyhjentämiseen Python-skripteissä. Katso lisätietoja [Python SDK-dokumentaatiosta](api-python-sdk.md#logout).
 {% endhint %}
 
 ***
 
 ### `status` - Tarkista lisenssin tila
 
-Näytä nykyinen lisenssi ja todennustila.
+Näyttää nykyisen lisenssin ja todennuksen tilan.
 
 **Syntaksi:**
 
@@ -177,11 +223,11 @@ chloros-cli status
 
 **Esimerkki:**
 
-```powershell
+```bash
 chloros-cli status
 ```
 
-**Tulos:**
+**Tulostus:**
 
 ```
 ╔══════════════════════════════════════╗
@@ -208,11 +254,11 @@ chloros-cli export-status
 
 **Esimerkki:**
 
-```powershell
+```bash
 chloros-cli export-status
 ```
 
-**Käyttötapaus:** Kutsu tämä komento käsittelyn aikana tarkistaaksesi viennin etenemisen.***
+**Käyttötapaus:** Käytä tätä komentoa käsittelyn ollessa käynnissä tarkistaaksesi viennin etenemisen.***
 
 ### `language` - Hallitse käyttöliittymän kieltä
 
@@ -233,7 +279,7 @@ chloros-cli language <language-code>
 
 **Esimerkkejä:**
 
-```powershell
+```bash
 # View current language
 chloros-cli language
 
@@ -251,14 +297,14 @@ chloros-cli language ja
 
 | Koodi    | Kieli              | Alkuperäinen nimi      |
 | ------- | --------------------- | ---------------- |
-| `en`    | Englanti               | Englanti          |
+| `en`    | Englanti               | English          |
 | `es`    | Espanja               | Español          |
 | `pt`    | Portugali            | Português        |
 | `fr`    | Ranska                | Français         |
 | `de`    | Saksa                | Deutsch          |
 | `it`    | Italia               | Italiano         |
 | `ja`    | Japani              | 日本語              |
-| `ko`    | Korea    | 한국어              |
+| `ko`    | Korea                | 한국어              |
 | `zh`    | Kiina (yksinkertaistettu)  | 简体中文             |
 | `zh-TW` | Kiina (perinteinen) | 繁體中文             |
 | `ru`    | Venäjä               | Русский          |
@@ -267,11 +313,11 @@ chloros-cli language ja
 | `pl`    | Puola                | Polski           |
 | `tr`    | Turkki               | Türkçe           |
 | `hi`    | Hindi                 | हिंदी            |
-| `id`    | Indonesia            | Bahasa Indonesia |
-| `vi`    | Vietnaminkielinen            | Tiếng Việt       |
-| `th`    | Thaimaalainen                  | ไทย              |
-| `sv`    | Ruotsinkielinen               | Svenska          |
-| `da`    | Tanskalainen                | Dansk            |
+| `id`    | Indonesia                | Bahasa Indonesia |
+| `vi`    | Vietnam                | Tiếng Việt       |
+| `th`    | Thai                  | ไทย              |
+| `sv`    | Ruotsi               | Svenska          |
+| `da`    | Tanska                | Dansk            |
 | `no`    | Norja             | Norsk            |
 | `fi`    | Suomi               | Suomi            |
 | `el`    | Kreikka                 | Ελληνικά         |
@@ -280,25 +326,25 @@ chloros-cli language ja
 | `ro`    | Romania              | Română           |
 | `uk`    | Ukraina             | Українська       |
 | `pt-BR` | Brasilian portugali  | Português Brasileiro |
-| `zh-HK` | Kantoni             | 粵語             |
+| `zh-HK` | Kantoninkiina             | 粵語             |
 | `ms`    | Malaiji                 | Bahasa Melayu    |
 | `sk`    | Slovakki                | Slovenčina       |
-| `bg`    | Bulgaria             | Български        |
-| `hr`    | Kroatia              | Hrvatski         |
-| `lt`    | Liettua            | Lietuvių         |
-| `lv`    | Latvia               | Latviešu         |
-| `et`    | virolaiset              | Eesti            |
-| `sl`    | sloveenit             | Slovenščina      |
+| `bg`    | bulgaria             | Български        |
+| `hr`    | kroatia              | Hrvatski         |
+| `lt`    | liettua            | Lietuvių         |
+| `lv`    | Latvian               | Latviešu         |
+| `et`    | Estonian              | Eesti            |
+| `sl`    | Slovenian             | Slovenščina      |
 
-{% hint style=&quot;success&quot; %}
-**Automaattinen pysyvyys**: Kielivalintasi tallennetaan `~/.chloros/cli_language.json` ja se säilyy kaikissa istunnoissa.
+{% hint style="success" %}
+**Automaattinen tallennus**: Kieliasetuksesi tallennetaan tiedostoon `~/.chloros/cli_language.json` ja säilyy kaikissa istunnoissa.
 {% endhint %}
 
 ***
 
 ### `set-project-folder` - Aseta oletusprojektikansio
 
-Muuta oletusprojektikansion sijaintia (jaettu GUI:n kanssa).
+Muuta oletusprojektikansion sijaintia (jaettu GUI:n kanssa tiedostossa Windows).
 
 **Syntaksi:**
 
@@ -306,17 +352,21 @@ Muuta oletusprojektikansion sijaintia (jaettu GUI:n kanssa).
 chloros-cli set-project-folder <folder-path>
 ```
 
-**Esimerkki:**
+**Esimerkit:**
 
-```powershell
+```bash
+# Windows
 chloros-cli set-project-folder "C:\Projects\2025"
+
+# Linux
+chloros-cli set-project-folder ~/projects/2025
 ```
 
 ***
 
 ### `get-project-folder` - Näytä projektikansio
 
-Näytä nykyisen oletusprojektikansion sijainti.
+Näyttää nykyisen oletusprojektikansion sijainnin.
 
 **Syntaksi:**
 
@@ -326,21 +376,26 @@ chloros-cli get-project-folder
 
 **Esimerkki:**
 
-```powershell
+```bash
 chloros-cli get-project-folder
 ```
 
-**Tulos:**
+**Tulostus:**
 
 ```
+
+# Windows
 ℹ Current project folder: C:\Projects\2025
+
+# Linux
+ℹ Current project folder: /home/user/.local/share/chloros/projects
 ```
 
 ***
 
 ### `reset-project-folder` - Palauta oletusasetukset
 
-Palauta projektikansio oletuspaikkaan.
+Palauttaa projektikansion oletussijaintiin.
 
 **Syntaksi:**
 
@@ -350,94 +405,163 @@ chloros-cli reset-project-folder
 
 ***
 
+### `selftest` - Suorita järjestelmän diagnostiikka
+
+Suorita 7 diagnostiikkatarkistusta järjestelmän kokoonpanon varmistamiseksi.
+
+**Syntaksi:**
+
+```bash
+chloros-cli selftest
+```
+
+**Suoritetut diagnostiikkatarkistukset:**
+
+1. Versiotarkistus
+2. Portin saatavuus (5000)
+3. Backend-käynnistys
+4. API-yhteystesti
+5. Järjestelmätiedot ja GPU-tunnistus
+6. Denoiser-mallien tarkistus
+7. CUDA-saatavuustarkistus
+
+{% hint style="info" %}
+**Hyödyllistä vianmäärityksessä**: Suorita `selftest` asennuksen jälkeen varmistaaksesi, että järjestelmäsi on määritetty oikein, erityisesti Linux/Jetson-laitteissa, joissa GPU- ja CUDA-asetukset saattavat vaatia tarkistusta.
+{% endhint %}
+
+***
+
+### `update` - Tarkista päivitykset (vain Linux)
+
+Tarkista ja asenna CLI-päivitykset Linux-järjestelmissä.
+
+**Syntaksi:**
+
+```bash
+# Check for updates without installing
+chloros-cli update --check
+
+# Check for and install updates
+chloros-cli update
+```
+
+| Vaihtoehto    | Kuvaus                        |
+| --------- | ---------------------------------- |
+| `--check` | Etsi vain päivityksiä, älä asenna |
+
+{% hint style="info" %}
+Tämä komento on käytettävissä vain Linux-järjestelmissä. Windows-järjestelmissä päivitykset toimitetaan asennusohjelman kautta.
+{% endhint %}
+
+***
+
 ## Yleiset asetukset
 
 Nämä asetukset koskevat kaikkia komentoja:
 
-| Asetus          | Tyyppi    | Oletus       | Kuvaus                                      |
-| --------------- | ------- | ------------- | ------------------------------------------------ |
-| `--backend-exe` | Polku    | Automaattisesti tunnistettu | Polku taustaprosessin suoritustiedostoon                       |
-| `--port`        | Kokonaisluku | 5000          | Taustaprosessin API-portin numero                          |
-| `--restart`     | Lippu    | -             | Pakota taustaprosessin uudelleenkäynnistys (lopettaa olemassa olevat prosessit) |
-| `--version`     | Lippu    | -             | Näytä versiotiedot ja poistu                |
-| `--help`        | Lippu    | -             | Näytä ohjetiedot ja poistu                   |
+| Asetus            | Tyyppi    | Oletus       | Kuvaus                                      |
+| ----------------- | ------- | ------------- | ------------------------------------------------ |
+| `--backend-exe`   | Polku    | Tunnistetaan automaattisesti | Polku taustaprosessin suoritustiedostoon                       |
+| `--port`          | Kokonaisluku | 5000          | Taustaprosessin API portin numero                          |
+| `--restart`       | Lippu    | -             | Pakota taustaprosessin uudelleenkäynnistys (lopettaa olemassa olevat prosessit) |
+| `--version`       | Lippu    | -             | Näytä versiotiedot ja poistu                |
+| `--help`          | Lippu    | -             | Näytä ohjetiedot ja poistu                   |
 
-**Esimerkki globaaleista asetuksista:**
+{% hint style="info" %}
+**Taustapalvelimen automaattinen tunnistus**: `--backend-exe`-polku tunnistetaan automaattisesti alustakohtaisesti:
+* **Windows**: `C:\Program Files\MAPIR\Chloros\resources\backend\chloros-backend.exe`
+* **Linux (.deb)**: `/usr/lib/chloros/chloros-backend`
+* **Linux (manuaalinen)**: `/opt/mapir/chloros/backend/chloros-backend`
+{% endhint %}
+
+**Esimerkki globaaleilla asetuksilla:**
+
+**Windows:**
 
 ```powershell
 chloros-cli --port 5001 process "C:\Datasets\Survey_001"
+```
+
+**Linux:**
+
+```bash
+chloros-cli --port 5001 process ~/datasets/survey_001
 ```
 
 ***
 
 ## Käsittelyasetusten opas
 
-### Rinnakkaiskäsittely
+### Rinnakkaiskäsittely ja dynaaminen laskentatehon sopeutus
 
-Chloros+ CLI **skaalaa automaattisesti**rinnakkaiskäsittelyn tietokoneesi suorituskyvyn mukaan:**Kuinka se toimii:**
+Chloros 1.1.0 sisältää [dynaamisen laskentatehon sopeutuksen](processing-architecture/dynamic-compute-adaptation.md) — käsittelymoottori **tunnistaa laitteistosi automaattisesti** ja valitsee optimaalisen strategian:
 
-* Tunnistaa CPU-ytimet ja RAM-muistin
-* Jakaa työt: **2× CPU-ytimet** (käyttää hyperthreading-tekniikkaa)
-* **Enintään: 16 rinnakkaista työtä** (vakauden takaamiseksi)**Järjestelmätasot:**
+| Alusta | Strategia | Työntekijät | Putki | Huomautukset |
+| --- | --- | --- | --- | --- |
+| **Jetson Nano 8GB** | `GPU_SINGLE` | 1 | `tiled_gpu` | Muistitehokas, sarjoitettu |
+| **Jetson Orin NX 16GB** | `GPU_PARALLEL` | 3 | `fused_gpu` | Samanaikainen GPU-käsittely |
+| **Pöytätietokone, jossa 8 Gt:n GPU** | `GPU_SINGLE` | 3 | `tiled_gpu` | Hyvä pöytätietokoneen suorituskyky |
+| **Pöytätietokone, jossa on vähintään 12 Gt:n GPU** | `GPU_PARALLEL` | 3–4 | `fused_gpu` | Optimaalinen pöytätietokoneen suorituskyky |
+| **Pelkkä CPU-järjestelmä** | `CPU_PARALLEL` | ytimet - 1 | `cpu_fallback` | Ei vaadi GPU:ta |
 
-| Järjestelmätyyppi   | CPU        | RAM      | Työt  | Suorituskyky     |
-| ------------- | ---------- | -------- | -------- | --------------- |
-| **Huippuluokka**  | 16+ ydintä  | 32+ Gt   | Jopa 16 | Maksiminopeus   |
-| **Keskitaso** | 8–15 ydintä | 16–31 Gt | 8–16     | Erinomainen nopeus |
-| **Alataso**   | 4–7 ydintä  | 8–15 Gt  | 4–8      | Hyvä nopeus      |
-
-{% hint style=&quot;success&quot; %}
-**Automaattinen optimointi**: CLI tunnistaa automaattisesti järjestelmän tekniset tiedot ja määrittää optimaalisen rinnakkaisprosessoinnin. Manuaalista määritystä ei tarvita!
+{% hint style="success" %}
+**Ei manuaalista konfigurointia!** Chloros tunnistaa automaattisesti CPU:n, GPU:n, RAM-muistin ja (Jetsonissa) lämpötila-anturit ja määrittää sitten optimaalisen prosessointiputken automaattisesti.
 {% endhint %}
 
 ### Debayer-menetelmät
 
-CLI käyttää oletusarvoisesti ja suositeltuna debayer-algoritmina **High Quality (Faster)** -menetelmää:
+| Menetelmä | CLI-lippu | Laatu | Nopeus | Lisenssi |
+| --- | --- | --- | --- | --- |
+| **Vakio (nopea, keskitasoinen laatu)** | `--debayer standard` | Hyvä | Nopea | Ilmainen / Chloros+ |
+| **Tekstuuritietoinen (hidas, korkein laatu)** | `--debayer texture-aware` | Korkein | Hidas | Vain Chloros+ |
 
-| Menetelmä                      | Laatu | Nopeus | Kuvaus                                 |
-| --------------------------- | ------- | ----- | ------------------------------------------- |
-| **Korkea laatu (nopeampi)** ⭐ | ⭐⭐⭐⭐    | ⚡⚡⚡   | Reunat tunnistava algoritmi (oletus, suositeltu) |
+Oletusarvoinen debayer-menetelmä on **Standard**.**Texture Aware** -menetelmä käyttää AI/ML-kohinanpoistomallia korkealaatuisimman tuloksen saavuttamiseksi, mutta vaatii Chloros+ -lisenssin ja NVIDIA-näytönohjaimen.
 
-### Vignette-korjaus
+```bash
+# Use Texture Aware debayer (Chloros+ only)
+chloros-cli process ~/datasets/field_a --debayer texture-aware
+```
 
-**Toiminto:** Korjaa valon heikkenemisen kuvan reunoilla (kamerakuvissa yleiset tummemmat kulmat).
+### Vignettikorjaus
 
-* **Oletuksena käytössä** - Useimpien käyttäjien tulisi pitää tämä käytössä
+**Toiminto:** Korjaa valon heikkenemistä kuvan reunoilla (kamerakuvissa yleiset tummemmat kulmat).
+
+* **Oletusarvoisesti käytössä** – Useimpien käyttäjien tulisi pitää tämä käytössä
 * Poista käytöstä `--no-vignette`:llä
 
-{% hint style=&quot;success&quot; %}
-**Suositus**: Ota vignettikorjaus aina käyttöön, jotta kuvan kirkkauden tasaisuus varmistetaan.
+{% hint style="success" %}
+**Suositus**: Ota vignettikorjaus aina käyttöön, jotta kuvan kirkkaus on tasainen koko kehyksessä.
 {% endhint %}
 
-### Heijastavuuskalibrointi
+### Heijastavuuden kalibrointi
 
-Muuntaa raakakuvausanturin arvot standardoiduiksi heijastavuusprosenttiarvoiksi kalibrointipaneelien avulla.
+Muuntaa raakakuvasensorin arvot standardoiduiksi heijastavuusprosenteiksi kalibrointipaneelien avulla.
 
-* **Oletusarvoisesti käytössä** – välttämätön kasvillisuuden analysoinnille.
-* Vaatii kalibrointikohdepaneelit kuvissa.
-* Poista käytöstä `--no-reflectance`:llä.
+* **Oletusarvoisesti käytössä** – välttämätön kasvillisuuden analysoinnille
+* Vaatii kalibrointikohdepaneeleita kuvissa
+* Poista käytöstä `--no-reflectance`
 
-{% hint style=&quot;info&quot; %}
-**Vaatimukset**: Varmista, että kalibrointipaneelit ovat oikein valaistuja ja näkyvissä kuvissasi, jotta heijastavuuden muunnos on tarkka.
+{% hint style="info" %}
+**Vaatimukset**: Varmista, että kalibrointipaneelit ovat kuvissa oikein valotettuja ja näkyvissä, jotta heijastavuusmuunnos on tarkka.
 {% endhint %}
 
 ### PPK-korjaukset
 
-**Toiminto:** Soveltaa jälkikäsiteltyjä kinemaattisia korjauksia DAQ-A-SD-lokitietojen avulla GPS-tarkkuuden parantamiseksi.
+**Toiminto:** Sovelletaan jälkikäsiteltyjä kinemaattisia korjauksia käyttämällä DAQ-A-SD-lokitietoja GPS-tarkkuuden parantamiseksi.
 
-* **Oletuksena pois käytöstä**
+* **Oletusarvoisesti pois käytöstä**
 * Käytä `--ppk`:ää ottaaksesi käyttöön
-* Vaatii .daq-tiedostot projektikansiosta MAPIR DAQ-A-SD-valosensorista.
+* Vaatii .daq-tiedostoja projektikansiossa MAPIR DAQ-A-SD-valosensorista.
 
 ### Tulostusmuodot
 
-<table><thead><tr><th width="197">Muoto</th><th width="130.20001220703125">Bittisyvyys</th><th width="116.5999755859375">Tiedostokoko</th><th>Sopii parhaiten</th></tr></thead><tbody><tr><td><strong>TIFF (16-bittinen)</strong> ⭐</td><td>16-bittinen kokonaisluku</td><td>Suuri</td><td>GIS-analyysi, fotogrammetria (suositeltava)</td></tr><tr><td><strong>TIFF (32-bittinen, prosentti)</strong></td><td>32-bittinen liukuluku</td><td>Erittäin suuri</td><td>Tieteellinen analyysi, tutkimus</td></tr><tr><td><strong>PNG (8-bittinen)</strong></td><td>8-bittinen kokonaisluku</td><td>Keskikokoinen</td><td>Silmämääräinen tarkastus, verkkopohjainen jakaminen</td></tr><tr><td><strong>JPG (8-bittinen)</strong></td><td>8-bittinen kokonaisluku</td><td>Pieni</td><td>Nopea esikatselu, pakattu tulostus</td></tr></tbody></table>***
+<table><thead><tr><th width="197">Muoto</th><th width="130.20001220703125">Bittisyvyys</th><th width="116.5999755859375">Tiedostokoko</th><th>Sopii parhaiten</th></tr></thead><tbody><tr><td><strong>TIFF (16-bittinen)</strong> ⭐</td><td>16-bittinen kokonaisluku</td><td>Suuri</td><td>GIS-analyysi, fotogrammetria (suositeltava)</td></tr><tr><td><strong>TIFF (32-bittinen, prosentti)</strong></td><td>32-bittinen liukuluku</td><td>Erittäin suuri</td><td>Tieteellinen analyysi, tutkimus</td></tr><tr><td><strong>PNG (8-bittinen)</strong></td><td>8-bittinen kokonaisluku</td><td>Keskikokoinen</td><td>Silmämääräinen tarkastus, jakaminen verkossa</td></tr><tr><td><strong>JPG (8-bittinen)</strong></td><td>8-bittinen kokonaisluku</td><td>Pieni</td><td>Pikakatselu, pakattu tulos</td></tr></tbody></table>***
 
 ## Automaatio ja skriptit
 
-### PowerShell-eräprosessointi
+### PowerShell-eräkäsittely (Windows)
 
-Useiden tietojoukkojen kansioiden automaattinen käsittely:
+Käsittele useita tietojoukkojen kansioita automaattisesti Windows:
 
 ```powershell
 # process_all_datasets.ps1
@@ -461,9 +585,9 @@ foreach ($dataset in $datasets) {
 Write-Host "All datasets processed!" -ForegroundColor Green
 ```
 
-### Windows-eräskripti
+### Windows-eräskripti (Windows)
 
-Yksinkertainen silmukka eräprosessointia varten:
+Yksinkertainen silmukka eräprosessointia varten Windows:
 
 ```batch
 @echo off
@@ -488,9 +612,35 @@ echo All datasets processed!
 pause
 ```
 
-### Python Automaatioskripti
+### Bash-eräprosessointi (Linux)
 
-Edistynyt automaatio virheiden käsittelyllä:
+Useiden tietojoukkojen kansioiden käsittely Linux:
+
+```bash
+#!/bin/bash
+# process_all_datasets.sh
+
+for dataset in ~/datasets/2026/*/; do
+    name=$(basename "$dataset")
+    echo "Processing $name..."
+
+    chloros-cli process "$dataset" \
+        --vignette \
+        --reflectance
+
+    if [ $? -eq 0 ]; then
+        echo "✓ $name complete"
+    else
+        echo "✗ $name failed"
+    fi
+done
+
+echo "All datasets processed!"
+```
+
+### Python-automaatioskripti (alustariippumaton)
+
+Edistynyt automaatio virheiden käsittelyllä (toimii Windows:ssä ja Linux:ssä):
 
 ```python
 import subprocess
@@ -515,6 +665,9 @@ def process_dataset(input_folder):
 
 def main():
     """Process all datasets in a directory"""
+    # Adjust path for your platform
+    # Windows: Path('C:/Datasets/2025')
+    # Linux:   Path.home() / 'datasets' / '2025'
     datasets_dir = Path('C:/Datasets/2025')
     log_file = Path('processing_log.txt')
     
@@ -573,12 +726,12 @@ if __name__ == '__main__':
 
 ### Vakiotyönkulku
 
-1. **Syöttö**: Kansio, joka sisältää RAW/JPG-kuvapareja
-2. **Haku**: CLI etsii automaattisesti tuettuja kuvatiedostoja
-3. **Käsittely**: Rinnakkaistila skaalautuu CPU-ytimien mukaan (Chloros+)
-4. **Tuloste**: Luo kameramallin alikansiot käsitellyillä kuvilla
+1. **Syöte**: Kansio, joka sisältää RAW/JPG-kuvaparit
+2. **Tunnistus**: CLI etsii automaattisesti tuetut kuvatiedostot
+3. **Käsittely**: Rinnakkaistila skaalautuu prosessorin ytimien määrän mukaan (Chloros+)
+4. **Tulos**: Luo kameramallikohtaiset alikansiot, joihin tallennetaan käsitellyt kuvat
 
-### Esimerkki tulostorakenteesta
+### Esimerkki tulosrakenteesta
 
 ```
 
@@ -592,17 +745,20 @@ MyProject/
     └── ...
 ```
 
-### Arvioitu käsittelyaika
+### Arvioidut käsittelyajat
 
-Tyypillinen käsittelyaika 100 kuvalle (kukin 12 MP):
+Tyypilliset käsittelyajat 100 kuvalle (kukin 12 MP):
 
-| Tila              | Aika      | Laitteisto                                     |
-| ----------------- | --------- | -------------------------------------------- |
-| **Rinnakkaistila** | 5–10 min  | i7/Ryzen 7, 16 Gt RAM-muistia, SSD (enintään 16 työntekijää) |
-| **Rinnakkaistila** | 10–15 min | i5/Ryzen 5, 8 Gt RAM-muistia, HDD (enintään 8 työntekijää)   |
+| Alusta | Tila | Arvioitu aika | Huomautukset |
+| --- | --- | --- | --- |
+| **Pöytätietokone 12 GB+ GPU** | `GPU_PARALLEL` | 5–10 min | Nopein vaihtoehto |
+| **Pöytätietokone 8 Gt:n GPU** | `GPU_SINGLE` | 10–15 min | Hyvä suorituskyky |
+| **Jetson Orin NX 16 Gt** | `GPU_PARALLEL` | 15–25 min | Reunalaskenta |
+| **Jetson Nano 8 Gt** | `GPU_SINGLE` | 30–60 min | Muistin rajoittama |
+| **Vain CPU** | `CPU_PARALLEL` | 20–40 min | Ei vaadi GPU:ta |
 
-{% hint style=&quot;info&quot; %}
-**Suorituskykyvinkki**: Käsittelyaika vaihtelee kuvien lukumäärän, tarkkuuden ja tietokoneen ominaisuuksien mukaan.
+{% hint style="info" %}
+**Suorituskykyvinkki**: Käsittelyaika vaihtelee kuvien lukumäärän, tarkkuuden, debayer-menetelmän ja laitteiston mukaan. Texture Aware -debayer kestää huomattavasti kauemmin kuin Standard. Katso lisätietoja kohdasta [Dynamic Compute Adaptation](processing-architecture/dynamic-compute-adaptation.md).
 {% endhint %}
 
 ***
@@ -611,35 +767,62 @@ Tyypillinen käsittelyaika 100 kuvalle (kukin 12 MP):
 
 ### CLI ei löydy
 
-**Virhe:**
+**Windows Virhe:**
 
 ```
 'chloros-cli' is not recognized as an internal or external command
 ```
 
-**Ratkaisut:**
+**Windows Ratkaisut:**
 
-1. Tarkista asennuksen sijainti:
+1. Tarkista asennuspaikka:
 
 ```powershell
 dir "C:\Program Files\Chloros\resources\cli\chloros-cli.exe"
 ```
 
-2. Käytä koko polkua, jos se ei ole PATH-polussa:
+2. Käytä täydellistä polkua, jos se ei ole PATH-muuttujassa:
 
 ```powershell
 "C:\Program Files\Chloros\resources\cli\chloros-cli.exe" process "C:\Datasets\Field_A"
 ```
 
-3. Lisää PATH-polkuun manuaalisesti:
+3. Lisää PATH-muuttujaan manuaalisesti:
    * Avaa Järjestelmän ominaisuudet → Ympäristömuuttujat
    * Muokkaa PATH-muuttujaa
    * Lisää: `C:\Program Files\Chloros\resources\cli`
    * Käynnistä terminaali uudelleen
 
+**Linux Virhe:**
+
+```
+chloros-cli: command not found
+```
+
+**Linux Ratkaisut:**
+
+1. Tarkista asennus:
+
+```bash
+which chloros-cli
+dpkg -L chloros-amd64  # or chloros-arm64-jp6
+```
+
+2. Lataa shell uudelleen:
+
+```bash
+source ~/.bashrc
+```
+
+3. Tarkista käyttöoikeudet:
+
+```bash
+sudo chmod +x /usr/bin/chloros-cli
+```
+
 ***
 
-### Backend-palvelun käynnistys epäonnistui**Virhe:**
+### Backend-palvelimen käynnistys epäonnistui**Virhe:**
 
 ```
 
@@ -648,23 +831,37 @@ Backend failed to start within 30 seconds
 
 **Ratkaisut:**
 
-1. Tarkista, onko backend-palvelu jo käynnissä (sulje se ensin)
-2. Tarkista, ettei Windows palomuuri estä sitä
+1. Tarkista, onko taustapalvelu jo käynnissä (sulje se ensin)
+2. Tarkista, ettei palomuuri estä yhteyttä (Windows) tai tarkista portin saatavuus (Linux: `lsof -i :5000`)
 3. Kokeile eri porttia:
 
-```powershell
+```bash
+# Windows
 chloros-cli --port 5001 process "C:\Datasets\Field_A"
+
+# Linux
+chloros-cli --port 5001 process ~/datasets/field_a
 ```
 
-4. Pakota backend käynnistymään uudelleen:
+4. Pakota taustapalvelimen uudelleenkäynnistys:
 
-```powershell
+```bash
+# Windows
 chloros-cli --restart process "C:\Datasets\Field_A"
+
+# Linux
+chloros-cli --restart process ~/datasets/field_a
+```
+
+5. Tarkista kohdassa Linux, onko taustapalvelimen suoritustiedosto olemassa:
+
+```bash
+ls -la /usr/lib/chloros/chloros-backend
 ```
 
 ***
 
-### Lisenssi-/todennusongelmat**Virhe:**
+### Lisenssi- ja todennusongelmat**Virhe:**
 
 ```
 
@@ -673,16 +870,16 @@ Chloros+ license required for CLI access
 
 **Ratkaisut:**
 
-1. Varmista, että sinulla on voimassa oleva Chloros+ -tilaus.
+1. Varmista, että sinulla on voimassa oleva Chloros+ -tilaus
 2. Kirjaudu sisään tunnuksillasi:
 
-```powershell
+```bash
 chloros-cli login user@example.com 'password'
 ```
 
 3. Tarkista lisenssin tila:
 
-```powershell
+```bash
 chloros-cli status
 ```
 
@@ -699,18 +896,18 @@ No images found in the specified folder
 
 **Ratkaisut:**
 
-1. Varmista, että kansio sisältää tuettuja tiedostomuotoja (.RAW, .TIF, .JPG).
-2. Tarkista, että kansion polku on oikea (käytä lainausmerkkejä poluissa, joissa on välilyöntejä).
-3. Varmista, että sinulla on kansion lukuoikeudet.
-4. Tarkista, että tiedostotunnisteet ovat oikein.
+1. Varmista, että kansio sisältää tuettuja tiedostomuotoja (.RAW, .TIF, .JPG)
+2. Tarkista, että kansion polku on oikea (käytä lainausmerkkejä poluissa, joissa on välilyöntejä)
+3. Varmista, että sinulla on lukuoikeudet kansioon
+4. Tarkista, että tiedostotunnisteet ovat oikeat
 
 ***
 
 ### Käsittely pysähtyy tai jumittuu**Ratkaisut:**
 
-1. Tarkista käytettävissä oleva levytila (varmista, että sitä on riittävästi tulostusta varten).
-2. Sulje muut sovellukset vapauttaaksesi muistia.
-3. Vähennä kuvien määrää (käsittele ne erissä).
+1. Tarkista käytettävissä oleva levytila (varmista, että sitä on tarpeeksi tulostusta varten)
+2. Sulje muut sovellukset muistin vapauttamiseksi
+3. Vähennä kuvien määrää (käsittele erissä)
 
 ***
 
@@ -721,12 +918,22 @@ No images found in the specified folder
 Port 5000 is already in use
 ```
 
-**Ratkaisu:**
+**Ratkaisut:**
 
-Määritä toinen portti:
+**Windows:**
 
 ```powershell
 chloros-cli --port 5001 process "C:\Datasets\Field_A"
+```
+
+**Linux:**
+
+```bash
+# Find what's using port 5000
+lsof -i :5000
+
+# Use a different port
+chloros-cli --port 5001 process ~/datasets/field_a
 ```
 
 ***
@@ -738,34 +945,43 @@ chloros-cli --port 5001 process "C:\Datasets\Field_A"
 **V:**Kyllä! CLI vaatii maksullisen**Chloros+ -lisenssin**.
 
 * ❌ Standard (ilmainen) -paketti: CLI pois käytöstä
-* ✅ Chloros+ (maksulliset) paketit: CLI täysin käytössä
+* ✅ Chloros+ (maksullinen) -paketit: CLI täysin käytössä
 
 Tilaa osoitteesta: [https://cloud.mapir.camera/pricing](https://cloud.mapir.camera/pricing)
 
 ***
 
-### K: Voinko käyttää CLI:ää palvelimella, jossa ei ole graafista käyttöliittymää?**V:** Kyllä! CLI toimii täysin ilman graafista käyttöliittymää. Vaatimukset:
-
+### K: Voinko käyttää CLI:ää palvelimella, jossa ei ole graafista käyttöliittymää?**V:** Kyllä! CLI toimii täysin ilman käyttöliittymää. Tämä on Linux:n pääasiallinen käyttötapa.**Windows-palvelin:**
 * Windows Server 2016 tai uudempi
 * Visual C++ Redistributable asennettuna
-* Riittävä RAM-muisti (vähintään 8 Gt, suositellaan 16 Gt)
-* Kertaluonteinen GUI-lisenssin aktivointi millä tahansa koneella
+
+**Linux-palvelin:**
+* Ubuntu 20.04+ / Debian 11+ (amd64) tai JetPack 6 (arm64)
+* Asenna `.deb`-paketin kautta
+
+**Molemmat alustat:**
+* Vähintään 8 Gt RAM-muistia (suositus 16 Gt)
+* Kertaluonteinen lisenssin aktivointi: `chloros-cli login user@example.com 'password'`
 
 ***
 
-### K: Mihin käsitellyt kuvat tallennetaan?**V:**Oletuksena käsitellyt kuvat tallennetaan**samaan kansioon kuin syötöt** kameramallin alikansioihin (esim. `Survey3N_RGN/`).
+### K: Mihin käsitellyt kuvat tallennetaan?**V:**Oletusarvoisesti käsitellyt kuvat tallennetaan**samaan kansioon kuin syötteen** kameramallin alikansioihin (esim. `Survey3N_RGN/`).
 
 Käytä `-o`-vaihtoehtoa määrittääksesi toisen tulostuskansion:
 
-```powershell
+```bash
+# Windows
 chloros-cli process "C:\Input" -o "D:\Output"
+
+# Linux
+chloros-cli process ~/input -o ~/output
 ```
 
 ***
 
-### K: Voinko käsitellä useita kansioita kerralla?**V:** Ei suoraan yhdellä komennolla, mutta voit käyttää skriptejä kansioiden käsittelyyn peräkkäin. Katso kohta [Automaatio ja skriptit](CLI.md#automation--scripting).***
+### K: Voinko käsitellä useita kansioita kerralla?**V:** Ei suoraan yhdellä komennolla, mutta voit käyttää skriptejä kansioiden käsittelemiseen peräkkäin. Katso kohta [Automaatio ja skriptit](CLI.md#automation--scripting).***
 
-### K: Kuinka tallennan CLI-tuloksen lokitiedostoon?**PowerShell:**
+### K: Miten tallennan CLI-tuloksen lokitiedostoon?**PowerShell:**
 
 ```powershell
 chloros-cli process "C:\Datasets\Field_A" | Tee-Object -FilePath "processing.log"
@@ -777,23 +993,29 @@ chloros-cli process "C:\Datasets\Field_A" | Tee-Object -FilePath "processing.log
 chloros-cli process "C:\Datasets\Field_A" > processing.log 2>&1
 ```
 
+**Linux Bash:**
+
+```bash
+chloros-cli process ~/datasets/field_a 2>&1 | tee processing.log
+```
+
 ***
 
 ### K: Mitä tapahtuu, jos painan Ctrl+C käsittelyn aikana?**V:** CLI:
 
-1. Lopettaa käsittelyn siististi
-2. Sammuta taustaprosessin
-3. Poistu koodilla 130
+1. Lopettaa käsittelyn hallitusti
+2. Sammuttaa taustapalvelimen
+3. Poistuu koodilla 130
 
 Osittain käsitellyt kuvat voivat jäädä tulostuskansioon.
 
 ***
 
-### K: Voinko automatisoida CLI-käsittelyn?**V:** Totta kai! CLI on suunniteltu automatisointia varten. Katso [Automaatio ja skriptit](CLI.md#automation--scripting) PowerShell-, Batch- ja Python-esimerkkejä varten.***
+### K: Voinko automatisoida CLI-käsittelyn?**V:** Totta kai! CLI on suunniteltu automatisointia varten. Katso [Automatisointi ja skriptit](CLI.md#automation--scripting) PowerShellille (Windows), Batchille (Windows), Bash (Linux) ja Python (alustojen välinen) esimerkkejä.***
 
 ### K: Miten tarkistan CLI-version?**V:**
 
-```powershell
+```bash
 chloros-cli --version
 ```
 
@@ -801,7 +1023,7 @@ chloros-cli --version
 
 ```
 
-Chloros CLI 1.0.2
+Chloros CLI 1.1.0
 ```
 
 ***
@@ -810,9 +1032,9 @@ Chloros CLI 1.0.2
 
 ### Komentorivin ohje
 
-Tarkastele ohjeita suoraan CLI:ssa:
+Tarkastele ohjetietoja suoraan CLI:ssa:
 
-```powershell
+```bash
 # General help
 chloros-cli --help
 
@@ -832,22 +1054,41 @@ chloros-cli language --help
 
 ### Esimerkki 1: Peruskäsittely
 
-Käsittely oletusasetuksilla (vignette, heijastavuus):
+Käsittele oletusasetuksilla (vignette, heijastavuus):
+
+**Windows:**
 
 ```powershell
 chloros-cli process "C:\Datasets\Field_A_2025_01_15"
 ```
 
+**Linux:**
+
+```bash
+chloros-cli process ~/datasets/field_a_2025_01_15
+```
+
 ***
 
-### Esimerkki 2: Korkealaatuinen tieteellinen tulos
+### Esimerkki 2: Laadukas tieteellinen tulos
 
-32-bittinen float TIFF:
+32-bittinen liukuluku TIFF:
+
+**Windows:**
 
 ```powershell
 chloros-cli process "C:\Datasets\Field_A" ^
   --format "TIFF (32-bit, Percent)" ^
   --vignette ^
+  --reflectance
+```
+
+**Linux:**
+
+```bash
+chloros-cli process ~/datasets/field_a \
+  --format "TIFF (32-bit, Percent)" \
+  --vignette \
   --reflectance
 ```
 
@@ -857,6 +1098,8 @@ chloros-cli process "C:\Datasets\Field_A" ^
 
 8-bittinen PNG ilman kalibrointia nopeaa tarkastelua varten:
 
+**Windows:**
+
 ```powershell
 chloros-cli process "C:\Datasets\Field_A" ^
   --format "PNG (8-bit)" ^
@@ -864,11 +1107,22 @@ chloros-cli process "C:\Datasets\Field_A" ^
   --no-reflectance
 ```
 
+**Linux:**
+
+```bash
+chloros-cli process ~/datasets/field_a \
+  --format "PNG (8-bit)" \
+  --no-vignette \
+  --no-reflectance
+```
+
 ***
 
 ### Esimerkki 4: PPK-korjattu käsittely
 
-PPK-korjausten soveltaminen heijastavuudella:
+Käytä PPK-korjauksia heijastavuuden avulla:
+
+**Windows:**
 
 ```powershell
 chloros-cli process "C:\Datasets\Field_A" ^
@@ -876,11 +1130,21 @@ chloros-cli process "C:\Datasets\Field_A" ^
   --reflectance
 ```
 
+**Linux:**
+
+```bash
+chloros-cli process ~/datasets/field_a \
+  --ppk \
+  --reflectance
+```
+
 ***
 
-### Esimerkki 5: Mukautettu tulostuspaikka
+### Esimerkki 5: Mukautettu tulostuskohde
 
-Käsittely eri asemalle tietyssä muodossa:
+Käsittele eri kohteeseen tietyllä formaatilla:
+
+**Windows:**
 
 ```powershell
 chloros-cli process "C:\Input\Raw_Images" ^
@@ -888,13 +1152,21 @@ chloros-cli process "C:\Input\Raw_Images" ^
   --format "TIFF (16-bit)"
 ```
 
+**Linux:**
+
+```bash
+chloros-cli process ~/input/raw_images \
+  -o ~/output/processed \
+  --format "TIFF (16-bit)"
+```
+
 ***
 
-### Esimerkki 6: Todentamisen työnkulku
+### Esimerkki 6: Todentamisprosessi
 
-Suorita todentamisen työnkulku loppuun:
+Täydellinen todentamisprosessi (sama kaikilla alustoilla):
 
-```powershell
+```bash
 # Step 1: Login
 chloros-cli login user@example.com 'MyP@ssw0rd'
 
@@ -902,7 +1174,9 @@ chloros-cli login user@example.com 'MyP@ssw0rd'
 chloros-cli status
 
 # Step 3: Process images
-chloros-cli process "C:\Datasets\Field_A"
+# Windows: chloros-cli process "C:\Datasets\Field_A"
+# Linux:   chloros-cli process ~/datasets/field_a
+chloros-cli process ~/datasets/field_a
 
 # Step 4: Logout (optional, when switching accounts)
 chloros-cli logout
@@ -912,9 +1186,9 @@ chloros-cli logout
 
 ### Esimerkki 7: Monikielinen käyttö
 
-Vaihda käyttöliittymän kieli:
+Käyttöliittymän kielen vaihtaminen (sama kaikilla alustoilla):
 
-```powershell
+```bash
 # List available languages
 chloros-cli language --list
 
@@ -922,7 +1196,9 @@ chloros-cli language --list
 chloros-cli language es
 
 # Process with Spanish interface
-chloros-cli process "C:\Vuelos\Campo_A"
+# Windows: chloros-cli process "C:\Vuelos\Campo_A"
+# Linux:   chloros-cli process ~/vuelos/campo_a
+chloros-cli process ~/vuelos/campo_a
 
 # Change back to English
 chloros-cli language en

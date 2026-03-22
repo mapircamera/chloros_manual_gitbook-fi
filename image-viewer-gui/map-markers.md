@@ -1,23 +1,23 @@
 # Karttamerkit
 
-Kartta-välilehti näyttää kuvasi interaktiivisella 2D-kartalla niiden GPS-koordinaattien perusteella. Tämä tarjoaa maantieteellisen yleiskuvan kuvausistunnosta ja auttaa visualisoimaan alueellisen kattavuuden. Se on myös hyödyllinen, kun tuot kuvasi ensimmäisen kerran, jotta voit nopeasti poistaa kuvat, joita et tarvitse käsitellä.
+Kartta-välilehdessä kuvasi näkyvät interaktiivisella 2D-kartalla niiden GPS-koordinaattien perusteella. Tämä tarjoaa maantieteellisen yleiskuvan kuvausistunnosta ja auttaa visualisoimaan kuvausalueen. Se on hyödyllinen myös kuvia ensimmäistä kertaa tuotaessa, jotta voit nopeasti poistaa kuvat, joita ei tarvitse käsitellä.
 
 <figure><img src="../.gitbook/assets/chloros_map_markers.gif" alt=""><figcaption></figcaption></figure>
 
 ## Kartta-välilehden avaaminen
 
-1. Avaa tai luo projekti Chloros:ssä.
-2. Tuo kuvat, jotka sisältävät GPS-metatietoja.
+1. Avaa tai luo projekti Chloros-ohjelmassa
+2. Tuo kuvat, jotka sisältävät GPS-metatietoja
 3. Napsauta **Kartta** <img src="../.gitbook/assets/image (3).png" alt="" data-size="line"> -välilehteä vasemmassa sivupalkissa
 4. Kartta näyttää merkit kunkin kuvan GPS-sijainnissa
 
 {% hint style="info" %}
-**GPS vaaditaan**: Kartalle näkyvät vain kuvat, joiden EXIF-metatiedoissa on upotetut GPS-koordinaatit. Varmista, että kamerassasi on GPS käytössä kuvauksen aikana.
+**GPS vaaditaan**: Kartalle näkyvät vain kuvat, joiden EXIF-metatietoihin on upotettu GPS-koordinaatit. Varmista, että kamerasi GPS-toiminto on käytössä kuvauksen aikana.
 {% endhint %}
 
 ***
 
-## Kuvien säätäminen Kartta-välilehdeltä**Kartta**<img src="../.gitbook/assets/image (3).png" alt="" data-size="line"> -välilehdessä on samat lisäys-  <img src="../.gitbook/assets/image.png" alt="" data-size="line">   <img src="../.gitbook/assets/image (1).png" alt="" data-size="line">  ja poisto  <img src="../.gitbook/assets/image (2).png" alt="" data-size="line">  -painikkeet kuin [**Tiedostoselain**](../processing-images-gui/adding-files-to-a-project.md) <img src="../.gitbook/assets/icon_file-browser.JPG" alt="" data-size="line"> -välilehdessä. Se näyttää myös saman projektitiedostotaulukon, mutta eri sarakkeiden otsikoilla:
+## Kuvien säätäminen Kartta-välilehdellä**Kartta**<img src="../.gitbook/assets/image (3).png" alt="" data-size="line"> -välilehdessä on sama lisää  <img src="../.gitbook/assets/image.png" alt="" data-size="line">   <img src="../.gitbook/assets/image (1).png" alt="" data-size="line">  ja poista  <img src="../.gitbook/assets/image (2).png" alt="" data-size="line">  -painikkeet kuin [**Tiedostoselaimessa**](../processing-images-gui/adding-files-to-a-project.md) <img src="../.gitbook/assets/icon_file-browser.JPG" alt="" data-size="line"> -välilehdessä. Siinä näkyy myös sama projektitiedostojen taulukkoluettelo, mutta eri sarakkeiden otsikoilla:
 
 ### Tiedostonimi
 
@@ -37,54 +37,54 @@ Kartta-välilehti näyttää kuvasi interaktiivisella 2D-kartalla niiden GPS-koo
 * Kuvan korkeus
 
 {% hint style="info" %}
-Taulukon sarakkeiden otsikoita napsauttamalla voit myös lajitella rivien tiedot
+Taulukon sarakkeiden otsikoita klikkaamalla voit myös lajitella rivitiedot
 {% endhint %}
 
 ***
 
-## Kuvan merkit
+## Kuvamerkit
 
-Jokainen kuva, jossa on GPS-tietoja, on merkitty kartalle merkillä:
+Jokainen kuva, jossa on GPS-tietoja, näkyy kartalla merkkinä:
 
 ### Merkkien näyttö
 
-* Merkkien avulla näkyy kunkin kuvan tarkka GPS-koordinaatti
-* Ryhmitetyt merkit voivat näkyä yhdessä, kun karttaa pienennetään
-* Zoomaa karttaa nähdäksesi yksittäisten kuvien sijainnit
+* Merkit osoittavat kunkin kuvan tarkat GPS-koordinaatit
+* Ryhmitetyt merkit voivat ryhmittyä yhteen, kun karttaa pienennetään
+* Suurenna karttaa nähdäksesi yksittäisten kuvien sijainnit
 
 {% hint style="success" %}
-SUPERZOOM: Kun karttaruudun tarjoajan suurin zoomausaste on saavutettu, ruutu suurenee edelleen zoomattaessa, jolloin voit nähdä lähellä toisiaan olevat merkit.
+SUPER-ZOOM: Kun saavutat karttalaattojen tarjoajan suurimman zoomausasteen, laatta suurennetaan edelleen, jolloin voit nähdä lähekkäin olevat merkit.
 {% endhint %}
 
-### Esikatselu hiiren osoittimella
+### Esikatselu hiiren osoittamalla
 
-* **Vie hiiren osoitin** minkä tahansa merkin päälle nähdäksesi pienen esikatselukuvan kyseisestä kuvasta.
-* Tämä mahdollistaa nopean visuaalisen tunnistamisen poistumatta karttanäkymästä.
-* Hyödyllinen tiettyjen kuvien paikantamiseen suuresta kuvaussessiosta.
+* **Vie hiiri** minkä tahansa merkin päälle nähdäksesi pienen esikatselukuvan kyseisestä kuvasta
+* Tämä mahdollistaa nopean visuaalisen tunnistamisen poistumatta karttanäkymästä
+* Hyödyllinen tiettyjen kuvien paikantamiseen suuressa kuvaussessiossa
 
 ***
 
 ## Karttalaattojen tarjoajat
 
 {% hint style="success" %}
-**Automaattinen valinta**: Chloros valitsee automaattisesti ruutupalvelun, joka tarjoaa parhaan zoomausasteen nykyiselle kartan sijainnillesi. Voit vaihtaa palveluntarjoajaa manuaalisesti, jos haluat.
+**Automaattinen valinta**: Chloros valitsee automaattisesti ruutupalvelun, joka tarjoaa parhaan zoomausasteen nykyiselle karttapaikallesi. Voit halutessasi vaihtaa palveluntarjoajaa manuaalisesti.
 {% endhint %}
 
-Kartta-välilehti tukee kahta ruutupalveluntarjoajaa taustakartan kuville:
+Kartta-välilehti tukee kahta ruutupalveluntarjoajaa taustakarttakuville:
 
 ### Google Maps
 
-* Googlen tavalliset satelliitti- ja karttakuvat
-* Paras yleiseen maailmanlaajuiseen kattavuuteen
+* Googlen vakiomuotoiset satelliitti- ja karttakuvat
+* Paras yleinen maailmanlaajuinen kattavuus
 
 ### ESRI
 
-* ESRI ArcGIS:n satelliitti- ja ilmakuvat
+* ESRI ArcGISin satelliitti- ja ilmakuvat
 * Tarjoaa usein korkeamman resoluution kuvia tietyillä alueilla
 
 ***
 
-## Karttatiilityypit
+## Karttalaattatyypit
 
 Voit valita karttakerroksen tyypin (vasemmalta oikealle):
 
@@ -94,48 +94,48 @@ Näyttää korkeusprofiilit ja karttalaatat yksityiskohdilla (tiet jne.)
 
 ### Kartta
 
-Näyttää tavalliset (pienempi kaistanleveys) karttalaatat yksityiskohdilla (tiet jne.)
+Näyttää tavalliset (pienemmällä kaistanleveydellä toimivat) karttalaatat yksityiskohdilla (tiet jne.)
 
 ### Satelliitti
 
-Näyttää yksityiskohtaiset (suurempi kaistanleveys) satelliittikarttalaatat
+Näyttää yksityiskohtaiset (suuremmalla kaistanleveydellä toimivat) satelliittikarttalaatat
 
 ### Hybridi
 
-Näyttää satelliittikarttalaatat lisäyksillä (tiet jne.)
+Näyttää satelliittikarttalaatat, joihin on lisätty yksityiskohtia (tiet jne.)
 
 ***
 
 ## Kartan navigointi
 
-### Zoomaustoiminnot
+### Zoomaustyökalut
 
-* **Lähennä/loitonna**: Käytä hiiren rullapyörää tai zoomauspainikkeita.
-* **Koko näyttö**: Näytä kartta koko näytöllä.
+* **Lähentäminen/loitontaminen**: Käytä hiiren rullapyörää tai zoomauspainikkeita
+* **Koko näyttö**: Näytä kartta koko näytöllä
 
-### Panoroinnin toiminnot
+### Panorointityökalut
 
-* **Panoroida**: Napsauta ja vedä hiiren painikkeita liikutellaksesi kartalla.***
+* **Panorointi**: Napsauta ja vedä hiirtä liikkuaksesi kartalla***
 
-## Käyttötapauksia
+## Käyttötapaukset
 
 ### Lentoreitin visualisointi
 
-* Tarkastele drone-kuvausistuntojen peittoaluetta
-* Tunnista kuvien peittoalueen aukot
+* Tarkastele drone-kuvausistuntojen kattamaa aluetta
+* Tunnista aukkoja kuvien kattavuudessa
 * Tarkista lentoreitin toteutuminen
 
-### Maastokartoituksen tarkastelu
+### Maastotutkimuksen tarkastelu
 
-* Tarkastele maastokartoituksen kuvien alueellista jakautumista
-* Paikanna kalibrointikohteiden kuvat suhteessa kartoitusalueeseen
-* Suunnittele lisäkuvauspaikat
+* Katso maastossa otettujen kuvien alueellinen jakautuminen
+* Paikanna kalibrointikohdekuvat suhteessa tutkimusalueeseen
+* Suunnittele lisäkuvauspaikkoja
 
 ### Laadunvalvonta
 
-* Tunnista nopeasti odottamattomissa paikoissa otetut kuvat.
-* Tarkista GPS:n tarkkuus koko tietojoukossa.
-* Vertaa kuvien sijainteja kenttämuistiinpanoihin.
+* Tunnista nopeasti odottamattomissa paikoissa otetut kuvat
+* Tarkista GPS-tarkkuus koko aineistossa
+* Vertaa kuvien sijainteja kenttämuistiinpanoihin
 
 ***
 
@@ -145,17 +145,17 @@ Näyttää satelliittikarttalaatat lisäyksillä (tiet jne.)
 
 **Mahdolliset syyt:**
 
-* Kuvat eivät sisällä GPS-metatietoja.
-* GPS oli pois käytöstä kamerassa kuvauksen aikana.
-* EXIF-tiedot on poistettu ulkoisella ohjelmistolla.
+* Kuvissa ei ole GPS-metatietoja
+* GPS oli pois päältä kamerassa kuvauksen aikana
+* EXIF-tiedot on poistettu ulkoisella ohjelmistolla
 
-**Ratkaisu**: Varmista, että GPS on käytössä kamerassa, ja tuo alkuperäiset tiedostot uudelleen.
+**Ratkaisu**: Varmista, että GPS on käytössä kamerassasi, ja tuo alkuperäiset tiedostot uudelleen
 
-### Merkinnät väärässä paikassa
+### Merkit väärässä paikassa
 
 **Mahdolliset syyt:**
 
-* Kameran GPS:n satelliittisignaalin vastaanotto oli heikko.
-* GPS:n signaali heilahti kuvauksen aikana.
+* Kameran GPS:n satelliittisignaali oli heikko
+* GPS-signaali ajautui kuvauksen aikana
 
-**Ratkaisu**: Tämä on tyypillisesti kuvausajankohtaan liittyvä ongelma. Harkitse PPK/RTK GPS:n käyttöä tarkkuutta vaativissa sovelluksissa.
+**Ratkaisu**: Tämä on tyypillisesti kuvaushetkeen liittyvä ongelma; harkitse PPK/RTK-GPS:n käyttöä tarkkuutta vaativissa sovelluksissa

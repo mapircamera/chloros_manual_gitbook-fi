@@ -1,119 +1,115 @@
 # Kohdekuvien valinta
 
-Kuvien merkitseminen, jotka sisältävät kalibrointikohteita, on tärkeä vaihe, joka nopeuttaa merkittävästi Chloros-käsittelyprosessia. Valitsemalla kohdekuvat etukäteen, Chloros:n ei tarvitse skannata kaikkia datajoukon kuvia kalibrointikohteiden löytämiseksi.
+Niiden kuvien merkitseminen, jotka sisältävät kalibrointikohteita, on ratkaiseva vaihe, joka nopeuttaa merkittävästi Chloros-käsittelyprosessia. Valitsemalla kohdekuvat etukäteen vältät sen, että Chloros joutuu skannaamaan jokaisen kuvan datajoukossasi kalibrointikohteiden löytämiseksi.
 
-## Miksi kohdekuvat on merkittävä?
+## Miksi kohdekuvat kannattaa merkitä?
 
 ### Käsittelynopeus
 
 Ilman kohdekuvien merkitsemistä Chloros:n on:
 
 * Skannattava jokainen projektiisi kuuluva kuva
-* Suoritettava kohteen tunnistusalgoritmit jokaiselle kuvalle
+* Suoritettava kohteen tunnistusalgoritmeja jokaiselle kuvalle
 * Tarkistettava satoja tai tuhansia kuvia tarpeettomasti
 
-**Tulos**: Käsittely voi kestää huomattavasti kauemmin, etenkin suurten tietojoukkojen kohdalla.
+**Tulos**: Käsittely voi kestää huomattavasti kauemmin, etenkin suurissa datajoukoissa.
 
-### Merkityt kohdekuvat
+### Merkittyjen kohdekuvien kanssa
 
-Kun valitset kohdesarakkeesta tietyt kuvat:
+Kun valitset tiettyjen kuvien Kohde-sarakkeen:
 
-* Chloros skannaa vain valitut kuvat kohteiden löytämiseksi
-* Kohteiden tunnistus tapahtuu paljon nopeammin
+* Chloros skannaa kohteita vain valituista kuvista
+* Kohteen tunnistus valmistuu paljon nopeammin
 * Kokonaiskäsittelyaika lyhenee huomattavasti
 
-{% hint style=&quot;success&quot; %}
-**Nopeuden parannus**: Merkitsemällä 2–3 kohdekuvaa 500 kuvan tietojoukosta voidaan kohteen tunnistusaika lyhentää yli 30 minuutista alle minuuttiin.
+{% hint style="success" %}
+**Nopeuden parannus**: 2–3 kohdekuvan merkitseminen 500 kuvan aineistossa voi lyhentää kohteen tunnistusaikaa yli 30 minuutista alle minuuttiin.
 {% endhint %}
 
 ***
 
 ## Kohdekuvien merkitseminen
 
-### Vaihe 1: Tunnista kohdekuvat
+### Vaihe 1: Tunnista kohdekuvasi
 
-Tarkista tuodut kuvat tiedostoselaimessa ja tunnista, mitkä kuvat sisältävät kalibrointikohteita.
+Selaa tuotuja kuvia tiedostoselaimessa ja tunnista, mitkä kuvat sisältävät kalibrointikohteita.
 
-**Yleisiä tilanteita:**
-
-* **Ennen kuvausta otettu kohde**: Otettu ennen istunnon aloittamista.
-* **Kuvauksen jälkeen otettu kohde**: Otettu istunnon päätyttyä.
-* **Kentällä olevat kohteet**: Kohteet, jotka on sijoitettu kuvausalueelle.
-* **Useita kohteita**: 2–3 kohdekuvaa istuntoa kohti (suositeltava määrä).
+**Yleisiä tilanteita:*** **Ennen kuvauksen kohde**: Kuvattu ennen istunnon aloittamista
+* **Kuvauksen jälkeinen kohde**: Kuvattu istunnon päätyttyä
+* **Kenttäkohteet**: Kohteet, jotka on sijoitettu kuvausalueelle
+* **Useita kohteita**: 2–3 kohdekuvaa istuntoa kohti (suositeltava)
 
 ### Vaihe 2: Tarkista kohdesarake
 
 Jokaiselle kalibrointikohteen sisältävälle kuvalle:
 
-1. Etsi kuva tiedostoselaimen taulukosta.
-2. Etsi **Kohde**-sarake (oikeanpuoleisin sarake).
-3. Napsauta kyseisen kuvan Kohde-sarakkeen valintaruutua.
-4. Toista tämä kaikille kohteita sisältäville kuville.
+1. Etsi kuva tiedostoselaimen taulukosta
+2. Etsi **Kohde**-sarake (oikeanpuoleisin sarake)
+3. Napsauta kyseisen kuvan Kohde-sarakkeen valintaruutua
+4. Toista tämä kaikille kohteita sisältäville kuville
 
-### Vaihe 3: Vahvista valintasi
+### Vaihe 3: Varmista valintasi
 
-Tarkista ennen käsittelyä, että:
+Tarkista ennen käsittelyä:
 
-* [ ] Kaikki kalibrointikohteita sisältävät kuvat on valittu.
-* [ ] Mitään muita kuin kohdekuvia ei ole valittu vahingossa.
-* [ ] Kohteet ovat selvästi näkyvissä valituissa kuvissa.
+* [ ] Kaikki kuvat, joissa on kalibrointikohteita, on valittu
+* [ ] Mitään kuvia, joissa ei ole kohteita, ei ole valittu vahingossa
+* [ ] Kohteet näkyvät selvästi valituissa kuvissa
 
 ***
 
 ## Kohdekuvien parhaat käytännöt
 
-### Kohteiden kuvaamisen ohjeet
+### Kohteen kaappaamisen ohjeet
 
 **Ajoitus:**
 
-* Ota kohdekuvat välittömästi ennen kuvaussessiota ja sen aikana.
-* Ota kuvat samoissa valaistusolosuhteissa kuin DAQ-valosensori.
-* Ihannetapauksessa ota kohdekuvia mahdollisimman usein, jotta saat parhaat tulokset. Muussa tapauksessa valosensorin tietoja käytetään kalibroinnin säätämiseen ajan mittaan.
+* Kaappaa kohdekuvat välittömästi ennen kuvaussessiota ja sen aikana
+* Samoissa valaistusolosuhteissa kuin DAQ-valosensori
+* Parhaiden tulosten saavuttamiseksi ota kohdekuvia mieluiten mahdollisimman usein. Muussa tapauksessa valosensorin tietoja käytetään kalibroinnin säätämiseen ajan mittaan.
 
 **Kameran sijainti:**
 
-* Pidä kameraa kohteen yläpuolella siten, että se on keskellä ja täyttää noin 40–60 % kuvan keskikohdasta.
-* Pidä kamera yhdensuuntaisena/nadir-asennossa kohteen pintaan nähden
+* Pidä kameraa kohteen yläpuolella siten, että se on keskitetty ja täyttää noin 40–60 % kuvan keskiosasta.
+* Pidä kamera yhdensuuntaisena/nadirina kohteen pintaan nähden
 
 **Valaistus:**
 
-* Sama ympäristön valaistus kuin DAQ-valosensorissa
-* Vältä varjoja kohteen pinnalla
-* Älä peitä valonlähdettä kehollasi, ajoneuvolla tai kasvillisuudella
-* Pilvinen sää tuottaa tasaisimmat tulokset
+* Sama ympäristön valaistus kuin DAQ-valosensorillasi
+* Vältä varjoja kohdepinnoilla
+* Älä peitä valonlähdettä kehollasi, ajoneuvollasi tai kasvillisuudella
+* Pilviset olosuhteet antavat tasaisimmat tulokset
 
 **Kohteen kunto:**
 
 * Pidä kohdepaneelit puhtaina ja kuivina
-* Kaikkien neljän paneelin tulee olla selvästi näkyvissä ja esteettöminä
+* Kaikkien neljän paneelin tulee olla selvästi näkyvissä ja esteettömiä
 * Kohteet kohtisuorassa/nadir-asennossa valonlähteeseen nähden, jos mahdollista
 
 ### Kuinka monta kohdekuvaa?
 
-**Vähimmäismäärä:** 1 kohdekuva per istunto. **Suositeltava määrä:** 3–5 kohdekuvaa per istunto.
+**Vähimmäismäärä:**1 kohdekuva per istunto.**Suositus:** 3–5 kohdekuvaa per istunto.**Paras käytäntö:**
 
-**Paras käytäntö:**
-
-* Ota 3–5 kuvaa pian valosensorin tallennuksen aloittamisen jälkeen.
-* Kierrä kameraa kuvien välillä parhaan tuloksen saamiseksi.
-* Valinnainen: ota kuvia säännöllisesti istunnon aikana, jos valaistusolosuhteet muuttuvat jatkuvasti.
+* 3–5 kuvaa otetaan pian sen jälkeen, kun valosensori on alkanut tallentaa
+* Käännä kameraa kuvien välillä parhaan tuloksen saamiseksi
+* Valinnainen: säännöllisesti istunnon aikana, jos valaistusolosuhteet muuttuvat jatkuvasti
 
 ***
 
 ## Useiden kameroiden käyttö
 
-### Kahden kameran asetukset
+### Kahden kameran kokoonpanot
 
 Jos käytät kahta MAPIR-kameraa samanaikaisesti (esim. Survey3W RGN + Survey3N OCN):
 
-1. Ota kohdekuvat **molemmilla kameroilla** samanaikaisesti.
-2. Käytä **samaa fyysistä kohdetta** molemmille kameroille.
-3. Merkitse kohdekuvat **molemmille kameratyypeille** tiedostoselaimessa.
-4. Chloros käyttää sopivia kohteita kunkin kameran kalibrointiin.
+1. Ota kohdekuvia **molemmilla kameroilla** samanaikaisesti
+2. Käytä **samaa fyysistä kohdetta** molemmille kameroille
+3. Merkitse kohdekuvat **molemmille kameratyypeille** tiedostoselaimessa
+4. Chloros käyttää sopivia kohteita kunkin kameran kalibrointiin
 
-### Kameramallipylväs
+### Kameramalli-sarake
 
-**Kameramalli**-pylväs auttaa tunnistamaan, mitkä kuvat ovat peräisin mistäkin kamerasta:
+**Kameramalli**-sarake auttaa tunnistamaan, mitkä kuvat ovat peräisin mistäkin kamerasta:
 
 * Survey3W\_RGN
 * Survey3N\_OCN
@@ -128,64 +124,54 @@ Käytä tätä saraketta tarkistaaksesi, että olet merkinnyt kohteet jokaiselle
 
 ### Tunnistuksen herkkyyden säätäminen
 
-Jos Chloros ei tunnista kohteitasi oikein, säädä näitä asetuksia [Projektin asetuksissa](adjusting-project-settings.md):
+Jos Chloros ei tunnista kohteitasi oikein, säädä näitä asetuksia [Projektin asetuksissa](adjusting-project-settings.md):**Vähimmäiskalibrointinäytteen pinta-ala:*** **Oletus**: 25 pikseliä
+* **Lisää**, jos saat vääriä tunnistuksia pienistä esineistä
+* **Vähennä**, jos kohteita ei tunnisteta**Vähimmäiskohteiden ryhmittely:*** **Oletus**: 60
+* **Lisää**, jos kohteet jakautuvat useiksi tunnistuksiksi
+* **Pienennä**, jos värivaihteluita sisältäviä kohteita ei tunnisteta kokonaan***
 
-**Vähimmäiskalibrointinäytealue:**
-
-* **Oletus**: 25 pikseliä
-* **Lisää**, jos pienet esineet tunnistetaan virheellisesti
-* **Vähennä**, jos kohteita ei tunnisteta
-
-**Vähimmäiskohteiden klusterointi:**
-
-* **Oletus**: 60
-* **Lisää**, jos kohteet jaetaan useisiin tunnistuksiin
-* **Vähennä**, jos värivaihteluita sisältäviä kohteita ei tunnisteta kokonaan
-
-***
-
-## Yleisiä kohdekuvaongelmia
+## Yleisiä kohdekuvien ongelmia
 
 ### Ongelma: Kohteita ei tunnistettu
 
 **Mahdolliset syyt:**
 
 * Kohdekuvia ei ole merkitty tiedostoselaimessa
-* Kohde on liian pieni kehyksessä (&lt; 30 % kuvasta)
+* Kohde on liian pieni kuvassa (&lt; 30 % kuvasta)
 * Huono valaistus (varjot, häikäisy)
-* Kohteen havaitsemisen asetukset liian tiukat
+* Kohteen tunnistuksen asetukset ovat liian tiukat
 
 **Ratkaisut:**
 
-1. Varmista, että Kohde-sarakkeessa on valittu oikeat kuvat
-2. Tarkista kohteen kuvanlaatu esikatselussa
+1. Varmista, että Kohde-sarakkeen valinta on valittuna oikeille kuville
+2. Tarkista kohdekuvan laatu esikatselussa
 3. Ota kohteet uudelleen, jos laatu on huono
-4. Säädä kohteen havaitsemisen asetuksia tarvittaessa
+4. Säädä kohteen tunnistuksen asetuksia tarvittaessa
 
-### Ongelma: Vääriä kohteen havaitsemisia
+### Ongelma: Vääriä kohteen tunnistuksia
 
 **Mahdolliset syyt:**
 
-* Valkoiset rakennukset, ajoneuvot tai maaperän peite sekoitetaan kohteisiin
-* Kirkkaat kohdat kasvillisuudessa
+* Valkoiset rakennukset, ajoneuvot tai maaperän peitteet, joita luullaan kohteiksi
+* Kirkkaat alueet kasvillisuudessa
 * Tunnistuksen herkkyys liian alhainen
 
 **Ratkaisut:**
 
-1. Merkitse vain todelliset kohdekuvat tunnistuksen laajuuden rajoittamiseksi
-2. Lisää kalibroinnin vähimmäisnäytealuetta
-3. Lisää kohteen klusterointiarvoa
-4. Varmista, että kohdekuvissa näkyy vain kohde (taustalla mahdollisimman vähän häiriöitä)
+1. Merkitse vain todelliset kohdekuvat tunnistusalueen rajoittamiseksi
+2. Suurenna kalibroinnin vähimmäisnäytteen pinta-alaa
+3. Suurenna kohteiden ryhmittelyn vähimmäisarvoa
+4. Varmista, että kohdekuvissa näkyy vain kohde (mahdollisimman vähän taustahäiriöitä)
 
 ***
 
 ## Tarkistuslista
 
-Ennen käsittelyn aloittamista tarkista kohdekuvien valinta:
+Tarkista kohdekuvien valinta ennen käsittelyn aloittamista:
 
 * [ ] Vähintään 1 kohdekuva merkitty per istunto
 * [ ] Kohdesarakkeen valintaruudut on valittu kaikille kohdekuville
-* [ ] Kohdekuvat on otettu samanaikaisesti kuin mittaus
+* [ ] Kohdekuvat on otettu samanaikaisesti tutkimuksen kanssa
 * [ ] Kohteet näkyvät selvästi esikatselussa, kun niitä napsautetaan
 * [ ] Kaikki 4 kalibrointipaneelia näkyvät jokaisessa kohdekuvassa
 * [ ] Kohteissa ei ole varjoja tai esteitä
@@ -193,29 +179,29 @@ Ennen käsittelyn aloittamista tarkista kohdekuvien valinta:
 
 ***
 
-## Kohteettoman käsittelyn
+## Kohteettomat käsittelyt
 
 ### Käsittely ilman kalibrointikohteita
 
-Vaikka sitä ei suositella tieteelliseen työhön, voit käsitellä ilman kohteita:
+Vaikka sitä ei suositella tieteelliseen työhön, voit käsitellä kuvia ilman kohteita:
 
-1. Jätä kaikki Kohde-sarakkeen valintaruudut valitsematta
-2. **Poista käytöstä** &quot;Heijastavuuskalibrointi&quot; projektin asetuksissa
-3. Vignettikorjaus otetaan edelleen käyttöön
-4. Tulos ei kalibroida absoluuttisen heijastavuuden mukaan
+1. Jätä kaikki kohde-sarakkeen valintaruudut valitsematta
+2. **Poista käytöstä** &quot;Heijastavuuden kalibrointi&quot; Projektin asetuksissa
+3. Vignettikorjaus sovelletaan edelleen
+4. Tulosta ei kalibroida absoluuttisen heijastavuuden suhteen
 
-{% hint style=&quot;warning&quot; %}
-**Ei suositella**: Ilman heijastavuuden kalibrointia pikseliarvot edustavat vain suhteellista kirkkautta, eivät tieteellisiä heijastavuusmittauksia. Käytä kalibrointikohteita tarkkojen, toistettavien tulosten saamiseksi.
+{% hint style="warning" %}
+**Ei suositella**: Ilman heijastavuuskalibrointia pikseliarvot edustavat vain suhteellista kirkkautta, eivät tieteellisiä heijastavuusmittauksia. Käytä kalibrointikohteita tarkkojen ja toistettavien tulosten saamiseksi.
 {% endhint %}
 
 ***
 
 ## Seuraavat vaiheet
 
-Kun olet merkinnyt kohdekuvat:
+Kun olet merkinnyt kohdekuvasi:
 
-1. **Tarkista asetukset** - Katso [Projektin asetusten säätäminen](adjusting-project-settings.md)
-2. **Aloita käsittely** - Katso [Käsittelyn aloittaminen](starting-the-processing.md)
-3. **Seuraa edistymistä** - Katso [Käsittelyn seuranta](monitoring-the-processing.md)
+1. **Tarkista asetuksesi** – Katso [Projektin asetusten säätäminen](adjusting-project-settings.md)
+2. **Aloita käsittely** – Katso [Käsittelyn aloittaminen](starting-the-processing.md)
+3. **Seuraa edistymistä** – Katso [Käsittelyn seuranta](monitoring-the-processing.md)
 
 Lisätietoja kalibrointikohteista on kohdassa [Kalibrointikohteet](../calibration-targets.md).

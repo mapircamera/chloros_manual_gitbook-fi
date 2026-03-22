@@ -4,17 +4,17 @@ Kun olet tuonut kuvat projektiin, ne näkyvät ruudukossa pääalueella.
 
 ## Pikkukuvien koko
 
-Voit säätää pikkukuvien kokoa oikeassa yläkulmassa olevalla zoomausliukusäätimellä. Voit myös pitää CTRL-näppäintä painettuna ja käyttää hiiren rullaa kuvien koon muuttamiseen.
+Voit säätää pikkukuvien kokoa oikeassa yläkulmassa olevalla zoomausliukusäätimellä. Voit myös skaalata niitä pitämällä CTRL-näppäintä painettuna ja pyörittämällä hiiren rullaa.
 
-<figure><img src="../.gitbook/assets/chloros_grid_zoom.gif" alt=""><figcaption></figcaption></figure>## Vienti-näkymän painikkeet
+<figure><img src="../.gitbook/assets/chloros_grid_zoom.gif" alt=""><figcaption></figcaption></figure>## Viennin näkymäpainikkeet
 
-Kun kuvat käsitellään, ruudukon vasempaan yläkulmaan ilmestyy painikkeita. Näillä painikkeilla voit vaihtaa ruudukon pikkukuvien tyyppiä:
+Kuvien käsittelyn edetessä ruudukon vasempaan yläkulmaan ilmestyy painikkeita. Näillä painikkeilla voit vaihtaa ruudukon pikkukuvien tyyppiä:
 
-* **JPG** – Alkuperäiset kameran JPG-pienoiskuvat
-* **Kohteet** – Kuvat, jotka sisältävät havaitut kalibrointikohteet
+* **JPG** – Alkuperäiset kameran JPG-pikkukuvat
+* **Kohteet** – Kuvat, joissa on havaittuja kalibrointikohteita
 * **Heijastavuus** – Kalibroidut heijastavuuskuvat
-* **RWA (indeksi/LUT)** – Lasketut monispektriset indeksikuvat, joissa on värillinen LUT-gradientti
+* **RWA (Indeksi/LUT)** – Lasketut monispektriset indeksikuvat, joissa on värillinen LUT-gradientti
 
-Klikkaamalla ruudukon pikkukuvia avaat koko näytön [kuvankatseluohjelman](opening-an-image-full-screen.md). Jos ruudukon katselutila on asetettu tiettyyn vientiin, kuten &quot;Kohteet&quot;, ruudukon pikkukuvaa klikkaamalla avaat viedyn kohdekuvan koko näytöllä.
+Klikkaamalla ruudukon pikkukuvia avaat [Kuvankatseluohjelman](opening-an-image-full-screen.md) koko ruudun tilassa. Jos ruudukon katselutila on asetettu tiettyyn vientimuotoon, kuten &quot;Kohteet&quot;, ruudukon pikkukuvaa klikkaamalla avautuu viety kohdekuva koko ruudun tilassa.
 
 <figure><img src="../.gitbook/assets/chloros_grid_mode.gif" alt=""><figcaption></figcaption></figure>

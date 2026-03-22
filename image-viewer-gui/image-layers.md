@@ -1,19 +1,17 @@
 # Kuvakerrokset
 
-Chloros-kuvankatseluohjelman Kuvakerrokset-pudotusvalikosta voit nopeasti vaihtaa saman kuvan eri versioiden välillä – alkuperäisistä kuvista käsiteltyihin heijastavuuslähtöihin ja laskettuihin indeksikuviin.
+Chloros-kuvankatseluohjelman Kuvakerrokset-pudotusvalikosta voit vaihtaa nopeasti saman kuvan eri versioiden välillä – alkuperäisistä kuvista käsiteltyihin heijastavuustuloksiin ja laskettuihin indeksikuviksi.
 
-## Mitä ovat kuvakerrokset?
+## Mitä kuvakerrokset ovat?
 
-Chloros-ohjelmassa **kerrokset** viittaavat eri kuvatulostuksiin, jotka ovat käytettävissä yhdelle lähdekuvalle. Kun käsittelet kuvia, Chloros luo useita versioita:
+Chloros-ohjelmassa **kerrokset** viittaavat eri kuvatuloksiin, jotka ovat saatavilla yhdestä lähdekuvasta. Kun käsittelet kuvia, Chloros luo useita versioita:
 
 * **Alkuperäiset kuvat** (kameran JPG- ja RAW-tiedostot)
 * **Heijastavuuskalibroidut** tulosteet (jos heijastavuuskalibrointi oli käytössä)
 * **Kohdekuvat** (jos kuva sisältää kalibrointikohteita)
-* **Indeksikuvat** (NDVI, NDRE, GNDVI jne., jos indeksit oli määritetty)
+* **Indeksikuvat** (NDVI, NDRE, GNDVI jne., jos indeksit on määritetty)
 
-Kuvankatseluohjelman oikeassa yläkulmassa olevan **Layer Selector -pudotusvalikon** avulla voit vaihtaa näiden versioiden välillä välittömästi poistumatta katseluohjelmasta.
-
-***
+Kuvankatseluohjelman oikeassa yläkulmassa olevan **Layer Selector -pudotusvalikon** avulla voit vaihtaa näiden versioiden välillä välittömästi poistumatta katseluohjelmasta.***
 
 ## Käytettävissä olevat kerrostyypit
 
@@ -21,72 +19,72 @@ Kuvankatseluohjelman oikeassa yläkulmassa olevan **Layer Selector -pudotusvalik
 
 * Kameran alkuperäinen JPG-esikatselukuva
 * Aina käytettävissä kaikille kuville
-* Käsittelemätön, kameran ottama
+* Käsittelemätön, sellaisena kuin kamera on sen tallentanut
 * Nopein ladata ja näyttää
-
-**Käyttötarkoitus:**
-
-* Nopea esikatselu alkuperäisestä kuvasta
-* Kuvan sommittelun ja rajauksen tarkistaminen
-* Kuvan laadun tarkistaminen ennen käsittelyä
-
-### RAW (alkuperäinen)
-
-* Kameran alkuperäinen RAW-anturidata
-* Debayeroitu ilman jälkikäsittelyä
-* Suurempi bittisyvyys kuin JPG (tyypillisesti 12- tai 14-bittinen anturidata)
 
 **Milloin katsella:**
 
-* Alkuperäisen anturidatan laadun tarkastaminen
-* Anturin ongelmien tai artefaktien tarkistaminen
+* Alkuperäisen kuvan nopea esikatselu
+* Kuvan sommittelun ja rajauksen tarkistaminen
+* Kuvan laadun tarkistaminen ennen käsittelyä
+
+### RAW (Alkuperäinen)
+
+* Kameran alkuperäiset RAW-anturitiedot
+* Debayeroitu ilman jälkikäsittelyä
+* Suurempi bittisyvyys kuin JPG:llä (tyypillisesti 12- tai 14-bittiset anturitiedot)
+
+**Milloin katsella:**
+
+* Alkuperäisen anturidatan laadun tarkastelu
+* Anturiongelmien tai artefaktien tarkistaminen
 * Käsittelyn ennen ja jälkeen -tulosten vertailu
 
-### RAW (kohde)
+### RAW (Kohde)
 
-* Näkyy vain kuvissa, joissa on kalibrointikohteita
-* Näyttää alkuperäisen RAW-kuvan, jossa kohde on havaittu
-* Käytetään kohteen havaitsemisen onnistumisen tarkistamiseen
+* Näkyy vain kuvissa, joiden on tunnistettu sisältävän kalibrointikohteita
+* Näyttää alkuperäisen RAW-kuvan, josta kohde on tunnistettu
+* Käytetään varmistamaan, että kohteen tunnistus onnistui
 
-**Milloin tarkastella:**
+**Milloin katsella:**
 
-* Kalibrointikohteiden oikean havaitsemisen vahvistaminen
-* Kohteen kuvanlaadun tarkistaminen
+* Kalibrointikohteiden oikean tunnistuksen vahvistaminen
+* Kohteen kuvan laadun tarkistaminen
 * Kalibrointiongelmien vianmääritys
 
-{% hint style=&quot;info&quot; %}
-**Kohdekerros**: Tämä kerros näkyy vain kalibrointikohteita sisältävien kuvien pudotusvalikossa. Tavallisissa kuvissa tätä vaihtoehtoa ei ole.
+{% hint style="info" %}
+**Kohdekerros**: Tämä kerros näkyy pudotusvalikossa vain kuvissa, jotka sisältävät kalibrointikohteita. Tavallisissa kuvissa tätä vaihtoehtoa ei ole.
 {% endhint %}
 
 ### RAW (heijastavuus)
 
-* Kalibroitu heijastavuuslähtökuva
-* Vignette-korjattu (jos käytössä käsittelyssä)
+* Kalibroitu heijastavuuskuva
+* Vignetoinnin korjaus (jos käytössä käsittelyssä)
 * Heijastavuus kalibroitu kohdetietojen avulla (jos käytössä)
 * Monikaistainen TIFF kaikilla kamerakanavilla
-* Pikseliarvot edustavat heijastavuuden prosenttiosuutta (kun käytetään prosenttimuotoa)
-* Valmis muokattavaksi [Index/LUT Sandbox] -työkalulla(index-lut-sandbox.md)
+* Pikseliarvot edustavat heijastavuuden prosenttiosuutta (kun käytetään prosenttitilaa)
+* Valmis muokattavaksi [Index/LUT Sandbox](index-lut-sandbox.md) -työkalulla
 
-**Katsomisen ajankohta:**
+**Milloin tarkastella:**
 
 * Kalibroitujen tulosten tarkastelu
-* Kalibroinnin laadun tarkistaminen
-* Pikseliarvojen tarkistaminen tieteellisen tarkkuuden varmistamiseksi
-* Vertailu alkuperäiseen kalibroinnin vaikutusten tarkastelemiseksi
+* Kalibroinnin laadun varmistaminen
+* Pikseliarvojen tieteellisen tarkkuuden tarkistaminen
+* Vertailu alkuperäiseen kuvaan kalibroinnin vaikutusten tarkastelemiseksi
 
-{% hint style=&quot;success&quot; %}
-**Suositeltava**: Käytä RAW (Reflectance) -kerrosta, kun tarkistat pikseliarvoja tieteellisiä mittauksia ja analyysejä varten.
+{% hint style="success" %}
+**Suositeltava**: Käytä RAW (heijastavuus) -kerrosta, kun tarkistat pikseliarvoja tieteellisiä mittauksia ja analyyseja varten.
 {% endhint %}
 
-### RAW (NDVI Index)... ja vastaavat
+### RAW (NDVI-indeksi)... ja vastaavat
 
 * Laskettu kasvillisuusindeksikuva (tässä esimerkissä NDVI)
-* Indeksin nimi muuttuu sen mukaan, mikä indeksi on määritetty käsittelyn aikana.
+* Indeksin nimi muuttuu sen mukaan, mikä indeksi on määritetty käsittelyn aikana
 * Esimerkkejä: RAW (NDVI-indeksi), RAW (NDRE-indeksi), RAW (GNDVI-indeksi) jne.
 * Yksikaistainen harmaasävykuva, joka näyttää indeksin laskentatulokset
-* Jokaiselle projektin asetuksissa määritetylle indeksille näkyy yksi kerros
+* Jokaisesta Projektin asetuksissa määritetystä indeksistä näkyy yksi kerros
 
-**Mahdolliset indeksien nimet:**
+**Mahdolliset indeksinimet:**
 
 * RAW (NDVI-indeksi)
 * RAW (NDRE-indeksi)
@@ -94,14 +92,14 @@ Kuvankatseluohjelman oikeassa yläkulmassa olevan **Layer Selector -pudotusvalik
 * RAW (OSAVI-indeksi)
 * RAW (EVI-indeksi)
 * RAW (SAVI-indeksi)
-* Ja paljon muuta... (katso [Monispektrinen indeksi kaavat](../project-settings/multispectral-index-formulas.md))
+* Ja monia muita... (katso [Monispektriset indeksikaavat](../project-settings/multispectral-index-formulas.md))
 
 **Milloin tarkastella:**
 
 * Indeksin laskentatulosten tarkastelu
-* Indeksin arvojen vaihteluvälien tarkistaminen
+* Indeksin arvoalueiden tarkistaminen
 * Kiinnostavien alueiden tunnistaminen
-* Indeksikuvien tarkistaminen ennen käyttöä GIS:ssä tai analyysissä
+* Indeksikuvien tarkistaminen ennen käyttöä GIS-järjestelmässä tai analyysissä
 
 ***
 
@@ -110,37 +108,35 @@ Kuvankatseluohjelman oikeassa yläkulmassa olevan **Layer Selector -pudotusvalik
 ### Pudotusvalikon avaaminen
 
 1. Avaa kuva koko näytön tilassa (napsauta mitä tahansa pikkukuvaa kuvankatselijassa)
-2. Etsi **kerrosten pudotusvalikko** katselijan oikeasta yläkulmasta
-3. Pudotusvalikossa näkyy valittuna oleva kerros (esim. &quot;JPG&quot;)
-4. Napsauta pudotusvalikkoa nähdäksesi kaikki käytettävissä olevat kerrokset
+2. Etsi **kerrosvalikko** katselijan oikeasta yläkulmasta
+3. Valikossa näkyy tällä hetkellä valittu kerros (esim. &quot;JPG&quot;)
+4. Napsauta valikkoa nähdäksesi kaikki käytettävissä olevat kerrokset
 
 ### Kerrosten vaihtaminen
 
-1. Napsauta kerrosten avattavaa valikkoa avataksesi luettelon.
-2. Kaikki nykyisen kuvan käytettävissä olevat kerrokset näytetään.
-3. Napsauta mitä tahansa kerroksen nimeä vaihtaaksesi kyseiseen versioon.
-4. Kuva päivittyy välittömästi näyttämään valitun kerroksen.
+1. Napsauta kerrosvalikkoa avataksesi luettelon
+2. Näkyviin tulevat kaikki nykyisen kuvan käytettävissä olevat kerrokset
+3. Napsauta mitä tahansa kerroksen nimeä vaihtaaksesi kyseiseen versioon
+4. Kuva päivittyy välittömästi näyttämään valitun kerroksen
 
 **Nopea vaihtaminen:**
 
-* Avattava valikko muistaa viimeisimmän valintasi.
-* Kun siirryt seuraavaan kuvaan, Chloros yrittää näyttää saman kerroksen tyypin.
-* Jos kyseistä kerrosta ei ole seuraavassa kuvassa, oletusarvona on JPG.
+* Pudotusvalikko muistaa viimeisimmän valintasi
+* Kun siirryt seuraavaan kuvaan, Chloros yrittää näyttää saman kerroksen tyypin
+* Jos kyseistä kerrosta ei ole seuraavassa kuvassa, oletusarvona on JPG
 
 ### Kerrosten saatavuus
 
 Kaikki kerrokset eivät ole käytettävissä jokaisessa kuvassa:
 
-**Aina käytettävissä:**
-
-* ✅ JPG (jokaisella kuvalla on JPG-esikatselu)
+**Aina käytettävissä:*** ✅ JPG (jokaisella kuvalla on JPG-esikatselu)
 
 **Ehdollisesti käytettävissä:**
 
-* ⚠️ RAW (alkuperäinen) – Vain jos kuva on otettu RAW- tai RAW+JPG-tilassa
-* ⚠️ RAW (kohde) – Vain jos kuva sisältää havaittuja kalibrointikohteita
-* ⚠️ RAW (heijastavuus) – Vain käsittelyn jälkeen, kun heijastavuuden kalibrointi on käytössä
-* ⚠️ RAW (\[indeksi] indeksi) – Vain käsittelyn jälkeen, kun indeksit on määritetty
+* ⚠️ RAW (Alkuperäinen) – Vain jos kuva on otettu RAW- tai RAW+JPG-tilassa
+* ⚠️ RAW (Kohde) – Vain jos kuva sisältää tunnistettuja kalibrointikohteita
+* ⚠️ RAW (heijastavuus) – Vain, jos käsittely on suoritettu heijastavuuskalibrointi käytössä
+* ⚠️ RAW (\[Indeksi] Indeksi) – Vain, jos käsittely on suoritettu indeksit määritettynä
 
 ***
 
@@ -148,102 +144,102 @@ Kaikki kerrokset eivät ole käytettävissä jokaisessa kuvassa:
 
 ### Kuvien välillä liikkuminen
 
-Kun siirryt toiseen kuvaan (nuolinäppäimillä tai napsauttamalla pikkukuvia):
+Kun siirryt toiseen kuvaan (nuolinäppäimillä tai napsauttamalla pikkukuvia):**Kerroksen asetukset säilyvät:**
 
-**Kerroksen asetukset säilyvät:**
-
-* Jos katselet &quot;RAW (heijastavuus)&quot;, seuraava kuva on &quot;RAW (heijastavuus)&quot; (jos saatavilla)
-* Jos katselet &quot;RAW (NDVI-indeksi)&quot;, seuraava kuva on &quot;RAW (NDVI Index)&quot; (jos saatavilla)
-* Jos samaa kerrosta ei ole, oletusarvo on JPG
+* Jos katsot &quot;RAW (heijastavuus)&quot;, seuraava kuva näyttää &quot;RAW (heijastavuus)&quot; (jos saatavilla)
+* Jos katsot &quot;RAW (NDVI-indeksi)&quot;, seuraava kuva näyttää &quot;RAW (NDVI-indeksi)&quot; (jos saatavilla)
+* Jos samaa kerrosta ei ole, oletuksena on JPG
 
 **Esimerkki työnkulusta:**
 
-1. Avaa kuva 1, vaihda RAW (NDVI Index)
+1. Avaa kuva 1, vaihda RAW (NDVI Index) -tilaan
 2. Paina → nähdäksesi kuvan 2
-3. Kuva 2 näyttää automaattisesti RAW (NDVI-indeksi) -kerroksen
+3. Kuva 2 näyttää automaattisesti RAW (NDVI Index) -kerroksen
 4. Jatka selaamista – kaikki kuvat näyttävät NDVI-kerroksen
-5. Erittäin tehokas tapa tarkastella indeksin tuloksia useissa kuvissa
+5. Erittäin tehokas tapa tarkastella indeksituloksia useissa kuvissa
 
 ***
 
-## Yleiset työnkulut
+## Yleisiä työnkulkuja
 
 ### Työnkulku 1: Ennen/jälkeen -vertailu
 
-**Tavoite**: Vertaa alkuperäistä kuvaa kalibroituun kuvaan
+**Tavoite**: Vertaa alkuperäistä ja kalibroitua kuvaa
 
 1. Avaa käsitelty kuva kuvankatseluohjelmassa
-2. Valitse **RAW (Alkuperäinen)** avattavasta valikosta
+2. Valitse pudotusvalikosta **RAW (Original)**
+
 3. Huomaa vinjetointi ja kalibroimattomat arvot
-4. Vaihda **RAW (Heijastavuus)** avattavasta valikosta
-5. Vertaa – vinjetointi on poistettu, arvot on kalibroitu
+4. Vaihda pudotusvalikosta **RAW (Reflectance)**
+
+5. Vertaa – vinjetointi poistettu, arvot kalibroitu
 
 ### Työnkulku 2: Indeksin tarkastelu
 
-**Tavoite**: Tarkista nopeasti NDVI-tulokset koko tietojoukosta.
+**Tavoite**: Tarkastele nopeasti NDVI-tuloksia koko aineistossa
 
-1. Avaa ensimmäinen käsitelty kuva.
-2. Valitse avattavasta valikosta **RAW (NDVI-indeksi)**.
-3. Siirry seuraavaan kuvaan →-nuolinäppäimellä
+1. Avaa ensimmäinen käsitelty kuva
+2. Valitse pudotusvalikosta **RAW (NDVI-indeksi)**
+
+3. Siirry seuraavaan kuvaan nuolinäppäimillä
 4. NDVI-kerros säilyy automaattisesti
 5. Jatka kaikkien kuvien läpi ja tarkista NDVI-kuviot
-6. Vaihda **RAW (NDRE-indeksi)** -tilaan vertailua varten
+6. Vaihda **RAW (NDRE Index)** -tilaan vertailua varten
 
 ### Työnkulku 3: Kohteen tarkistus
 
-**Tavoite**: Tarkista, että kaikki kohdekuvat on tunnistettu oikein.
+**Tavoite**: Varmista, että kaikki kohdekuvat on tunnistettu oikein
 
-1. Siirry kohdekuvaan.
-2. Valitse **RAW (kohde)** avattavasta valikosta.
-3. Tarkista, että kalibrointikohteet ovat selvästi näkyvissä ja tunnistettu.
-4. Siirry seuraavaan kohdekuvaan.
-5. Toista tarkistus kaikille kohteille.
+1. Siirry kohdekuvaan
+2. Valitse pudotusvalikosta **RAW (Target)**
 
-### Työnkulku 4: Pikseliarvon tarkastus
+3. Varmista, että kalibrointikohteet ovat selvästi näkyvissä ja tunnistettuja
+4. Siirry seuraavaan kohdekuvaan
+5. Toista tarkistus kaikille kohteille
 
-**Tavoite**: Tarkista heijastavuusarvojen tieteellinen tarkkuus.
+### Työnkulku 4: Pikseliarvojen tarkastus
 
-1. Avaa käsitelty kuva.
-2. Valitse **RAW (Heijastavuus)** -kerros.
-3. Ota käyttöön **Pikseliprosentti** -tila (painike oikeassa yläkulmassa olevassa työkalurivissä).
-4. Siirrä kursori kasvillisuusalueiden päälle.
-5. Varmista, että pikseliarvot ovat odotetulla alueella (30–70 % NIR:lle, 5–15 % Red:lle).
-6. Tarkista, että maaperän ja veden alueiden arvot ovat asianmukaiset.
+**Tavoite**: Tarkista heijastusarvojen tieteellinen tarkkuus
+
+1. Avaa käsitelty kuva
+2. Valitse **RAW (Heijastus)**-kerros
+3. Ota käyttöön **Pikseliprosentti**-tila (painike oikean yläkulman työkalurivillä)
+4. Siirrä kursori kasvillisuusalueiden päälle
+5. Varmista, että pikseliarvot ovat odotetuissa alueissa (30–70 % NIR:lle, 5–15 % Red:lle)
+6. Tarkista maaperän ja vesialueiden arvot
 
 ***
 
 ## Pikseliarvojen ymmärtäminen kerroksittain
 
-Eri kerrokset näyttävät erilaisia pikseliarvoalueita:
+Eri kerroksilla on erilaiset pikseliarvoalueet:
 
 ### JPG-kerros
 
 * **Alue**: 0–255 (8-bittinen)
-* **Merkitys**: Näytetään arvot, gamma-korjattu
+* **Merkitys**: Näyttöarvot, gamma-korjattu
 * **Käyttö**: Vain silmämääräinen tarkastelu, ei tieteellisiin mittauksiin
 
 ### RAW (alkuperäinen)
 
 * **Alue**: 0–65535 (16-bittinen)
-* **Merkitys**: Raakadigitaaliset anturiluvut
-* **Käyttö**: Anturin suorituskyvyn tarkistaminen, ei kalibroitu
+* **Merkitys**: Raakakuvasensorin digitaaliset luvut
+* **Käyttö**: Sensorin suorituskyvyn tarkistamiseen, ei kalibroitu
 
 ### RAW (heijastavuus)
 
 * **Alue**: 0–65 535 (16-bittinen TIFF) tai 0,0–1,0 (32-bittinen prosentti)
-* **Merkitys**: Kalibroitu heijastavuusprosentti
-* **Käyttö**: Tieteelliset mittaukset ja analyysit
-
-**16-bittinen TIFF:** Jaa 65 535:llä saadaksesi heijastavuusprosentin **32-bittinen prosentti:** Arvot edustavat suoraan prosenttia (0,5 = 50 % heijastavuus)
+* **Merkitys**: Kalibroitu heijastusprosentti
+* **Käyttö**: Tieteelliset mittaukset ja analyysit**16-bittiselle TIFF:lle:**Jaa 65 535:llä saadaksesi heijastusprosentin**32-bittiselle prosentille:** Arvot edustavat suoraan prosentteja (0,5 = 50 % heijastus)
 
 ### RAW (indeksikuvat)
 
-* **Alue**: Vaihtelee indeksin mukaan (tyypillisesti -1,0–+1,0 normalisoiduille indekseille)
-* **Merkitys**: Indeksin laskentatulokset
+* **Alue**: Vaihtelee indeksin mukaan (tyypillisesti -1,0 – +1,0 normalisoiduille indekseille)
+* **Merkitys**: Indeksin laskentatulos
 * **Esimerkkejä**:
-  * NDVI: -1–+1 (kasvillisuus tyypillisesti 0,4–0,9)
-  * NDRE: -1–+1 (stressin havaitseminen)
-  * EVI: 0–1 (parannettu kasvillisuus)
+  * NDVI: -1 – +1 (kasvillisuus tyypillisesti 0,4 – 0,9)
+  * NDRE: -1 – +1 (stressin havaitseminen)
+  * EVI: 0 – 1 (parannettu kasvillisuus)
 
 ***
 
@@ -251,94 +247,84 @@ Eri kerrokset näyttävät erilaisia pikseliarvoalueita:
 
 ### Tehokas kerrosten vaihtaminen
 
-* **Pikanäppäinten tuntemus**: Vaikka kerroksille ei ole pikanäppäimiä, navigointinuolet (←/→) toimivat kaikissa kerroksissa
-* **Johdonmukaiset työnkulut**: Valitse yksi kerros (esim. NDVI) ja tarkista koko tietojoukko ennen siirtymistä toiseen
-* **Nopeat vertailut**: Vaihda alkuperäisen ja heijastavuuden välillä prosessoinnin laadun tarkistamiseksi
+* **Pikanäppäinten käyttö**: Vaikka tasoille ei ole pikanäppäimiä, navigointinuolet (←/→) toimivat kaikilla tasoilla
+* **Johdonmukaiset työnkulut**: Valitse yksi taso (esim. NDVI) ja tarkista koko aineisto ennen siirtymistä toiseen
+* **Nopeat vertailut**: Vaihda Original- ja Reflectance-tasojen välillä käsittelyn laadun tarkistamiseksi
 
 ### Suorituskykyyn liittyvät seikat
 
-* **JPG latautuu nopeimmin**: Käytä nopeaan selaamiseen useiden kuvien välillä.
-* **RAW-kerrokset latautuvat hitaammin**: Korkeampi resoluutio ja bittisyvyys.
-* **Indeksi-kerrokset**: Samanlainen nopeus kuin heijastavuuskerrokset.
-* **Ensimmäinen lataus on hitain**: Saman kerroksen myöhemmät näkymät tallennetaan välimuistiin ja ovat nopeampia.
+* **JPG latautuu nopeimmin**: Käytä nopeaan selaamiseen useiden kuvien välillä
+* **RAW-kerrokset latautuvat hitaammin**: Korkeampi resoluutio ja bittisyvyys
+* **Indeksikerrokset**: Samanlainen nopeus kuin heijastuskerroksilla
+* **Ensimmäinen lataus on hitain**: Saman kerroksen seuraavat näkymät tallennetaan välimuistiin ja ovat nopeampia
 
-### Laadun tarkistus
+### Laadun tarkistaminen
 
-* **Tarkista aina RAW (alkuperäinen)**: Tarkista lähdetietojen laatu ennen kuin luotat käsiteltyihin tuloksiin
+* **Tarkista aina RAW (Alkuperäinen)**: Varmista lähdetietojen laatu ennen kuin luotat käsiteltyihin tuloksiin
 * **Vertaa kerroksia**: Käytä kerrosten vaihtoa varmistaaksesi, että käsittely on toiminut oikein
-* **Tarkista indeksin alueet**: Käytä pikseliprosenttitilaa indeksisluokkien kanssa varmistaaksesi, että arvot ovat kohtuullisia
-
-***
+* **Tarkista indeksialueet**: Käytä Pikseliprosentti-tilaa indeksikerrosten kanssa varmistaaksesi, että arvot ovat järkeviä***
 
 ## Vianmääritys
 
 ### Kerros ei ole käytettävissä
 
-**Ongelma**: Odotettu kerros ei näy pudotusvalikossa
-
-**Mahdolliset syyt:**
+**Ongelma**: Odotettua kerrosta ei näy pudotusvalikossa**Mahdolliset syyt:**
 
 * Kuvaa ei ole käsitelty (vain JPG ja RAW (alkuperäinen) käytettävissä)
 * Heijastavuuden kalibrointi oli pois käytöstä käsittelyn aikana
 * Tiettyä indeksiä ei ole määritetty projektin asetuksissa
-* Kuva on vain kohdekuva (kohteille ei ole luotu indeksejä)
+* Kuva on pelkästään kohdekuva (kohteille ei luoda indeksejä)
 
 **Ratkaisut:**
 
 1. Varmista, että kuva on käsitelty (tarkista tulostuskansiosta, onko käsiteltyjä tiedostoja)
-2. Tarkista projektin asetukset ja varmista, että indeksit on määritetty
-3. Käsittele kuva uudelleen haluttujen indeksien ollessa käytössä
+2. Tarkista projektin asetuksista, että indeksit on määritetty
+3. Käsittele uudelleen halutut indeksit käytössä
 
-### Väärä kerros näkyy
+### Väärä kerros näkyvissä
 
-**Ongelma**: Kuva avautuu odottamattomassa kerroksessa
-
-**Syy**: Edellisen kuvan kerroksen asetukset on siirretty, mutta kyseistä kerrosta ei ole nykyisessä kuvassa
-
-**Ratkaisu**: Chloros siirtyy automaattisesti JPG-muotoon, kun haluttu kerros ei ole käytettävissä – tämä on normaalia
+**Ongelma**: Kuva avautuu odottamattomalla kerroksella**Syy**: Edellisen kuvan kerrosasetus on siirtynyt eteenpäin, mutta kyseistä kerrosta ei ole nykyisessä kuvassa**Ratkaisu**: Chloros siirtyy automaattisesti JPG-muotoon, kun ensisijaista kerrosta ei ole käytettävissä – tämä on normaalia käyttäytymistä
 
 ### Kalibrointikohteita ei näy
 
-**Ongelma**: RAW (kohde) -kerros ei näytä kohteen tunnistusta.
+**Ongelma**: RAW (Kohde) -kerros ei näytä kohteen tunnistusta**Mahdolliset syyt:**
 
-**Mahdolliset syyt:**
-
-* Kohteita ei tunnistettu käsittelyn aikana.
-* Kuva ei sisällä kohteita.
-* Kohteen tunnistuksen asetukset ovat liian tiukat.
+* Kohteita ei havaittu käsittelyn aikana
+* Kuva ei sisällä kohteita
+* Kohteen tunnistuksen asetukset ovat liian tiukat
 
 **Ratkaisut:**
 
-1. Tarkista virheenkorjauslokista, onko siinä viestejä &quot;Kohde löydetty&quot;
+1. Tarkista virhelokista, onko siellä &quot;Kohde löydetty&quot; -viestejä
 2. Varmista, että kuva sisältää näkyviä kalibrointikohteita
-3. Säädä kohteen tunnistuksen asetuksia projektin asetuksissa
+3. Säädä kohteen tunnistuksen asetuksia Projektin asetuksissa
 4. Katso [Kohdekuvien valinta](../processing-images-gui/choosing-target-images.md)
 
 ***
 
 ## Liittyvät ominaisuudet
 
-### Kuvan katseluohjelman työkalut
+### Kuvankatselutyökalut
 
-Kun katselet mitä tahansa kerrosta, voit käyttää:
+Kun katselet mitä tahansa tasoa, voit käyttää:
 
-* **Zoomauspainikkeita**: Suurenna tarkastellaksesi yksityiskohtia.
-* **Panoraamaa**: Napsauta ja vedä siirtääksesi zoomattua kuvaa.
-* **Pikseliarvon tarkastelua**: Katso arvot kursorin sijainnissa.
-* **Navigointinuolia**: Siirry kuvien välillä säilyttäen kerroksen.
-* **Pikseliprosenttitilaa**: Vaihda DN- ja prosenttimäärän näyttämisen välillä.
+* **Zoomauspainikkeita**: Suurenna tarkastellaksesi yksityiskohtia
+* **Panorointia**: Napsauta ja vedä liikkuaaksesi zoomattua kuvaa
+* **Pikseliarvojen tarkastelua**: Katso arvot kursorin sijainnissa
+* **Navigointinuolet**: Siirry kuvien välillä säilyttäen kerroksen
+* **Pikseliprosenttitila**: Vaihda DN- ja prosenttinäytön välillä
 
-Katso [Kuvan avaaminen koko ruudulla](opening-an-image-full-screen.md) saadaksesi täydellisen kuvankatseluohjelman dokumentaation.
+Katso [Kuvan avaaminen koko ruudulle](opening-an-image-full-screen.md) saadaksesi täydellisen kuvankatseluohjelman dokumentaation.
 
 ### Indeksi/LUT-hiekkalaatikko
 
-Interaktiiviseen indeksin testaukseen ja visualisointiin:
+Interaktiiviseen indeksin testaamiseen ja visualisointiin:
 
 * **Reaaliaikainen indeksin laskeminen**: Testaa erilaisia indeksin kaavoja
-* **LUT-värikartoitus**: Käytä värigradientteja harmaasävyindekseihin
-* **Vie visualisoinnit**: Tallenna värilliset indeksikuvat
+* **LUT-värikartoitus**: Sovella värigradientteja harmaasävyindekseihin
+* **Visualisointien vienti**: Tallenna värilliset indeksikuvat
 
-Katso [Indeksi/LUT-hiekkalaatikko](index-lut-sandbox.md) lisätietoja varten.
+Katso [Indeksi/LUT-hiekkalaatikko](index-lut-sandbox.md) saadaksesi lisätietoja.
 
 ***
 
@@ -346,7 +332,7 @@ Katso [Indeksi/LUT-hiekkalaatikko](index-lut-sandbox.md) lisätietoja varten.
 
 Nyt kun ymmärrät kuvakerrokset:
 
-* [**Kuvan avaaminen koko näytöllä**](opening-an-image-full-screen.md) - Täydellinen Image Viewer -opas
+* [**Kuvan avaaminen koko ruudulle**](opening-an-image-full-screen.md) – Täydellinen Image Viewer -opas
 * [**Indeksi/LUT-hiekkalaatikko**](index-lut-sandbox.md) – Interaktiivinen indeksin visualisointi
-* [**Monispektriset indeksikaavat**](../project-settings/multispectral-index-formulas.md) – Käytettävissä olevat indeksit
+* [**Monispektriset indeksikaavat**](../project-settings/multispectral-index-formulas.md) – Käytettävissä olevien indeksien viite
 * [**Käsittelyn viimeistely**](../processing-images-gui/finishing-the-processing.md) – Käsiteltyjen tulosten ymmärtäminen

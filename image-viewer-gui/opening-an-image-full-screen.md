@@ -1,6 +1,6 @@
-# Kuvan avaaminen koko ruudulla
+# Kuvan avaaminen koko näytön tilassa
 
-Chloros-kuvankatseluohjelma tarjoaa erillisen koko ruudun käyttöliittymän monispektrikuvien katseluun, analysointiin ja muokkaamiseen. Kuvankatseluohjelma tarjoaa tehokkaat työkalut tarkasteluun ja analysointiin sekä alkuperäisten kuvien että käsiteltyjen tulosteiden katseluun.
+Chloros-kuvankatseluohjelma tarjoaa erillisen koko näytön käyttöliittymän monispektrikuvien katseluun, analysointiin ja muokkaamiseen. Olipa kyseessä alkuperäiset kuvat tai käsitellyt tulokset, kuvankatseluohjelma tarjoaa tehokkaat työkalut tarkasteluun ja analysointiin.
 
 ## Image Viewerin avaaminen
 
@@ -8,93 +8,95 @@ Chloros-kuvankatseluohjelma tarjoaa erillisen koko ruudun käyttöliittymän mon
 
 Yleisin tapa avata kuva Image Viewerissa:
 
-1. Varmista, että olet **Tiedostoselain**-välilehdessä <img src="../.gitbook/assets/icon_file-browser.JPG" alt="" data-size="line">
-2. Napsauta mitä tahansa **kuvien pikkukuvaa** kuvaruudukossa
+1. Varmista, että olet **Tiedostoselain**-välilehdellä <img src="../.gitbook/assets/icon_file-browser.JPG" alt="" data-size="line">
+2. Napsauta mitä tahansa **kuvan pikkukuvaa** kuvaruudukossa
 3. Kuva avautuu **pääesikatselualueelle** (näytön keskelle)
-4. Kuva on nyt ladattu ja valmis koko näytön katseluun
+4. Kuva on nyt ladattu ja valmis katsottavaksi koko näytön tilassa
 
 ### Image Viewer -välilehden avaaminen
 
 Kun kuva on ladattu esikatselualueelle:
 
-1. Napsauta **Image Viewer** <img src="../.gitbook/assets/icon_image-viewer.JPG" alt="" data-size="line"> -kuvaketta vasemmassa sivupalkissa.
-2. Kuvankatseluohjelman välilehti avautuu ja näyttää valitun kuvan koko ruudulla.
-3. Lisäasetukset ja analyysityökalut tulevat saataville vasemmassa sivupalkissa.
+1. Napsauta **Image Viewer** <img src="../.gitbook/assets/icon_image-viewer.JPG" alt="" data-size="line"> -kuvaketta vasemmassa sivupalkissa
+2. Kuvankatselu-välilehti avautuu ja näyttää valitun kuvan koko näytön tilassa
+3. Lisäasetukset katseluun ja analysointiin tulevat näkyviin vasemmassa sivupalkissa
 
 ***
 
-## Kuvankatseluohjelman käyttöliittymän yleiskatsaus
+## Kuvankatselu-käyttöliittymän yleiskatsaus
 
-### Pääruutu
+### Päänäyttöalue
 
-Suurin osa ruudusta näyttää kuvan:
+Suurin osa näytöstä näyttää kuvasi:
 
-* **Täysi resoluutio**: Kuvat näytetään alkuperäisellä resoluutiolla.
-* **Zoomattava**: Zoomaa käyttämällä säätimiä tai hiiren rullaa
-* **Panoroitava**: Siirrä kuvaa zoomatussa tilassa napsauttamalla ja vetämällä
+* **Täysi resoluutio**: Kuvat näytetään alkuperäisellä resoluutiolla
+* **Zoomaaminen**: Zoomaa säätimillä tai hiiren rullalla
+* **Panorointi**: Napsauta ja vedä liikkua zoomatussa tilassa
 * **Kuvasuhde säilyy**: Kuvat skaalautuvat suhteessa***
 
-## Katseluasetukset
+## Katseluvaihtoehdot
 
-### Peruskuvien selaus
+### Peruskuvanavigointi
 
-#### Kuvien selaus
+#### Selaa kuvia
 
-Selaa kuvasarjaa näppäimistön pikanäppäimillä tai painikkeilla:
+Selaa kuvasarjaasi pikanäppäimillä tai painikkeilla:
 
 * **Seuraava kuva**: Napsauta →-painiketta tai paina**→** (oikea nuoli) -näppäintä
 * **Edellinen kuva**: Napsauta ←-painiketta tai paina**←** (vasen nuoli) -näppäintä
 * **Siirry tiettyyn kuvaan**: Palaa tiedostoselaimeen ja napsauta haluamaasi pikkukuvaa
 
-#### Zoomaustoiminnot
+#### Zoomaustyökalut
 
 Säädä suurennusta kuvan yksityiskohtien tarkastelemiseksi:
 
-**Lähennä:*** Napsauta **+** (plus) -painiketta
-* Paina **+**tai**=** -näppäintä
+**Lähentäminen:*** Napsauta **+** (plus) -painiketta
+* Paina **+**- tai**=**-näppäintä
 * Vieritä hiiren rullaa **ylöspäin**
 
-**Kavenna:*** Napsauta **−** (miinus) -painiketta
+**Loitontaminen:*** Napsauta **−** (miinus) -painiketta
 * Paina **−** (miinus) -näppäintä
 * Vieritä hiiren rullaa **alaspäin**
 
-#### Panoroiminen zoomattuna
+#### Panorointi zoomattuna
 
-Kun kuva on zoomattu näytön kokoa suuremmaksi:
+Kun olet zoomannut kuvan näytön koon ulkopuolelle:
 
-1. Siirrä hiiren osoitin kuvan päälle.
-2. Napsauta ja **pidä hiiren vasenta painiketta painettuna**.
-3. **Vedä** siirtääksesi kuvaa.
-4. Vapauta painike lopettaaksesi panoroimisen.
+1. Siirrä hiiren osoitin kuvan päälle
+2. Napsauta ja **pidä hiiren vasenta painiketta painettuna**
 
-**Vaihtoehto**: Panoroi pienin askelin nuolinäppäimillä.***
+3.**Vedä** siirtääksesi kuvaa
+4. Vapauta lopettaaksesi panoroinnin
+
+**Vaihtoehto**: Käytä nuolinäppäimiä panoroidaksesi pienin askelin***
 
 ## Pikseliarvojen tarkastelu
 
-### Pikseliarvojen tarkastelu kursorin kohdalla
+### Pikseliarvojen tarkastelu kohdistimen kohdalla
 
-Kun siirrät hiiren osoittimen kuvan päälle, pikseliarvot näkyvät reaaliajassa:**Arvon näyttöpaikka:*** **Kelluva luku ja punainen viiva oikeanpuoleisessa indeksi-LUT-gradienttilegendassa*** **Kun zoomataan edelleen, kelluva arvo osoittimen lähellä ja korostettu pikseli*** Näyttää pikselin arvot **osoittimen alla tai korostettuna*** Päivittyy, kun siirrät hiirtä
+Kun siirrät hiiren kohdistinta kuvan päälle, pikseliarvot näkyvät reaaliajassa:**Arvon näyttöpaikka:*** **Kelluva luku ja punainen viiva oikeanpuoleisen indeksi-LUT-gradientin selitteessä*** **Kun zoomataan vielä pidemmälle, kelluva arvo kohdistimen ja korostetun pikselin lähellä*** Näyttää arvot **kohdistimen alla tai korostetulle** pikselille
+* Päivittyy hiiren liikkuessa
 
 ***
 
-## Kuvat, joita voit tarkastella
+## Katsottavat kuvatyypit
 
 ### JPG
 
 **Kameran JPG-kuvat:**
 
-* Näytä JPG-tiedot esikatseluna
-* Näytä alkuperäiset, korjaamattomat arvot
+* Näyttää JPG-tiedot esikatseluna
+* Näyttää alkuperäiset, korjaamattomat arvot
 * Hyödyllinen kuvan laadun tarkistamiseen ennen käsittelyä
 
-### RAW (alkuperäinen)
+### RAW (Alkuperäinen)
 
-### RAW (heijastavuus)
+### RAW (Heijastavuus)
 
 **Käsittelyn jälkeen:**
 
-* Vignette korjattu
-* Heijastavuus kalibroitu
+* Vignetoinnin korjaus
+* Heijastavuuden kalibrointi
 * Monikaistainen TIFF (Red, Green, NIR jne.)
 * Tieteelliset tiedot valmiina analysoitavaksi
 
@@ -104,22 +106,22 @@ Kun siirrät hiiren osoittimen kuvan päälle, pikseliarvot näkyvät reaaliajas
 
 * Yksikaistaiset harmaasävykuvat
 * Pikseliarvot edustavat indeksin laskentatuloksia
-* Normaalisoiduille indekseille tyypillinen alue on -1–+1
-* Visualisointia varten voidaan käyttää väri-LUT-taulukoita
+* Alue tyypillisesti -1 – +1 normalisoiduille indekseille
+* Värillisiä LUT-taulukoita voidaan käyttää visualisointiin
 
 ***
 
 ## Indeksin ja LUT-taulukon käyttö
 
-Käytä monispektrisiä indeksejä ja väri-LUT-taulukoita:
+Käytä monispektrisiä indeksejä ja värillisiä Look-Up-taulukoita:
 
-1. Etsi **Index/LUT Sandbox** **Image Viewer** <img src="../.gitbook/assets/icon_image-viewer.JPG" alt="" data-size="line"> sivupalkista
+1. Etsi **Index/LUT Sandbox** **Image Viewer** -sovelluksesta <img src="../.gitbook/assets/icon_image-viewer.JPG" alt="" data-size="line"> sivupalkissa
 2. Valitse kasvillisuusindeksi (NDVI, NDRE jne.)
 3. Valitse monispektrinen kaava tai luo oma mukautettu kaava (vain Chloros+)
-4. Käytä värilukutaulukon gradienttia visualisointiin
+4. Käytä värillistä LUT-gradienttia visualisointiin
 5. Säädä arvoalueita ja kynnysarvoja
 
-Katso yksityiskohtaiset ohjeet kohdasta [Indeksi/LUT-hiekkalaatikko](index-lut-sandbox.md).
+Katso [Indeksi/LUT-hiekkalaatikko](index-lut-sandbox.md) saadaksesi yksityiskohtaiset ohjeet.
 
 ***
 
@@ -127,86 +129,86 @@ Katso yksityiskohtaiset ohjeet kohdasta [Indeksi/LUT-hiekkalaatikko](index-lut-s
 
 ### Navigointi
 
-* **→** (oikea nuoli): Seuraava kuva
-* **←** (vasen nuoli): Edellinen kuva
-* **Koti**: Luettelon ensimmäinen kuva
+* **→** (Oikea nuoli): Seuraava kuva
+* **←** (Vasen nuoli): Edellinen kuva
+* **Home**: Luettelon ensimmäinen kuva
 * **End**: Luettelon viimeinen kuva
 
 ### Zoomaaminen
 
-* **+**tai**=**: Lähennä
-* **−**: Loitonna
-* **Hiiren rulla**: Lähennä/loitonna***
+* **+**tai**=**: Lähentää
+* **−**: Loitontaa
+* **Hiiren rulla**: Lähentää/loitontaa***
 
-### Indeksilaskelmien tarkistaminen
+### Indeksilaskentojen tarkistaminen
 
 Tarkista, että indeksit on laskettu oikein:
 
 1. Avaa NDVI tai muu indeksikuva
 2. Tarkista kasvillisuusalueet:
-   * **NDVI**: Terveiden kasvien arvojen tulisi olla 0,4–0,9
-   * **NDRE**: Voimakkaan kasvun arvojen tulisi olla korkeammat
+   * **NDVI**: Terveiden kasvien arvon tulisi olla 0,4–0,9
+   * **NDRE**: Voimakkaan kasvun arvo on suurempi
    * **GNDVI**: Samanlainen kuin NDVI, mutta klorofylliherkkä
-3. Tarkista kasvillisuuden ulkopuoliset alueet:
-   * **Maaperä**: Lähellä 0 tai hieman negatiivinen
+3. Tarkista muut kuin kasvillisuusalueet:
+   * **Maaperä**: Lähellä 0:aa tai hieman negatiivinen
    * **Vesi**: Negatiiviset arvot (-0,5–0)***
 
-## Näyttöongelmien vianmääritys
+## Katseluongelmien vianmääritys
 
 ### Kuva ei avaudu
 
 **Mahdolliset syyt:**
 
-* Tiedosto on vioittunut käsittelyn aikana
-* Tiedostomuoto ei ole tuettu
-* Muisti ei riitä suurelle kuvalle
+* Tiedosto vioittunut käsittelyn aikana
+* Tiedostomuotoa ei tueta
+* Muistia ei riitä suurelle kuvalle
 
 **Ratkaisut:**
 
-1. Yritä avata tiedosto ulkoisella katseluohjelmalla tiedoston eheyden tarkistamiseksi.
-2. Tarkista, että tiedostomuoto vastaa odotettua tyyppiä.
-3. Sulje muut sovellukset muistin vapauttamiseksi.
-4. Kokeile pienempää/eri kuvaa.
+1. Yritä avata tiedosto ulkoisessa katseluohjelmassa tiedoston eheyden varmistamiseksi
+2. Tarkista, että tiedostomuoto vastaa odotettua tyyppiä
+3. Sulje muut sovellukset muistin vapauttamiseksi
+4. Kokeile pienempää/eri kuvaa
 
-### Musta tai valkoinen kuva
+### Kuva näkyy mustana tai valkoisena
 
 **Mahdolliset syyt:**
 
-* Arvoalue ylittää näytön kapasiteetin.
-* 32-bittinen float-kuva, jossa on epätavallisia arvoja.
-* Indeksin laskentavirhe.
+* Arvoalue ylittää näytön kapasiteetin
+* 32-bittinen float-kuva, jossa on epätavallisia arvoja
+* Indeksin laskentavirhe
 
 **Ratkaisut:**
 
-1. Tarkista pikseliarvot – jos ne ovat kaikki hyvin pieniä tai suuria, säädä näyttöaluetta.
-2. Yritä avata kuva QGIS:ssä tai vastaavassa ohjelmassa, jossa on automaattinen alueiden säätö.
-3. Tarkista käsittelyn virhelokista, onko siinä virheitä.
+1. Tarkista pikseliarvot – jos ne ovat kaikki hyvin alhaisia tai hyvin korkeita, säädä näyttöaluetta
+2. Yritä avata tiedosto QGIS:ssä tai vastaavassa ohjelmassa, jossa on automaattinen alueen säätö
+3. Tarkista käsittelyn virheloki virheiden varalta
 
-### Pikseliarvot näyttävät virheellisiltä
+### Pikseliarvot näyttävät vääriltä
 
 **Mahdolliset syyt:**
 
-* Katselet väärää kuvaa (alkuperäinen vs. käsitelty)
-* Kalibrointia ei ole sovellettu oikein
-* Valosensorin tietoja ei ole sisällytetty syötteeseen
-* Prosenttimuoto on kytketty väärin
+* Väärän kuvan katselu (alkuperäinen vs. käsitelty)
+* Kalibrointia ei sovellettu oikein
+* Valosensorin tietoja ei sisällytetty syötteeseen
+* Prosenttitila on kytketty väärin
 
 **Ratkaisut:**
 
-1. Varmista, että katselet käsiteltyä tulosta (tarkista tiedostonimen pääte)
-2. Tarkista prosenttimuodon painikkeen tila
-3. Vertaa samaan tietojoukkoon kuuluvia tunnettuja hyviä kuvia
+1. Varmista, että katsot käsiteltyä tulosta (tarkista tiedostonimen pääte)
+2. Tarkista prosenttitilan painikkeen tila
+3. Vertaa samoista aineistoista peräisin oleviin, tiedossa oleviin hyviin kuviin
 
 ***
 
 ## Seuraavat vaiheet
 
-Nyt kun voit tarkastella kuvia koko näytön tilassa:
+Nyt kun voit katsella kuvia koko näytön tilassa:
 
-* [**Kuvakerrokset**](image-layers.md) – Lisätietoja monikaistaisesta visualisoinnista
-* [**Indeksi/LUT-hiekkalaatikko**](index-lut-sandbox.md) – Mukautettujen indeksien ja värikartoitusten soveltaminen
+* [**Kuvakerrokset**](image-layers.md) – Tutustu monikaistaisiin visualisointiin
+* [**Indeksi/LUT-hiekkalaatikko**](index-lut-sandbox.md) – Käytä mukautettuja indeksejä ja värikartoitusta
 * [**Monispektriset indeksikaavat**](../project-settings/multispectral-index-formulas.md) – Tutustu käytettävissä oleviin indekseihin
 
-Käsittelyn työnkulku:
+Käsittelytyönkulusta katso:
 
 * [**Kuvien käsittely (GUI)**](../processing-images-gui/adding-files-to-a-project.md) – Kattava käsittelyopas
