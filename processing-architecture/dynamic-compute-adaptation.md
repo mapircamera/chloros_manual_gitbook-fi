@@ -1,23 +1,30 @@
-# Dynaaminen laskentaympäristön mukautus
+# Dynaaminen laskentakapasiteetin mukautus
 
-Chloros 1.1.0 tuo mukanaan älykkään laitteistotunnistuksen ja automaattisen käsittelystrategian valinnan. Käsittelymoottori mukautuu laitteistoosi – Jetson Nanosta monen GPU:n työasemaan – ilman manuaalista konfigurointia.
+Chloros 1.2.0 hyödyntää laitteiston tunnistusta ja automaattista käsittelystrategian valintaa. Käsittelymoottori mukautuu laitteistoosi — olipa kyseessä sitten Jetson Orin Nano tai usean GPU:n työasema — ilman manuaalista konfigurointia.
 
 ***
 
-## Toimintaperiaate
+## Miten se toimii
 
-Kun Chloros käynnistyy, se luo automaattisesti profiilin järjestelmästäsi:
+Kun Chloros käynnistyy, se luo profiilin järjestelmästäsi:
 
 1. **Tunnistaa käyttöjärjestelmän** — Windows tai Linux
-2. **Tunnistaa CPU-ytimet ja kokonaisRAM-muistin**
+2. **Tunnistaa CPU-ytimet ja RAM-muistin kokonaismäärän**
 
-3.**Tunnistaa GPU:n läsnäolon** — NVIDIA CUDA -ominaisuus, VRAM, malli
+3.**Tunnistaa GPU:n olemassaolon** — NVIDIA CUDA -yhteensopivuus, VRAM, malli
 4. **Tunnistaa Jetson-mallin** (jos sovellettavissa) — `/proc/device-tree/model`:n kautta
 5. **Tarkistaa lämpötila-anturit** (Jetson) — lämpötilaa huomioivaa käsittelyä varten
-6. **Valitsee optimaalisen laskentastrategian** — kaikkien havaittujen laitteistojen perusteella
+6. **Valitsee laskentastrategian** — kaikkien havaittujen laitteistojen perusteella
 7. **Määrittää työntekijöiden lukumäärän, putkityypin ja muistin allokoinnin** automaattisesti
 
-Tulos tallennetaan välimuistiin, jotta seuraavat suoritukset käynnistyvät nopeammin. Jos laitteisto muuttuu (esim. GPU lisätään), Chloros luo uuden profiilin seuraavalla käynnistyksellä.
+Havaittu profiili tallennetaan välimuistiin istunnon ajaksi sekä muistiin että levylle, jolloin myöhemmät suoritukset käynnistyvät nopeammin:
+
+| Alusta | Välimuistissa oleva profiili |
+| --- | --- |
+| **Linux / Jetson** | `~/.config/chloros/system_config.json` (kunnioittaa `XDG_CONFIG_HOME`:ää) |
+| **Windows** | `%LOCALAPPDATA%\Chloros\config\system_config.json` |
+
+Poista kyseinen tiedosto, jotta järjestelmä tunnistaa laitteiston uudelleen — tämä on hyödyllistä esimerkiksi GPU:n tai lisää RAM-muistia lisättyäsi. Chloros tunnistaa laitteiston myös automaattisesti uudelleen, jos välimuisti on kirjoitettu yhteensopimattomalla vanhemmalla versiolla.
 
 ***
 
@@ -25,32 +32,76 @@ Tulos tallennetaan välimuistiin, jotta seuraavat suoritukset käynnistyvät nop
 
 Chloros valitsee yhden kolmesta laskentastrategiasta laitteistosi perusteella:
 
-| Strategia | Vaadittu GPU | Työntekijät | Putki | Sopii parhaiten |
+| Strategia | Valitaan, kun | Työntekijät | Suorittaja | Putki |
 | --- | --- | --- | --- | --- |
-| **`GPU_PARALLEL`** | Kyllä (vähintään 12 Gt VRAM-muistia tai vähintään 16 Gt jaettua muistia) | 3–4 | `fused_gpu` | Pöytätietokoneiden GPU:t, joissa on vähintään 12 Gt, Jetson Orin NX 16 Gt, AGX Orin |
-| **`GPU_SINGLE`** | Kyllä (&lt; 12 Gt VRAM) | 1–3 | `tiled_gpu` | Perustason GPU:t, Jetson Nano, Orin Nano |
-| **`CPU_PARALLEL`** | Ei | ytimet - 1 | `cpu_fallback` | Järjestelmät ilman NVIDIA-grafiikkapiiriä |
+| **`GPU_PARALLEL`**| CUDA-GPU, joka ilmoittaa**12 GB+ VRAM**(Jetsonin yhtenäisessä muistissa, vaatii myös vähintään 12 GB jaettua RAM-muistia) | `min(4, VRAM ÷ 4GB)`, vähintään 2 —**rajoitettu arvoon 2 Jetsonissa** | `ProcessPoolExecutor` (spawn) | `fused_gpu` |
+| **`GPU_SINGLE`**| CUDA-GPU, jossa on**2–12 GB VRAM**| 3 (I/O-päällekkäisyys; GPU-käyttö sarjoitettu semaforilla).**1 (peräkkäin) Jetson-laitteissa, joissa on alle 12 GB RAM-muistia** | `ProcessPoolExecutor` (spawn); peräkkäin prosessin sisällä vähäisen RAM-muistin Jetson-laitteissa | `fused_gpu` / `tiled_gpu` |
+| **`CPU_PARALLEL`** | Ei CUDA-GPU:ta tai alle 2 Gt VRAM-muistia | `max(2, physical cores − 1)` | `ThreadPoolExecutor` | `cpu_fallback` |
+
+Esimerkkejä `GPU_PARALLEL`-työntekijäkaavan toiminnasta: 12 Gt VRAM → 3 työntekijää, 16 Gt tai enemmän → 4 työntekijää, mikä tahansa Jetson → 2 työntekijää.
+
+Rinnakkaisuus toteutetaan Python:n vakiomuotoisella `concurrent.futures`:llä: GPU-strategiat käyttävät `ProcessPoolExecutor`:ää, jossa on **spawn** -käynnistysmenetelmää (jokainen työntekijä on erillinen prosessi, jolla on oma CUDA-kontekstinsa — `fork` kopioisi jo alustetun CUDA-tilan ja vahingoittaisi aliprosesseja), ja CPU-strategia käyttää `ThreadPoolExecutor`:ää. Chloros ei käytä mitään kolmannen osapuolen hajautettua kehystä (kuten Ray).
 
 ### Putkityypit
 
-* **`fused_gpu`** — Täysi grafiikkapiirin käsittelypolku. Kaikki debayer-, korjaus- ja indeksointitoiminnot suoritetaan GPU:lla yhdellä fuusioidulla kierroksella. Suurin läpimenokapasiteetti, mutta vaatii enemmän VRAM-muistia.
-* **`tiled_gpu`** — Muistitehokas GPU-polku. Käsittelee kuvia ruuduittain, jotta ne mahtuvat rajoitettuun GPU-muistiin. Pienempi läpimenokapasiteetti, mutta toimii laitteissa, joissa muistia on rajoitetusti.
-* **`cpu_fallback`** — Pelkästään CPU:lla suoritettava käsittely, jossa käytetään monisäikeistä rinnakkaisuutta. Käytetään, kun NVIDIA-GPU:ta ei ole käytettävissä.***
+* **`fused_gpu`** — Täydellinen GPU-käsittelypolku. Debayer-, korjaus- ja indeksointitoiminnot suoritetaan GPU:lla yhdellä yhdistetyllä läpikäynnillä. Suurin läpimenokapasiteetti, vaatii eniten VRAM-muistia.
+* **`tiled_gpu`** — Muistitehokas GPU-polku. Käsittelee kuvia ruuduittain, jotta ne mahtuvat rajoitettuun GPU-muistiin. Alhaisempi läpimenokapasiteetti, mutta toimii laitteissa, joissa muistia on rajoitetusti.
+* **`cpu_fallback`** — Pelkästään CPU:lla tapahtuva käsittely monisäikeistä rinnakkaisuutta hyödyntäen. Käytetään, kun NVIDIA-GPU:ta ei ole käytettävissä, ja viimeisenä keinona, kun molemmat GPU-käsittelypolut epäonnistuvat.
+
+Suoritusaikainen varajärjestys on aina `fused_gpu` → `tiled_gpu` → `cpu_fallback`.
+
+***
+
+## Strategian manuaalinen ohitus
+
+Aseta `CHLOROS_STRATEGY`-ympäristömuuttuja pakottaaksesi tietyn strategian — tämä on asiantuntijoiden varasuunnitelma tilanteisiin, joissa automaattinen tunnistus valitsee tilanteeseesi sopimatonta vaihtoehtoa (esimerkiksi GPU:n pitäminen vapaana muuhun työhön):
+
+```bash
+# Valid values: CPU_PARALLEL, GPU_SINGLE, GPU_PARALLEL
+CHLOROS_STRATEGY=CPU_PARALLEL chloros-cli process ~/datasets/flight001
+```
+
+Muuttujan tunnistuksessa ei erotella isoja ja pieniä kirjaimia; kaikki muut kuin nämä kolme nimeä ohitetaan, ja automaattinen tunnistus etenee normaalisti. Ohituksen ollessa käytössä Chloros valitsee edelleen työntekijämäärän puolestasi:
+
+| Ohitus | Käytetty työntekijämäärä |
+| --- | --- |
+| `CPU_PARALLEL` | `max(2, physical cores − 1)` |
+| `GPU_SINGLE` | 3 |
+| `GPU_PARALLEL` | `min(4, physical cores)` |
+
+On suositeltavaa määrittää asetus komentoittain eikä pysyvästi, jotta normaalit suoritukset sopeutuvat automaattisesti.
+
+***
 
 ## Alustakohtainen käyttäytyminen
 
 | Alusta | Strategia | Työntekijät | Putki | Huomautukset |
 | --- | --- | --- | --- | --- |
-| **Jetson Nano 8GB** | `GPU_SINGLE` | 1 | `tiled_gpu` (sarjoitettu) | Muistitehokas tila, käsittelee yhden kuvan kerrallaan |
-| **Jetson Orin NX 16GB** | `GPU_PARALLEL` | 3 | `fused_gpu` (samanaikainen) | Suositeltu reunalaite — todellinen rinnakkainen GPU-käsittely |
-| **Jetson AGX Orin 64 GB** | `GPU_PARALLEL` | 4 | `fused_gpu` (samanaikainen) | Maksimaalinen reuna-laitteen suorituskyky |
-| **Pöytätietokone, jossa on 8 Gt:n GPU** | `GPU_SINGLE` | 3 | `tiled_gpu` | Hyvä pöytätietokoneen suorituskyky muistitehokkailla ruuduilla |
-| **Pöytätietokone, jossa on vähintään 12 Gt:n GPU** | `GPU_PARALLEL` | 3–4 | `fused_gpu` | Optimaalinen pöytätietokoneen suorituskyky |
-| **Pelkkä CPU-järjestelmä** | `CPU_PARALLEL` | ytimet - 1 | `cpu_fallback` | Ei vaadi GPU:ta, käyttää ThreadPoolia |
+| **Jetson Orin Nano 8GB** | `GPU_SINGLE` | 1 | `tiled_gpu` (peräkkäinen) | Muistitehokas tila, yksi kuva kerrallaan |
+| **Jetson Orin NX 8GB** | `GPU_SINGLE` | 1 | `tiled_gpu` (peräkkäin) | Alle 12 GB:n jaettu RAM pakottaa peräkkäiseen käsittelyyn |
+| **Jetson Orin NX 16 GB** | `GPU_PARALLEL` | 2 | `fused_gpu` (rinnakkainen) | Suositeltu reunalaite — Jetson rajoitettu 2 työntekijään |
+| **Jetson AGX Orin 32–64 GB** | `GPU_PARALLEL` | 2 | `fused_gpu` (samanaikainen) | Suurin reuna-laitteen suorituskyky (myös Jetson-rajoitus: enintään 2 työntekijää) |
+| **Pöytätietokone, jossa 8 GB:n GPU** | `GPU_SINGLE` | 3 | `fused_gpu` / `tiled_gpu` | 3 työprosessia käyttävät I/O-liitäntöjä samanaikaisesti, kun semafori sarjoittaa GPU:n käytön |
+| **Työpöytätietokone, jossa on 12 Gt:n tai suurempi GPU** | `GPU_PARALLEL` | 3–4 | `fused_gpu` (samanaikaisesti) | Optimaalinen työpöytätietokoneen suorituskyky: 12 GB → 3 työntekijää, 16 GB+ → 4 |
+| **Pelkkä CPU-järjestelmä** | `CPU_PARALLEL` | fyysiset ytimet − 1 (vähintään 2) | `cpu_fallback` | GPU:ta ei tarvita, käyttää säikeistöpoolia |
 
 {% hint style="info" %}
-**Jetsonin yhtenäinen muisti**: Jetson-laitteet jakavat GPU- ja CPU-muistin. Jetson Orin NX 16GB ilmoittaa ~15,3 GB VRAM-muistia, mutta tämä on sama fyysinen RAM-muisti, jota käyttöjärjestelmä ja CPU-prosessit käyttävät. Chloros ottaa tämän huomioon muistivarausrajoja asetettaessa.
+**Jetsonin yhtenäinen muisti**: Jetson-laitteet jakavat GPU:n ja CPU:n muistin. Jetson Orin NX 16 Gt ilmoittaa ~15,3 Gt:n VRAM-muistia, mutta se on samaa fyysistä RAM-muistia, jota käyttöjärjestelmä ja CPU-prosessit käyttävät. Siksi 16 GB:n tai suuremmat Jetson-laitteet täyttävät `GPU_PARALLEL`-vaatimukset kuten 12 GB:n tai suuremmat pöytätietokoneiden GPU:t, mutta niissä on kuitenkin kahden työprosessin rajoitus — GPU, työprosessit ja niiden prosessikohtaiset CUDA-kontekstit käyttävät kaikki samaa jaettua muistipoolia.
 {% endhint %}
+
+### GPU-budjetti VRAM:n mukaan (erilliset GPU:t)
+
+x86_64-isäntäkoneissa, joissa on erillinen NVIDIA-GPU, tunnistettu VRAM määrittää myös, kuinka suuren osan kortin prosessointikapasiteetista voidaan varata ja kuinka suuriksi erät voivat kasvaa:
+
+| Tunnistettu VRAM | GPU-budjetin yläraja | Erän koon kerroin |
+| --- | --- | --- |
+| **8 GB+** | 90 % | ×2,0 |
+| **6–8 GB** | 85 % | ×1,75 |
+| **3,5–6 Gt** | 80 % | ×1,5 |
+| **2–3,5 Gt** | 75 % | ×1,25 |
+| **Alle 2 Gt** | 70 % | ×1,0 |
+
+Erilliset GPU:t varaavat järjestelmälle vain 0,5 GB, koska ne eivät jaa järjestelmän RAM-muistia. Jetson-profiilit varaavat huomattavasti enemmän ja asettavat alarajan matalammaksi — katso [NVIDIA Jetson -opas](../linux/nvidia-jetson-guide.md#per-model-gpu-budget).
 
 ***
 
@@ -58,76 +109,95 @@ Chloros valitsee yhden kolmesta laskentastrategiasta laitteistosi perusteella:
 
 Chloros käyttää [4-säikeistä käsittelyputkea](processing-pipeline.md):
 
-* **Säie 1** (Tunnistus) — Kuvan lataus, EXIF-tietojen jäsentäminen, kohteen tunnistus
-* **Säie 2** (Kalibrointi) — Heijastavuuden kalibrointilaskelma
-* **Säie 3** (Käsittely) — GPU-debayer, vinjetin korjaus, indeksin laskeminen
-* **Säie 4** (Vienti) — Tiedostojen kirjoittaminen, metatietojen upottaminen
+* **Säie 1** (Tunnistus) — Kuvan lataaminen, EXIF-tietojen jäsentäminen, kohteen tunnistus
+* **Säie 2** (Kalibrointi) — Heijastavuuskalibroinnin laskeminen
+* **Säie 3** (Käsittely) — GPU-debayer, vinjetoinnin korjaus, indeksin laskeminen
+* **Säie 4** (vienti) — tiedostojen tallennus, metatietojen upottaminen
 
-Kun aikaisemmat prosessointiputken säikeet saavat työnsä valmiiksi (esim. kaikki kuvat on tunnistettu), niiden GPU-muistin allokointi vapautuu ja **jaetaan uudelleen jäljellä oleville aktiivisille säikeille**. Tämä tarkoittaa, että säie 3 (GPU-intensiivinen vaihe) saa asteittain enemmän muistia prosessin edetessä, mikä parantaa laskentatehoa laskennallisesti vaativimmissa tehtävissä.
+Säikeet 1, 2 ja 4 kuluttavat vain vähän GPU-tehoa; Säie 3 on resurssien suurin kuluttaja. Kun aikaisemmat prosessiketjun säikeet päättyvät, niiden GPU-resurssit **jaetaan uudelleen jäljellä oleville aktiivisille säikeille**, joten säie 3 saa asteittain enemmän muistia prosessin edetessä.
 
 ### Allokointivaiheet
 
 | Vaihe | Aktiiviset säikeet | GPU-muistin jakautuminen |
 | --- | --- | --- |
-| **Alkuvaihe** | 1, 2, 3, 4 | Jaettu kaikkien säikeiden kesken |
-| **Alku-keskivaihe** | 2, 3, 4 | Säiteen 1 muisti jaetaan uudelleen |
-| **Keskivaihe-loppuvaihe** | 3, 4 | Säikeiden 1+2 muisti siirtyy säikeille 3+4 |
-| **Loppuvaihe** | 3 tai 4 | Enimmäismuisti jäljellä olevalle säikeelle |***
+| **Alkuvaihe** | 1, 2, 3, 4 | Jaettu kaikkien säikeiden kesken, suurin osa säikeelle 3 |
+| **Alku-keskivaihe** | 2, 3, 4 | Säikeen 1 osuus jaetaan uudelleen |
+| **Väli-loppuvaihe** | 3, 4 | Säikeiden 1 ja 2 osuudet siirtyvät säikeille 3 ja 4 |
+| **Loppuvaihe** | 3 tai 4 | Viimeinen aktiivinen säie saa maksimimääräisen muistivarauksensa |
+
+Lukuja säätelevät kaksi sääntöä:
+
+* **Ainoa** aktiivinen säie saa profiilinsa enimmäismääräisen allokoinnin.
+* Kun useampi kuin yksi *raskas* GPU-tehtävä on aktiivinen, kunkin raskaan tehtävän perusallokaatio jaetaan niiden kesken (ei koskaan alle määritetyn vähimmäismäärän).
+
+Suoritusaikana tosiasiallisesti käytetty arvo on alusta-profiilin allokaation ja GPU-muistimonitorin reaaliaikaisen suosituksen **pienempi**, joten kuormitettu kortti voittaa aina optimistisen profiilin.***
 
 ## Tekstuuritietoinen käsittely
 
-Tekstuuritietoinen debayer-menetelmä (vain Chloros+) käyttää huomattavasti enemmän GPU-muistia kuin Standard-menetelmä AI/ML-kohinanpoistomallin vuoksi:
+Tekstuuritietoinen debayer (**Chloros+ vain** — `--debayer texture-aware`) käyttää AI/ML-kohinanpoistomallia, joka tarvitsee noin 1,75 GB VRAM-muistia FP16-muodossa kopiota kohti, joten se käyttää huomattavasti enemmän GPU-muistia kuin Standard-menetelmä:
 
-* Järjestelmät, joissa on **&lt; 7 Gt VRAM**, pakotetaan synkroniseen käsittelysilmukkaan tekstuuritietoisessa tilassa (yksi kuva kerrallaan)
-* Järjestelmät, joissa on **7 Gt tai enemmän VRAM-muistia**, voivat käsitellä tekstuuritietoista käsittelyä samanaikaisesti, vaikkakin pienemmällä työntekijämäärällä verrattuna standardiin***
+* Järjestelmät, joissa on **alle 7 GB VRAM-muistia**, käsittelevät tekstuuritietoista käsittelyä**synkronisessa silmukassa, yksi kuva kerrallaan** — useita mallikopioita ei mahdu, ja työryhmä vain lisäisi kilpailua
+* Järjestelmissä, joissa on **7 Gt tai enemmän VRAM-muistia**, Texture Aware -toiminto voidaan käsitellä samanaikaisesti, vaikkakin Standard-menetelmään verrattuna pienemmällä työntekijämäärällä
+* **Jetson**-laitteilla Texture Aware on aina kiinnitetty yhteen työprosessiin, ja vähävirtaisissa malleissa (Nano, Orin Nano) se asettaa myös automaattisesti GPU:n taajuusrajoituksen — katso [NVIDIA Jetson -opas](../linux/nvidia-jetson-guide.md#gpu-frequency-cap-for-texture-aware-on-nano-and-orin-nano)***
 
 ## Lämmönhallinta (Jetson)
 
-Jetson-laitteilla on lämpörajoituksia, erityisesti suljetuissa tai lentokäytössä olevissa asennuksissa. Chloros valvoo GPU:n ja CPU:n lämpötiloja ja säätää käsittelyä automaattisesti:
+Jetson-laitteilla on lämpörajoituksia, erityisesti suljetuissa tai ilmakäytössä olevissa asennuksissa. Chloros valvoo Jetsonin sisäisiä lämpötila-antureita ja skaalaa eräkokoja automaattisesti:
 
 | Lämpötila | Reaktio |
 | --- | --- |
 | **&lt; 70 °C** | Normaali toiminta — täysi nopeus |
-| **70 °C** (Varoitus) | Pienennä erän kokoa |
-| **80 °C** (Kriittinen) | Aggressiivinen kuristaminen — pienennä samanaikaisuutta ja työntekijöiden määrää |
-| **90 °C** (Sammutus) | Lopeta GPU-käsittely kokonaan |
+| **70 °C** (Varoitus) | Erän koko pienenee asteittain (100 % → 50 % välillä 70 °C – 80 °C) |
+| **80 °C** (Kriittinen) | Voimakas tehonrajoitus (50 % → 0 % välillä 80 °C – 90 °C) |
+| **90 °C** (Sammutus) | GPU-käsittely pysäytetään kokonaan |
 
-Lämpötilan seurannassa käytetään `tegrastats`:ää Jetson-alustoilla. Riittävän jäähdytyksen omaavissa pöytätietokoneissa lämpösäätö laukeaa harvoin.
+Riittävän jäähdytyksen omaavissa pöytätietokoneissa lämpösäätö laukeaa harvoin.
 
 ***
 
-## Muistin kuormituksen hallinta
+## Muistipaineen hallinta
 
-Chloros valvoo järjestelmän muistipaineita käsittelyn aikana:
+Chloros valvoo GPU:n muistia jatkuvasti käsittelyn aikana ja reagoi kolmella tasolla.
 
-* **Muistikynnys**: 85 %:n käyttöaste laukaisee varovaisen käyttäytymisen
-* **OOM-vähennys**: Jos muistin loppumistilanne tapahtuu, allokointia vähennetään 25 % (kerroin 0,75)
-* **Pipeline-varajärjestelmä**: Vakavassa muistipaineessa putki siirtyy automaattisesti `fused_gpu`:stä `tiled_gpu`:ään
-* **Swap-suositukset**: Jetsonissa Chloros varoittaa, jos swap-tilaa ei ole riittävästi datajoukon koon kannalta***
+**Erän koko.** Erä alkaa 8 kuvasta kerrottuna yllä olevien taulukoiden mukaisella alustakertoimella. Chloros tarkistaa sitten vapaan VRAM-muistin, varaa siitä 20 % PyTorchin omaa hallintakustannusta varten ja olettaa, että 12 MP:n kuva vaatii noin 100 MB GPU-muistia — erän koko on pienempi näistä kahdesta: muistista johdettu raja tai alustan perusarvo. Se ei koskaan laske alle 1:n.**Ennakoiva pienentäminen.**Kun**VRAM-käyttöaste ylittää 85 %**, eräkokoja pienennetään ennen kuin mitään vikaa ilmenee.**Säikeittäisen allokoinnin rajoittaminen.** Käytön kasvaessa kunkin säikeen GPU-budjettia pienennetään: ×0,75 yli 80 %:n käyttöasteella, ×0,5 yli 90 %:n käyttöasteella. Valvontarajat ovat 70 % (varovainen), 85 % (normaali toimintaraja) ja 95 % (OOM-riski).**OOM-peruutus ja palautuminen.** Jos muistin loppumistilanne kuitenkin tapahtuu:
 
-## Laskentasovituksen seuranta
+* erän koko **puolitetaan**, ja se puolitetaan uudelleen jokaisen peräkkäisen OOM-tapahtuman yhteydessä — jokainen seuraava onnistunut erä siirtää tätä rangaistusta yhden askeleen taaksepäin
+* aktiivisten säikeiden resurssivaraukset leikataan 70 %:iin niiden nykyisestä arvosta ja allokoija siirtyy konservatiiviseen strategiaan, jota lievennetään jälleen onnistuneiden allokointien sarjan jälkeen
+* vakavan kuormituksen alla putki siirtyy tilasta `fused_gpu` tilaan `tiled_gpu` ja viimeisenä keinona tilaan `cpu_fallback`
 
-### CLI-tilan tulostus
+**Isäntäkoneen RAM-muisti (Jetson).** Ennen käsittelyä CLI arvioi isäntäkoneen huippumuistin kuvamäärän ja debayer-tilan perusteella ja varoittaa, jos RAM-muisti ja tiedostopohjainen swap-tila eivät todennäköisesti riitä, tulostaen tarkat komennot swap-tilan lisäämiseksi — katso [NVIDIA Jetson -opas](../linux/nvidia-jetson-guide.md#swap-warning-and-recommendations).***
 
-Kun käsittely alkaa, CLI näyttää havaitun laitteistoprofiilin:
-
-```
-
-Chloros CLI 1.1.0
-Platform: Linux aarch64 (Jetson Orin NX 16GB)
-Strategy: GPU_PARALLEL | Workers: 3 | Pipeline: fused_gpu
-CUDA: Available | GPU Memory: 15.3 GB (shared)
-```
+## Laskentakapasiteetin mukautumisen seuranta
 
 ### Järjestelmän diagnostiikka
 
-Suorita `chloros-cli selftest` nähdäksesi täydellisen laitteistoprofiilin ja tarkistaaksesi laskentakapasiteetin:
+`chloros-cli selftest` on nopein tapa tarkistaa, mitä laskentakerros havaitsee:
 
 ```bash
 chloros-cli selftest
 ```
 
-Tämä tarkistaa CUDA:n saatavuuden, GPU-muistin, kohinanpoistomallit ja taustayhteydet.
+Sen seitsemän tarkistusta kattavat version, porttien saatavuuden, taustapalvelun käynnistymisen, `/api/test`:n, järjestelmätiedot, kohinanpoistomallin olemassaolon sekä CUDA:n ja kohinanpoistomallin valmiuden. Tarkistus 5 tulostaa laitteistotiedot suoraan:
+
+```
+      GPU: NVIDIA RTX A4000, CUDA: True, PyTorch: 2.7.0
+```
+
+Tarkistus 7 tulostaa `CUDA: <bool>, Denoiser: <bool>` — molempien on oltava totta, jotta Texture Aware -ominaisuutta voidaan ylipäätään käyttää.
+
+### Taustaprosessin lokit
+
+Strategia ja työntekijöiden lukumäärä valitaan taustaprosessin sisällä kunkin ajon alussa — niitä ei ilmoiteta erillisellä CLI-bannerilla. Kun jokin toimii odottamattomasti (GPU-polun varajärjestelmään siirtyminen, muistin loppuminen (OOM), denoiserin latausongelma), se näkyy kyseisen istunnon taustapalvelimen lokissa:
+
+| Alusta | Lokin sijainti |
+| --- | --- |
+| **Linux / Jetson** | `~/.cache/chloros/logs/backend_<YYYYMMDD_HHMMSS>.log` (yksi tiedosto kutakin käynnistystä kohti) |
+| **Linux, CLI-started backend** | myös `~/.chloros/backend.log` |
+| **Windows** | `%LOCALAPPDATA%\Chloros\logs\` |
+
+### Reaaliaikainen edistymisnäyttö
+
+Käynnistyksen aikana CLI näyttää reaaliaikaisen edistymisen säikeittäin (tunnistaminen, analysointi, käsittely, vienti), joka välitetään Server-Sent Events -protokollan kautta — tämä on käytännöllinen tapa selvittää, onko säie 3 pullonkaula. Katso [Käsittelyputki](processing-pipeline.md).
 
 ***
 
@@ -135,4 +205,5 @@ Tämä tarkistaa CUDA:n saatavuuden, GPU-muistin, kohinanpoistomallit ja taustay
 
 * [Käsittelyputki](processing-pipeline.md) — 4-säikeisen putkiarkkitehtuurin ymmärtäminen
 * [NVIDIA Jetson -opas](../linux/nvidia-jetson-guide.md) — Jetson-laitteille ominainen käyttöönotto ja optimointi
-* [CLI : Komentorivi](../CLI.md) — Täydellinen CLI-viite
+* [CLI : Komentorivi](../CLI.md) — CLI-opas
+* [CLI-viite](../reference/cli-reference.md) — Kattava komentojen luettelo versioon 1.2.0

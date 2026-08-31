@@ -1,372 +1,291 @@
-# Indeksi/LUT-kokeilualusta
+# Indeksi/LUT-hiekkalaatikko
 
-Indeksi/LUT-kokeilualusta on Chloros-kuvankatseluohjelman sisällä toimiva interaktiivinen työtila, jonka avulla voit kokeilla monispektristen indeksien laskemista ja värillisiä visualisointeja reaaliajassa. Tämän tehokkaan työkalun avulla voit testata erilaisia indeksejä, tarkentaa arvoalueita ja luoda julkaisukelpoisia visualisointeja ilman, että koko aineistoa tarvitsee käsitellä uudelleen.
+Index/LUT-hiekkalaatikko on Chloros-kuvankatseluohjelman sivupalkissa oleva interaktiivinen työtila. Valitset kaavan, liität kamerasi kanavat siihen, värität sen liukuvärillä ja säädät arvoaluetta — ja kuva päivittyy reaaliaikaisesti samalla kun teet muutoksia. Versiosta 1.2.0 lähtien voit myös **tallentaa luomuksesi** joko yksittäisen kuvan tai koko projektin osalta ilman uudelleenkäsittelyä.
 
-## Mikä on indeksi/LUT-hiekkalaatikko?
+## Mihin Sandboxia käytetään
 
-### Tarkoitus
-
-Hiekkalaatikko tarjoaa:
-
-* **Reaaliaikaisen indeksin laskennan** – Sovella mitä tahansa kasvillisuusindeksiä välittömästi
-* **Interaktiivisen LUT-säätämisen** – Hienosäädä värigradientteja ja alueita
-* **Työnkulun optimoinnin** – Määritä parhaat asetukset ennen eräkäsittelyä
-
-### Sandbox vs. projektikäsittely
-
-**Indeksi/LUT-Sandbox (interaktiivinen):**
-
-* Yksi kuva kerrallaan
-* Välitön palaute
-* Kokeellinen ja iteratiivinen
-* Ei pysyviä muutoksia tiedostoihin
-* Täydellinen tutkimiseen ja testaamiseen
-
-**Projektikäsittely (erä):**
-
-* Koko tietojoukko kerralla
-* Ennalta määritetyt asetukset
-* Pysyvät tulostustiedostot
-* Aikaa vievää
-* Paras vaihtoehto, kun asetukset on vahvistettu
+| Index/LUT Sandbox (interaktiivinen)        | Projektin käsittely (eräajona)       |
+| -------------------------------------- | -------------------------------- |
+| Yksi kuva kerrallaan, välitön palaute  | Koko aineisto yhdellä kertaa     |
+| Kokeellinen ja iteratiivinen             | Valmiiksi määritetyt asetukset          |
+| Renderöi reaaliaikaisesti; tallentaa vain pyydettäessä  | Kirjoittaa aina lopulliset tiedostot      |
+| Täydellinen oikeiden asetusten löytämiseen | Paras, kun asetukset ovat lopulliset |
 
 {% hint style="success" %}
-**Paras työnkulku**: Käytä Sandboxia kokeilemiseen ja optimaalisten indeksi- ja LUT-asetusten löytämiseen, ja sovella sitten näitä asetuksia koko tietojoukkoon projektikäsittelyn aikana.
+**Tavallinen työnkulku**: säädä asetuksia Sandboxissa, kunnes visualisointi vastaa toiveitasi, ja vie sitten joko suoraan Sandboxista tai kopioi samat indeksi- ja LUT-asetukset [Projektin asetuksiin](../project-settings/project-settings.md), jotta seuraava käsittelykierros sisällyttää ne jokaiseen kuvaan.
 {% endhint %}
 
 ***
 
-## Indeksi-/LUT-Sandboxin käyttö
+## Sandboxin avaaminen
 
-### Ennalta laskettujen indeksien ymmärtäminen
+1. Napsauta ruudukossa olevaa kuvaa — se avautuu koko ruudun kokoisena **Kuvankatselijan** <img src="../.gitbook/assets/icon_image-viewer.JPG" alt="" data-size="line">-välilehdessä
+2. Napsauta **Kuvankatselijan** <img src="../.gitbook/assets/icon_image-viewer.JPG" alt="" data-size="line">-kuvaketta avataksesi vasemman sivupalkin, jos se ei ole jo auki
+3. Valitse monikaistakerros oikean yläkulman kerrosvalikosta — **RAW (Reflectance)** on tavallisin valinta, koska kalibroidun heijastavuuden perusteella lasketut indeksiarvot ovat vertailukelpoisia eri kuvien välillä
 
-Chloros:ssa indeksejä voidaan soveltaa projektin käsittelyn aikana. Vientiin sovellettavien indeksi- ja LUT-asetusten määrittämiseksi on helpointa käyttää kuvankatseluohjelman Sandboxia.
+Sivupalkissa näkyy ylhäältä alas:
 
-Sandboxin avulla voit:
+* kuvan nimi ja sen kameramalli
+* **Vie/Tallenna kuva(t)**-painike — tulee näkyviin, kun**Indeksi**tai**LUT** on valittu
+* **Indeksi**- ja**LUT**-valintaruudut
+* indeksin asetuspaneeli
+* **Kursoriarvot**-paneeli, jossa on lukema, histogrammi ja GSD-säädin
 
-* **Käyttää uusia indeksejä ja värigradientteja (LUT-taulukoita)** datan visualisointiin
-* **Säätää visualisointiasetuksia** interaktiivisesti
-* **Tarkastella** jo laskettuja indeksikuvia
-* **Tarkistaa** pikseliarvoja kaikilla zoomausasteilla
+{% hint style="warning" %}
+**Ei käytettävissä mustavalkokameroissa.** Yksikaistaisessa LATTICE M3M -kuvassa molemmat valintaruudut ovat pois käytöstä, ja niiden työkaluvihjeessä lukee _”Ei käytettävissä monokromaattisissa (M3M) antureissa”_ — monikaistainen indeksi on määrittelemätön yhdellä kaistalla. Laskeaksesi indeksejä M3M-kameroista, yhdistä kaksi tai useampia kameraa kohdistetuksi monikaistaiseksi kuvapinoksi ja käytä LATTICE-indeksimoottoria.
+{% endhint %}
 
-### Sandboxin avaaminen
+***
 
-Indeksi-/LUT-sandboxiin pääsee **Kuvankatseluohjelman** <img src="../.gitbook/assets/icon_image-viewer.JPG" alt="" data-size="line"> -sivupalkin välilehdestä:
+## Indeksin soveltaminen
 
-1. Napsauta kuvaa tiedostoselaimen kuvaruudukossa, jolloin se avautuu **Kuvankatseluohjelman** <img src="../.gitbook/assets/icon_image-viewer.JPG" alt="" data-size="line"> -välilehdessä
-2. Napsauta **Image Viewer** <img src="../.gitbook/assets/icon_image-viewer.JPG" alt="" data-size="line"> -välilehteä avataksesi vasemman ponnahdusvalikon, jos se ei ole jo auki
+1. Valitse **Indeksi**-valintaruutu sivupalkin yläosassa
+2. Valitse kamerasi suodatin vasemmasta pudotusvalikosta (`RGN`, `OCN`, `NGB`, `RGB`, `RE`, `NIR`)
+3. Valitse indeksikaava oikeanpuoleisesta pudotusvalikosta — 27 sisäänrakennettua kaavaa sekä mahdolliset tallentamasi mukautetut kaavat
+4. Kaava näkyy alla olevana matemaattisena lausekkeena, jossa jokaisessa kaistapaikassa on tyhjä ympyrä. **Vedä värillinen kanavaympyrä paikalleen** sitoaksesi sen
+5. Kun kaikki kaavan käyttämät paikat on liitetty, kuva päivittyy ja näyttää indeksiarvot
+6. Vie kohdistin kuvan päälle lukeaksesi arvot; **Kohdistimen arvot** -paneeli lisää indeksirivin, jossa näkyy kohdistimen alla oleva arvo
 
-### Indeksin/LUT:n kohdistettavan kuvan valitseminen
+Kaksoisnapsauta sidottua paikkaa tyhjentääksesi sen. Keskeneräinen kaava on normaali tilanne vedon aikana, ei virhe — kuva ei yksinkertaisesti päivitty, ennen kuin kaava on valmis.
 
-Työskennelläksesi indeksin kanssa Image Viewer <img src="../.gitbook/assets/icon_image-viewer.JPG" alt="" data-size="line"> -hiekkalaatikossa:
+Kanavaympyrät on värikoodattu: punainen = Red, vihreä = Green, sininen = Blue, oranssi = Orange, syaani = Cyan, violetti = NIR, magenta = RE. Samoja värejä käytetään kanavapisteissä ja histogrammikäyrissä Kursorin arvot -paneelissa.
 
-1. **Avaa kuva** pääkuvaruudukosta napsauttamalla sitä
-2. **Kuvankatseluohjelman** <img src="../.gitbook/assets/icon_image-viewer.JPG" alt="" data-size="line"> -välilehti avautuu
-3. Napsauta **Layer-pudotusvalikkoa** (katselijan oikeassa yläkulmassa)
-4. Valitse kerros pudotusvalikosta:
-   * RAW (Reflectance)
-
-### Indeksin soveltaminen kuvaan
-
-Kun kuva on koko ruudun kokoinen ja **Image Viewer** <img src="../.gitbook/assets/icon_image-viewer.JPG" alt="" data-size="line"> -välilehden sivupalkki on auki:
-
-1. Valitse Indeksi-ruutu sivupalkin yläosasta
-2. Valitse kamerasi suodatin vasemmasta pudotusvalikosta
-3. Valitse haluamasi indeksikaava oikeasta pudotusvalikosta
-4. Vedä suodattimen kanavan väripiirejä alla olevan indeksikaavan kohdille
-5. Kun kaava on kelvollinen, kuva päivittyy ja näyttää indeksiarvot
-6. Liikuta hiiren osoitinta nähdäksesi arvot osoittimen sijainnissa
-7. Zoomaa nähdäksesi yksittäiset pikselit ja niihin liittyvät arvot
-
-Jokaisella indeksillä on tietty arvoalue ja merkitys:
-
-#### NDVI Esimerkki
+### Esimerkki NDVI
 
 ```
 
 Formula: (NIR - Red) / (NIR + Red)
 
-For Survey3W RGN camera:
-NIR = 850nm band
-Red = 661nm band
+For a Survey3W RGN camera:
+  NIR = 850 nm band
+  Red = 661 nm band
 
-Result range: -1.0 to +1.0
-Typical vegetation: 0.4 to 0.9
-Stressed vegetation: 0.2 to 0.4
-Bare soil: 0.0 to 0.2
-Water: -0.1 to 0.1
+Result range:          -1.0 to +1.0
+Typical vegetation:     0.4 to 0.9
+Stressed vegetation:    0.2 to 0.4
+Bare soil:              0.0 to 0.2
+Water:                 -0.1 to 0.1
 ```
 
-Täydellinen indeksikaavojen dokumentaatio löytyy kohdasta [Monispektriset indeksikaavat](../project-settings/multispectral-index-formulas.md).
+Täydellinen kaavojen viite — kaikki kolme esiasetettua luetteloa ja tiedot siitä, mitkä nimet toimivat missäkin — on kohdassa [Monispektriset indeksikaavat](../project-settings/multispectral-index-formulas.md).
 
-***
+### Kun Indeksi on valittuna, mutta LUT:ta ei ole
 
-## LUT-taulukoiden (Look-Up Tables) käyttö
+Kuva piirretään **harmaasävyisenä**, venytettynä kahden kynnysarvon välille. Tämä on tarkoituksellista: indeksikuvassa on skalaaritietoja, ja harmaasävyinen kuva on sen rehellinen esitys. Lisää LUT, kun haluat väriä.***
 
-### Mikä on LUT?
+## LUT-taulukoiden (Look-Up Tables) käyttö**Hakutaulukko** yhdistää indeksiarvot väreihin: syötetään NDVI 0,65, tuloksena tietty vihreä väri. Se ei muuta dataa — se muuttaa tapaa, jolla dataa tulkitaan.
 
-**Look-Up Table (LUT)** muuntaa numeeriset indeksiarvot väreiksi visualisointia varten:
+### LUT:n lisääminen
 
-* **Syöte**: Indeksin pikseliarvo (esim. NDVI 0,65)
-* **Tulos**: RGB väri (esim. kirkkaanvihreä)
-* **Tarkoitus**: Helpottaa kuvioiden havaitsemista ja tulkintaa**Harmaasävy vs. väri-LUT:**
-
-* Harmaasävy: Tieteellinen ja neutraali, näyttää raakadataa
-* Väri-LUT: Intuitiivinen ja vaikuttava, korostaa kuvioita ja eroja
-
-{% hint style="success" %}
-**Visualisointiteho**: Värillisen LUT:n soveltaminen harmaasävyiseen indeksikuvaan helpottaa huomattavasti kuvioiden, poikkeamien ja kiinnostavien alueiden tunnistamista yhdellä silmäyksellä.
-{% endhint %}
-
-### LUT:n soveltaminen indeksikuvaan
-
-Kun sinulla on indeksikuva, joka näyttää
-
-1. Napsauta <img src="../.gitbook/assets/image (1) (1).png" alt="" data-size="line"> &quot;+Lisää LUT&quot; -painiketta
+1. Napsauta kaavan alla olevaa **&quot;+ Lisää LUT&quot;**-painiketta (<img src="../.gitbook/assets/image (1) (1) (1).png" alt="" data-size="line">)
 2. Valitse värigradientti
-3. Säädä leikkauksen minimi- ja maksimipisteitä
-4. Säädä leikkausmoodia
-5. Valitse **Kuvankatselijan** <img src="../.gitbook/assets/icon_image-viewer.JPG" alt="" data-size="line"> -välilehden sivupalkissa LUT:n soveltamiseksi
+3. Aseta leikkauksen minimi- ja maksimiarvot
+4. Valitse leikkausmoodi
+5. Valitse sivupalkista **LUT**-valintaruutu, jotta se renderöidään
+
+LUT-valintaruutu pysyy pois käytöstä, kunnes LUT on todella määritetty indeksiin.
 
 ### Värigradientin valitseminen
 
-**Gradientin valitseminen:**
+Vie hiiri **gradienttipalkin**päälle avataksesi esiasetusluettelon — Chloros sisältää**seitsemän** gradienttiesiasetusta:
 
-1. Etsi LUT-paneelista**värillinen gradienttipalkki**
+| # | Gradientti                            | Muoto                                                               |
+| - | ----------------------------------- | ------------------------------------------------------------------- |
+| 1 | Red → Keltainen → Green (**oletus**)  | Hajaantuva — vastaa tavanomaista kasvillisuutta koskevaa käsitystä, vihreä = terve |
+| 2 | Violetti → Keltainen → Green             | Hajautuva, selvästi matalalla alareunalla                                  |
+| 3 | Ruskea → Valkoinen → Blue                | Poikkeava vaalean keskipisteen ympärillä                                   |
+| 4 | Musta → Violetti → Vaaleanpunainen → Vaaleankeltainen | Peräkkäinen, tummasta vaaleaan                                           |
+| 5 | Red → Keltainen → Blue                 | Hajaantuvat vaalean keskipisteen ympärillä                                   |
+| 6 | Violetti → Blue → Green → Keltainen      | Peräkkäin, tummasta vaaleaan                                           |
+| 7 | Orange → Valkoinen → Violetti             | Hajaantuva vaalean keskipisteen ympärillä                                   |
 
-2. Vie hiiri sen päälle nähdäksesi käytettävissä olevat gradienttiasetukset
-3. Valitse haluamasi gradientti
-4. Kuva **päivittyy välittömästi** uusilla väreillä, kun Indeksi-ruutu on valittuna
+**Hajautuva**väriliukuma sijoittaa neutraalin värin ikkunan keskelle, mikä toimii hyvin, kun keskipisteellä on merkitystä (kynnysarvo, viitepäivämäärä).**Peräkkäinen** väriliukuma kulkee yksitoikkoisesti tummasta vaaleaan, mikä toimii hyvin suureille, joilla on vain &quot;enemmän&quot; ja &quot;vähemmän&quot;.
 
-{% hint style="success" %}
-**Paras käytäntö**: Kasvillisuusindeksien, kuten NDVI, kohdalla Red-keltainen-Green-gradientti on intuitiivisin, koska se vastaa luonnollisia väriyhdistelmiä (vihreä = terve, keltainen = kohtalainen, punainen = stressaantunut).
-{% endhint %}
+Jokaisessa esiasetuksessa on seitsemän väripistettä. Napsauta esiasetusta, niin kuva päivittyy välittömästi (kun LUT-ruutu on valittuna).
 
-### Väriluokkien säätäminen
+### Väripisteiden muokkaaminen
 
-**Luokat-säädin**määrittää, kuinka monta erillistä värivaihetta gradientissa näkyy:**Luokkien lukumäärän vaihtoehdot:*** **2–5 luokkaa**: Erittäin laajat kategoriat, erilliset vyöhykkeet
-* **6–10 luokkaa**: Tasapainoinen, sopii luokitteluun
-* **11–20 luokkaa**: Tasaiset gradientit, jatkuva ulkonäkö
-* **20+ luokkaa**: Lähes jatkuva, maksimaalinen tasaisuus**Kuinka säätää:**
+Gradienttipalkin alla on rivi värinäytteitä, yksi kutakin väripistettä kohti:
 
-1. Etsi LUT-paneelista**värinäytteiden neliöt gradienttipalkin alapuolelta**
+* **Värin muuttaminen**: napsauta värinäytettä avataksesi värivalitsimen (värirengas, RGB/HSV-liukusäätimet tai heksakoodi, kuten `#FF0000`)
+* **Lisää väri**: napsauta rivin lopussa olevaa**+**-painiketta — valkoinen väri lisätään
+* **Poista väri**:**kaksoisnapsauta** värinäytettä
+* **Tallenna muokattu väriliukuma**: napsauta väriliukumapalkin vieressä olevaa tallennuskuvaketta lisätäksesi muokatun väriliukumasi esiasetusluetteloon, jotta voit valita sen uudelleen
 
-2. Säädä luokkien määrää lisäämällä niitä +-painikkeella
-3. Poista luokkia kaksoisnapsauttamalla värinäytettä
-4. Gradientti päivittyy **reaaliajassa** kuvaan**Vaikutus visualisointiin:*** **Vähemmän luokkia** (3–5): Luo erillisiä alueita, yksinkertaistettu luokittelu, helpompi erottaa kategoriat
-* **Keskimääräinen määrä luokkia** (6–10): Tasapainoinen lähestymistapa, sopii useimpiin sovelluksiin
-* **Enemmän luokkia** (15–20): Tasaiset siirtymät, yksityiskohtaiset vaihtelut, valokuvamainen ulkonäkö**Käyttötarkoitukset:*** **Vähän luokkia (3–5)**: Esitysslidit, luokittelukartat, yksinkertaiset raportit
-* **Keskimääräinen määrä luokkia (6–10)**: Yleinen analyysi, tasapainoinen yksityiskohtaisuus, vakiomuotoiset raportit
-* **Paljon luokkia (15–20)**: Tieteellinen analyysi, yksityiskohtainen tarkastelu, julkaisukelpoiset tulokset
+Indeksiin määrittämäsi väriliukuma tallennetaan kyseisen indeksin mukana projektin asetuksiin, joten se säilyy, vaikka projekti suljetaan ja avataan uudelleen.
 
-### Arvoalueiden hienosäätö
+**Vähemmän väriasteita**tuottaa selkeitä vyöhykkeitä, jotka luokitellaan;**enemmän väriasteita** tuottaa pehmeitä, lähes valokuvamaisia siirtymiä. Kolme–viisi väriastetta sopivat esitysdioihin ja luokittelukarttoihin; kuusi–kymmenen sopivat yleiseen analyysiin; viisitoista tai enemmän sopivat yksityiskohtaiseen tarkasteluun ja julkaisukuvioihin.
 
-**Arvoalueiden säätimet**määrittävät, mitkä indeksiarvot vastaavat mitäkin värejä gradientissasi:**Arvoalueiden säätimet LUT-paneelissa:*** **Minimiarvo**: Väriskaalan alaraja
-* **Maksimiarvo**: Väriskaalan yläraja
-* **Välivärit**: Jaetaan automaattisesti minimi- ja maksimiarvojen välille (luokkien lukumäärän perusteella)
+### Arvoalueen asettaminen
 
-#### Minimi- ja maksimiarvojen säätäminen
+Kynnysarvon säätö on **kaksikahvainen liukusäädin**, jonka arvoalue on −1 – +1. Sen kummassakin päässä on muokattava tekstikenttä tarkkojen arvojen syöttämistä varten sekä**AUTO**-painike.
 
-**Arvoalueiden säätäminen:**
+* Vedä kumpaakin kahvaa tai kirjoita luku ruutuun ja paina Enter
+* **AUTO**asettaa alueen kuvan kelvollisten indeksiarvojen**
 
-1. Etsi LUT-paneelista**Minimiarvo**- ja**Maksimiarvo**-syöttökentät
-2. Napsauta **Minimiarvo**-kenttää
-3. Kirjoita haluttu minimiarvo (esim. `0.2`)
-4. Paina **Enter**-näppäintä tai napsauta kentän ulkopuolelle
-5. Toista sama **Max Value** -kentän kohdalla (esim. `0.9`)
-6. Visualisointi **päivittyy välittömästi**{% hint style="info" %}**Automaattinen skaalaus**: Kun sovellat LUT:ta ensimmäisen kerran, Chloros asettaa automaattisesti minimi- ja maksimiarvot kuvan todellisen data-alueen mukaan. Voit sitten kaventaa tätä aluetta keskittyäksesi tiettyihin kiinnostaviin arvoalueisiin.
-{% endhint %}
+2. ja 98. persentiiliin** — tämä on hyvä lähtökohta, joka jättää poikkeavat arvot huomiotta. Chloros pyöristää tuloksen joustavasti: 4 desimaalin tarkkuudella hyvin kapealla alueella, 3 desimaalin tarkkuudella kapealla alueella ja muutoin 2 desimaalin tarkkuudella
+* Manuaaliset säätöjä on etusija AUTO-asetukseen nähden, kunnes painat AUTO-painiketta uudelleen
 
-**Esimerkki NDVI-alueen säätöistä:*** **Koko alue**: `-1.0` – `1.0` (näytä kaikki mahdolliset arvot)
-* **Kasvillisuuteen keskittynyt**: `0.2` – `0.9` (poista paljas maa ja vesi)
-* **Vain terve kasvillisuus**: `0.5` – `0.9` (korosta vain voimakkaasti kasvavat kasvit)
-* **Stressin havaitseminen**: `0.2` – `0.5` (korosta ongelma-alueet)
-* **Mukautettu alue**: Säädä havaittujen pikseliarvojen perusteella**Miksi alueita tulisi säätää?*** **Lisää kontrastia** kiinnostavalla alueella
-* **Poista epäolennaiset arvot** (esim. vesistöt, paljas maaperä)
-* **Yhdenmukaista visualisointi** useiden kuvien tai päivämäärien välillä
-* **Korosta hienovaraisia eroja** kapealla arvoalueella
+Esimerkki NDVI-ikkunoista:
 
-### Alueen ulkopuolisten arvojen leikkaaminen
+| Tavoite                                    | Min  | Max |
+| --------------------------------------- | ---- | --- |
+| Näytä kaikki                         | −1,0 | 1,0 |
+| Vain kasvillisuus, sulje pois maaperä ja vesi | 0,2  | 0,9 |
+| Vain terve kasvillisuus                 | 0,5  | 0,9 |
+| Korosta stressiä                        | 0,2  | 0,5 |
 
-Kun pikseliarvot eivät mahdu määrittelemääsi minimi-/maksimiarvoalueeseen, voit hallita niiden näyttöä **leikkausmoodien** avulla.
+Ikkunan kaventaminen lisää kontrastia kiinnostuksen kohteena olevalla alueella ja siirtää kaiken muun alueen ulkopuolelle — missä **leikkausmoodi** päättää, mitä sille tapahtuu.***
 
-#### **Käytettävissä olevat leikkausmoodivaihtoehdot:**
+## Leikkausmoodit
 
-#### 1. Minimi ja maksimi
+Kun pikselin indeksiarvo jää minimi-/maksimi-ikkunan ulkopuolelle, leikkausmoodi päättää, miten se piirretään.
 
-* Pikselit, jotka ovat **minimiarvon alapuolella**→ näytetään käyttämällä gradientin**ensimmäistä väriä** (esim. punainen)
-* Pikselit, jotka ovat **maksimiarvon yläpuolella**→ näytetään käyttämällä gradientin**viimeistä väriä** (esim. vihreä)
-* **Käyttötapaus**: Korosta ääriarvot, näytä koko data-alue kylläisillä väreillä rajoilla
-* **Esimerkki**: NDVI-arvot alle 0,2 näkyvät kaikki punaisina, arvot yli 0,9 näkyvät kaikki vihreinä
+| Pudotusvalikon nimi                  | Tallennettu arvo      | Alueen ulkopuolella olevat pikselit piirretään seuraavasti                                                                                                |
+| ------------------------------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| **Minimi ja maksimi** (oletus) | `clip`            | Gradientin lähin pääteväri — minimiarvon alapuolella olevat arvot saavat ensimmäisen värin, maksimiarvon yläpuolella olevat arvot saavat viimeisen |
+| **Läpinäkyvä tausta**      | `transparent`     | Täysin läpinäkyvä (todellinen alfa)                                                                                                  |
+| **Indeksitausta**| `indexColor`      | Harmaasävy, joka ulottuu kuvan**koko** indeksialueelle, joten alueen ulkopuolella oleva rakenne näkyy edelleen harmaana                |
+| **Alkuperäinen tausta**         | `backgroundColor` | Itse taustakuvan kuva, joten värikerros sijaitsee todellisen kuvan päällä                                                |
 
-#### 2. Läpinäkyvä tausta
-
-* **Alueen ulkopuolella**olevat pikselit muuttuvat**täysin läpinäkyviksi*** Vain **alueen sisällä** olevat pikselit näyttävät värigradientin
-* **Käyttötapaus**: GIS-peittokuva, tiettyjen arvoalueiden erottelu, vain kiinnostavien alueiden korostaminen
-* **Esimerkki**: Näytä vain NDVI 0,4–0,7 värillisenä, kaikki muu läpinäkyvänä
-
-{% hint style="warning" %}
-**Läpinäkyvyyden rajoitus**: Läpinäkyvät pikselit näkyvät katseluohjelmassa taustavärinä. Kun tiedosto viedään käsittelyn aikana, läpinäkyvyys säilyy PNG-muodossa, mutta ei JPG-muodossa.
-{% endhint %}
-
-#### 3. Indeksin tausta
-
-* **Alueen ulkopuolella**olevat pikselit näkyvät**harmaasävyinä** (raakaindeksiarvot näkyvät)
-* **Alueen sisällä**olevat pikselit näyttävät**värigradientin*** **Käyttötapaus**: Hienovarainen korostus, kontekstin säilyttäminen samalla kun korostetaan kiinnostavia alueita
-* **Esimerkki**: Korosta värillä stressaantunutta kasvillisuutta (NDVI 0,3–0,5) ja näytä terveet alueet harmaana
-
-#### 4. Alkuperäinen tausta
-
-* **Alueen ulkopuolella**olevat pikselit näyttävät**alkuperäisen monispektrikuvan*** **Alueen sisällä**olevat pikselit näyttävät**värigradientin*** **Käyttötapaus**: Intuitiivisin – yhdistää luonnollisen kuvakontekstin analyyttiseen väripäällysteeseen
-* **Esimerkki**: Katso kentän/viljelykasvien todellinen ulkonäkö, johon on päällekkäin värikoodatut stressialueet
-
-### Oikean leikkausmoodin valinta
-
-| Leikkaustila              | Sopii parhaiten                                   | Visualisointityyli          |
-| -------------------------- | ------------------------------------------ | ---------------------------- |
-| **Minimi ja maksimi**    | Täydellinen datanäyttö, tieteellinen analyysi     | Kaikki pikselit värillisiä           |
-| **Läpinäkyvä tausta** | GIS-peittokuvat, tiettyjen alueiden erottelu    | Väri alueella, tyhjä sen ulkopuolella |
-| **Indeksitausta**       | Hienovarainen korostus, datakontekstin säilyttäminen  | Väri alueella, harmaa sen ulkopuolella  |
-| **Alkuperäinen tausta**    | Raportit, esitykset, intuitiivinen analyysi | Väri alueella, valokuva sen ulkopuolella |
-
-### Mukautettujen LUT-värien luominen
-
-Voit hallita visualisointia täysin luomalla **mukautettuja värigradientteja** muokkaamalla yksittäisiä väripysähdyksiä.**Mukautetun gradientin luominen:**
-
-1. Etsi LUT-paneelista**gradientin esikatselupalkki**
-
-2. Etsi gradientin alapuolelta**värinäytteiden neliöt**
-
-3.**Napsauta väripysähdystä** valitaksesi sen
-4. **Värivalitsin** avautuu
-5. Valitse uusi väri käyttämällä:
-   * **Värirengasta**: Visuaalinen värivalinta
-   * **RGB/HSV-liukusäätimiä**: Tarkka värinhallinta
-   * **Hex-koodin syöttöä**: Tarkka värimäärittely (esim. `#FF0000` punaiselle)
-6. Napsauta värivalitsimen ulkopuolelle **sovellaksesi uuden värin**
-
-7. Liukuväri**päivittyy välittömästi** kuvassa**Väripysähdysten lisääminen tai poistaminen:*** **Lisää pysähdys**: Napsauta +-kuvaketta lisätäksesi uuden värinäytteen loppuun
-* **Poista pysähdys**: Kaksoisnapsauta väriruutua poistaaksesi värinäytteen**Mukautusstrategiat:*** **Käännä gradientti**: Käännä värien järjestys merkityksen kääntämiseksi (esim. vihreä = matala, punainen = korkea)
-* **Brändivärit**: Sovita raportit organisaatiosi väripalettiin
-* **Värisokeille sopiva**: Käytä oranssi-sinisiä tai violetti-keltaisia yhdistelmiä
-* **Tulostuksen optimointi**: Valitse värit, jotka toimivat sekä väri- että harmaasävyisessä tulostuksessa
-* **Monikynnys**: Käytä erillisiä värejä tietyissä arvorajoissa luokittelua varten
+| Tila                       | Sopii parhaiten                               | Ulkonäkö                                      |
+| -------------------------- | -------------------------------------- | ----------------------------------------- |
+| **Minimi ja maksimi**      | Täydellinen tietojen esitys, tieteellinen analyysi | Jokainen pikseli on värillinen                      |
+| **Läpinäkyvä tausta** | GIS-päällekkäisyydet, arvoalueen erottelu   | Väri ikkunan sisällä, ei mitään sen ulkopuolella |
+| **Indeksitausta**       | Korostus säilyttäen tietojen kontekstin    | Väri sisällä, harmaa ulkopuolella               |
+| **Alkuperäinen tausta**    | Raportit ja esitykset              | Väri sisällä, valokuva ulkopuolella         |
 
 {% hint style="info" %}
-**Mukautettujen gradienttien tallentaminen**: Mukautetut gradientit voidaan tallentaa ja käyttää uudelleen. Napsauta LUT-paneelin tallennuskuvaketta tallentaaksesi mukautetut värimaailmat tulevaa käyttöä varten.
+**Pikselit, joista ei ole dataa, ovat aina läpinäkyviä kaikissa tiloissa.** Pikseli, jonka indeksi ei ole äärellinen (0/0-jakolasku) tai on täsmälleen −1,0 tai +1,0 (kylläisyysraja-arvot, kun toisessa kaistassa lukema on nolla ja toisessa ei), käsitellään datattomana pikselinä eikä ääriarvona. Tämä pitää ylivalotetut kohokohdat ja tummat varjot pois väriskaalasta sen sijaan, että ne maalattaisiin kehyksen äärimmäisimmiksi lukemiksi. Sama sääntö määrittää, mitkä pikselit syötetään AUTO-kynnyksiin ja indeksihistogrammiin, jotta kaikki kolme ovat yhdenmukaisia.
+{% endhint %}
+
+Läpinäkyvyys säilyy, kun vienti tallennetaan muodossa PNG. Sitä ei voida esittää JPG-muodossa.
+
+***
+
+## Arvojen lukeminen säätöjen aikana
+
+Asetuspaneelin alapuolella oleva **Kursoriarvot**-paneeli toimii Sandboxin mittausvälineenä:
+
+* Siirrä kursori kuvan päälle ja lue kanavakohtaiset lähdearvot sekä indeksiarvo omalta riviltään
+* Ota käyttöön histogrammin yläpuolella oleva **INDEX**-painike nähdäksesi indeksiarvojen jakauman kehyksessä; kaksi leikkauskynnystäsi näkyvät oransseina katkoviivoina ja kursorin arvo valkoisena viivana — tämä on nopein tapa valita ikkuna, joka todella sisältää haluamasi tiedot
+* Ota **CURSOR** käyttöön nähdäksesi merkintäviivat osoittimen alla olevissa arvoissa
+* Zoomaa yli 60× (vähemmän, jos GSD-lohkon koko on asetettu) korostaaksesi yksittäiset näytetyt pikselit, joilla on kelluva arvo
+
+Käytännön ohjeet:
+
+1. Merkitse muistiin arvot terveen kasvillisuuden, stressaantuneen kasvillisuuden, paljaan maan ja veden kohdalta
+2. Tarkista, missä nämä klusterit sijaitsevat indeksi-histogrammissa
+3. Aseta minimi- ja maksimiarvot niin, että ne rajaavat sinua kiinnostavan klusterin
+4. Valitse leikkausmoodi — _Original Background_ pitää ympäröivän näkymän näkyvissä
+
+***
+
+## Vienti Sandboxista
+
+Kaikki yllä oleva on reaaliaikaista esikatselua, kunnes tallennat sen. Sivupalkin yläosassa oleva **Vie/Tallenna kuva(t)** -painike avaa paneelin, joka liukuu sivupalkin päälle (eikä peitä kuvaa, joten näet edelleen, mitä olet päättämässä).
+
+<figure><img src="../.gitbook/assets/image (35).png" alt=""><figcaption></figcaption></figure>### Asetukset
+
+| Asetus                          | Vaikutus                                                                                                                                            |
+| ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Käytä nykyiseen kuvaan**      | Tallentaa näytetyn kuvan täsmälleen näillä asetuksilla                                                                                                |
+| **Käytä kaikkiin projektin kuviin** | Suorittaa saman konfiguraation uudelleen jokaiselle projektin kuvalle. Kuvat, joista puuttuvat tämän indeksin tarvitsemat kaistat, ohitetaan, eikä niitä käsitellä virheinä |
+| **Indeksi-/LUT-gradienttipalkki**      | Tallentaa lisäksi jokaisesta viennistä erillisen selitekuvan, jossa arvoalue on merkitty                                                                     |
+| **Indeksi-histogrammi**             | Tallentaa lisäksi jokaisesta viennistä erillisen histogrammikuvan, joka näyttää datan minimi- ja maksimiarvot sekä leikkauskynnykset                                               |
+
+Jos kuvavälilehden **GSD-lohkon koko** on yli 1, paneeli ilmoittaa siitä ennen vahvistamista: vienti tallentaa sen, mitä näet, lohkojen keskiarvoistaminen mukaan lukien. Aseta GSD-säädin ensin takaisin arvoon 1, jos haluat täyden resoluution.
+
+### Tiedostojen tallennuspaikka
+
+Jokainen **Vie**-painikkeen napsautus luo**uuden, kertakäyttöisen kansion**:
+
+```
+<project folder>/Sandbox_Exports/<IndexName>_<Index|LUT>_<NNN>/
+```
+
+Esimerkkejä: `Sandbox_Exports/NDVI_LUT_001/`, sitten `Sandbox_Exports/NDVI_LUT_002/` seuraavalle ajolle. Numerointi perustuu levyllä jo olevien tiedostojen skannaamiseen, joten se säilyy uudelleenkäynnistyksissä ja vaikka poistaisit kansioita manuaalisesti. Mitään ei koskaan korvata — Sandboxin koko idea on verrata yhtä yritystä edelliseen.
+
+Kansion sisällä, kuva kohden:
+
+| Tiedosto                                                   | Sisältö                                                   |
+| ------------------------------------------------------ | ---------------------------------------------------------- |
+| `<source name>_<IndexName>_<Index\|LUT>.png`           | Renderöity kuva, pikseli pikseliltä sellainen kuin katseluohjelma sen näytti |
+| `<source name>_<IndexName>_<Index\|LUT>_legend.png`    | Gradienttipalkin sivutiedosto, jos sitä on pyydetty                     |
+| `<source name>_<IndexName>_<Index\|LUT>_histogram.png` | Indeksihistogrammin sivutiedosto, jos sitä on pyydetty                  |
+
+Nämä kaksi sivukuvia tallennetaan aina **täydellä resoluutiolla**, vaikka pääkuva olisi lohkokohtaisesti keskiarvoistettu: lohkon koko vastaa näytön resoluutiota, ja molemmat sivukuvat sisältävät todelliset pikselikohtaiset indeksiarvot. Ne tulostavat myös enemmän tietoa kuin ruudulla näkyvät versiot — molemmat merkitsevät venytysikkunan _ja_ todelliset datan minimi- ja maksimiarvot, joten tallennettu selite on luettavissa vielä kuukausienkin kuluttua ilman, että projektia tarvitsee avata.
+
+### Edistyminen ja tulokset
+
+Koko projektin vienti kestää muutaman minuutin, joten ohjelma raportoi edistymisestä reaaliaikaisen edistymiskanavan kautta sen sijaan, että se jumiutuisi:
+
+* Edistymispalkki näyttää tekstin ”`current / total`” ja tiedoston, jota parhaillaan tallennetaan
+* Kun vienti on valmis, ruudussa ilmoitetaan, kuinka monta kuvaa vietiin, kuinka monta ohitettiin ja tulostuskansion polku
+* Ohitetut kuvat luetellaan syyn kera (näytetään enintään viisi, minkä jälkeen tulee rivi ”+N lisää”). Yleisin syy on kerros, jossa ei ole tämän indeksin tarvitsemia kanavia
+* Jos **yksikään** projektin kuva ei voi käyttää indeksiä, suoritus ilmoittaa epäonnistumisesta sen sijaan, että jättäisi sinulle tyhjän kansion
+
+Vain yksi hiekkalaatikkovienti voi olla käynnissä kerrallaan. Toisen käynnistäminen kesken käynnissä olevan vientiä estetään selkeällä viestillä sen sijaan, että kaksi suoritusta kilpailisi samasta projektitiedostosta.
+
+### Ruudukko poimii ajon
+
+Jokainen valmis ajo näkyy omana painikkeenaan [kuvaruudukossa](image-grid.md) työkalurivillä, nimellä `<IndexName> <Index|LUT> <NNN>`. Näin voit verrata suorituksia: tee kaksi vientiä eri gradientteilla tai kynnysarvoilla ja vaihda sitten ruudukon kahden painikkeen välillä.
+
+***
+
+## Mukautetut indeksikaavat (Chloros+)
+
+{% hint style="info" %}
+**Missä ne luodaan**: Sandbox-sivupalkissa tai**Projektin asetuksissa** ennen käsittelyä. Molemmat tallentavat samaan projektitason luetteloon.
+{% endhint %}
+
+1. Avaa mukautetun kaavan laskin indeksikaavan pudotusvalikosta (vaatii kirjautumisen kelpoisella Chloros+-tilauksella)
+2. Kirjoita kaava käyttämällä **kaistapaikkasymboleja** `x`, `y`, `z`, `a`, `b`, `c` — eivät kaistojen nimiä
+3. Käytettävissä olevat operaattorit: `+`, `-`, `*`, `/`, `^` ja `()` ryhmittelyä varten
+4. Käytettävissä olevat funktiot: `sqrt()`, `log()`, `ln()`, `abs()`, `sign()`, `log1p()`, `log2()`
+5. Nimeä ja tallenna se — se näkyy kaavan pudotusvalikon alaosassa, ja voit määrittää sen paikat vetämällä kanavapiirejä, aivan kuten sisäänrakennetussa esiasetuksessa
+
+```
+
+Modified NDVI with an offset:   (y-x)/(y+x+0.5)
+Simple ratio:                   y/x
+Three-band difference:          (y-x)/(y+x-z)
+Squared ratio:                  (y/x)^2
+```
+
+{% hint style="warning" %}
+**Mukautetut kaavat ovat käytettävissä vain graafisessa käyttöliittymässä.** CLI/SDK `--indices` -vaihtoehto laajentaa 22 sisäänrakennettua esiasetuksen nimeä ja ohittaa hiljaisesti kaiken muun, mukaan lukien mukautetut kaavasi. Jos haluat käsitellä mukautetun kaavan eränä, määritä se Projektin asetuksissa ja suorita käsittely tai käytä Sandboxin ”Käytä kaikkiin projektin kuviin” -vientiä.
 {% endhint %}
 
 ***
 
-## Interaktiivinen työnkulku
+## Vianmääritys
 
-### Reaaliaikaiset päivitykset
+### ”Tässä kerroksessa ei ole tämän indeksin tarvitsemia kanavia”
 
-Kaikki LUT-säädöt hiekkalaatikossa päivittävät kuvan **välittömästi ja interaktiivisesti**:
+Kaava lukee kanavan sijaintia, jota nykyisessä kerroksessa ei ole — esimerkiksi kolmen paikan indeksiä yhden tai kahden kanavan tiedostossa. Vaihda monikaistaiseksi kerrokseksi (heijastavuus tai debayeroitu) tai valitse indeksi, joka sopii kamerasi suodattimeen.
 
-* **Vaihda tasoa** → Kuva muuttuu välittömästi
-* **Valitse gradientti** → Värit päivittyvät välittömästi
-* **Säädä arvoaluetta** → Kontrasti muuttuu reaaliajassa
-* **Vaihda luokkia** → Gradientin tasaisuus päivittyy välittömästi
-* **Muokkaa leikkausta** → Taustan näyttö muuttuu välittömästi
-* **Muokkaa värejä** → Mukautettu gradientti otetaan käyttöön välittömästi**&quot;Käytä&quot;-painiketta ei tarvita** – kaikki muutokset ovat reaaliaikaisia ja interaktiivisia!
+### ”Kuvankäsittelytaustapalvelua ei voitu tavoittaa”
 
-{% hint style="success" %}
-**Reaaliaikainen palaute**: Välittömän visuaalisen palautteen ansiosta voit kokeilla nopeasti erilaisia asetuksia, kunnes löydät analyysitarpeisiisi sopivan optimaalisen visualisoinnin.
-{% endhint %}
+Taustapalvelu ei vastaa. Tarkista Lokit-välilehti; jos taustapalvelu käynnistyy uudelleen, Sandbox palautuu itsestään, kun se on jälleen käytettävissä.
 
-### Iteratiivinen hienosäätötyönkulku
+### Kuva ei muuttunut, kun vedin ympyrää
 
-**Tyypillinen LUT-optimointityönkulku:**
+Kaava ei ole vielä valmis. Keskeneräistä kaavaa käsitellään tavallisena vedon keskivaiheen tilana — mitään ei renderöidä eikä mitään raportoida virheeksi. Täytä kaikki kaavan käyttämät kentät.
 
-1.**Valitse indeksikerros** (esim. RAW (heijastavuus))
-2. **Käytä indeksiä** – Valitse kamerasuodatin ja indeksikaava, vedä värilliset ympyrät oikeaan kohtaan indeksikaavassa
-3. **Käytä LUT-gradienttia** – Aloita Red-Yellow-Green-esiasetuksella
-4. **Tarkista pikseliarvot** – Liikuta kursoria ympäriinsä, huomioi arvoalueet
-5. **Säädä minimi-/maksimiarvoja** – Rajaa alue kasvillisuuteen keskittymiseksi (esim. 0,2–0,9)
-6. **Valitse leikkaus** - Kokeile &quot;Alkuperäinen tausta&quot; kontekstin vuoksi
-7. **Tarkenna värejä** - Mukauta gradienttia tarvittaessa tiettyjen kohteiden korostamiseksi
-8. **Viimeistele asetukset**- Kirjaa asetukset muistiin ja kopioi ne Projektin asetuksiin vientikäsittelyä varten
+### Koko kuva on yhtä väriä
 
-### Pikseliarvojen tarkastelu
+Leikeikkunasi on todennäköisesti kaukana datan ulkopuolella. Paina **AUTO**-painiketta kiinnittääksesi sen 2. tai 98. persentiiliin, tai ota**INDEX**-histogrammi käyttöön nähdäksesi, missä data tosiasiassa sijaitsee.
 
-Todellisten pikseliarvojen ymmärtäminen on ratkaisevan tärkeää tehokkaiden LUT-alueiden asettamiseksi:**Kuinka tarkastella arvoja:**
+### Viedyt värit eivät vastaa näkemääni
 
-1. Pikseliarvot näkyvät, kun kuvassa on joko Indeksi-valintaruutu tai sekä Indeksi- että LUT-valintaruudut**valittuna**.
-2. **Siirrä kursori** kuvan eri alueiden päälle
-3. **Tarkkaile pikseliarvoja**, jotka näkyvät selitteessä, kun viet kursorin kuvan päälle
-4. Zoomaa nähdäksesi yksittäiset pikselit, jotka on korostettu kelluvalla arvolla
-5. **Tee muistiinpanoja** eri piirteiden arvoalueista:
-   * **Terve kasvillisuus**: esim. NDVI 0,55–0,85
-   * **Stressaantunut kasvillisuus**: esim. NDVI 0,30–0,50
-   * **Paljas maaperä**: esim. NDVI 0,05–0,25
-   * **Vesi** (jos läsnä): esim. NDVI -0,05–0,10**Pikseliarvojen käyttö LUT-alueiden asettamisessa:**Kun olet tarkastellut pikseliarvoja, säädä LUT:n minimi- ja maksimiarvot vastaavasti:**Esimerkki:*** **Havainto**: Maaperän arvot = 0,05–0,25, stressaantunut = 0,25–0,50, terve = 0,50–0,85
-* **Tavoite**: Visualisoi vain kasvien terveys (jätä maaperä pois)
-* **LUT-asetukset**: Min = `0.25`, Max = `0.85`
-* **Leikkaus**: &quot;Alkuperäinen tausta&quot;, jotta maaperä näkyy luonnollisissa väreissä
-* **Tulos**: Värigradientti koskee vain kasvillisuutta, maaperä näkyy alkuperäisen kuvan mukaisena
-
-{% hint style="info" %}
-**Dynaaminen alue**: Eri viljelykasveilla, vuodenaikoilla ja kasvuvaiheilla on erilaiset arvoalueet. Tarkista aina pikseliarvot omassa tietojoukossasi ennen LUT-alueiden asettamista.
-{% endhint %}
-
-***
-
-## Mukautetut indeksit (Chloros+)
-
-### Mukautettujen indeksikaavojen luominen
-
-{% hint style="info" %}
-**Missä luoda**: Mukautetut indeksit voidaan määrittää**Projektin asetuksissa** ennen käsittelyä sekä Image Viewer -sivupalkin hiekkalaatikossa.
-{% endhint %}
-
-**Mukautetun indeksin luominen:**
-
-1.**Avaa Projektin asetukset** (ennen käsittelyä) tai Image Viewer -hiekkalaatikon sivupalkki
-2. Siirry **Indeksikaavan pudotusvalikkoon**
-
-3. Etsi**&quot;Mukautettu&quot;**-vaihtoehto (sinun on oltava kirjautuneena sisään Chloros+ -lisenssillä)
-4. **Määritä kaava** käyttämällä kaistamuuttujia:
-   * Kaistojen nimet: `NIR`, `Red`, `Green`, `Blue`, `RedEdge` jne.
-   * Operaattorit: `+`, `-`, `*`, `/`, `^` (eksponentti)
-   * Funktiot: `sqrt()`, `abs()` jne. (jos tuettu)
-   * Suluissa: `()` laskujärjestyksen määrittämiseksi
-5. **Nimeä indeksi** (esim. &quot;MyIndex&quot; tai &quot;CustomNDVI&quot;)
-6. **Tallenna asetukset**
-
-**Esimerkkejä mukautetuista kaavoista:**
-
-```
-
-Modified NDVI with offset:
-(NIR - Red) / (NIR + Red + 0.5)
-
-Simple ratio:
-NIR / Red
-
-Complex multi-band:
-(NIR - Red) / (NIR + Red - Blue)
-
-Exponential index:
-(NIR / Red) ^ 2
-```
-
-{% hint style="warning" %}
-**Kaavan vahvistus**: Varmista, että kaavassasi käytetään kamerassasi käytettävissä olevia kaistoja. Esimerkiksi RedEdge on käytettävissä vain kameroissa, joissa on RedEdge-suodatin.
-{% endhint %}
+Niiden pitäisi vastata – vientipolku on tarkoituksellisesti live-esikatselun peilikuva, mukaan lukien leikkausmoodin alfa, ja lohkojen keskiarvoistaminen suoritetaan _värityksen jälkeen_ täsmälleen samalla tavalla kuin katseluohjelmassa. Jos ne eroavat toisistaan, tarkista, ettei GSD-lohkon koko ole muuttunut katselun ja viennin välillä.
 
 ***
 
 ## Seuraavat vaiheet
 
-Nyt kun ymmärrät indeksi-/LUT-hiekkalaatikon:
-
-* **Käytä käsittelyssä**: Käytä löydettyjä asetuksia [Projektin asetuksissa](../project-settings/project-settings.md)
-* **Eräkäsittely**: Käytä optimoituja indeksejä koko datajoukkoon
-* **Lisätietoja**: Lue [Monispektriset indeksikaavat](../project-settings/multispectral-index-formulas.md)
-
-Aiheeseen liittyvä dokumentaatio:
-
-* [**Kuvakerrokset**](image-layers.md) – Kerrosten hallinta ja visualisointi
-* [**Kuvan avaaminen koko näytön tilassa**](opening-an-image-full-screen.md) – Kuvankatseluohjelman perusteet
-* [**Kuvien käsittely (GUI)**](../processing-images-gui/adding-files-to-a-project.md) – Koko käsittelytyönkulku
+* [**Kuvakerrokset**](image-layers.md) — mille kerrokselle indeksi suoritetaan ja mitä sen arvot tarkoittavat
+* [**Kuvan avaaminen koko näytön tilassa**](opening-an-image-full-screen.md) — kursorin lukema, histogrammi ja GSD-säätö yksityiskohtaisesti
+* [**Monispektriset indeksikaavat**](../project-settings/multispectral-index-formulas.md) — kaikki esiasetukset, kaikilla pinnoilla
+* [**Projektin asetukset**](../project-settings/project-settings.md) — löytämiesi asetusten tallentaminen käsittelykierrokseen

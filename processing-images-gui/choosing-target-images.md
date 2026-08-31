@@ -1,29 +1,27 @@
 # Kohdekuvien valinta
 
-Niiden kuvien merkitseminen, jotka sisältävät kalibrointikohteita, on ratkaiseva vaihe, joka nopeuttaa merkittävästi Chloros-käsittelyprosessia. Valitsemalla kohdekuvat etukäteen vältät sen, että Chloros joutuu skannaamaan jokaisen kuvan datajoukossasi kalibrointikohteiden löytämiseksi.
+Merkitsemällä, mitkä kuvat sisältävät kalibrointikohteita, kerrot Chloros-sivustolle tarkalleen, mistä niitä tulee etsiä. Kun vähintään yksi kuva on valittu Kohde-sarakkeessa, Chloros skannaa **vain valitut kuvat** — kohteiden merkitseminen siis sekä nopeuttaa käsittelyä että estää kartoituskuvien sekoittumisen kohteisiin.
+
+<figure><img src="../.gitbook/assets/image (40).png" alt=""><figcaption></figcaption></figure>
 
 ## Miksi kohdekuvat kannattaa merkitä?
 
-### Käsittelynopeus
+### Merkitseminen ohjaa skannausta
 
-Ilman kohdekuvien merkitsemistä Chloros:n on:
-
-* Skannattava jokainen projektiisi kuuluva kuva
-* Suoritettava kohteen tunnistusalgoritmeja jokaiselle kuvalle
-* Tarkistettava satoja tai tuhansia kuvia tarpeettomasti
-
-**Tulos**: Käsittely voi kestää huomattavasti kauemmin, etenkin suurissa datajoukoissa.
-
-### Merkittyjen kohdekuvien kanssa
-
-Kun valitset tiettyjen kuvien Kohde-sarakkeen:
+Kun valitset tiettyjä kuvia Kohde-sarakkeesta:
 
 * Chloros skannaa kohteita vain valituista kuvista
-* Kohteen tunnistus valmistuu paljon nopeammin
-* Kokonaiskäsittelyaika lyhenee huomattavasti
+* Kohteiden tunnistus tapahtuu paljon nopeammin
+* Kartoituskuvat eivät voi aiheuttaa vääriä kohdetunnistuksia
+
+Jos **yhtään** kuvaa ei ole valittu, Chloros skannaa oletuksena kaikki projektin kuvat:
+
+* Kohteen tunnistusalgoritmit suoritetaan jokaiselle kuvalle
+* Satoja tai tuhansia kuvia tarkistetaan tarpeettomasti
+* Käsittely kestää huomattavasti kauemmin, etenkin suurissa aineistoissa
 
 {% hint style="success" %}
-**Nopeuden parannus**: 2–3 kohdekuvan merkitseminen 500 kuvan aineistossa voi lyhentää kohteen tunnistusaikaa yli 30 minuutista alle minuuttiin.
+**Nopeuden parannus**: 2–3 kohdekuvan merkitseminen 500 kuvan aineistossa voi lyhentää kohteen tunnistusaikaa yli 30 minuutista alle 1 minuuttiin.
 {% endhint %}
 
 ***
@@ -34,23 +32,23 @@ Kun valitset tiettyjen kuvien Kohde-sarakkeen:
 
 Selaa tuotuja kuvia tiedostoselaimessa ja tunnista, mitkä kuvat sisältävät kalibrointikohteita.
 
-**Yleisiä tilanteita:*** **Ennen kuvauksen kohde**: Kuvattu ennen istunnon aloittamista
+**Yleisiä tilanteita:*** **Ennen kuvauksen aloittamista otettu kohde**: Otettu ennen istunnon aloittamista
 * **Kuvauksen jälkeinen kohde**: Kuvattu istunnon päätyttyä
 * **Kenttäkohteet**: Kohteet, jotka on sijoitettu kuvausalueelle
 * **Useita kohteita**: 2–3 kohdekuvaa istuntoa kohti (suositeltava)
 
-### Vaihe 2: Tarkista kohdesarake
+### Vaihe 2: Tarkista kohdesarake <img src="../.gitbook/assets/image (33).png" alt="" data-size="original">
 
-Jokaiselle kalibrointikohteen sisältävälle kuvalle:
+Jokaiselle kuvalle, joka sisältää kalibrointikohteen:
 
 1. Etsi kuva tiedostoselaimen taulukosta
-2. Etsi **Kohde**-sarake (oikeanpuoleisin sarake)
-3. Napsauta kyseisen kuvan Kohde-sarakkeen valintaruutua
-4. Toista tämä kaikille kohteita sisältäville kuville
+2. Etsi **Target**-sarake (oikeanpuoleisin sarake)
+3. Napsauta kyseisen kuvan kohdesarakkeen valintaruutua
+4. Toista tämä kaikille kuville, joissa on kohteita
 
 ### Vaihe 3: Varmista valintasi
 
-Tarkista ennen käsittelyä:
+Tarkista ennen käsittelyä vielä kerran:
 
 * [ ] Kaikki kuvat, joissa on kalibrointikohteita, on valittu
 * [ ] Mitään kuvia, joissa ei ole kohteita, ei ole valittu vahingossa
@@ -58,40 +56,57 @@ Tarkista ennen käsittelyä:
 
 ***
 
+## LATTICE: Kohteet ovat valinnaisia, kun DAQ tallentaa
+
+LATTICE-monispektrikameroissa kuvakehyksessä oleva kalibrointikohde on **toinen kahdesta** mahdollisesta heijastavuusviitteestä:
+
+* **Kuvassa oleva kohde**: kun merkitty kohdekuva läpäisee Chloros:n laadunvalvontaportit (QA), kohteesta tulee**absoluuttinen heijastavuusviite** sitä ympäröivälle kuvamateriaalille.
+* **DAQ:n alaspäin suuntautuva säteily**: kun kohdetta ei ole (tai laadunvalvonta epäonnistuu), Chloros laskee heijastavuuden sen sijaan DAQ-valosensorin alaspäin suuntautuvan säteilyn voimakkuuden perusteella (ρ = π·L/E). Jos `.daq`- tai DAQ-M `.csv`-tallennus kattaa kaappauksesi, saat kalibroidun heijastavuuden**ilman minkäänlaisia kohdekuvia**.
+
+Tämä automaattinen toiminta on oletusasetus. CLI- ja SDK-tiedostoissa tämä vastaa `--reflectance-source auto`-asetusta; voit myös pakottaa `target`-asetuksen (tiukka — ei DAQ-korvausta) tai `daq`-asetuksen (DAQ-määräävä). Katso [CLI-viite](../reference/cli-reference.md#per-product-export-toggles-lattice-multispectral).
+
+**LATTICE-kohteiden geometriat**: Survey3:ssa käytetyn perinteisen paneelintunnistuksen lisäksi LATTICE-käsittely tukee**ArUco-merkittyjä kohteita**,**kiinteitä ROI-kohteita**ja**nauhakohteita**, jotka määritetään projektikohtaisesti. Yksikkökohtaiset**mitatut** kohteen heijastavuusskannaukset voidaan toimittaa sarjanumeroittain (CLI: `--target-reflectance-dir`, yksi `<serial>.csv` kohdeyksikköä kohti), ja nimelliset T3/T4P-spektrit toimivat varavaihtoehtona.
+
+{% hint style="info" %}
+**F988-moduuli**: F988-heijastavuus kalibroidaan käyttämällä kuvauspaikalla olevaa heijastavuuspaneelia: kaista sijaitsee DAQ-valosensorin kalibroidun alueen ulkopuolella, joten Chloros käyttää viimeisintä paneelista tallennettua arvoa ja säilyttää sen paneelin mittausten välillä. Jos F988-moduuli käsitellään pelkästään DAQ:n avulla, Chloros hylkää kyseisen kaistan DAQ-pohjaisen heijastavuuden (ohitusperuste `dls-uncalibrated-band-988`) — paneeliprosessi on tuettu menetelmä.
+{% endhint %}
+
+***
+
 ## Kohdekuvien parhaat käytännöt
 
-### Kohteen kaappaamisen ohjeet
+### Kohdekuvien ottamista koskevat ohjeet
 
 **Ajoitus:**
 
-* Kaappaa kohdekuvat välittömästi ennen kuvaussessiota ja sen aikana
+* Ota kohdekuvia välittömästi ennen kuvausistuntoa ja sen aikana
 * Samoissa valaistusolosuhteissa kuin DAQ-valosensori
-* Parhaiden tulosten saavuttamiseksi ota kohdekuvia mieluiten mahdollisimman usein. Muussa tapauksessa valosensorin tietoja käytetään kalibroinnin säätämiseen ajan mittaan.
+* Parhaiden tulosten saavuttamiseksi kohdekuvia tulisi ihannetapauksessa ottaa mahdollisimman usein. Muussa tapauksessa valosensorin tietoja käytetään kalibroinnin säätämiseen ajan mittaan.
 
 **Kameran sijainti:**
 
-* Pidä kameraa kohteen yläpuolella siten, että se on keskitetty ja täyttää noin 40–60 % kuvan keskiosasta.
-* Pidä kamera yhdensuuntaisena/nadirina kohteen pintaan nähden
+* Pidä kameraa kohteen yläpuolella siten, että kohde on kuvan keskellä ja täyttää noin 40–60 % kuvan keskiosasta.
+* Pidä kamera yhdensuuntaisena kohteen pinnan kanssa tai sen suoraan alapuolella
 
 **Valaistus:**
 
-* Sama ympäristön valaistus kuin DAQ-valosensorillasi
-* Vältä varjoja kohdepinnoilla
+* Sama ympäristön valaistus kuin DAQ-valosensorissasi
+* Vältä varjoja kohteen pinnoilla
 * Älä peitä valonlähdettä kehollasi, ajoneuvollasi tai kasvillisuudella
-* Pilviset olosuhteet antavat tasaisimmat tulokset
+* Pilviset olosuhteet tuottavat tasaisimmat tulokset
 
 **Kohteen kunto:**
 
 * Pidä kohdepaneelit puhtaina ja kuivina
-* Kaikkien neljän paneelin tulee olla selvästi näkyvissä ja esteettömiä
-* Kohteet kohtisuorassa/nadir-asennossa valonlähteeseen nähden, jos mahdollista
+* Kaikkien kohteen paneelien (esim. T4:n kaikki 4) tulee olla selvästi näkyvissä ja esteettömiä
+* Kohteet mahdollisuuksien mukaan kohtisuorassa/nadir-asennossa valonlähteeseen nähden
 
 ### Kuinka monta kohdekuvaa?
 
-**Vähimmäismäärä:**1 kohdekuva per istunto.**Suositus:** 3–5 kohdekuvaa per istunto.**Paras käytäntö:**
+**Vähimmäismäärä:**1 kohdekuva per istunto.**Suositus:** 3–5 kohdekuvaa per istunto.**Paras käytäntö aikataulun suhteen:**
 
 * 3–5 kuvaa otetaan pian sen jälkeen, kun valosensori on alkanut tallentaa
-* Käännä kameraa kuvien välillä parhaan tuloksen saamiseksi
+* Käännä kameraa kuvien välillä parhaan tuloksen saavuttamiseksi
 * Valinnainen: säännöllisesti istunnon aikana, jos valaistusolosuhteet muuttuvat jatkuvasti
 
 ***
@@ -109,30 +124,37 @@ Jos käytät kahta MAPIR-kameraa samanaikaisesti (esim. Survey3W RGN + Survey3N 
 
 ### Kameramalli-sarake
 
-**Kameramalli**-sarake auttaa tunnistamaan, mitkä kuvat ovat peräisin mistäkin kamerasta:
+**Kameramalli**-sarakkeen avulla voit tunnistaa, mitkä kuvat ovat peräisin mistäkin kamerasta:
 
 * Survey3W\_RGN
 * Survey3N\_OCN
-* Survey3W\_RGB
+* LATT-M3M-L41-F550
+* LATT-M3C-L87-FRGN
 * jne.
 
-Käytä tätä saraketta tarkistaaksesi, että olet merkinnyt kohteet jokaiselle kameratyypille projektissasi.
+Käytä tätä saraketta varmistaaksesi, että olet merkinnyt kohteet jokaiselle kameratyypille projektissasi.
 
 ***
 
-## Kohteen tunnistuksen asetukset
+## Kohteiden tunnistuksen asetukset
 
 ### Tunnistuksen herkkyyden säätäminen
 
-Jos Chloros ei tunnista kohteitasi oikein, säädä näitä asetuksia [Projektin asetuksissa](adjusting-project-settings.md):**Vähimmäiskalibrointinäytteen pinta-ala:*** **Oletus**: 25 pikseliä
-* **Lisää**, jos saat vääriä tunnistuksia pienistä esineistä
-* **Vähennä**, jos kohteita ei tunnisteta**Vähimmäiskohteiden ryhmittely:*** **Oletus**: 60
+Jos Chloros ei tunnista kohteitasi oikein, säädä näitä asetuksia kohdassa [Projektin asetukset](adjusting-project-settings.md):**Kalibroinnin vähimmäisnäytteen pinta-ala (px):*** **Oletus**: 25 pikseliä
+* **Suurenna**, jos pienistä esineistä saadaan vääriä tunnistustuloksia
+* **Pienennä**, jos kohteita ei tunnisteta**Kohteiden ryhmittelyn vähimmäisarvo (0–100):*** **Oletus**: 60
 * **Lisää**, jos kohteet jakautuvat useiksi tunnistuksiksi
-* **Pienennä**, jos värivaihteluita sisältäviä kohteita ei tunnisteta kokonaan***
+* **Vähennä**, jos värivaihteluita sisältäviä kohteita ei tunnisteta kokonaan
+
+{% hint style="info" %}
+**Vinkki CLI:lle**: `chloros-cli process` tukee samoja säätimiä (`--min-target-size`, `--target-clustering`), ja sen lippu `--target`/`--targets` merkitsee koko syöttökansion kohdepaneelikäyttöön tarkoitetuksi. Katso [CLI-viite](../reference/cli-reference.md).
+{% endhint %}
+
+***
 
 ## Yleisiä kohdekuvien ongelmia
 
-### Ongelma: Kohteita ei tunnistettu
+### Ongelma: Kohteita ei havaittu
 
 **Mahdolliset syyt:**
 
@@ -143,23 +165,23 @@ Jos Chloros ei tunnista kohteitasi oikein, säädä näitä asetuksia [Projektin
 
 **Ratkaisut:**
 
-1. Varmista, että Kohde-sarakkeen valinta on valittuna oikeille kuville
-2. Tarkista kohdekuvan laatu esikatselussa
-3. Ota kohteet uudelleen, jos laatu on huono
+1. Varmista, että Kohde-sarakkeen valintaruutu on valittuna oikeiden kuvien kohdalla
+2. Tarkista kohdekuvien laatu esikatselussa
+3. Ota kohteet uudelleen kuvaan, jos laatu on huono
 4. Säädä kohteen tunnistuksen asetuksia tarvittaessa
 
 ### Ongelma: Vääriä kohteen tunnistuksia
 
 **Mahdolliset syyt:**
 
-* Valkoiset rakennukset, ajoneuvot tai maaperän peitteet, joita luullaan kohteiksi
-* Kirkkaat alueet kasvillisuudessa
+* Valkoiset rakennukset, ajoneuvot tai maaperän peitteet tulkitaan virheellisesti kohteiksi
+* Kasvillisuuden kirkkaat alueet
 * Tunnistuksen herkkyys liian alhainen
 
 **Ratkaisut:**
 
-1. Merkitse vain todelliset kohdekuvat tunnistusalueen rajoittamiseksi
-2. Suurenna kalibroinnin vähimmäisnäytteen pinta-alaa
+1. Merkitse vain todelliset kohdekuvat — vain valitut kuvat skannataan
+2. Suurenna kalibroinnin vähimmäisnäytealuetta
 3. Suurenna kohteiden ryhmittelyn vähimmäisarvoa
 4. Varmista, että kohdekuvissa näkyy vain kohde (mahdollisimman vähän taustahäiriöitä)
 
@@ -167,31 +189,40 @@ Jos Chloros ei tunnista kohteitasi oikein, säädä näitä asetuksia [Projektin
 
 ## Tarkistuslista
 
-Tarkista kohdekuvien valinta ennen käsittelyn aloittamista:
+Ennen käsittelyn aloittamista tarkista kohdekuvien valinta:
 
-* [ ] Vähintään 1 kohdekuva merkitty per istunto
-* [ ] Kohdesarakkeen valintaruudut on valittu kaikille kohdekuville
-* [ ] Kohdekuvat on otettu samanaikaisesti tutkimuksen kanssa
+* [ ] Vähintään yksi kohdekuva merkitty per istunto (tai LATTICE-järjestelmässä istunnon kattava `.daq`/`.csv`-tallenne)
+* [ ] Kohdesarakkeen valintaruudut on valittu kaikissa kohdekuvissa
+* [ ] Kohdekuvat on otettu saman ajanjakson aikana kuin tutkimus
 * [ ] Kohteet näkyvät selvästi esikatselussa, kun niitä napsautetaan
-* [ ] Kaikki 4 kalibrointipaneelia näkyvät jokaisessa kohdekuvassa
+* [ ] Kaikki kalibrointipaneelit näkyvät jokaisessa kohdekuvassa
 * [ ] Kohteissa ei ole varjoja tai esteitä
 * [ ] Kaksikamerajärjestelmässä: Kohteet on merkitty molemmille kameratyypeille
 
 ***
 
-## Kohteettomat käsittelyt
+## Kohteettoman käsittelyn
 
-### Käsittely ilman kalibrointikohteita
+### LATTICE: DAQ-tallenteen avulla
 
-Vaikka sitä ei suositella tieteelliseen työhön, voit käsitellä kuvia ilman kohteita:
+Jos DAQ-valosensori on tallentanut alaspäin suuntautuvaa säteilyn voimakkuutta LATTICE-kuvauksen aikana, kohdetta ei tarvita:
 
-1. Jätä kaikki kohde-sarakkeen valintaruudut valitsematta
-2. **Poista käytöstä** &quot;Heijastavuuden kalibrointi&quot; Projektin asetuksissa
-3. Vignettikorjaus sovelletaan edelleen
-4. Tulosta ei kalibroida absoluuttisen heijastavuuden suhteen
+1. Tuo kuvamateriaalin sisältävä tiedosto `.daq` (tai DAQ-M `.csv`)
+2. Jätä Kohde-sarakkeen valinta valitsematta
+3. Heijastuskyky lasketaan automaattisesti DAQ:n alaspäin suuntautuvan säteilyn viitearvosta
+4. Säteilyvoimakkuus ei koskaan vaadi kohdetta tai DAQ:ta — se perustuu yksinomaan kameran tehtaalla tehtyyn radiometriseen kalibrointiin
+
+### Käsittely ilman viitteitä
+
+Voit käsitellä aineistoa myös ilman kohteita ja ilman DAQ:ta:
+
+1. Jätä kaikki Kohde-sarakkeen valintaruudut valitsematta
+2. **Poista käytöstä** ”Heijastavuuskalibrointi / valkotasapaino” Projektin asetuksissa – kohteen tunnistus ohitetaan tällöin kokonaan
+3. Vignettokorjaus sovelletaan edelleen
+4. Tulostetta ei kalibroida absoluuttisen heijastavuuden suhteen (LATTICE multispektraali vie edelleen debayeroidut, esikatselu- ja säteilyvoimakkuustuotteet)
 
 {% hint style="warning" %}
-**Ei suositella**: Ilman heijastavuuskalibrointia pikseliarvot edustavat vain suhteellista kirkkautta, eivät tieteellisiä heijastavuusmittauksia. Käytä kalibrointikohteita tarkkojen ja toistettavien tulosten saamiseksi.
+**Ei suositella tieteelliseen työhön (Survey3)**: Ilman heijastavuuskalibrointia Survey3 pikseliarvot edustavat vain suhteellista kirkkautta, eivät tieteellisiä heijastavuusmittauksia. Käytä kalibrointikohteita (tai LATTICE-ohjelmistossa DAQ-valosensoria) tarkkojen ja toistettavien tulosten saamiseksi.
 {% endhint %}
 
 ***
@@ -204,4 +235,4 @@ Kun olet merkinnyt kohdekuvasi:
 2. **Aloita käsittely** – Katso [Käsittelyn aloittaminen](starting-the-processing.md)
 3. **Seuraa edistymistä** – Katso [Käsittelyn seuranta](monitoring-the-processing.md)
 
-Lisätietoja kalibrointikohteista on kohdassa [Kalibrointikohteet](../calibration-targets.md).
+Lisätietoja kalibrointikohteista itsestään on kohdassa [Kalibrointikohteet](../calibration-targets.md).
