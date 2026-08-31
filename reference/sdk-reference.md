@@ -6,43 +6,43 @@
 
 29.7.2026 klo 19.19 ·**Päivitetty:**
 
-30.8.2026**Paketti:** `chloros-sdk` (PyPI)**Kohderyhmä:** Optimoitu suurten kielimallien (LLM) käyttöön; ihmisen luettavissa.**Laajuus:** Kaikki `import chloros_sdk`:n tarjoamat julkiset luokat, funktiot ja apufunktiot, sekä kopioitavat esimerkit, jotka kattavat kuvankäsittelyn, yhden kameran ohjauksen, synkronoidut taulukot, DAQ-anturit ja projektin automatisoinnin.
+30.8.2026**Paketti:** `chloros-sdk` (PyPI)**Kohderyhmä:** Optimoitu suurten kielimallien (LLM) käyttöön; ihmisen luettavissa.**Laajuus:** Kaikki `import chloros_sdk`:n tarjoamat julkiset luokat, funktiot ja apufunktiot, sekä kopioitavat esimerkit, jotka kattavat kuvankäsittelyn, yhden kameran ohjauksen, synkronoidut taulukot, DAQ-anturit ja projektiautomaation.
 
 Jos haluat tutustua vain tärkeimpiin kohtiin, siirry kohtaan:
 - [Asennus ja pikaopas](#installation)
 - [Smart-Connect LATTICE-kameroille](#smart-connect-for-lattice-cameras)
 - [DAQ-anturisessiot](#daq-sensor-sessions)
-- [Projektiautomaatio](#project-automation--chlorosproject)
+- [Projektin automatisointi](#project-automation--chlorosproject)
 - [Smart-AE / Smart-Capture](#smart-ae--smart-capture)
 
 ---
 
 ## Arkkitehtuuri 60 sekunnissa
 
-SDK on ohut Python-kerros Chloros-taustapalvelimen päällä (sama Flask-palvelin, jota työpöytäkäyttöliittymä ja CLI käyttävät). Automaatiota varten tuodaan `chloros_sdk` ja kutsutaan korkean tason metodeja; taustalla jokaisesta kutsusta tulee HTTP-pyyntö paikalliselle taustapalvelimelle portissa 5000 — `http://127.0.0.1:5000/api/...` (tarkoituksella ei `localhost`, joka ohjautuu ensin `::1`:ään osoitteessa Windows ja joka vie noin 2 sekuntia pyyntöä kohti, kun taustapalvelin käyttää vain IPv4-osoitteita). Taustapalvelin hallinnoi laitteistopoolia — kameroita, DAQ-antureita, kohdistusprofiileja, kehyspuskuria — joten SDK-skriptit voivat toimia rinnakkain graafisen käyttöliittymän kanssa ilman, että ne kilpailevat sarjaporttien tai verkkokortin kaistanleveyden käytöstä.
+SDK on ohut Python-kerros Chloros-taustapalvelimen päällä (sama Flask-palvelin, jota työpöytäkäyttöliittymä ja CLI käyttävät). Automaatiota varten tuodaan `chloros_sdk` ja kutsutaan korkean tason metodeja; taustalla jokainen kutsu muuttuu HTTP-pyynnöksi paikalliselle taustapalvelimelle portissa 5000 — `http://127.0.0.1:5000/api/...` (tarkoituksella ei `localhost`, joka ratkaistaan ensin muodossa `::1` osoitteessa Windows ja joka vie noin 2 sekuntia pyyntöä kohti, kun taustapalvelu tukee vain IPv4:ää). Taustapalvelin hallinnoi laitteistopoolia — kameroita, DAQ-antureita, kohdistusprofiileja, kehyspuskuria — joten SDK-skriptit voivat toimia rinnakkain graafisen käyttöliittymän kanssa ilman, että ne kilpailevat sarjaporttien tai verkkokortin kaistanleveyden käytöstä.
 
 Käytössäsi on kolme käyttöliittymää:
 
-1. **`ChlorosLocal` + ilmaiset funktiot** (`process_folder`, `process_lattice_capture`) — Kuvan käsittelyputki. Käsittele koko kansio kalibroinnin, debayer-muunnoksen ja indeksin viennin kautta yhdellä Python-kutsulla.
-2. **Smart-connect-käsittelyt** (`connect_camera`, `connect_array`, `connect_daq_sensor`) — Avaa pysyvä taustasessio reaaliaikaista laitteistoa varten. Sama &quot;smart-prep&quot;-prosessi kuin graafisessa käyttöliittymässä: verkkotunnistus, tason automaattinen valinta, PTP, AE-alustus, GPIO-laukaisijan konfigurointi.
-3. **`ChlorosProject` / `open_project`** — Lataa tallennettu projekti (kansio, jossa on tiedostot `cameras.json` + `sensors.json` + `project.json`), kytke kaikki kerralla ja aja tallennuksia nimetyillä käsitteillä.
+1. **`ChlorosLocal` + vapaat toiminnot** (`process_folder`, `process_lattice_capture`) — Kuvan käsittelyputki. Käsittele koko kansio kalibroinnin, debayer-muunnoksen ja indeksin viennin kautta yhdellä Python-kutsulla.
+2. **Smart-connect-käsittelyt** (`connect_camera`, `connect_array`, `connect_daq_sensor`) — Avaa pysyvä taustasessio reaaliaikaiselle laitteistolle. Sama ”smart-prep”-prosessi kuin graafisessa käyttöliittymässä: verkkotesti, tason automaattinen valinta, PTP, AE-alustus, GPIO-laukaisijan konfigurointi.
+3. **`ChlorosProject` / `open_project`** — Lataa tallennettu projekti (kansio, jossa on `cameras.json` + `sensors.json` + `project.json`), kytke kaikki kerralla ja suorita kaappauksia nimetyillä käsittimillä.
 
-Pinnat 1 ja 2 **käynnistävät paikallisen taustapalvelimen automaattisesti** , ellei sellainen ole jo kuuntelutilassa (sama mukana toimitettu binääri, jonka GUI/CLI käynnistää) — joten pelkkä skripti toimii uudesta komentotulkista ilman, että sinun tarvitsee käynnistää taustapalvelinta ensin. Ohita tämä antamalla `auto_start_backend=False` (esim. kun osoitetaan etätaustapalvelimeen, jota ei koskaan käynnistetä). Katso [Taustapalvelimen automaattinen käynnistys](#backend-auto-start). Surface 3 toimii eri tavalla: `open_project()` ei ota vastaan `auto_start_backend`-parametria, eikä `connect_all()` koskaan käynnistä taustaprosessia — se tunnustaa `http://127.0.0.1:5000`:ää kerran ja, jos mikään ei vastaa, siirtyy hiljaisesti suoraan (taustapalvelimettomaan) `lattice_sdk`-laitteen ohjaukseen. Vain `proj.process()` ja `stream(..., overlays=True)` muodostavat viiveellä `ChlorosLocal()`:n (joka käynnistyy automaattisesti).
+Pinnat 1 ja 2 **käynnistävät paikallisen taustaprosessin automaattisesti**, jos sellainen ei ole jo kuuntelutilassa (sama mukana toimitettu binääri, jonka GUI/CLI käynnistää) — joten pelkkä skripti toimii uudesta shellistä ilman, että sinun tarvitsee käynnistää taustapalvelinta ensin. Ohita tämä antamalla `auto_start_backend=False` (esim. kun osoitat etätaustapalvelimeen, jota ei koskaan käynnistetä). Katso [Taustapalvelimen automaattinen käynnistys](#backend-auto-start). Surface 3 toimii eri tavalla: `open_project()` ei ota vastaan `auto_start_backend`-parametria, eikä `connect_all()` koskaan käynnistä taustaprosessia — se yrittää `http://127.0.0.1:5000`:ää kerran, ja jos mikään ei vastaa, se siirtyy hiljaisesti suoraan (taustaprosessittomaan) `lattice_sdk`-laitteen ohjaukseen. Vain `proj.process()` ja `stream(..., overlays=True)` muodostavat viiveellä `ChlorosLocal()`:n (joka käynnistyy automaattisesti).
 
-Kaikki kolme vaativat todennuksen: suorita `chloros-cli login` kerran koneella tai kirjaudu sisään työpöydän graafisen käyttöliittymän kautta. SDK-kutsut ilman kelvollista istuntoa aiheuttavat virheen `ChlorosAuthenticationError`.
+Kaikki kolme vaativat todennusta: suorita `chloros-cli login` kerran koneella tai kirjaudu sisään työpöydän graafisen käyttöliittymän kautta. SDK-kutsut ilman voimassa olevaa istuntoa aiheuttavat virheen `ChlorosAuthenticationError`.
 
 Vaatimukset:
 - Python 3.7+ (paketin ilmoituksen mukaan; kehitetty/testattu versiossa 3.10)
 - Chloros Desktop asennettuna paikallisesti (taustaprosessi sisältyy asennusohjelmaan)
-- Aktiivinen Chloros+ -kirjautumistunnus. SDK / CLI -palvelun vähimmäistaso on **Copper**-taso tai korkeampi (Copper / Bronze / Silver / Gold); ilmaisella**Iron**-tasolla ei ole pääsyä SDK / CLI -palveluihin. Tätä valvotaan**palvelinpuolella**: jokaisessa SDK / CLI -merkityssä pyynnössä on oltava sekä aktiivinen istunto että maksettu tilaus, tai taustapalvelu palauttaa virheen `403` yhdessä virheen `error_code: PLAN_UPGRADE_REQUIRED` kanssa (näkyy muodossa `ChlorosLicenseError` virheen `ChlorosLocal` ja `ChlorosConnectError`-muodossa `connect_*`-aputoimintojen toimesta). Uloskirjautunut kutsuja saa sen sijaan virheen `401` / `AUTH_REQUIRED` (`ChlorosAuthenticationError`) — nämä kaksi ovat erillisiä, koska `chloros-cli login`:n uudelleenkäynnistäminen korjaa ensimmäisen, mutta ei toista.
-- Offline-käyttöä tuetaan paketinarmonajan puitteissa: käyttöoikeustaso luetaan palvelimen vahvistusvälimuistista (5 min) tai allekirjoitetusta, laitteeseen sidotusta lisenssivälimuistista (30 päivää kuukausitilauksissa, vuositilauksissa tilauksen voimassaolon loppuun asti). Kun tämä armonaika päättyy, tilaus muuttuu ilmaiseksi ja SDK / CLI -käyttö keskeytyy, kunnes laite pääsee kerran yhteyteen palvelimen kanssa. `chloros-cli status` (`GET /api/license-status`) pysyy käytettävissä ilmaisella tasolla, joten syy on näkyvissä — se on ainoa SDK / CLI reitti, joka on vapautettu tasorajoituksesta.
-- Windows 10/11 64-bittinen, **Ubuntu 22.04 LTS tai uudempi**, tai Jetson (JetPack 6). Ubuntu 20.04:ää**ei** tueta: `.deb`:n riippuvuudet perustuvat siihen, mihin taustapalvelu linkittyy, mukaan lukien `libc6 (>= 2.34)`, ja Focal toimittaa glibc 2.31:n.
+- Aktiivinen Chloros+ -kirjautumistunnus. SDK / CLI -palvelun vähimmäistaso on **Copper**-taso tai korkeampi (Copper / Bronze / Silver / Gold); ilmaisella**Iron**-tasolla ei ole pääsyä osoitteisiin SDK / CLI. Tämä velvoite koskee**palvelinpuolella**: jokaisessa SDK / CLI -merkityssä pyynnössä on oltava sekä aktiivinen istunto että maksettu tilaus, tai taustajärjestelmä palauttaa virheen `403` yhdessä virheen `error_code: PLAN_UPGRADE_REQUIRED` kanssa (näkyy nimellä `ChlorosLicenseError` `ChlorosLocal`:n kautta ja `ChlorosConnectError`:na `connect_*`-aputoimintojen kautta). Uloskirjautunut kutsuja saa sen sijaan virhekoodit `401` / `AUTH_REQUIRED` (`ChlorosAuthenticationError`) — nämä kaksi ovat erillisiä, koska `chloros-cli login`:n uudelleenkäynnistäminen korjaa ensimmäisen, mutta ei toista.
+- Offline-käyttöä tuetaan paketin armonaikana: käyttöoikeustaso luetaan palvelimen-validointivälimuistista (5 min) tai allekirjoitetusta, laitteeseen sidotusta lisenssivälimuistista (30 päivää kuukausitilauksissa, vuositilauksissa tilauksen voimassaolon loppuun asti). Kun tämä armonaika päättyy, tilaus muuttuu ilmaiseksi ja SDK / CLI -pääsy keskeytyy, kunnes laite pääsee kerran yhteyteen palvelimen kanssa. `chloros-cli status` (`GET /api/license-status`) pysyy saavutettavissa ilmaisella tasolla, joten syy on näkyvissä – se on ainoa SDK / CLI-reitti, joka on vapautettu tasorajoituksesta.
+- Windows 10/11 64-bittinen, **Ubuntu 22.04 LTS tai uudempi**tai Jetson (JetPack 6). Ubuntu 20.04:ää**ei** tueta: `.deb`:n riippuvuudet perustuvat siihen, mihin taustapalvelu linkittyy, mukaan lukien `libc6 (>= 2.34)`, ja Focal toimittaa glibc 2.31:n.
 
 ---
 
 ## Asennus
 
-Python SDK on ohut Python-kerros Chloros-taustaprosessin päällä. Jos haluat tehdä muutakin kuin muutamia pelkästään DAQ:ta käyttäviä työnkulkuja, tarvitset **paikallisesti asennetun Chloros-työpöytäpaketin** (Windows asennusohjelma tai Linux `.deb`) — se tarjoaa taustapalvelimen binääritiedoston, Arena-SDK-ajoympäristön LATTICE-kameroille sekä kalibrointipaketit.
+Python SDK on ohut Python-kerros Chloros-taustaprosessin päällä. Muuhun kuin muutamaan pelkästään DAQ-tyyppiseen työnkulkuun tarvitset **paikallisesti asennetun Chloros-työpöytäpaketin** (Windows asennusohjelma tai Linux `.deb`) — se tarjoaa taustapalvelimen binääritiedoston, Arena-SDK-ajoympäristön LATTICE-kameroille sekä kalibrointipaketit.
 
 Uusimmat lataukset: [`https://mapir.gitbook.io/chloros/download`](https://mapir.gitbook.io/chloros/download)
 
@@ -51,7 +51,7 @@ Uusimmat lataukset: [`https://mapir.gitbook.io/chloros/download`](https://mapir.
 #### Windows (.exe)
 
 1. Lataa `Chloros-Setup-x.y.z.exe` lataussivulta.
-2. Suorita asennusohjelma ja seuraa ohjatun toiminnon ohjeita. Oletusasennuskansio on `C:\Program Files\MAPIR\Chloros\`.
+2. Suorita asennusohjelma ja seuraa ohjatun asennuksen ohjeita. Oletusasennuskansio on `C:\Program Files\MAPIR\Chloros\`.
 3. Käynnistä Chloros vähintään kerran ja kirjaudu sisään Chloros+ -tililläsi.
 
 #### Linux amd64 (.deb)
@@ -78,11 +78,11 @@ chloros-cli login user@example.com 'YourPassword'
 
 #### Windows
 
-Asennusohjelma suorittaa automaattisesti `pip install`-komennon mukana toimitetulle wheel-tiedostolle käyttämällä järjestelmänPython-komentoa (`py.exe`-käynnistysohjelma on ensisijainen, mutta se siirtyy varasuunnitelmana `python -m pip`-komentoon). Mitään toimia ei tarvita — `import chloros_sdk` toimii Python-ympäristössäsi asennuksen onnistuttua. Jos koneessa ei ole Python-tiedostoa, asennusohjelma ohittaa tämän vaiheen hiljaisesti, ja graafinen käyttöliittymä sekä CLI jatkavat toimintaansa.
+Asennusohjelma suorittaa automaattisesti `pip install`:n mukana toimitetun wheel-tiedoston avulla käyttäen järjestelmäsi Python (`py.exe`-käynnistysohjelma on ensisijainen, mutta se siirtyy varajärjestelmäksi `python -m pip`:ään). Mitään toimenpiteitä ei tarvita — `import chloros_sdk` toimii Python-ympäristössäsi asennuksen onnistuttua. Jos koneella ei ole Python-tiedostoa, asennusohjelma ohittaa tämän vaiheen hiljaisesti, ja graafinen käyttöliittymä sekä CLI jatkavat toimintaansa.
 
 #### Linux (.deb)
 
-.deb-tiedosto sijoittaa wheel-tiedoston kansioon `/usr/lib/chloros/sdk/`. Komento `postinst` tulostaa tarkan komennon — PEP 668 -jakelut estävät oletuksena globaalit pip-kirjoitukset, joten emme asenna ohjelmaa automaattisesti:
+.deb-tiedosto sijoittaa wheel-tiedoston kansioon `/usr/lib/chloros/sdk/`. `postinst` tulostaa tarkan komennon — PEP 668 -jakelut kieltävät oletusarvoisesti globaalit pip-kirjoitukset, joten emme asenna sitä automaattisesti:
 
 ```bash
 pip install --user /usr/lib/chloros/sdk/chloros_sdk-*.whl
@@ -92,13 +92,13 @@ Air-gapped-Jetson-asennuksissa tämä tapahtuu täysin offline-tilassa — wheel
 
 #### Julkinen PyPI
 
-Pelkästään pip:iä käyttäville isäntäkoneille (Chloros-työpöytäpakettia ei ole asennettu; etätausta- tai pelkästään DAQ-työnkulut):
+Pelkästään pip-pohjaisille isäntäkoneille (Chloros-työpöytäpakettia ei ole asennettu; etätausta- tai pelkästään DAQ-työnkulut):
 
 ```bash
 pip install chloros-sdk
 ```
 
-PyPI päivitetään julkaisuversioiden asennusohjelmistojen rakennuksissa, joten julkaistu wheel-tiedosto vastaa uusinta vakaata julkaisua. Kehitysversiot (esim. `1.1.4.dev1`) toimitetaan vain mukana tulevan asennusohjelman wheel-tiedoston kautta.
+PyPI päivitetään version-version asennusohjelman rakennettaessa, joten julkaistu wheel-tiedosto vastaa uusinta vakaata julkaisua. Kehitysversiot (esim. `1.1.4.dev1`) toimitetaan ainoastaan mukana tulevan asennusohjelman wheel-tiedoston kautta.
 
 #### Varmista
 
@@ -116,22 +116,22 @@ print("PROJECT_AVAILABLE =", chloros_sdk.PROJECT_AVAILABLE)
 
 Pelkkä pip-paketti **ei** riitä useimpiin työnkulkuihin. Tässä on luettelo siitä, mitä kukin SDK-pinta tarvitsee:
 
-| SDK-pinta | Tarvitaanko työpöytäpakettia? | Miksi |
+| SDK-pinta | Tarvitseeko työpöytäpaketin? | Miksi |
 | --- | --- | --- |
-| `ChlorosLocal`, `process_folder`, `process_lattice_capture` | **Kyllä** | Käynnistää taustaprosessin automaattisesti `/usr/lib/chloros/chloros-backend`:ssä (Linux) tai `C:\Program Files\MAPIR\Chloros\…`:ssä (Windows). |
-| `connect_camera`, `connect_array`, `connect_daq_sensor`, `analyze_array_network`, `list_*`, `discover_*` | **Kyllä**(paikallinen)**/ Ei**(etä) | Pelkät HTTP-asiakasohjelmat taustapalvelimen kautta. Paikallinen taustapalvelin → vaatii työpöytäpaketin. Etätaustapalvelin → `backend_url=`**tunnelin kautta** (katso Etätaustapalvelintila — mukana toimitetut taustapalvelimet sitovat vain loopback-liitännän). |
+| `ChlorosLocal`, `process_folder`, `process_lattice_capture` | **Kyllä** | Käynnistää taustaprosessin automaattisesti kohdassa `/usr/lib/chloros/chloros-backend` (Linux) tai `C:\Program Files\MAPIR\Chloros\…` (Windows). |
+| `connect_camera`, `connect_array`, `connect_daq_sensor`, `analyze_array_network`, `list_*`, `discover_*` | **Kyllä**(paikallinen)**/ Ei**(etä) | Pelkät HTTP-asiakkaat taustapalvelimen kautta. Paikallinen taustapalvelin → vaatii työpöytäpaketin. Etätaustapalvelin → `backend_url=`**tunnelin kautta** (katso Etä-taustapalvelintila — mukana toimitetut taustapalvelimet sitoutuvat vain loopbackiin). |
 | `ChlorosProject` / `open_project` | **Kyllä** | Ajaa tallennettuja projekteja taustapalvelimen kautta. |
-| Suorat LATTICE-luokat (`LatticeCamera`, `CameraPool`, `Calibration`, `DLS`, …) | **Kyllä** | Tarvitsee Arena-SDK-natiiviruntimea, joka toimitetaan työpöytäpaketin mukana. Muussa tapauksessa `CAMERA_AVAILABLE` on tuonnin yhteydessä `False`. |
-| Suorat DAQ-luokat (`DAQUSensor`, `DAQMSensor`, `DAQESensor`, `SensorFleet`, `discover_all`) | **Ei** | Puhdas Python pyserial/bleak/zeroconf:n päälle. Pelkästään pip-ympäristö voi ohjata DAQ-laitteita päästä päähän. |
+| Suorat LATTICE-luokat (`LatticeCamera`, `CameraPool`, `Calibration`, `DLS`, …) | **Kyllä** | Tarvitsee Arena-SDK-natiiviruntimea, joka toimitetaan työpöytäpaketin mukana. Muussa tapauksessa `CAMERA_AVAILABLE` on `False` tuonnin yhteydessä. |
+| Suorat DAQ-luokat (`DAQUSensor`, `DAQMSensor`, `DAQESensor`, `SensorFleet`, `discover_all`) | **Ei** | Puhdas Python pyserial/bleak/zeroconf:n kautta. Pelkästään pip-ympäristö voi ohjata DAQ-laitteita päästä päähän. |
 
 ### Etätaustapalvelintila (vain pip-isäntä, tunnelin kautta)
 
-> **Toimitettua taustapalvelinta ei voi saavuttaa lähiverkon kautta.** Tuotantoversio
-> -rakennukset sitovat vain loopback-liitännän (molemmat loopback-perheet) ja hylkäävät jyrkästi
-> ainoan ei-loopback-tilan (`CHLOROS_CLOUD_MODE`), joten
-> `backend_url="http://<lan-ip>:5000"` **ei voi toimia asennettua
-> Chloros:n kanssa** — kyseinen malli on toiminut ainoastaan source/dev-
-> taustapalvelimen kanssa. Jos haluat käyttää toisella koneella sijaitsevaa taustapalvelinta, ohjaa sen loopback-
+> **Toimitettua taustapalvelinta ei voi saavuttaa lähiverkon kautta.** Tuotantoversioissa
+> sidotaan vain loopback-liitännät (molemmat loopback-perheet) ja hylätään ehdottomasti
+> ainoa ei-loopback-tila (`CHLOROS_CLOUD_MODE`), joten
+> `backend_url="http://<lan-ip>:5000"` **ei voi toimia asennetun
+> Chloros** kanssa — kyseinen malli on toiminut aina vain source/dev
+> taustapalvelinta. Jos haluat käyttää toisella koneella olevaa taustapalvelinta, ohjaa sen loopback-
 > portti itse ja osoita SDK tunneliin:
 
 ```bash
@@ -149,11 +149,11 @@ chloros_sdk.connect_array(serials, backend_url=BACKEND)
 chloros_sdk.connect_daq_sensor(eth_host="daq-e-1.local", backend_url=BACKEND)
 ```
 
-Headless- / CI- / robotiikkakoneet voivat pitää yhden koneen, johon on asennettu täysi työpöytäympäristö, ”Chloros-palvelimena” ja käyttää `pip install chloros-sdk`:ää kaikkialla muualla — mutta niiden välinen siirto tapahtuu yllä mainitun käyttäjän järjestämän tunnelin kautta, ei suoran LAN-URLin kautta.
+Headless-/CI-/robotiikkakoneet voivat pitää yhden koneen, johon on asennettu täysi työpöytäympäristö, ”Chloros-palvelimena” ja käyttää `pip install chloros-sdk`:ää kaikkialla muualla — mutta niiden välinen siirto tapahtuu yllä mainitun, käyttäjän järjestämän tunnelin kautta, ei suoran LAN-URLin kautta.
 
-> **Tunnettu rajoitus — `ChlorosLocal` ei tue pelkästään pip-käyttöä.** `ChlorosLocal(backend_url=BACKEND)` etsii tällä hetkellä paikallisen taustapalvelun binääritiedoston konstruktorissaan *ennen* kuin se tarkistaa URL-osoitteen, ja aiheuttaa virheen `ChlorosBackendError` (&quot;Chloros-taustapalvelinta ei löydy…&quot;), jos työpöytäpakettia ei ole asennettu — vaikka etätaustapalvelin olisi tavoitettavissa. Vain yllä oleva smart-connect-käyttöliittymä (`connect_camera` / `connect_array` / `connect_daq_sensor` sekä `analyze_array_network` sekä apuohjelmat `list_*` / `discover_*`) toimivat pelkän pip-isäntäkoneen kautta.
+> **Tunnettu rajoitus — `ChlorosLocal` ei tue pelkästään pip-käyttöä.** `ChlorosLocal(backend_url=BACKEND)` etsii tällä hetkellä paikallisen taustaprosessin binääritiedoston konstruktorissaan *ennen* kuin se tarkistaa URL-palvelun, ja antaa virheilmoituksen `ChlorosBackendError` (&quot;Chloros-taustaprosessia ei löydy…&quot;), jos työpöytäpakettia ei ole asennettu — vaikka etätaustaprosessi olisi saavutettavissa. Vain yllä oleva älykäs-yhteysrajapinta (`connect_camera` / `connect_array` / `connect_daq_sensor` sekä `analyze_array_network` ja `list_*` / `discover_*`-apuohjelmat) toimivat pelkästään pip-isäntäkoneelta.
 
-### Pelkkä DAQ-työnkulku (vain pip-isäntä)
+### Pelkästään DAQ-työnkulku (pelkästään pip-isäntäkone)
 
 Jos tarvitset vain DAQ-antureita etkä käytä LATTICE-kameroita tai kuvankäsittelyä, pip-paketti on itsenäinen:
 
@@ -211,7 +211,7 @@ proj.disconnect_all()
 
 ---
 
-## API-hakemiston ylätaso
+## Ylätason API-hakemisto
 
 ```python
 import chloros_sdk
@@ -271,7 +271,7 @@ chloros_sdk.PROJECT_AVAILABLE    # True iff ChlorosProject deps available
 
 ## Kuvan käsittely — `ChlorosLocal`
 
-Pääputkiluokka. Käynnistää taustaprosessin ensimmäisellä käyttökerralla, luo ja määrittää projektit, valvoo edistymistä ja palauttaa suorituksen jälkeiset yhteenvedot.
+Päällysputkiluokka. Käynnistää taustapalvelimen ensimmäisellä käyttökerralla, luo ja määrittää projekteja, valvoo etenemistä ja palauttaa suorituksen jälkeiset yhteenvedot.
 
 ### Konstruktori
 
@@ -292,16 +292,16 @@ ChlorosLocal(
 | Menetelmä | Kuvaus |
 | --- | --- |
 | `create_project(project_name, camera=None)` | Luo uuden projektin (valinnaisesti kameramallin, kuten `"Survey3N_RGN"`, avulla). |
-| `import_images(folder_path, recursive=False)` | Tuo RAW/TIF/JPG/DNG-kuvia **ja `.daq`-valosensoritallenteita**. Palauttaa `count` (kuvat) ja `scan_count` (tallenteet). Antaa varoituksen vain, jos kansiossa ei ole kumpaakaan. |
-| `export_light_sensor(daq=True, csv=True)` | Kirjoittaa kalibroidut `.daq` + `.csv` jokaisesta projektin valosensoritallenteesta tiedostoon `<project>/Light Sensor/`. Katso [Valosensoritallenteet](#light-sensor-tallenteet--kalibroitu-daq--csv). |
+| `import_images(folder_path, recursive=False)` | Tuo RAW-/TIF-/JPG-/DNG-kuvat **ja `.daq` valosensorin tallenteita**. Palauttaa `count` (kuvat) ja `scan_count` (tallenteet). Antaa varoituksen vain, jos kansiossa ei ole kumpaakaan. |
+| `export_light_sensor(daq=True, csv=True)` | Kirjoita kalibroidut `.daq` + `.csv` jokaisesta projektin valosensoritallenteesta tiedostoon `<project>/Light Sensor/`. Katso [Valosensoritallenteet](#light-sensor-recordings--calibrated-daq--csv). |
 | `configure(debayer=..., vignette_correction=..., reflectance_calibration=..., indices=[...], export_format=..., ppk=..., daq_log_path=..., input_level=..., radiometric_output=..., array_alignment=..., array_alignment_crop=..., array_alignment_interpolation=..., custom_settings=None)` | Aseta käsittelyn säätimet. |
-| `process(mode="parallel", wait=True, progress_callback=None, poll_interval=2.0)` | Suorita käsittelyputki. Palauttaa `{"status": "complete", "async": False}`:n, sekä `summary`-avaimen, jos taustapalvelu tarjoaa sellaisen — katso [Suorituksen jälkeinen yhteenveto ja vinkit](#post-run-summary--hints). |
+| `process(mode="parallel", wait=True, progress_callback=None, poll_interval=2.0)` | Suorita käsittelyputki. Palauttaa `{"status": "complete", "async": False}`:n sekä `summary`-avaimen, jos taustaprosessi tarjoaa sellaisen — katso [Suorituksen jälkeinen yhteenveto ja vinkit](#post-run-summary--hints). |
 | `get_config()` / `get_status()` / `status()` | Tarkista taustapalvelimen tila. |
 | `logout()` | Tyhjennä välimuistissa olevat tunnistetiedot. |
-| `shutdown_backend()` | Lopeta taustapalvelu (jos SDK -started). |
-| `discover_cameras()` | Etsi LATTICE-kamerat **tämän instanssin taustapalvelimen kautta** (`/api/camera/discover`). Palauttaa sanakirjojen luettelon (`serial`, `model`, `ip`, …) — sama rakenne kuin GUI:ssa/ CLI. Tyhjä luettelo, jos kameroita ei löydy tai taustapalvelimeen ei saada yhteyttä. |
-| `camera_capture(output_dir, format="tiff", **settings)` | Tallenna yksi kuva**taustapalvelimen kautta**(käynnistyy automaattisesti tämän käsittimen avulla), jolloin se saa saman esikäsittelyn kuin GUI/ CLI (oletusarvo 12 bittiä, poolin uudelleenkäyttö, upotetut kalibrointimetatiedot). Määritä kohde komennolla `serial=` tai `device_index=`; välitä `exposure`/`gain`/`pixel_format`/`preset` arvona `**settings`. Palauttaa vanhan metatietosanakirjan (`filepath`, `width`, `height`, `pixel_format`, `exposure_time`, `gain`, `timestamp`). |
-| `camera_stream(serial, *, fps=10.0, overlay=None, decode=True, connect_timeout=10.0, read_timeout=15.0)` | Tuottaa päällekkäisistä kuvista koostettuja esikatselukuvia yhdistetyistä kameroista — kevyt MJPEG-asiakasohjelma taustapalvelimen `/api/camera/<serial>/stream-annotated`-reitin kautta (zebra / ruudukko / ristikohdistin / histogrammi / peaking / piste, jotka on piirretty palvelinpuolella). `decode=True` tuottaa BGR-taulukoita; `False` tuottaa raakamuotoisia JPEG-tavuja. Saatavilla myös projektikohtaisesti nimellä `ChlorosProject.stream(overlays=True)`. |
+| `shutdown_backend()` | Lopeta taustapalvelu (jos se on käynnistetty komennolla SDK -start). |
+| `discover_cameras()` | Etsi LATTICE-kamerat **tämän instanssin taustapalvelimen kautta** (`/api/camera/discover`). Palauttaa sanakirjojen luettelon (`serial`, `model`, `ip`, …) — sama rakenne kuin GUI:ssa/CLI:ssa. Tyhjä luettelo, jos mitään ei löydy tai taustapalvelinta ei tavoiteta. |
+| `camera_capture(output_dir, format="tiff", **settings)` | Kaappaa yhden kehyksen**taustapalvelimen kautta**(tämä kahva käynnistää sen automaattisesti), jotta se saa saman esikäsittelyn kuin GUI/ CLI (oletusarvo 12-bittinen, poolin uudelleenkäyttö, upotetut kalibrointimetatiedot). Määritä kohde komennolla `serial=` tai `device_index=`; välitä `exposure`/`gain`/`pixel_format`/`preset`, kun `**settings`. Palauttaa vanhan metatietosanakirjan (`filepath`, `width`, `height`, `pixel_format`, `exposure_time`, `gain`, `timestamp`). |
+| `camera_stream(serial, *, fps=10.0, overlay=None, decode=True, connect_timeout=10.0, read_timeout=15.0)` | Tuottaa päällekkäin yhdistettyjä esikatselukuvia yhdistetyltä kameralta — ohut MJPEG-asiakasohjelma taustapalvelimen `/api/camera/<serial>/stream-annotated`-reitin kautta (zebra / ruudukko / hiusristikko / histogrammi / peaking / piste piirretään palvelinpuolella). `decode=True` tuottaa BGR-taulukoita; `False` tuottaa raakoja JPEG-tavuja. Saatavilla myös projektikohtaisesti nimellä `ChlorosProject.stream(overlays=True)`. |
 
 Käytä kontekstinhallintana taatun puhdistuksen varmistamiseksi:
 
@@ -322,40 +322,39 @@ print(results["summary"])
 ### Valosensorin tallenteet — kalibroitu `.daq` + `.csv`
 
 DAQ-U / DAQ-M / DAQ-E voidaan tallentaa **ilman** sen kalibrointipakettia. Juuri
-tämän julkiset [`chloros_scripts`](https://github.com/mapircamera/chloros_scripts)
+tätä julkiset [`chloros_scripts`](https://github.com/mapircamera/chloros_scripts)
 tallentimet (`record_daq.py`) tekevät oletuksena: ne tallentavat anturien raakalukemat ja merkitsevät
 tiedostoon leiman, jotta Chloros hakee kyseisen anturin tehdaskalibroinnin **sarjanumeron perusteella** — ensin paikallisesta välimuistista
-, sitten MAPIR-pilvestä — ja soveltaa sen tuonnin yhteydessä.
+ja sitten MAPIR-pilvestä — ja soveltaa sitä tuonnin yhteydessä.
 
-Chloros tallentaa tuloksen takaisin kahdeksi tuotteeksi tallennusta kohti, nimikkeellä
+Chloros kirjoittaa tuloksen takaisin ulos kahtena tuotteena tallennusta kohti, nimellä
 `<project>/Light Sensor/`:
 
 | Tuote | Mikä se on |
 | --- | --- |
-| `<name>_calibrated.daq` | Uudelleenkäsiteltävä arkisto — sama rakenne kuin reaaliaikaisessa tallenteessa, mutta nyt ilmoitetaan sen tuottanut paketti. Sen uudelleen tuominen **ei** kalibroi sitä toista kertaa. |
-| `<name>_calibrated.csv` | Spektrinen säteilyvoimakkuus yksiköissä W/m²/nm anturin omalla aallonpituusruudukolla, yksi rivi lukemaa kohti, sekä fotometriset sarakkeet (kokonaisteho, fotopinen/skotopinen lux, PPFD ja sen sininen/vihreä/punainen jakautuma, huippuaallonpituus). |
-| `<name>_raw.daq` / `<name>_raw.csv` | **Vain niputtamattomat anturit (DAQ-A).** Anturin raakaspektrilukemat — *ei* säteilyvoimakkuutta. Katso alla. |
+| `<name>_calibrated.daq` | Uudelleen käsiteltävä arkisto — sama rakenne kuin reaaliaikaisessa tallenteessa, mutta nyt ilmoitetaan sen tuottanut paketti. Sen uudelleen tuominen **ei** kalibroi sitä toista kertaa. |
+| `<name>_calibrated.csv` | Spektrinen säteilyvoimakkuus yksikössä W/m²/nm anturin omalla aallonpituusruudukolla, yksi rivi lukemaa kohti, sekä fotometriset sarakkeet (kokonaisteho, fotopinen/skotopinen lux, PPFD ja sen sininen/vihreä/punainen jakautuma, huippuaallonpituus). |
+| `<name>_raw.daq` / `<name>_raw.csv` | **Vain ilman pakettia toimivat anturit (DAQ-A).** Anturin raakaspektrilukemat — *ei* säteilyvoimakkuutta. Katso alla. |
 
-`process()` suorittaa tämän viennin yhtenä vaiheistaan. Se **ei** vaadi kuvamateriaalia:
-yksin lennetty valosensori on ensiluokkainen työnkulku, ja tällaisessa projektissa ei ole lainkaan
-kuvia rakenteensa vuoksi.
+`process()` suorittaa tämän viennin yhtenä vaiheenaan. Se **ei** vaadi kuvamateriaalia:
+yksinään lennetty valosensori on ensiluokkainen työnkulku, ja tällaisessa projektissa ei ole lainkaan
+kuvia sen rakenteen vuoksi.
 
 **DAQ-A-tallenteet viedään raakalukemina.** DAQ-A-tuoteperhe on peräisin ajalta ennen sarjanumeroittain
-toimivaa niputusjärjestelmää, eikä sille ole noutettavaa niputusta — se kalibroidaan kentällä
-heijastavuuskohteeseen, minkä vuoksi sille ei ole koskaan tarvittu nimeä. Nämä tallenteet viedään
-tiedostonimellä `_raw` eikä `_calibrated`: tiedostonimellä eikä tunnisteella
-tiedoston sisällä, koska tiedoston nimi on säilytettävä sellaisenaan, kun se lähetetään sähköpostitse.
-`.csv`-otsikossa lukee `raw spectral sensor counts (NOT irradiance)` ja varoitetaan, että
-arvot ovat vertailukelpoisia **tiedoston sisällä** tiedoston sisällä — juuri siihen tarkoitukseen, johon kohdepohjainen kalibrointi
-niitä käyttää — eivätkä anturien välillä. Tehoa riippuvat fotometriset sarakkeet (kokonaisteho,
+toimivaa niputusjärjestelmää, eikä sillä ole noutettavaa nippua — se kalibroidaan kentällä heijastavuuskohteeseen, minkä vuoksi sille ei ole koskaan tarvittu nippua. Nämä tallenteet viedään
+tiedostorungolla `_raw` eikä `_calibrated`: eri tiedostonimi tiedoston sisällä olevan tunnisteen sijaan
+tiedoston sisällä, koska tiedoston nimi on säilytettävä sellaisenaan, kun se lähetetään sähköpostitse. `.csv`-otsikossa
+ilmoitetaan `raw spectral sensor counts (NOT irradiance)` ja varoitetaan, että
+arvot ovat vertailukelpoisia **tiedoston sisällä** — juuri siihen tarkoitukseen, johon kohdepohjainen kalibrointi
+niitä käyttää — eivätkä eri antureiden välillä. Teho riippuvaiset fotometriset sarakkeet (kokonaisteho,
 fotopinen/skotopinen lux, PPFD) palauttavat arvon **NULL** sen sijaan, että ne integroitaisiin laskentojen perusteella.
 
 DAQ-U / DAQ-M / DAQ-E, jonka pakettia ei yksinkertaisesti voitu hakea, **ohitetaan** edelleen,
-eikä sitä kirjoiteta raakamuodossa: siinä tapauksessa paketti on olemassa ja ”yhdistä uudelleen ja käsittele uudelleen” on oikea neuvo.
+eikä raakatietoja kirjoiteta: siinä tapauksessa paketti on olemassa ja ”yhdistä uudelleen ja käsittele uudelleen” on oikea neuvo.
 
-Vanhat **v1.01 / v1.02**-tallenteet (DAQ-A-SD kirjoittaa näitä) eivät sisällä lukukohtaista aikakohdetta,
-vain tiedoston kirjoitusajan. Image↔downwelling-vastaavuustarkistaja hylkää ne edelleen —
-kehyksen vertaaminen kirjoitusajankohtaan olisi huomaamattomasti virheellistä — mutta viejä lukee ne, ja
+Vanhat **v1.01 / v1.02**-tallenteet (joita DAQ-A-SD kirjoittaa) eivät sisällä lukukohtaista aikakohdetta,
+vaan ainoastaan tiedoston kirjoitusajan. Image↔downwelling-vastaavuustarkistaja hylkää ne edelleen —
+kehyksen vertaaminen kirjoitusaikaan olisi näkymättömästi virheellistä — mutta vientiohjelma lukee ne, ja
 CSV tulostaa `clock=daq_created_on`, joten tuote ilmoittaa, millä kellolla se toimii.
 
 ```python
@@ -373,11 +372,11 @@ for rec in result["skipped"]:
 ```
 
 Tallenne, jonka kalibrointipakettia ei voida hakea (offline-tilassa tai anturi, jolla ei ole
-kalibrointitietoja tiedostossa), raportoidaan koodilla `skipped` **syyn kera**. Sitä ei koskaan
+kalibrointitietoja tiedostossa), raportoidaan `skipped`:n alla **syyn kera**. Sitä ei koskaan
 tallenneta ”kalibroituna” tiedostona, joka sisältää raakalukemia — muodosta yhteys internetiin ja
-suorita uudelleen, jolloin vienti valmistuu.
+suorita komento uudelleen, jolloin vienti valmistuu.
 
-### Edistymiskutsut
+### Edistymisen takaisinsoitot
 
 ```python
 def show_progress(percent, message):
@@ -392,7 +391,7 @@ with chloros_sdk.ChlorosLocal() as cl:
 
 ### Suorituksen jälkeinen yhteenveto ja vinkit
 
-Valmistuessaan `process()` hakee `GET /api/processing-summary`:n ja liittää rungon tiedostona `result["summary"]`. Hakeminen on parasta-ponnistusta eikä se koskaan estä onnistunutta paluuta — jos yhteenvetoa ei ole saatavilla, `process()` siirtyy takaisin tavalliseen `{"status": "complete", "async": False}`-muotoon. Jokainen merkintä `summary["hints"]`:ssä — kokonaiset lauseet, joissa on ehdotettu korjaus, esim. miksi suoritus tuotti nollatuloksen — lähetetään uudelleen myös muodossa Python `UserWarning`, joten nollatulokselliset suoritukset ovat itsediagnostikoivia, vaikka sanakirjaa ei koskaan tarkasteltaisi:
+Suorituksen päätyttyä `process()` hakee `GET /api/processing-summary`-tiedoston ja liittää sen sisällön tiedostoksi `result["summary"]`. Hakeminen onvaivatonta eikä se koskaan estä onnistunutta paluuta — jos yhteenvetoa ei ole saatavilla, `process()` siirtyy takaisin tavalliseen `{"status": "complete", "async": False}`-muotoon. Jokainen `summary["hints"]`:n merkintä — kokonaiset lauseet, joissa on ehdotettu korjaus, esim. miksi suoritus tuotti nollatuloksen — lähetetään uudelleen myös muodossa Python `UserWarning`, joten nollatulokselliset suoritukset ovat itsediagnosoivia, vaikka sanakirjaa ei koskaan tarkasteltaisi:
 
 ```python
 result = cl.process()
@@ -406,36 +405,36 @@ for hint in result.get("summary", {}).get("hints", []):
 
 | Avain | Mitä se laskee |
 | --- | --- |
-| `models` | Suorituksen kameraryhmät. |
+| `models` | Ajoon sisältyvät kameraryhmät. |
 | `images_in_groups` | Näiden ryhmien lähdekuvat. |
-| `targets_found` | Havaittuja heijastavuuskohteita. |
+| `targets_found` | Havaittujen heijastuskohteiden määrä. |
 | `images_calibrated` | Ajojen kalibroimat kuvat. |
 | `exported_files` | **Ajojen luomat kuvatuotetiedostot.** |
-| `daq_recordings_exported` / `daq_recordings_skipped` | Valosensorin tallenteet, jotka on tarkoituksella laskettu erikseen — ne ovat peräisin eri vaiheesta ja niitä on myös ajoissa, joissa ei ole lainkaan kuvamateriaalia, joten niiden sisällyttäminen saisi pelkän DAQ-ajon näyttämään siltä, kuin se olisi vienyt kuvia. |
+| `daq_recordings_exported` / `daq_recordings_skipped` | Valosensorin tallenteet, jotka on tarkoituksella laskettu erikseen — ne ovat peräisin eri vaiheesta ja niitä on myös ajoissa, joissa ei ole lainkaan kuvia, joten niiden sisällyttäminen saisi pelkän DAQ-ajon näyttämään siltä, kuin se olisi vienyt kuvia. |
 
-Niiden lisäksi: `summary["output_dirs"]` (jokainen hakemisto, johon on kirjoitettu),
+Niiden lisäksi: `summary["output_dirs"]` (jokaiseen kirjoitettuun hakemistoon),
 `summary["light_sensor_export"]`, `summary["stopped"]` (tosi, kun käyttäjä keskeytti
-ajon, jotta osittaiset laskelmat eivät tulkitu suoritetuksi ajoksi, jossa tuotanto jäi vajaaksi) ja
+ajon, jotta osittaiset laskelmat eivät tulkittaisi sitä suoritetuksi ajoksi, jonka tuotanto jäi vajaaksi), ja
 `summary["groups"]` (ryhmäkohtainen erittely).
 
 `exported_files` tallennetaan prosessiketjussa **kirjoituksen yhteydessä**, eikä sitä skannata
-projektin kuvaobjekteista jälkikäteen. Rinnakkais- ja GPU-strategiat rakentavat omat kuvaobjektinsa
-(GPU-polkujen tapauksessa työntekijöiden aliprosesseissa), joten vanha skannaus raportoi
+projektin kuvakohteista jälkikäteen. Rinnakkais- ja GPU-strategiat rakentavat omat kuvakohteensa
+(GPU-polkujen tapauksessa työntekijöiden aliprosesseissa), joten vanha skannaus ilmoitti
 `0 file(s) written` jokaisesta tällaisesta ajosta ja lähetti sitten nollaviennin vihjeen — ajoissa,
-joissa kaikki oli toiminut. Jos kirjoitat skriptin tämän numeron perusteella, toimiva rinnakkaiskäyttö
-ilmoittaa nyt nollasta poikkeavan lukeman.
+joissa kaikki oli toiminut. Jos kirjoitat skriptin tämän numeron perusteella, toimiva rinnakkaiskäyttö ilmoittaa nyt
+raportoi nollasta poikkeavan lukeman.
 
-Ohitusten raportit ilmoittavat syyn, jonka lukija tosiasiallisesti määritteli jokaiselle tiedostolle –
-lukukelvoton skeema, puuttuva nippu, kirjoitusvirhe – **päällekkäisyydet poistettuina**, joten kaksikymmentä tiedostoa,
-jotka ohitettiin yhden syyn vuoksi, näkyvät yhtenä syynä sen sijaan, että syy toistettaisiin kaksikymmentä kertaa.
+Ohitettujen tiedostojen raportit ilmoittavat syyn, jonka lukija tosiasiallisesti totesi kullekin tiedostolle —
+lukukelvoton skeema, puuttuva nippu, kirjoitusvirhe — **duplikaatioita poistettuna**, joten kaksikymmentä tiedostoa,
+jotka ohitettiin yhden syyn takia, näkyvät yhtenä syynä sen sijaan, että sama syy toistuu kaksikymmentä kertaa.
 
 > **`process()` ei laukea, kun ajo ei tuota kuvia.** Tämä on ainoa kohta, jossa SDK ja
-> CLI eroavat toisistaan tarkoituksellisesti: `chloros-cli process` käsittelee &quot;tuotteita pyydettiin, mutta yhtään ei
-> kirjoitettu” -tilannetta virheenä ja lopettaa nollasta poikkeavalla tuloksella, kun taas SDK palaa normaalisti ja ilmoittaa
-> tilanteesta `summary` / hints -viestien kautta. Jos putkistosi pitäisi pysähtyä tyhjän ajon yhteydessä, tarkista se
+> CLI eroavat toisistaan tarkoituksellisesti: `chloros-cli process` käsittelee tilannetta ”tuotteita pyydettiin, mutta yhtään ei
+> kirjoitettu” virheenä ja lopettaa ajonnollasta, kun taas SDK palaa normaalisti ja raportoi
+> tilanteen `summary` /hints-viestin kautta. Jos prosessiketjusi pitäisi pysähtyä tyhjän ajon yhteydessä, tarkista se
 > itse — tarkista `summary` (tai laske projektikansiossa olevien tiedostojen määrä) sen sijaan, että luottaisit
 > poikkeuksen puuttumiseen. Yleisiä syitä ovat syöttökansio, jota ei tunnistettu
-> tallennukseksi, sekä tuotteet, jotka ohitettiin, koska niitä ei voitu soveltaa käytettävissä oleviin kameroihin (esim. radiance RGB-
+> tallennuskohteeksi, sekä tuotteet, jotka ohitettiin, koska niitä ei voitu soveltaa käytössä oleviin kameroihin (esim. säteilyarvot RGB -
 > kameroista).
 
 ### Aputoiminnot
@@ -502,7 +501,7 @@ False         # export in native sensor geometry / skip the common-overlap crop
 
 #### Radiometrinen tulos (LATTICE-monispektrinen prosessiketju)
 
-`process`-prosessiketjun LATTICE-monispektrinen (M3C/M3M) vientitaso — `reflectance` (oletus), `radiance`, `sensor-response` tai `all` (kaikki kuvakohtaiset soveltuvat tilat) — vastaa projektin **&quot;Radiometrinen tuloste&quot;** -käsittelyasetukseen. `configure()`:llä on oma avainsanansa:
+`process`-prosessiketjun LATTICE-monispektrinen (M3C/M3M) vientitaso — `reflectance` (oletus), `radiance`, `sensor-response` tai `all` (kaikki kuvakohtaiset soveltuvat tilat) — vastaa projektin **&quot;Radiometrinen tulos&quot;** -käsittelyasetusta. `configure()`:llä on oma avainsanansa:
 
 ```python
 with chloros_sdk.ChlorosLocal() as cl:
@@ -526,15 +525,15 @@ cl.configure(custom_settings={
 })
 ```
 
-`reflectance` (oletus) jakaa kameran säteilyvoimakkuuden **aikaleimalla täsmätyllä DAQ-alasvirtauksella**, joka määritetään automaattisesti tallennetusta `.daq` (DAQ-U/M/E)**tai kuvamateriaalin yhteydessä löytyvästä DAQ-M:n omasta `.csv`**; paikallisesti puuttuvat kamera- tai DAQ-kalibrointipaketit**ladataan automaattisesti AWS:stä** ensimmäisellä käyttökerralla. CLI esittää tämän tuotetyyppikohtaisina kytkiminä tiedostossa `chloros-cli process`: `--radiance`/`--no-radiance`, `--reflectance`/`--no-reflectance`, `--debayered`, `--preview`.
+`reflectance` (oletus) jakaa kameran säteilyn **aikaleimalla täsmätyn DAQ-alasvirtauksen**avulla, joka määritetään automaattisesti tallennetusta `.daq` (DAQ-U/M/E)**tai DAQ-M:n omasta `.csv`**-tiedostosta, joka löytyy kuvamateriaalin yhteydessä; mahdolliset paikallisesti puuttuvat kamera- tai DAQ-kalibrointipaketit**haetaan automaattisesti AWS:stä** ensimmäisen käytön yhteydessä. CLI esittää tämän tyyppikohtaisina tuotevaihtoehtoina `chloros-cli process`: `--radiance`/`--no-radiance`, `--reflectance`/`--no-reflectance`, `--debayered`, `--preview`.
 
-> `custom_settings` **korvaa** koko lasketun asetuslohkon (se ohittaa suunnittelunsa mukaisesti `configure()`:n muut avainsanat ja validoinnin). Kun käytät sitä, sisällytä kaikki sinulle tärkeät `Project Settings`-avaimet, kuten yllä olevassa esimerkissä.
+> `custom_settings` **korvaa** koko lasketun asetuslohkon (se ohittaa suunnittelunsa mukaisesti `configure()`:n muut avainsanat ja validoinnin). Kun käytät sitä, sisällytä kaikki tärkeät `Project Settings`-avaimet, kuten yllä olevassa esimerkissä.
 
 ---
 
 ## Smart-Connect LATTICE-kameroille
 
-Pysyvät taustaprosessisessiot reaaliaikaiselle laitteistolle. Samat päätepisteet kuin GUI:ssa, joten toiminta on identtinen osoitteissa SDK / CLI / GUI.
+Pysyvät taustapalvelinsessiot reaaliaikaiselle laitteistolle. Samat päätepisteet kuin GUI:ssa, joten toiminta on identtinen osoitteissa SDK / CLI / GUI.
 
 ### Yksi kamera — `CameraSession`
 
@@ -573,26 +572,26 @@ connect_camera(
 | Menetelmä | Kuvaus |
 | --- | --- |
 | `read_nodes(names, enum_names=(), timeout=30.0)` | Lue GenICam-solmut; palauttaa `{nodes, errors, enums, device}`. |
-| `set_settings(**kwargs)` | Kirjoita solmut ystävällisellä nimellä (`exposure_time`, `gain`, `pixel_format`, `width`, `height`, `target_brightness`, `ae_damping`, `ae_upper_limit`, `trigger_mode`, `trigger_source`, …). |
-| `capture(output_dir="output", ext=".tiff", jpeg_quality=95, processing=None, levels=None, force_daq=None, settings=None, timeout=None)` | Tallentaa **yhden** kehyksen. Palauttaa yhden elementin sisältävän luettelon, jossa on kehyksen metatietosanakirjoja. (Sarjakuvaus/usean kehyksen tallennus on poistettu — kutsu `capture()` silmukassa, jos tarvitset sarjaa.) |
+| `set_settings(**kwargs)` | Kirjoittaa solmuja ystävällisellä nimellä (`exposure_time`, `gain`, `pixel_format`, `width`, `height`, `target_brightness`, `ae_damping`, `ae_upper_limit`, `trigger_mode`, `trigger_source`, …). |
+| `capture(output_dir="output", ext=".tiff", jpeg_quality=95, processing=None, levels=None, force_daq=None, settings=None, timeout=None)` | Tallenna **yksi** kehys. Palauttaa yhden elementin sisältävän luettelon, jossa on kehysten metatietosanakirjoja. (Sarja-/monikehys-kuvan tallennus on poistettu — kutsu `capture()` silmukassa, jos tarvitset sarjan.) |
 | `disconnect()` | Vapauttaa resurssin poolista. Ei tee mitään, jos olemme liittäneet jo avoimeen istuntoon. |
 
-`capture()`-vientiasetukset (sama malli kuin taulukko + käyttöliittymä):
+`capture()`-vientiohjaimet (sama malli kuin taulukko + käyttöliittymä):
 
-- `processing` / `levels` — `processing="all"` tallentaa kaikki soveltuvat vientityypit; `levels=["raw","radiance"]` tallentaa vain ne (ohittaa `processing`:n). Jätä molemmat pois, jos haluat käyttää taustapalvelimen oletusasetusta.
-- `force_daq=True` — tallentaa määritetyn DAQ/DLS-lukemaa `.daq`-sidecarina jopa pelkän raakadatan tallennuksessa, jotta kehys voidaan myöhemmin käsitellä uudelleen heijastavuudeksi/indeksiksi. Ei toimi, jos DAQ:ta ei ole liitetty.
+- `processing` / `levels` — `processing="all"` tallentaa kaikki sovellettavat vientityypit; `levels=["raw","radiance"]` tallentaa vain ne (ohittaa `processing`:n). Jätä molemmat pois, jos haluat käyttää taustaprosessin oletusasetusta.
+- `force_daq=True` — tallentaa määritetyn DAQ/DLS-lukeman `.daq`-sidecarina jopa pelkän raakadatan keräyksessä, jotta kehys voidaan myöhemmin käsitellä uudelleen heijastavuudeksi/indeksiksi. Ei vaikutusta, jos DAQ:ta ei ole liitetty.
 
 ### Synkronoitu matriisi — `ArraySession` (Smart-Prep)
 
-`connect_array` on **suositeltu lähtökohta** monikamerajärjestelmille. Se suorittaa taustalla koko GUI-pohjaisen Smart-Prep-prosessin:
+`connect_array` on **suositeltu lähtökohta** monikamerajärjestelyissä. Se suorittaa taustalla koko GUI-pohjaisen Smart-Prep-prosessin:
 
-1. **Verkkoanalyysi** (`/api/camera/array/recommend`) — etsii suurimman kehyskoko, joka mahtuu sim-emit-tasoon ilman kehysten menetystä.
-2. **Tason automaattinen valinta** — `sim-capture-sim-emit`, jos kaapeliyhteys kestää sen; muussa tapauksessa `sim-capture-ftd-stagger` tai `slip-emit-and-capture`.
-3. **Automaattinen pienentäminen**— pienentää kehyksen kokoa / lisää binningiä huomaamatta, kun kaapeli ei kykene ylläpitämään pyydettyä resoluutiota.**Tämä turvaverkko ei kata aggregoitua ylimerkintää**: kaapelille liian monia kameroita ei voida korjata pienentämällä kehyksiä — katso [Ylimerkintä](#over-subscription-the-per-cam-floor).
-4. **PTP käytössä** oletuksena — kameroiden väliset aikaleimat ovat vertailukelpoisia mikrosekunnin tarkkuudella.
-5. **Kamerakohtainen pikselimuodon automaattinen valinta** — RGB-kamerat → `BayerRG8`, multispec-kamerat → `BayerRG12`.
-6. **AE-alustaminen** — tallentaa kunkin kameran nykyisen AE-tilan, jotta yhteyden muodostaminen ei nollaa valotusta kesken toiminnan.
-7. **GPIO-laukaisun konfigurointi** — `connect_array` aktivoi kaikki kamerat (`TriggerMode=On`, `TriggerSource=Line2`), jolloin isäntälaitteen pulssi ohjaa orjakameroita M8-kaapelin kautta. Tämä on vain taulukoille tarkoitettu vaihe: yksittäinen kamera, joka avataan komennolla `LatticeCamera`, toimii sen sijaan itsenäisesti.
+1. **Verkkoanalyysi** (`/api/camera/array/recommend`) — etsii suurimman kehyskoko, joka mahtuu sim-emit-tasolle ilman kehysten menetystä.
+2. **Tason automaattinen valinta** — `sim-capture-sim-emit`, jos kaapeli kestää sen; muuten `sim-capture-ftd-stagger` tai `slip-emit-and-capture`.
+3. **Automaattinen pienentäminen**— pienentää kehyksen kokoa / lisää binningiä hiljaisesti, kun kaapeli ei kykene ylläpitämään pyydettyä resoluutiota.**Tämä turvaverkko ei kata kokonaisylimerkintää**: liian monia kameroita kaapelille ei voida korjata pienentämällä kehyskokoa — katso [Ylimerkintä](#over-subscription-the-per-cam-floor).
+4. **PTP käytössä**oletuksena — kameroiden väliset aikaleimat synkronoidaan yhteiseen kelloon**~1 ms**:n tarkkuudella. Samanaikainen valotus tapahtuu M8-laitteiston laukaisimen avulla (**&lt; 100 µs** moduulien välillä), ei PTP:n avulla: PTP synkronoi *aikaleimoja*, ei valotuksia.
+5. **Kamerakohtainen pikselimuodon automaattinen valinta** — RGB-kamerat → `BayerRG8`, monispektrikamerat → `BayerRG12`.
+6. **AE-alustaminen** — tallentaa kunkin kameran nykyisen AE-tilan, jotta yhteyden muodostaminen ei nollaa valotusaikaa kesken toiminnon.
+7. **GPIO-laukaisimen konfigurointi** — `connect_array` asettaa jokaisen kameran (`TriggerMode=On`, `TriggerSource=Line2`), jolloin pääkameran pulssi ohjaa alikameroita M8-kaapelin kautta. Tämä vaihe koskee vain kameraryhmiä: yksittäinen kamera, joka on avattu komennolla `LatticeCamera`, toimiitoimii sen sijaan.
 
 ```python
 import chloros_sdk
@@ -628,48 +627,48 @@ connect_array(
 
 `force_tier`-arvot:
 - `"sim-capture-sim-emit"` — todellinen samanaikaisuus (kaikki kamerat laukeavat samalla kelloreunalla).
-- `"sim-capture-ftd-stagger"` — joustava aikatasoinen porrastus (kammiot lähettävät hieman viiveellä, jolloin paketit sarjoituvat siirtoyhteydellä).
-- `"slip-emit-and-capture"` — peräkkäinen kaappaus kammiota kohti (ei ajallista synkronointia; ainoa vaihtoehto, kun mikään kehyskoko ei sovi simulaatioon).
+- `"sim-capture-ftd-stagger"` — joustava aikatasoinen porrastus (kamerat lähettävät hieman porrastettuina aikoina, jolloin paketit sarjoittuvat siirtoyhteydellä).
+- `"slip-emit-and-capture"` — peräkkäinenkameraa (ei ajallista synkronointia; ainoa vaihtoehto, kun mikään kehyskoko ei sovi samanaikaiseen lähetykseen).
 
-`wire_ceiling_mbps` ohittaa **isännän jatkuvan siirtokapasiteetin** megabitteinä sekunnissa (MB/s) — se on se yksi
-luku, josta koko matriisin allokointi riippuu. Jätä se `None`-asetukseksi, jotta käytetään automaattisesti tunnistettua
-arvoa. Pienennä sitä, kun matriisi ilmoittaa GVSP-vioittuneista kehyksistä: automaattinen arvo johdetaan
-NIC:n ilmoittamasta linkkinopeudesta, joka yliarvioi USB-sovittimet, kapeat PCIe-kaistat ja
-ruuhkautuneita jaettuja verkkoarkkitehtuureja — ja tämä yliarviointi ilmenee vioittuneina kehyksinä sen sijaan, että se näkyisi
-näkyvästi hitaana yhteytenä. Arvo tallennetaan projektin matriisin tallennuslohkoon, joten
-uudelleen avaaminen tai myöhempi `connect_array` palauttaa sen kuten minkä tahansa muun matriisin asetuksen.
-Katso [Array Health](#array-health--which-subsystem-is-losing-frames).
+`wire_ceiling_mbps` ohittaa **isännän jatkuvan siirtokapasiteetin** megabitteinä sekunnissa — se yksi
+luku, josta koko matriisin allokointi riippuu. Jätä se asetukseksi `None`, jotta käytetään automaattisesti tunnistettua
+arvoa. Laske arvoa, kun matriisi ilmoittaa GVSP-vioittuneista kehyksistä: automaattinen arvo johdetaan
+verkkokortin ilmoittamasta linkkinopeudesta, joka yliarvioi USB-sovittimet, kapeat PCIe-väylät ja
+ruuhkaiset jaetut verkot — ja tämä yliarviointi näkyy vioittuneina kehyksinä eikä
+näkyvästi hitaana linkkinä. Arvo tallennetaan projektin array-kaappauslohkoon, joten
+uudelleenkäynnistys tai myöhempi `connect_array` palauttaa sen kuten minkä tahansa muun array-asetuksen.
+Katso [Taulukon kunto](#array-health--which-subsystem-is-losing-frames).
 
-#### Ylimerkintä (kameraa kohti laskettu alaraja)
+#### Ylimerkintä (kameraa kohti määritetty alaraja)
 
-Sim-emit-tahtaus jakaa jokaiselle kameralle osuuden törmäysturvallisesta kaistanleveysbudjetista, jonka alaraja on **8 MB/s kameraa kohti**(`per_cam_floor_bps`). Kun `N × floor` ylittää törmäysturvallisen ylärajan, matriisi**ylimerkitsee kaistan**— vikamoodina on GVSP-pakettihäviö, ei alhaisempi kuvataajuus — eikä keino korjata kehyskoon ongelmaa:**binning ja ROI pienentävät tavuja kehystä kohti, eivätkä ne vaikuta tasoitetun tiedonsiirron tavumäärään sekunnissa**, jota kokonaisvalvonta vertaa. Käytännön täysresoluutioiset ylärajat 1 GbE -isäntäkoneella:**6 kameraa @ 1500 MTU, 9 jumbo-kehyksillä** (`max_cams_collision_safe` analyysivastauksessa ilmoittaa kaapelisi ylärajan). Korjaustoimenpiteet: vähemmän kameroita, jumbo-kehykset päästä päähän tai nopeampi verkkokortti.
+Sim-emit-taajuuden säätö jakaa jokaiselle kameralle osuuden törmäysturvallisesta kaistanleveydestä, jonka alaraja on **8 MB/s kameraa kohti**(`per_cam_floor_bps`). Heti kun `N × floor` ylittää törmäysturvallisen ylärajan, array**ylisubskriboi kaistan**— vikatilana on GVSP-pakettihäviö, ei alhaisempi kuvataajuus — eikä kehyksen koon muuttaminen auta:**binning ja ROI pienentävät tavuja kehystä kohti, ei sekunnissa lähetettyjen tavujen määrää**, jota kokonaisvalvonta vertaa. Käytännön täysresoluutioiset ylärajat 1 GbE -isäntäkoneella:**6 kameraa @ 1500 MTU, 9 jumbo-kehyksillä** (`max_cams_collision_safe` analyysivastauksessa ilmoittaa verkkoyhteytesi ylärajan). Korjaustoimenpiteet: vähemmän kameroita, jumbo-kehykset päästä päähän tai nopeampi verkkokortti.
 
-- Vastaukset `analyze_array_network()` ja `/api/camera/array/connect` sisältävät `oversubscribed`, `aggregate_demand_bps`, `collision_safe_ceiling_bps`, `max_cams_collision_safe` ja `per_cam_floor_bps`. Kun `oversubscribed` on totta, projektio **nollaa fps-kentät** (`achievable_fps_max` / `fps_bright` / `fps_dark`) sen sijaan, että se ilmoittaisi harhaanjohtavan, hitaan mutta toimivan nopeuden.
-- `POST /api/camera/array/connect` hyväksyy `pin_resolution`-runkoparametrin (**vain HTTP — ei SDK-kwargia**; `connect_array` ei paljasta sitä). Kiinnittäminen poistaa binning-laskukierroksen turvaverkon, joten ylimerkitty yhteys, jossa `pin_resolution` on asetettu,**hyläetään ehdottomasti** ja virheilmoituksessa mainitaan kaikki korjaustoimenpiteet. Ilman kiinnitystä yhteyden muodostaminen etenee binning-menetelmän mukaisesti, mutta järjestelmä varoittaa, että pienentäminen ei riitä kokonaismäärän tyhjentämiseen.
-- Testausympäristön kiertotapa: aseta `CHLOROS_ARRAY_ALLOW_OVERSUBSCRIBED=1` taustapalvelimen ympäristöasetuksiin, jolloin hylkäys muuttuu voimakkaaksi varoitukseksi — yhteys muodostetaan silti ja pakettihäviö hyväksytään.
+- Vastaukset `analyze_array_network()` ja `/api/camera/array/connect` sisältävät `oversubscribed`, `aggregate_demand_bps`, `collision_safe_ceiling_bps`, `max_cams_collision_safe` ja `per_cam_floor_bps`. Kun `oversubscribed` on totta, projisointi **nollaa fps-kentät** (`achievable_fps_max` / `fps_bright` / `fps_dark`) sen sijaan, että se ilmoittaisi harhaanjohtavan, hitaan mutta toimivan nopeuden.
+- `POST /api/camera/array/connect` hyväksyy `pin_resolution`-runko -parametrin (**vain HTTP-vain — ei SDK-avainsana**; `connect_array` ei paljasta sitä). Kiinnittäminen poistaa binning-laskun turvaverkon, joten ylimerkitty yhteys, jossa `pin_resolution` on asetettu,**hyläetään ehdottomasti** virheilmoituksella, jossa luetellaan kaikki korjaustoimenpiteet. Ilman kiinnitystä yhteyden muodostus etenee binning-prosessin mukaisesti, mutta varoittaa, että pienentäminen ei voi tyhjentää aggregaattia.
+- Testausympäristön kiertotie: aseta `CHLOROS_ARRAY_ALLOW_OVERSUBSCRIBED=1` taustapalvelimen ympäristössä, jolloin hylkäys muuttuu voimakkaaksi varoituksesi — voit muodostaa yhteyden joka tapauksessa ja hyväksyä pakettihäviöt.
 
-#### Taulukon kunto — mikä alijärjestelmä menettää kehyksiä
+#### Järjestelmän kunto — mikä alijärjestelmä menettää kehyksiä
 
-`GET /api/camera/array/<array_id>/capability` sisältää aktiivisen `health`-lohkon
-kytketyssä massassa, joka arvioidaan uudelleen **10 sekunnin** pituisessa liukuvassa ikkunassa. Se jakaa kehysten menetyksen
-kahteen syyhyn, jotka vaativat vastakkaisia korjauksia, sen sijaan että käytettäisiin yhtä ”epätäydellisyysastetta”, joka
+`GET /api/camera/array/<array_id>/capability` sisältää reaaliaikaisen `health`-lohkon
+kytketyssä järjestelmässä, jota arvioidaan uudelleen **10 sekunnin** pituisella liukuvalla ikkunalla. Se jakaa kehysten menetyksen
+kahteen syyhyn, jotka vaativat vastakkaisia korjauksia, sen sijaan että se esittäisi yhden ”epätäydellisen” osuuden, joka
 ei nimeä kumpaakaan:
 
 | Kenttä | Mitä se tarkoittaa | Mikä alijärjestelmä |
 | --- | --- | --- |
-| `gvsp_corrupt_rate_pct` (sarjaliitännän mukaan) | Kehys **saapui, mutta oli rakenteellisesti viallinen**— GVSP-paketin menetys. |**Verkko**: kaapelibudjetti, tahdistus, NIC RX-rengas, MTU |
-| `never_arrived_rate_pct` (sarjanumeroittain) | Kehystä **ei saapunut lainkaan**— kamera ei lauennut tai siitä ei lähetetty mitään. |**Laukaisin / synkronointi**: M8-kaapeli, `line=`, `TriggerMode` |
-| `worst_gvsp_corrupt_pct` / `worst_never_arrived_pct` | Kunkin kameran huonoin lähetysnopeus. | — |
-| `per_cam_rate_pct` | Yhdistetty epätäydellisyysaste kameraa kohti (molemmat syyt yhdessä). | — |
+| `gvsp_corrupt_rate_pct` (sarjanumeroittain) | Kehys **saapui, mutta oli rakenteellisesti viallinen**— GVSP-pakettihäviö. |**Verkko**: kaapelibudjetti, tahdistus, NIC RX-rengas, MTU |
+| `never_arrived_rate_pct` (sarjanumeroittain) | Kehystä **ei saapunut lainkaan**— kamera ei lauennut tai siitä ei lähtenyt mitään. |**Laukaisin / synkronointi**: M8-kaapeli, `line=`, `TriggerMode` |
+| `worst_gvsp_corrupt_pct` / `worst_never_arrived_pct` | Kunkin kameran huonoin suorituskyky. | — |
+| `per_cam_rate_pct` | Yhdistetty puutteellisten kuvien osuus kameraa kohti (molemmat syyt yhdessä). | — |
 | `stable_for_seconds` | Kuinka kauan kukin kamera on pysynyt alle 0,01 %:n. | — |
 
-`health`:n ohella sama tietue ilmoittaa koko allokoinnin viiveen:
+`health`:n ohella sama tietue raportoi koko allokoinnin käyttämättömän osan määrän:
 
 | Kenttä | Merkitys |
 | --- | --- |
-| `wire_ceiling_mbps` | Isäntäkoneen voimassa oleva jatkuva kaistanleveysbudjetti, MB/s. |
-| `wire_ceiling_source` | Mistä kyseinen luku on peräisin, sanoin — esim. `USB-capped 200 MB/s (was theoretical 1062; …)` tai `user override 120 MB/s (auto said 200)`. |
-| `wire_ceiling_is_user_set` | `true`, kun `wire_ceiling_mbps=` on asettanut sen. |
+| `wire_ceiling_mbps` | Isännän voimassa oleva jatkuva siirtokapasiteetti, MB/s. |
+| `wire_ceiling_source` | Mistä kyseinen luku on peräisin, sanoin ilmaistuna — esim. `USB-capped 200 MB/s (was theoretical 1062; …)` tai `user override 120 MB/s (auto said 200)`. |
+| `wire_ceiling_is_user_set` | `true`, kun `wire_ceiling_mbps=` asetti sen. |
 | `nic_is_usb` | `true` USB-Ethernet-sovittimelle. |
 
 Tälle päätepisteelle ei ole SDK-käärettä — lue se suoraan:
@@ -693,54 +692,54 @@ if (health.get("worst_gvsp_corrupt_pct") or 0) > 1.0:
     arr = chloros_sdk.connect_array(serials, wire_ceiling_mbps=120)
 ```
 
-**Lukeminen:** nollasta poikkeava `gvsp_corrupt_rate_pct`, jossa `never_arrived_rate_pct` on 0, tarkoittaa, että
-liipaisu ja kaapelisynkronointi ovat moitteettomia ja 100 % häviöstä johtuu verkkoreitistä — pienempi
-`wire_ceiling_mbps`X ja muodosta yhteys uudelleen. Päinvastainen kuvio viittaa sen sijaan synkronointikaapeliin tai
-laukaisulinjaan.
+**Lukeminen:** nollasta poikkeava `gvsp_corrupt_rate_pct`, kun `never_arrived_rate_pct` on 0, tarkoittaa, että
+liipaisu ja kaapelisynkronointi ovat moitteettomia ja 100 % häviöstä johtuu verkkoreitistä — pienennä
+`wire_ceiling_mbps` ja muodosta yhteys uudelleen. Päinvastainen kuvio viittaa sen sijaan synkronointikaapeliin tai
+liipaisulinjaan.
 
-> **`target_fps` ei ole syy vioittuneisiin kehyksiin.** GevSCPD-taajuus määritetään kerran
+> **`target_fps` ei ole ratkaisu vioittuneiden kehysten ongelmaan.** GevSCPD-taajuus määritetään kerran
 > yhteyden muodostuksen yhteydessä, joten laukaisutaajuuden laskeminen muuttaa käyttöjaksoa, ei
 > samanaikaisten lähetysten pursetaajuutta. Mitattu 5-kertainen kysynnän leikkaus ei tuottanut parannusta, kun taas
-> kaapelirajan laskeminen 240:stä 200 MB/s:iin laski saman laitteiston virheiden määrän 10,4 %:sta
+> kaapelin enimmäisnopeuden laskeminen 240:stä 200 MB/s:iin laski saman laitteiston vioittuneiden kehysten osuuden 10,4 %:sta
 > 0,00 %:iin.
 
-> **TRI032S-laiteohjelmistossa ei ole käytettävissä lähetysvirran automaattista supistusta.** Käynnissä oleva ryhmä ei voi
-> korjata tätä itse; katkaise yhteys ja muodosta se uudelleen, jotta yhteyden muodostusajankohdan valitsija suunnittelee uudelleen
+> **TRI032S-laiteohjelmistossa ei ole käytettävissä välivaiheen automaattista supistusta.** Käynnissä oleva ryhmä ei voi
+> korjata tätä itse; irrota ja liitä uudelleen, jotta yhteyden muodostusajankohdan valitsin suunnittelee uudelleen
 > uuden ylärajan perusteella.
 
-**USB-Ethernet-sovitin on rajoitettu 200 MB/s:iin** mittauslaitteen toimesta riippumatta sen
-tyyppikilvestä: tehokkuustaulukko, joka muuntaa linkkinopeuden jatkuvaksi arvoksi, on
-johdettu PCIe:stä, ja USB-verkkokortti ilmoittaa Ethernet-linkkinopeutensa, mutta sitä rajoittaa
-USB-väylä ja sen ohjain. Yläraja on absoluuttinen, ei suhteellinen — USB 1 GbE -sovitin
-saavuttaa ~80 MB/s, eikä se ole tämän vaikutuksen alainen.
+**USB-Ethernet-sovittimen yläraja on 200 MB/s** mittauslaitteen toimesta riippumatta sen
+tyyppikilvistä: tehokkuustaulukko, joka muuntaa linkkinopeuden jatkuvaksi arvoksi, on
+johdettu PCIe-standardista, ja USB-verkkokortti ilmoittaa Ethernet-linkkinopeutensa ollessaan rajoitettu
+USB-väylän ja sen ohjaimen asettamien rajoitusten alaisena. Yläraja on absoluuttinen, ei suhteellinen — USB 1 GbE -sovitin
+tuottaa ~80 MB/s, eikä rajoitus vaikuta siihen.
 
 #### `ArraySession`-menetelmät
 
 | Menetelmä | Kuvaus |
 | --- | --- |
 | `status(timeout=10.0)` | Live `{fps, ptp, frame_count, last_error, …}`. |
-| `capture(output_dir="output", format="tiff", processing="debayered", levels=None, aligned=None, render_index=None, force_daq=None, smart=False, timeout=300.0)` | Yksi synkronoitu kaappausryhmä. Palauttaa `CaptureResult` (luettelo kehyssanakirjoista + `.skipped`). Vientiä koskevat ohjeet alla. |
-| `capture(..., smart=True)` | **Älykäs tallennus** — odottaa, että AE vakiintuu kaikissa kameroissa, ja laukaisee sitten. |
+| `capture(output_dir="output", format="tiff", processing="debayered", levels=None, aligned=None, render_index=None, force_daq=None, smart=False, timeout=300.0)` | Yksi synkronoitu tallennusryhmä. Palauttaa `CaptureResult`:n (luettelo kehyssanakirjoista + `.skipped`). Vientiä koskevat ohjeet alla. |
+| `capture(..., smart=True)` | **Älykäs kaappaus** — odottaa, että AE vakiintuu kaikissa kameroissa, ja laukaisee sitten. |
 | `capture_fastest(output_dir="output", force_daq=True, render_index=True, timeout=120.0)` | Nopein tallennus: vain raakadata + määritetty DAQ-lukema (+ vapaa yhdistetty indeksi). Vastaa käyttöliittymän &quot;Nopein tallennus&quot; -painiketta. |
-| `capture_repeated(output_dir="output", count=None, duration_s=None, interval_s=0.0, on_capture=None, **capture_kwargs)` | Yksittäinen / Jatkuva / Intervalli yhdessä rajatussa silmukassa. Palauttaa `list[CaptureResult]`.**Vaatii `count`:n ja/tai `duration_s`:n**, jotta se päättyy (SDKissa ei ole Ctrl+C-näppäintä). |
-| `record(output_dir="output", fps=10.0, duration_s=None, video=True, gif=False, timeout=30.0)` | Aloita yhdistettyjen indeksien reaaliaikaisen näkymän tallennus videoksi/GIF-tiedostoksi → `RecorderHandle`. Yksi yhdistelmätallennin kutakin taulukkoa kohti. |
-| `burst(output_dir="output", duration_s=None, max_frames=None, index_config=None, serial_index_config=None, timeout=30.0)` | Aloita korkean-fps:n raaka-Bayer-sarjakuvauksen → `RecorderHandle`. Käsittele uudelleen offline-tilassa komennolla `build_video()`. |
-| `build_video(burst_dir, products=None, fps=10.0, video=True, gif=False, save_tiffs=False, wait=True, poll_s=2.0, timeout=1800.0)` | Käsittele tallennettu raakasarjakuva uudelleen offline-tilassa kalibroiduksi videoksi(s). Estää jatkotoiminnot, kunnes käsittely on valmis (`wait=True`), ja palauttaa `{outputs, errors, combined}`. |
-| `build_video_status(job_id, timeout=15.0)` | Tarkista offline-rakennustyön tila: `{running, result, error, burst_dir}`. |
-| `disconnect()` | Vapauta koko taulukko. |
+| `capture_repeated(output_dir="output", count=None, duration_s=None, interval_s=0.0, on_capture=None, **capture_kwargs)` | Yksittäinen / Jatkuva / Intervalli yhdessä rajatussa silmukassa. Palauttaa `list[CaptureResult]`.**Vaatii `count`:n ja/tai `duration_s`:n**, jotta se päättyy (SDKissa ei ole Ctrl+C). |
+| `record(output_dir="output", fps=10.0, duration_s=None, video=True, gif=False, timeout=30.0)` | Aloittaa yhdistettyjen indeksien reaaliaikaisen näkymän tallennuksen videoksi/GIF-tiedostoksi → `RecorderHandle`. Yksi yhdistelmätallennin kutakin taulukkoa kohti. |
+| `burst(output_dir="output", duration_s=None, max_frames=None, index_config=None, serial_index_config=None, timeout=30.0)` | Aloita korkean kuvataajuuden raaka-Bayer-sarjakuvaus → `RecorderHandle`. Käsittele uudelleen offline-tilassa komennolla `build_video()`. |
+| `build_video(burst_dir, products=None, fps=10.0, video=True, gif=False, save_tiffs=False, wait=True, poll_s=2.0, timeout=1800.0)` | Käsittele tallennettu raaka-sarjakuvaus offline-tilassa kalibroiduiksi videoiksi. Estää jatkotoiminnot, kunnes käsittely on valmis (`wait=True`) ja palauttaa `{outputs, errors, combined}`. |
+| `build_video_status(job_id, timeout=15.0)` | Kysele offline-rakennustyön tilaa: `{running, result, error, burst_dir}`. |
+| `disconnect()` | Vapauttaa koko taulukon. |
 
-`capture()`-vienti hallitaan (sama päätepiste kuin GUI:ssa / CLI):
+`capture()`-vientiohjaimet (sama päätepiste kuin GUI:ssa/CLIissa):
 
-- `processing` / `levels` — `processing="all"` (tai `levels=["raw","radiance",…]`) tallentaa jokaisen soveltuvan vientityypin kameraa kohden; yksi `processing`-arvo tallentaa vain kyseisen tason.
-- `aligned=True` — muuntaa jokaisen jäsenen ei-raakamuotoisen viennin taulukon [kohdistusprofiilin](#array-alignment) (yhteisrekisteröity); raakamuotoiset tiedot jäävät muuntamattomiksi, mutta niiden metatiedoissa on mukana muunnos. Jos taulukolla ei ole profiilia, palataan kohdistamattomaan tilaan (ja tuloksessa näkyy varoitus`alignment`), jos matriisilla ei ole profiilia.
-- `render_index=False` — ohita kamerakohtainen kasvillisuusindeksin peittokuva; oletusarvoisesti se renderöidään, jos se on määritetty.
-- `force_daq=True` — tallentaa määritetyn DAQ/DLS-lukeman `.daq`-sidecarina, vaikka mikään valittu taso ei sitä tarvitsisi.
+- `processing` / `levels` — `processing="all"` (tai `levels=["raw","radiance",…]`) tallentaa jokaisen sovellettavan vientityypin kameraa kohden; yksi `processing`-arvo tallentaa vain kyseisen tason.
+- `aligned=True` — vääristää jokaisen jäsenen ei-raakamuotoisen viennin taulukon [kohdistusprofiilin](#array-alignment) mukaiseksi (yhteisrekisteröity); raakadataa ei muunneta, mutta se sisältää muunnoksen metatiedoissa. Palautuu kohdistamattomaksi (ja tuloksen `alignment`-arvoon ilmestyy varoitus), jos taulukolla ei ole profiilia.
+- `render_index=False` — ohita-kameran kasvillisuusindeksin peittokuva ohitetaan; oletusarvoisesti se renderöidään määritetyssä paikassa.
+- `force_daq=True` — tallentaa määritetyn DAQ/DLS-lukeman `.daq`-sidecar-tiedostona, vaikka mikään valittu taso ei sitä tarvitsisikaan.
 
-**TIFF-pakkaus (vain HTTP-säädin):**`ArraySession.capture()` ei lähetä `compression`-avainta, joten taustapalvelimen oletusasetus on voimassa — `POST /api/camera/array/capture` lukee `compression`-runko-parametrin, oletuksena `"deflate"` (häviötön zlib L1 + vaakasuuntainen ennustaja, ~4,1 MB per täysresoluutioinen kehys). `"none"` kirjoittaa pakkaamattomana (~6,3 MB/kehys)**~5× nopeammalla kirjoitusnopeudella** — molemmat ovat häviöttömiä ja luetaan identtisesti tuonnin yhteydessä. SDK ei tarjoa sille kwarg-parametria; kiertotie on `chloros-cli lattice array-capture --compression none` tai raaka HTTP. DEFLATE pitää myös Python GIL:iä, joten pakattuja kirjoituksia ei voida rinnakkaistaa perkameraa kohti — jatkuva 8-kameran täysresoluutioinen tallennus anturin taajuudella vaatii `compression: "none"`:ää. Lisätietoja: [CLI Viite → array-capture](cli-reference.md).**Jokaisenjäsenkohtaiset vientiohitukset (vain HTTP):**sama päätepiste hyväksyy myös `exclude_serials` (lista — poista jäseniä tallennetusta joukosta; taulukko laukeaa edelleen yhtenä synkronoituna ryhmänä ja pois jätetyt jäsenet palautetaan `excluded`:ssä), `serial_levels` (`{serial: [level tokens]}` kamera-kohtaiset ohitukset) sekä `serial_index` (`{serial: bool}` kamerakohtaiset indeksi-päällysteen ohitukset). Nämä ovat GUI-pariteettisia runkoparametreja, ja**eivät ole vielä SDK-avainarvoja**; karttoista puuttuvat jäsenet käyttävät oletuksena koko taulukon kattavia `levels`- ja `render_index`-arvoja.
+**TIFF-pakkaus (vain HTTP-säädin):**`ArraySession.capture()` ei lähetä `compression`-avainta, joten taustapalvelimen oletusasetus on voimassa — `POST /api/camera/array/capture` lukee `compression`-runkoparametrin, `"deflate"` oletusarvoisesti (häviötön zlib L1 + vaakasuuntainen ennustaja, ~4,1 MB täysresoluutioista kehystä kohti). `"none"` kirjoittaa pakkaamattomana (~6,3 MB/kuva) ja**noin 5 kertaa nopeammin** — molemmat ovat häviöttömiä ja luetaan identtisesti tuonnin yhteydessä. SDK ei tarjoa sille kwarg-parametria; kiertotie on `chloros-cli lattice array-capture --compression none` tai raaka HTTP. DEFLATE pitää myös Python GIL:ää, joten pakattuja kirjoituksia ei voida rinnakkaistaa kamerakohtaisten kirjoitussäikeiden välillä — jatkuva 8-kameran täysresoluutioinen tallennus anturin taajuudella vaatii `compression: "none"`:ää. Lisätietoja: [CLI Viite → array-capture](cli-reference.md).**Jäsenkohtaiset vientimäärittelyjen ohitukset (vain HTTP):**sama päätepiste hyväksyy myös `exclude_serials` (lista — poistaa jäseniä tallennetusta joukosta; taulukko laukeaa edelleen yhtenä synkronoituna ryhmänä ja pois suljetut jäsenet palautetaan `excluded`:ssa), `serial_levels` (`{serial: [level tokens]}` kamera-kohtaiset ohitukset) sekä `serial_index` (`{serial: bool}` kamerakohtaiset indeksin päällekkäisyyksien ohitukset). Nämä ovat GUI-pariteettisia runkoparametreja eivätkä**vielä SDK-kwaarg-parametreja**; karttoista puuttuvat jäsenet käyttävät oletusarvoisesti koko taulukon kattavia `levels` / `render_index`-arvoja.
 
 ##### Ohitettujen kameroiden tarkastelu — `CaptureResult.skipped`
 
-`ArraySession.capture()` palauttaa `CaptureResult`:n, joka on `list`:n alaluokka: kierrä sitä, indeksoi sitä, `len()` sitä — kaikki olemassa olevat mallit toimivat edelleen. Uusi koodi voi tarkistaa `.skipped`-attribuutin nähdäkseen, mitkä kamerat on jätetty pois ja miksi. Yleisin tapaus on RGB kamerat sekasuodatinmatriisissa, kun pyydät `processing="radiance"`- tai `"reflectance"` — Bayer-kohtainen säteilyvoimakkuus on merkityksetön laajakaistaiselle anturille, joten taustaprosessi ohittaa kyseiset kamerat sen sijaan, että tuottaisi järjetöntä tietoa.
+`ArraySession.capture()` palauttaa `CaptureResult`:n, joka on `list`-alaluokka: iteroi sitä, indeksoi sitä, `len()` sitä — kaikki olemassa olevat mallit toimivat edelleen. Uusi koodi voi tarkistaa `.skipped`-attribuutin nähdäkseen, mitkä kamerat jätettiin pois ja miksi. Yleisin tapaus on, että sekasuodatinmatriisissRGB-kameroita, kun pyydät `processing="radiance"`- tai `"reflectance"`-tietoja — Bayer-kohtainen säteilyvoimakkuus on merkityksetön laajakaistaiselle anturille, joten taustaprosessi ohittaa nämä kamerat sen sijaan, että tuottaisi järjetöntä tietoa.
 
 ```python
 with chloros_sdk.connect_array(serials) as arr:
@@ -758,24 +757,24 @@ with chloros_sdk.connect_array(serials) as arr:
         #       'filter': 'RGB'}
 ```
 
-Syytunnisteet noudattavat mallia `<level>-not-applicable-to-rgb-cam` (yksi merkintä ohitettua tasoa kohti, joista jokainen sisältää `level`). Heijastavuuteen liittyvät ohitukset ovat `reflectance-skipped-no-fresh-dls` (uutta alaspäin suuntautuvaa lukemaa ei saatavilla), `reflectance-skipped-bound-daq-unavailable (…)` (sidottua DAQ-laitetta ei voitu tavoittaa) ja `dls-uncalibrated-band-<nm>` — kaista sijaitsee pääosin DAQ-valosensorin radiometrisesti kalibroidun alueen ulkopuolella (~374–974 nm), joten absoluuttinen DAQ-pohjainen heijastusjakaja hylätään ja kehys siirtyy selvästi anturin vasteeseen. Toimitettavista tuotetunnuksista vain F988 laukaisee tämän; kyseisen kameran tuettu polku on heijastuspaneelin työnkulku.
+Syytunnisteet noudattavat mallia `<level>-not-applicable-to-rgb-cam` (yksi merkintä ohitettua tasoa kohti, joista jokaisessa on `level`). Heijastavuuteen liittyvät ohitukset ovat `reflectance-skipped-no-fresh-dls` (uutta alaspäin suuntautuvaa lukemaa ei saatavilla), `reflectance-skipped-bound-daq-unavailable (…)` (sidottuun DAQ-laitteeseen ei päästy käsiksi) ja `dls-uncalibrated-band-<nm>` — kaista sijaitsee pääosin DAQ-valosensorin radiometrisesti kalibroidun alueen ulkopuolella (~374–974 nm), joten absoluuttista DAQ-pohjaista heijastusarvon jakoa ei hyväksytä ja kehys siirtyy selvästi anturin vasteeseen. Myynnissä olevista tuotetunnuksista vain F988 laukaisee tämän; kyseisen kameran tuettu työnkulku on heijastusarvo-paneelin työnkulku.
 
 `processing`-tasot:
 
 | Taso | Lähtö |
 | --- | --- |
-| `"raw"` | Yksikanavainen Bayer (mustavalkokamerat: yksikaistainen) suoraan anturista. |
-| `"debayered"` *(SDK oletus)* | 3-kanavainen BGR bilineaarisen demosaikin kautta (mustavalkokamerat: 1-kanavainen harmaasävy). |
-| `"radiance"` | float32 W/m²/sr/nm koko radiometrisen ketjun kautta. Ohitetaan vain monispektrisissä — RGB-kamerat ohitetaan. |
-| `"reflectance"` | uint16 0..32768 (Pix4D-yhteensopiva); vaatii reaaliaikaisen DAQ-pariliitoksen absoluuttista vertailukohtaa varten. Vain monispektrinen. |
-| `"display"` | Täydellinen ketju, joka vastaa käyttöliittymän esikatselua (CCM + WB + gamma kameran profiilin mukaan). |
-| `"all"` | **Yksi tiedosto kutakin soveltuvaa tasoa kohti** jokaiselle kameralle (vastaa GUI:n &quot;Capture All&quot; /CLI-oletusasetusta). Palautettu `CaptureResult` sisältää sitten yhden kehyssanakirjan kutakin `(cam, level)`:ää kohti, ja jokaisessa sanakirjassa on taso; soveltumattomat tasot näkyvät tiedostossa `.skipped`. Minkä tahansa heijastavuuskehyksessä tallennetaan `.daq`-sidecarina. |
+| `"raw"` | Yksikanavainen Bayer (mustavalkokamerat: yksi kaista) suoraan anturista. |
+| `"debayered"` *(SDK:n oletus)* | 3-kanavainen BGR bilineaarisen demosaicin kautta (mustavalkokamerat: 1-kanavainen harmaasävy). |
+| `"radiance"` | float32 W/m²/sr/nm koko radiometrisen ketjun kautta. Vain monispektrinen — RGB-kamerat ohitetaan. |
+| `"reflectance"` | uint16 0..32768 (Pix4D-valmis); vaatii reaaliaikaisen DAQ-pariliitoksen absoluuttista vertailukohtaa varten. Vain monispektrinen. |
+| `"display"` | Täydellinen ketju, joka vastaa käyttöliittymän esikatselua (CCM + WB + gamma kameran profiilin mukaisesti). |
+| `"all"` | **Yksi tiedosto kutakin soveltuvaa tasoa kohti** jokaiselle kameralle (vastaa käyttöliittymän ”Capture All&quot; / CLI oletusasetuksen mukaisesti). Palautettu `CaptureResult` sisältää sitten yhden kehyssanakirjan (dict) kutakin `(cam, level)`:ää kohti, ja kussakin sanakirjassa on taso; soveltumattomat tasot näkyvät tiedostossa `.skipped`. Minkä tahansa heijastavuuskehyksen DAQ-lukema tallennetaan `.daq`-sidecarina. |
 
-> **Huomautus — oletusarvo poikkeaa CLI-tiedostosta.** `ArraySession.capture()`:n oletusarvona on `processing="debayered"`; `chloros-cli lattice array-capture`-komennon oletusarvona on `processing="all"`. Syötä `processing="all"` nimenomaisestiSDK-komennolla, jotta se vastaa CLI /GUI:n monitasoista tallennusta.
+> **Huomautus — oletusarvo eroaa CLI-asetuksesta.** `ArraySession.capture()`:n oletusarvona on `processing="debayered"`; komennon `chloros-cli lattice array-capture` oletusarvona on `processing="all"`. Määritä `processing="all"` nimenomaisesti SDK-tiedostosta, jotta se vastaa CLI /GUI:n monitasoista tallennusta.
 
 ### Tallennustilat ja tallentimet
 
-Matriisin pinta vastaa GUI:n tallennuspaneelia: Yksittäinen / Jatkuva / Väli / Nopein suljintila sekä kaksi tallenninta (live-komposiittivideo ja raaka sarjatallennus → offline-jälkikäsittely).
+Taulukon pinta vastaa GUI:n tallennuspaneelia: Yksittäinen / Jatkuva / Väli / Nopein suljintila sekä kaksi tallenninta (reaaliaikainen-komposiittivideo ja raakasarja → offline-jälkikäsittely).
 
 ```python
 import time, chloros_sdk
@@ -806,22 +805,22 @@ with chloros_sdk.connect_array(serials) as arr:
     print(out["outputs"])
 ```
 
-- **`capture_repeated`**on SDK:n jatkuva/väli-silmukka. Koska ei ole olemassa `Ctrl+C`:ää, jolla sen voisi keskeyttää skriptistä,**sinun on** välitettävä `count` ja/tai `duration_s` (se pysähtyy, kun jompikumpi saavutetaan). `interval_s` mitataan kunkin kierroksen alusta (GUI:n mukaisesti). Jäljellä olevat kwarg-argumentit välitetään suoraan `capture()`:ään.
-- **`record`** on *valvontatasoinen*: se tallentaa reaaliaikaisen yhdistelmäindeksin komposiitin sellaisena kuin se näytetään, joten yhdistelmävirran on oltava auki, jotta kehykset pääsevät perille. Yksi komposiittitallennin kutakin taulukkoa kohti (heittää poikkeuksen, jos sellainen on jo käynnissä).
-- **`burst` → `build_video`** on *analyysitason*: `burst` tallentaa raakakehykset + kehyskohtaisen manifestin + yhden `.daq`:n kutakin erillistä DLS-lukemaa kohti `<output>/bursts/<base>/`:n alla tallennussilmukan täydellä nopeudella (ei ketjua, ei exiftool-työkalua, ei reaaliaikaista esikatselua). `build_video` sovittaa kunkin kehyksen ajallisesti lähimpään `.daq`-kehykseen ja suorittaa tuontiputken säteily-/heijastavuus-/indeksiketjun uudelleen. `products` on luettelo `{"kind": "per_cam"|"combined", "level": "radiance"|"reflectance"|"index"}`-arvoista (oletus: yhdistetty indeksi). `burst().stop()` käynnistää myös automaattisesti parhaansa mukaan tehdyn yhdistettyjen indeksien rakennuksen, joka palautetaan `build_job`:na lopetustuloksessa.
+- **`capture_repeated`**on SDK:n Jatkuva/väli-silmukka. Koska skriptistä ei ole mahdollista keskeyttää sitä `Ctrl+C`:llä,**on välttämätöntä** välittää `count` ja/tai `duration_s` (silmukka pysähtyy, kun jompikumpi saavutetaan). `interval_s` mitataan kunkin kierroksen alusta (GUI:n mukaisesti). Jäljellä olevat kwarg-argumentit välitetään suoraan `capture()`:ään.
+- **`record`** on *seurantatasoinen*: se tallentaa näytöllä näkyvän yhdistelmäindeksin reaaliaikaisesti, joten yhdistelmävirran on oltava auki, jotta kehykset pääsevät perille. Yksi yhdistelmätallennin kutakin taulukkoa kohti (heittää poikkeuksen, jos sellainen on jo käynnissä).
+- **`burst` → `build_video`** on *analyysitason*: `burst` tallentaa raakakehykset + kehyskohtaisen manifestin + yhden `.daq`:n kutakin erillistä DLS-lukemaa kohti `<output>/bursts/<base>/`:n alla kaappaussilmukan täydellä nopeudella (ei ketjua, ei exiftool-työkalua, ei reaaliaikaista esikatselua). `build_video` sovittaa kunkin kehyksen ajallisesti lähimpään `.daq`-arvoon ja suorittaa tuontiputken säteily-/heijastavuus-/indeksiketjun uudelleen. `products` on luettelo `{"kind": "per_cam"|"combined", "level": "radiance"|"reflectance"|"index"}`:sta (oletus: yhdistetty indeksi). `burst().stop()` käynnistää myös automaattisestikäynnistää parhaansa mukaan yhdistettyä indeksiä koskevan rakennuksen, joka palautetaan lopetustuloksessa nimellä `build_job`.
 
 #### `RecorderHandle`
 
-Palautetaan `ArraySession.record()`:n ja `ArraySession.burst()`:n toimesta. Käytä sitä kontekstinhallintana, jotta se pysähtyy automaattisesti laajuuden päättyessä, tai ohjaa sitä manuaalisesti.
+Palautetaan `ArraySession.record()`:n ja `ArraySession.burst()`:n toimesta. Käytä sitä kontekstinhallintana automaattiseen lopettamiseen laajuuden päättyessä tai ohjaa sitä manuaalisesti.
 
 | Jäsen | Kuvaus |
 | --- | --- |
 | `job_id` | Taustatehtävän tunniste (merkkijono). |
-| `kind` | `"composite"` (peräisin `record`:sta) tai `"raw"` (peräisin `burst`:sta). |
-| `start_stats` | `start`-kutsun palauttama sanakirja. |
-| `result` | `None` suorituksen aikana; lopullinen pysäytystulos-sanakirja, kun toiminta on lopetettu. |
+| `kind` | `"composite"` (lähde: `record`) tai `"raw"` (lähde: `burst`). |
+| `start_stats` | X000467-kutsun palauttama sanakirja. |
+| `result` | `None` suorituksen aikana; lopullinen pysäytystulos-sanakirja, kun suoritus on pysäytetty. |
 | `stats(timeout=10.0)` | Reaaliaikaiset työn tilastot (kirjoitetut kehykset, toteutunut kuvataajuus, kulunut aika). |
-| `stop(timeout=60.0)` | Pysäyttää tallentimen; palauttaa ja tallentaa välimuistiin lopullisen tuloksen. Idempotentti (toinen kutsu palauttaa välimuistissa olevan tuloksen). |
+| `stop(timeout=60.0)` | Pysäyttää tallentimen; palauttaa ja tallentaa välimuistiin lopullisen tuloksen. Idempotentti (toinen kutsu palauttaa välimuistista tallennetun tuloksen). |
 
 ```python
 rec = arr.burst("capture/")
@@ -833,7 +832,7 @@ print(result["out_dir"], result.get("build_job"))
 
 ### Liittäminen jo kytkettyyn taulukkoon — `attach_array`
 
-Jos taulukko on jo käynnissä (GUI on avannut sen tai edellinen SDK-istunto on kutsunut `connect_array`:ää), käytä `attach_array`:ää saadaksesi siihen viittauksen uudelleenkytkemisen sijaan. `connect_array` antaa <sn><id>kyseisessä tilanteessa</id></sn> aina virheilmoituksen ”Kamera <sn>on jo ryhmässä<id>”, koska jäsenelle lähetetty POST-pyyntöei ole idempotenttia; `attach_array` lukee `/api/camera/array/list`:n ja vertaa joko array_id:n tai sarjanumeroiden perusteella.
+Jos taulukko on jo käynnissä (GUI on avannut sen, tai aiempi SDK-istunto on kutsunut `connect_array`:ää), käytä `attach_array`:ää saadaksesi siihen käsittelykäsitteen uudelleenliittämisen sijaan. `connect_array` antaa tuossa tilanteessa aina virheilmoituksen ”Kamera  on<sn> jo ryhmässä<id>”, koska `/array/connect`-komennon lähettäminen ryhmään kuuluvalle jäsenelle ei ole idempotentti; `attach_array` lukee `/api/camera/array/list`:n ja vertaa joko array_id:n tai sarjanumeroiden perusteella.
 
 ```python
 import chloros_sdk
@@ -849,7 +848,7 @@ arr = chloros_sdk.attach_array("array-1779862544497")
 arr.capture("output/", processing="reflectance")
 ```
 
-Malli: SDK skriptit, jotka toimivat rinnakkain työpöydän graafisen käyttöliittymän kanssa, tulisi yrittää ensin `attach_array`:ää ja siirtyä `connect_array`:ään, jos poolissa ei vielä ole yhtään taulukkoa.
+Malli: SDK Skriptit, jotka toimivat samassa ympäristössä työpöydän graafisen käyttöliittymän kanssa, tulisi yrittää ensin `attach_array`:ää ja siirtyä `connect_array`:ään, jos vielä yhtään taulukkoa.
 
 ```python
 import chloros_sdk
@@ -860,7 +859,7 @@ except chloros_sdk.ChlorosConnectError:
     arr = chloros_sdk.connect_array(serials)
 ```
 
-> **Tärkeää — context-managerin lopettaminen KATKAISEE yhteyden.**`ArraySession.disconnect()` lähettää aina POST-pyynnön `/array/disconnect`:lle; siihen ei ole liitetty-not-owned-suojaus, kuten on `CameraSession`:n / `DAQSensorSession`:n kohdalla. Jos käytät samaa vuokra-aluetta GUI:n kanssa etkähalua purkaa taulukkoa laajuuden lopetuksen yhteydessä,**älä käytä `with`-lohkoa** — säilytä kahva tavallisessa muuttujassa ja ohita eksplisiittinen `disconnect()`:
+> **Tärkeää — context-managerin sulkeminen KATKAISEE yhteyden.**`ArraySession.disconnect()` lähettää aina POST-pyynnön `/array/disconnect`:lle; siihen ei ole liitetty-omistamatonta suojausmekanismia, kuten on `CameraSession`:n / `DAQSensorSession`:n tapauksessa. Jos oletkäytät GUI:ta ja et halua purkaa taulukkoa skopan päättyessä,**älä käytä `with`-lohkoa** — säilytä kahva tavallisessa muuttujassa ja ohita eksplisiittinen `disconnect()`:
 >
 > ```python
 > arr = chloros_sdk.attach_array(serials)
@@ -868,9 +867,9 @@ except chloros_sdk.ChlorosConnectError:
 > # … script ends; array stays up for the GUI
 > ```
 
-### Verkkoanalyysin aputyökalu
+### Verkkoanalyysin apuväline
 
-Hyödyllinen ennen taulukon avaamista — arvioi, sopivatko ehdotetut asetukset:
+Hyödyllinen ennen taulukon avaamista — arvioi, sopivatko ehdotetut asetuksesi:
 
 ```python
 result = chloros_sdk.analyze_array_network(
@@ -893,16 +892,16 @@ elif result["status"] == "needs_force_slip":
     print("Sim-sync impossible on this wire; force_tier='slip-emit-and-capture' required")
 ```
 
-`status` on yksi seuraavista: `ok` / `auto_capped_fps` / `auto_shrunk` / `needs_force_slip` (muussa tapauksessa `error`). `auto_capped_fps` tarkoittaa, että pyydetty resoluutio sopii RX-renkaaseen vain rajoitetulla laukaisutaajuudella — säilytä resoluutio ja siirrä `target_fps=result["recommended"]["recommended_target_fps"]` arvoon `connect_array` (katso [Esimerkki 6](#6-capability-probe-before-connecting-a-4-cam-array)).
+`status` on yksi seuraavista: `ok` / `auto_capped_fps` / `auto_shrunk` / `needs_force_slip` -joukkoon (muussa tapauksessa `error`). `auto_capped_fps` tarkoittaa, että pyydetty resoluutio sopii RX-renkaaseen vain rajoitetulla laukaisunopeudella — säilytä resoluutio ja välitä `target_fps=result["recommended"]["recommended_target_fps"]` arvoon `connect_array` (katso [Esimerkki 6](#6-capability-probe-before-connecting-a-4-cam-array)).
 
 **Kuinka tulkita projektio** (sama malli kuin GUI:n Array Settings -paneelissa):
 
-- **Burst (`frame_bytes_total`) lasketaan yhteen kamerakohtaisesti kunkin kameran todellisen pikselimuodon mukaan.**Mono**M3M**-kamerat lähettävät Mono12-virtaa (2 B/px) riippumatta siitä, minkä `pixel_format`-arvon syötät, joten nelikamerainen täysresoluutioinen kehys on**~25 MB** kolmella monokameralla, ei ~12,6 MB:n kokoa, kuten oletettaisiin, jos kaikki olisivat 8-bittisiä. Taustaprosessi määrittää kunkin kameran formaatin sen mallin perusteella.
-- **Admittance (`burst_fits_nic_ring`) on drain-tietoinen**, ei koko-burst-vs-ring-tyyppinen: sim-emit sopii tilanteeseen, jossa isäntä tyhjentää RX-renkaan nopeammin kuin kamerat täyttävät sitä. 10G-isäntä + 1 GbE-kamerat**sallivat** täyden resoluution, vaikka purske ylittäisi renkaan; 1 GbE:n isäntä estää (`needs_force_slip` / `auto_shrunk`).
-- **`achievable_fps_max` on konservatiivinen sarjahaun yläraja** — `max(readout+emit, N×emit)`, jossa kamerakohtainen lähetys on rajoitettu 1 GbE:n kamerayhteyteen, valotuksesta riippumatta. Esim. ~2,8 fps nelikameraiselle täysresoluutioiselle 12-bittiselle matriisille (vastaa ajoympäristössä mitattua ~2,7–3,0). Täydellinen malli: [CLI Viite → Matriisin fps- ja sarjakuvausmalli](cli-reference.md#array-fps--burst-model).
-- **Ylimerkintä (`oversubscribed: true`) tarkoittaa, että N × kamerakohtainen alaraja ylittää törmäysturvallisen ylärajan** — fps-kentät (`achievable_fps_max` / `fps_bright` / `fps_dark`) lukevat arvoa 0, eikä automaattinen pienentäminen/binning korjaa tilannetta (ne vähentävät tavuja kehystä kohti, eivät tahdistettuja tavuja sekunnissa). Ratkaisuina ovat kameramäärän vähentäminen, jumbo-kehykset tai nopeampi verkkokortti; `max_cams_collision_safe` ilmoittaa ylärajan (6 täysresoluutioista kameraa 1 GbE:llä @ 1500 MTU, 9 jumbo-kehyksillä). Vastaus sisältää myös virhekoodit `aggregate_demand_bps`, `collision_safe_ceiling_bps` ja `per_cam_floor_bps` (8 MB/s). Katso [Ylimerkintä](#over-subscription-the-per-cam-floor).
+- **Burst (`frame_bytes_total`) lasketaan yhteen kamerakohtaisesti kunkin kameran todellisessa pikselimuodossa.**Mono**M3M**-kamerat lähettävät Mono12-tiedostoja (2 B/px) riippumatta siitä, minkä `pixel_format`-arvon annat, joten neljän kameran täysresoluutioinen kehys on**~25 MB** kolmen monokameran tapauksessa, ei ~12,6 MB, kuten oletettaisiin, jos kaikki olisivat 8-bittisiä. Taustaprosessi määrittää kunkin kameran formaatin sen mallin perusteella.
+- **Pääsy (`burst_fits_nic_ring`) on tyhjennystietoinen**, ei koko-burst-vs-rengas: sim-emit sopii, kun isäntä tyhjentää RX-renkaan nopeammin kuin kamerat täyttävät sitä. 10G-isäntä + 1 GbE-kamerat**sallivat** täyden resoluution, vaikka purske ylittäisi renkaan kapasiteetin; 1 GbE:n isäntä estää sen (`needs_force_slip` / `auto_shrunk`).
+- **`achievable_fps_max` on konservatiivinen sarjahaun yläraja** — `max(readout+emit, N×emit)`, jossa kamerakohtainen lähetys on rajoitettu 1 GbE:n kameralinkkiin, valotuksesta riippumatta. Esim. ~2,8 fps nelikameraiselle täysresoluutioiselle 12-bittiselle kameraryhmälle (vastaa ajon aikana mitattua ~2,7–3,0). Täydellinen malli: [CLI Viite → Kameraryhmän fps- ja pursemalli](cli-reference.md#array-fps--burst-model).
+- **Ylimerkintä (`oversubscribed: true`) tarkoittaa, että N × kamerakohtainen alaraja ylittää törmäysturvallisen ylärajan** — fps-kentät (`achievable_fps_max` / `fps_bright` / `fps_dark`) näyttävät arvoa 0, eikä automaattista pienentämistä tai binnointia voi käyttää korjaamaan tilannetta (ne pienentävät tavuja kehystä kohti, eivät tahdistettuja tavuja sekunnissa). Ratkaisuina ovat kameramäärän vähentäminen, jumbo-kehykset tai nopeampi verkkokortti; `max_cams_collision_safe` ilmoittaa ylärajan (6 täysresoluutioista kameraa 1 GbE:llä @ 1500 MTU, 9 jumbo-kehyksillä). Vastaus sisältää myös koodit `aggregate_demand_bps`, `collision_safe_ceiling_bps` ja `per_cam_floor_bps` (8 MB/s). Katso [Ylimerkintä](#over-subscription-the-per-cam-floor).
 
-### Tunnistus ja luettelointi
+### Tunnistaminen ja luettelointi
 
 ```python
 chloros_sdk.discover_lattice_cameras()   # list all cams visible to the backend
@@ -914,7 +913,7 @@ chloros_sdk.list_arrays()                # active arrays in the pool
 
 ## Smart-AE / Smart-Capture
 
-LATTICE-järjestelmät suorittavat jatkuvaa automaattista valotusta (AE) taustalla heti, kun ne on kytketty, mutta vastikään kohdistetun kuvauskohteen valotuksen vakiintuminen vie hetken. **Smart-Capture** on kätevä toiminto: se tarkistaa kunkin kameran valotuksen, odottaa, kunnes järjestelmä on vakaa koko ikkunassa, ja laukaisee sitten kuvauksen. Se vastaa graafisen käyttöliittymän toimintaa: työpöytäsovelluksen ”älykäs” tallennuspainike kutsuu samaa taustapalvelimen päätepistettä.
+LATTICE-matriisit suorittavat jatkuvaa automaattista valotusta (AE) taustalla heti, kun ne on kytketty, mutta vastakohdistettu kuva kestää hetken konvergoitua. **Smart-Capture** on kätevä pakettiratkaisu: se tarkistaa jokaisen kameran valotuksen, odottaa, kunnes matriisi on vakaa koko ikkunassa, ja laukaisee sitten kuvauksen. Se vastaa graafista käyttöliittymää: työpöytäsovelluksen ”älykäs” tallennuspainike kutsuu samaa taustapalvelimen päätepistettä.
 
 ```python
 import chloros_sdk
@@ -928,7 +927,7 @@ with chloros_sdk.connect_array([
     arr.capture("pose_b/", processing="reflectance", smart=True)
 ```
 
-Kun käytät `ChlorosProject`-ohjausta (seuraava osa), saat käyttöösi lisää säätimiä:
+Kun käytät `ChlorosProject`:ää (seuraava osa), saat käyttöösi lisää säätimiä:
 
 ```python
 proj.arrays["main_rig"].capture_smart(
@@ -940,13 +939,13 @@ proj.arrays["main_rig"].capture_smart(
 )
 ```
 
-Älykäs AE-käytäntö on oletusarvoisesti konservatiivinen. Kiristä `exposure_tolerance_pct`-asetusta tarkkoihin radiometrisiin töihin; laajenna sitä nopeasti muuttuvissa tilanteissa, joissa riittää, että tulos on ”riittävän lähellä”.
+Älykäs valotuksen säätö (smart-AE) on oletusarvoisesti konservatiivinen. Kiristä asetusta `exposure_tolerance_pct` tarkkoihin radiometrisiin mittauksiin; löysää sitä nopeasti muuttuvissa tilanteissa, joissa riittää, että tulos on ”riittävän lähellä”.
 
 ---
 
 ## DAQ-anturisessiot
 
-Pysyvä taustapooli spektrisensoreille (DAQ-U USB:n kautta, DAQ-M BLE:n kautta, DAQ-E Ethernetin kautta). Vastaa kameran toimintaa: älykäs tunnistus, poolin uudelleenkäyttö, idempotentti liittäminen.
+Pysyvä taustapooli spektrisensoreille (DAQ-U USB:n kautta, DAQ-M BLE:n kautta, DAQ-E Ethernetin kautta). Toimii samalla tavalla kuin kameran pinta: älykäs tunnistus, pooliin uudelleenkäyttö, idempotentti liittäminen.
 
 ### Älykäs tunnistus (Zero-Config)
 
@@ -962,9 +961,9 @@ with chloros_sdk.connect_daq_sensor() as daq:
         print(len(spectrum), is_sat)
 ```
 
-Prioriteetti: Ethernet → BLE → USB. Määritä mikä tahansa eksplisiittinen vihje kiinnittääksesi siirtoyhteyden.
+Prioriteetti: Ethernet → BLE → USB. Määritä kuljetustapa antamalla mikä tahansa eksplisiittinen vihje.
 
-### Kiinnitetty siirtotapa
+### Kiinnitetty siirtoyhteys
 
 ```python
 # DAQ-U on a specific serial port
@@ -986,22 +985,22 @@ daq = chloros_sdk.connect_daq_sensor(
 )
 ```
 
-### `DAQSensorSession`-metodit
+### `DAQSensorSession`-menetelmät
 
-| Metodi | Kuvaus |
+| Menetelmä | Kuvaus |
 | --- | --- |
-| `status(timeout=10.0)` | Pool-merkinnän yhteenveto (suoratoisto-/tallennustila, aallonpituusalue, kalibrointisha, integraatioaika, frame_avg, AE-tila). |
+| `status(timeout=10.0)` | Poolimerkinnän yhteenveto (suoratoisto-/tallennustila, aallonpituusalue, kalibrointitunnus, integraatioaika, frame_avg, AE-tila). |
 | `latest(n=1, timeout=10.0)` | Palauttaa enintään N viimeisintä spektrikehystä. |
-| `stream_start()` / `stream_stop()` | Jatka / keskeytä suoratoisto (käsittely pysyy auki). |
-| `record_start(output_dir=None, device_name=None)` | Aloita .daq-tiedoston tallennus. Palauttaa tiedostopolun. Hylkää DAQ-U/M:n ilman AWS-kalibrointipakettia (DAQ-E on poikkeus). |
+| `stream_start()` / `stream_stop()` | Jatka / keskeytä suoratoisto (käsittelykäsittely pysyy auki). |
+| `record_start(output_dir=None, device_name=None)` | Aloittaa .daq-tiedoston tallennuksen. Palauttaa tiedostopolun. Ei onnistu DAQ-U/M-laitteilla, joilla ei ole AWS-kalibrointipakettia (DAQ-E on poikkeus). |
 | `record_stop()` | Lopeta tallennus. Palauttaa `{path, rows}`. |
-| `disconnect()` | Vapauttaa poolista. Ei-toimiva liitetyille, mutta ei omistetuille kahvoille. |
+| `disconnect()` | Vapauta poolista. Ei-toiminto liitetyille, mutta ei omistetuille kahvoille. |
 
-> **Kapasiteetin korjausprofiilit (`cap_id`) eivät ole SDK-säätimiä.** `connect_daq_sensor()` / `DAQSensorSession` eivät paljasta mitään `cap_id`-parametria tai `set_cap`-menetelmää. Valitse laivaston kapasiteetin korjausprofiili CLI -sivuston kautta (`chloros-cli daq pool-connect --cap-id …` / `chloros-cli daq pool-set-cap …`) tai taustapalvelimen `/api/daq`-HTTP-reittien kautta (`/api/daq/connect` ja `/api/daq/<id>/cap-id` hyväksyvät `cap_id`).
+> **Kapasiteetin korjausprofiilit (`cap_id`) eivät ole SDK-säätimiä.** `connect_daq_sensor()` / `DAQSensorSession` eivät paljasta `cap_id`-parametria tai `set_cap`-menetelmää. Valitse laivaston ylärajan korjausprofiili CLI (`chloros-cli daq pool-connect --cap-id …` / `chloros-cli daq pool-set-cap …`) tai backendin`/api/daq`-HTTP-reittejä (`/api/daq/connect` ja `/api/daq/<id>/cap-id` hyväksyvät `cap_id`).
 
 ### Löytö — yhteyden muodostamiseen tarvittavan osoitteen etsiminen
 
-`discover_daq_sensors()` skannaa USB- / BLE- ja ETH-liitäntöjä etsiäkseen antureita, jotka *voisit* avata. Se on DAQ-vastaava `discover_lattice_cameras()`:lle, ja ainoa tapa saada selville **DAQ-M:n BLE-MAC-osoite** — DAQ-E:llä on isäntänimi ja DAQ-U:lla COM-portti, mutta MAC-osoitetta ei ole painettu laitteeseen eikä se näy käyttöjärjestelmän luettelossa.
+`discover_daq_sensors()` etsii USB-, BLE- ja ETH-liitännöistä antureita, jotka *voisit* avata. Se on `discover_lattice_cameras()`:n DAQ-vastine ja ainoa tapa saada selville **DAQ-M:n BLE-MAC-osoite** — DAQ-E:llä on isäntänimi ja DAQ-U:lla COM-portti, mutta MAC-osoitetta ei ole painettu laitteeseen eikä se näy käyttöjärjestelmän luettelossa.
 
 ```python
 for s in chloros_sdk.discover_daq_sensors():
@@ -1018,19 +1017,19 @@ for s in chloros_sdk.discover_daq_sensors(transports=["ble"]):
 | Kenttä | Kuvaus |
 | --- | --- |
 | `transport` | `usb` \| `ble` \| `eth`. |
-| `address` | COM-portti / BLE MAC / isäntänimi — välitetään `connect_daq_sensor`:lle muodossa `port=` / `mac=` / `eth_host=`. |
-| `display` | Ihmisen luettavissa oleva nimike. |
-| `model` | `DAQ-U` \| `DAQ-M` \| `DAQ-E` tai `None`, jos skannaus ei tunnista porttia (USB-sarjaliikenneadaptereita ei voida erottaa toisistaan ilman mittausanturia, joten tuntemattomat portit näytetään eikä piiloteta). |
+| `address` | COM-portti / BLE-MAC / isäntänimi — välitetään `connect_daq_sensor`:ksi nimellä `port=` / `mac=` / `eth_host=`. |
+| `display` | Ihmisen luettavissa oleva nimi. |
+| `model` | `DAQ-U` \| `DAQ-M` \| `DAQ-E` tai `None`, jos skannaus ei tunnista porttia (USB-sarjaliikenneadaptereita ei voida erottaa toisistaan ilman mittausanturia, joten tuntemattomat portit näytetään eikä niitä piiloteta). |
 | `extra` | Kuljetuskohtaiset tiedot (BLE:n ilmoitettu nimi, USB-valmistaja, DAQ-E:n IP/fw/…). Tyhjät arvot jätetään pois. |
 
 | Parametri | Oletus | Kuvaus |
 | --- | --- | --- |
 | `transports` | kaikki kolme | Skannausta rajoittava sekvenssi (tai CSV-merkkijono). Kannattaa antaa, kun tiedät mitä haluat — BLE on hidas osa. |
-| `scan_timeout` | 5 |-kuljetuskohtainen skannausikkuna sekunteina; taustapalvelin rajoittaa arvon välille 1–20. |
-| `timeout` | 60,0 | Koko kutsun HTTP-yläraja (kuten muuallakin SDK-tiedostossa). |
-| `auto_start_backend` | `True` | Luo paikallinen taustaprosessi, jos sellaista ei ole käynnissä. Ei luo koskaan etäistä `backend_url`-prosessia. |
+| `scan_timeout` | 5 | Skannausikkuna kuljetuskohtaisesti sekunteina; taustapalvelu rajoittaa arvon välille 1–20. |
+| `timeout` | 60,0 | HTTP yläraja koko kutsulle (kuten muuallakin SDK-tiedostossa). |
+| `auto_start_backend` | `True` | Käynnistä paikallinen taustaprosessi, jos sellaista ole käynnissä. Ei luo koskaan etä-`backend_url`:ää. |
 
-> **Poolissa jo avoimina olevat anturit eivät näy.** Yhdistetty BLE-oheislaite lopettaa mainostamisen, eikä avointa COM-porttia voi tunnistaa, joten hakutoiminto listaa ne, jotka ovat *yhdistettävissä*. On odotettavissa, että tulos on tyhjä heti sen jälkeen, kun olet yhdistänyt jonkin laitteen — käytä `list_daq_sensors()`:ää niille, jotka sinulla jo on. Siirrot , joiden skannaus ei voi suorittaa (bleak / zeroconf ei ole asennettu), ohitetaan sen sijaan, että ne aiheuttaisivat virheilmoituksen, joten kone, jossa ei ole Bluetoothia, saa silti vastaukset USB:lle ja ETH:lle.
+> **Poolissa jo avoimina olevat anturit eivät näy.** Yhdistetty BLE-oheislaite lopettaa mainostamisen, eikä avointa COM-porttia voida tutkia, joten löytötoiminto listaa ne, jotka ovat *yhdistettävissä*. Tyhjä tulos heti laitteen yhdistämisen jälkeen on odotettavissa — käytä `list_daq_sensors()`:ää niille, jotka jo hallussasi. Kuljetusprotokollat, joiden skannausta ei voida suorittaa (bleak / zeroconf ei asennettu), ohitetaan virheilmoituksen sijaan, joten kone, jossa ei ole Bluetoothia, saa silti vastaukset USB:lle ja ETH:lle.
 
 ### Luettelo
 
@@ -1041,13 +1040,13 @@ for s in chloros_sdk.list_daq_sensors():
 
 ### Yhteiskäyttö GUI:n kanssa / CLI
 
-Jos GUI:ssa on jo auki oleva anturi, Python-komennolla kutsuttu `connect_daq_sensor(port="COM3")` palauttaa käsittelytunnuksen, joka on merkitty `already_connected=True`. Istunnon `disconnect()` on tällöin tyhjä operaatio, joten SDK-skriptisi ei irrota anturia GUI:n alta, kun poistumisen yhteydessä.
+Jos GUI:ssa on jo auki oleva anturi, `connect_daq_sensor(port="COM3")`-komennon kutsuminen osoitteesta Python palauttaa käsitteen, joka on merkitty `already_connected=True`. Istunnon `disconnect()` on tällöin no-op, joten SDK-skriptisi ei irrota anturia GUI:n alta, kun ohjelma suljetaan.
 
-### Suorat laitteistoluokat (ilman taustaprosessia)
+### Suoraan laitteistoon liittyvät luokat (ilman taustaprosessia)
 
-`daq_sdk` onvienti `chloros_sdk`:n kautta, joten voit myös ohjata antureita päästä päähän prosessin sisällä ilman taustapalvelinta:
+`daq_sdk` viedään uudelleen `chloros_sdk`:n kautta, joten voit myös ohjata antureita päästä päähän prosessin sisällä ilman taustapalvelua:
 
-> **Saatavuus:**`daq_sdk` toimitetaan Chloros-työpöytäasennuksen mukana,**ei** PyPI-paketin mukana — `pip install chloros-sdk` tarjoaa sinulle `lattice_sdk`:n, mutta jättää `chloros_sdk.DAQ_AVAILABLE == False`:n pois. Tarkista tämä asetus ennen näiden luokkien käyttöä; pip-vain-isäntäkoneella ohjaa anturia sen sijaan [`connect_daq_sensor()`](#daq-sensor-sessions) kautta, joka ei vaadi paikallisia siirtokirjastoja.
+> **Saatavuus:**`daq_sdk` toimitetaan Chloros-työpöytäasennuksen mukana,**ei** PyPI-paketin mukana — `pip install chloros-sdk` tarjoaa sinulle `lattice_sdk`:n, mutta jättää `chloros_sdk.DAQ_AVAILABLE == False`:n pois. Tarkista tämä lippu ennen näiden luokkien käyttöä; pip-vain-isäntäkoneella ohjaa anturia sen sijaan [`connect_daq_sensor()`](#daq-sensor-sessions) -anturia, joka ei vaadi paikallisia siirtokirjastoja.
 
 ```python
 from chloros_sdk import DAQUSensor, DAQMSensor, DAQESensor, discover_all
@@ -1064,13 +1063,13 @@ sensor.start_streaming()
 sensor.stop()
 ```
 
-Käytä mieluummin smart-connect-polkua (`connect_daq_sensor`), kun haluat jakaa omistajuuden graafisen käyttöliittymän kanssa; käytä suoria luokkia päättömille skripteille, jotka omistavat anturin yksin.
+Käytä mieluummin älykästä-yhteyspolku (`connect_daq_sensor`), kun haluat jakaa omistajuuden graafisen käyttöliittymän kanssa; käytä suoria luokkia päättömille skripteille, jotka omistavat anturin yksin.
 
 ---
 
-## Projektiautomaatio — `ChlorosProject`
+## Projektin automatisointi — `ChlorosProject`
 
-Tallennettu Chloros-projekti on kansio, joka sisältää `cameras.json` + `sensors.json` + `project.json`. `open_project` lataa manifestin, ja `connect_all` kytkee kaikki tallennetut laitteet verkkoon niiden tallennetuilla asetuksilla — samassa laitteistotilassa kuin mitä graafinen käyttöliittymä tuottaisi.
+Tallennettu Chloros-projekti on kansio, joka sisältää `cameras.json` + `sensors.json` + `project.json`. `open_project` lataa manifestin, ja `connect_all` tuo kaikki tallennetut laitteet verkkoon niiden tallennetuilla asetuksilla — samassa laitteistotilassa kuin mitä graafinen käyttöliittymä tuottaisi.
 
 ### Yksinkertainen esimerkki
 
@@ -1109,17 +1108,17 @@ with chloros_sdk.open_project("/path/to/proj") as proj:
 
 | Metodi | Kuvaus |
 | --- | --- |
-| `connect_all(cameras=True, arrays=True, sensors=True, verbose=False, align=None)` | Etsi ja yhdistä kaikki tallennetut laitteet. Palauttaa luokkakohtaisen yhteysraportin. Käyttää käynnissä olevaa taustapalvelinta, jos sellainen kuuntelee osoitteessa `127.0.0.1:5000`; muussa tapauksessa siirtyy hiljaisesti suoraan (taustapalvelin-vapaaseen) `lattice_sdk`-laiteohjaukseen — se ei koskaan luo taustapalvelinta. |
+| `connect_all(cameras=True, arrays=True, sensors=True, verbose=False, align=None)` | Etsi ja yhdistä kaikki tallennetut laitteet. Palauttaaluokkakohtaisen yhteysraportin. Käyttää käynnissä olevaa taustaohjelmaa, kun sellainen kuuntelee osoitteessa `127.0.0.1:5000`; muussa tapauksessa siirtyy hiljaisesti suoraan (taustaohjelmatonta) `lattice_sdk`-laiteohjaukseen — se ei koskaan luo taustaohjelmaa. |
 | `disconnect_all()` | Katkaise kaikki yhteydet. |
 | `capture_all(output_dir=".")` | Yksi kehys jokaisesta kamerasta + matriisi + spektri jokaisesta anturista. |
-| `stream(camera, overlays=False, fps=10.0)` | Generaattori, joka tuottaa BGR-kehyksiä nimetystä kamerasta (tai matriisista). `overlays=False` on suora `lattice_sdk`-sieppaussilmukka (matriisit tuottavat `{serial: frame}`-sanakirjoja). `overlays=True` reititetään `ChlorosLocal.camera_stream()` → taustapalvelimen `/api/camera/<serial>/stream-annotated` MJPEG-syötteen kautta, jolloin kameran tallennettu `ui.overlay`-lohko välitetään kyselyparametreina. Vaatii taustapalvelintilan ja **itsenäisen kameran**: suoramoodikamera aiheuttaa virheen `RuntimeError` (taustapalvelu ei voi napata tämän prosessin omistamaa kameraa) ja taulukko aiheuttaa virheen `NotImplementedError` (yhdistää overlayt kamerakohtaisesti — lähettää jäsenen nimellä). Vastaava kertakäyttöinen toiminto: `CameraHandle.capture(annotated=True)`. |
+| `stream(camera, overlays=False, fps=10.0)` | Generaattori, joka tuottaa BGR-muotoisia `numpy`-kehyksiä nimetystä kamerasta (tai matriisista). `overlays=False` on suora `lattice_sdk`-kaappaussilmukka (matriisit tuottavat `{serial: frame}`-sanakirjoja). `overlays=True` reititetään `ChlorosLocal.camera_stream()`:n kautta → taustapalvelimen `/api/camera/<serial>/stream-annotated` MJPEG-syötteeseen, ja kameran tallennettu `ui.overlay`-lohko välitetään kyselyparametreina. Vaatii taustapalvelintilan ja **itsenäisen kameran**: suoramoodikamera aiheuttaa virheen `RuntimeError` (taustapalvelu ei voi kaapata tämän prosessin omistamaa kameraa) ja taulukko aiheuttaa virheen `NotImplementedError` (yhdistää komposiitit kamerakohtaisesti — suoratoistaa jäsenen nimen perusteella). Kertakäyttöinen vastine: `CameraHandle.capture(annotated=True)`. |
 | `align_arrays(align=True, verbose=False)` | Suorita kohdistus jokaiselle tällä hetkellä kytketylle taulukolle. |
-| `process(mode="parallel", wait=True, progress_callback=None, poll_interval=2.0)` | Suorita kalibrointi-/indeksointiprosessi projektinkuviin (käärii `ChlorosLocal.process`:n; nämä neljä ovat **ainoat** hyväksytyt avainsanat — `indices=` jne. aiheuttavat virheen `TypeError`; aseta indeksit komennolla `ChlorosLocal.configure()`). Rakentaa viiveellä `ChlorosLocal()`, joka käynnistää taustaprosessin automaattisesti. |
+| `process(mode="parallel", wait=True, progress_callback=None, poll_interval=2.0)` | Suorita kalibrointi-/indeksointiprosessi projektin kuville (wraps `ChlorosLocal.process`; nämä neljä ovat **ainoat** hyväksytyt avainsanat — `indices=` jne. aiheuttaa virheen `TypeError`; aseta indeksit komennolla `ChlorosLocal.configure()`). Muodostaa viiveellä `ChlorosLocal()`:n, joka käynnistää taustaprosessin automaattisesti. |
 
-Attribuutit:
-- `proj.cameras` — `Dict[str, CameraHandle]`, jonka avain on nimi JA sarjanumero.
+Ominaisuudet:
+- `proj.cameras` — `Dict[str, CameraHandle]`, avaintena nimi JA sarjanumero.
 - `proj.arrays` — `Dict[str, ArrayHandle]`, jonka avain on nimi JA array_id.
-- `proj.sensors` — `Dict[str, SensorHandle]`, jonka avain on nimi JA slot_id.
+- `proj.sensors` — `Dict[str, SensorHandle]`, indeksoitu nimen JA slot_id:n perusteella.
 - `proj.config` — `project.json["config"]`-sanakirja.
 
 ### `CameraHandle`
@@ -1148,49 +1147,49 @@ for arr in cam.frame_stream(processing="debayered", fps=5, count=100):
 ```
 
 **Käsittelytasot.** `capture()`, `grab()` ja `frame_stream()` ottavat kaikki vastaan saman `processing`
--tunnusta, ja ketju on kumulatiivinen — jokainen taso suorittaa kaikki sitä ylemmät tasot:
+-tunnuksen, ja ketju on kumulatiivinen — jokainen taso suorittaa kaikki sitä ylempänä olevat:
 
 | Taso | Lähtö | Huomautukset |
 | --- | --- | --- |
-| `raw` | 1-kanavainen Bayer, anturin oma | Ei demosaicia. Päällekkäiskuvia ei ole käytettävissä tällä tasolla. |
-| `debayered` | 3-kanavainen BGR (**oletus**) | Bilineaarinen demosaikointi. Ainoa taso, joka toimii ilman backend-tilaa. |
-| `radiance` | float32, W/m²/sr/nm | Täydellinen radiometrinen ketju: demosaikki + 3×3-sekoituksen purku (multispec) + DSNU + tasokenttäkorjaus + NIST-asteikko, jossa valotus × vahvistus on jaettu pois, jotta arvot ovat absoluuttisia. |
-| `reflectance` | uint16, 32768 = 1,0 | Säteilysuhde jaettuna alaspäin suuntautuvalla säteilyvoimakkuudella (ρ = π·L/E). Vaatii DLS/DAQ-lukeman — katso huomautus alla. |
+| `raw` | 1-kanavainen Bayer, anturin natiivi | Ei demosaicia. Päällekkäisyyksiä ei ole käytettävissä tällä tasolla. |
+| `debayered` | 3-kanavainen BGR (**oletus**) | Bilineaarinen demosaikki. Ainoa taso, joka toimii ilman backend-tilaa. |
+| `radiance` | float32, W/m²/sr/nm | Täydellinen radiometrinen ketju: demosaikki + 3×3-sekoituksen purku (multispec) + DSNU + tasauskorjaus + NIST-asteikko, jossa valotus × vahvistus on jaettu pois, jotta arvot ovat absoluuttisia. |
+| `reflectance` | uint16, 32768 = 1,0 | Säteilyvoimakkuus jaettuna alaspäin suuntautuvalla säteilyvoimakkuudella (ρ = π·L/E). Vaatii DLS/DAQ-lukeman — katso alla oleva huomautus. |
 | `display` | 8-bittinen sRGB-tyyppinen | GUI-vastaava renderointi: CCM + valkotasapaino + gamma kameran aktiivisen väriprofiilin kautta. |
 
 Mikä tahansa muu kuin `debayered` vaatii taustatoimintatilaa; suoratoimintatilan kamera nostaa
-`NotImplementedError`:n. `reflectance` vaatii käyttökelpoisen alaspäin suuntautuvan lukeman — kehyksen päätepiste vetää
-kootun DAQ:n automaattisesti kameran DLS-paikkaan, mutta ilman sidottua DAQ:ta ketju hylkää
-heijastavuuslähtöä ja merkitsee rehellisesti alennuksen palautettaviin metatietoihin sen sijaan, että
-palauttaa heikompaa tuotetta.
+`NotImplementedError`. `reflectance` vaatii käyttökelpoisen alaspäin suuntautuvan säteilyn lukeman — kehyksen päätepiste vetää
+yhdistetyn DAQ:n automaattisesti kameran DLS-paikkaan, mutta ilman sidottua DAQ:ta ketju hylkää
+heijastavuuslähdön ja merkitsee alennuksen rehellisesti palautettaviin metatietoihin sen sijaan, että
+palauttaisi hiljaisesti heikomman tuloksen.
 
-> **Heijastavuuden DN-asteikko — älä koodaa sitä kiinteästi.** LATTICE-heijastavuus käyttää `32768` = ρ 1,0 ja merkitsee
-> XMP `Chloros:PixelScale=32768`; Survey3 heijastavuus käyttää `65535` = ρ 1,0 eikä sisällä
-> `Chloros:*`-tunnisteita. Lue tunniste ja jaa se sillä. Se on määritelty uint16-alueella, joten se pysyy
-> `32768`:na kaikissa formaateissa, joissa mittakaava muuttuu (16-bittinen TIFF, 8-bittinen PNG /JPG, 32-bittinen prosentti) — normalisoi
-> tallennettu dtype ensin takaisin uint16:ksi (×257 8-bittisestä, ×65535 float-tyypistä). Ainoa poikkeus:
-> 8-bittisestä lähteestä peräisin oleva tallenne, joka on kirjoitettu muodossa 8-bittisenä TIFF *rajataan*, ei skaalata uudelleen, joten sitä ei kuvata millään skaalalla
-> — Chloros jättää siinä tapauksessa `PixelScale`:n ja MicaSense-tupelin kokonaan pois. Käsittele puuttuvaa
-> tunnistetta LATTICE-heijastustiedostossa ”ei kelvollista skaalaa” -tilanteena, ei oletusarvona.
+> **Heijastavuuden DN-asteikko — älä koodaa sitä kiinteästi.** LATTICE-heijastavuus käyttää `32768` = ρ 1.0 ja merkitsee
+> XMP-tunnisteeseen `Chloros:PixelScale=32768`; Survey3-heijastavuus käyttää `65535` = ρ 1,0 eikä sisällä
+> `Chloros:*`-tunnisteita. Lue tunniste ja jaa arvo sillä. Se on määritelty uint16-alueella, joten se pysyy
+> `32768`:na kaikissa formaateissa, jotka skaalaavat uudelleen (16-bittinen TIFF, 8-bittinen PNG /JPG, 32-bittinen prosentti) — normalisoi
+> tallennettu dtype ensin takaisin uint16:ksi (×257 8-bittisestä, ×65535 floatista). Ainoa poikkeus:
+> 8-bittisenä lähteenä tallennettu kuva, joka on kirjoitettu muodossa 8-bittinen TIFF, *rajataan*, sitä ei skaalata uudelleen, joten mitään skaalaa ei voida määrittää
+> sille — Chloros jättää tällöin `PixelScale`:n ja MicaSense-tupleen kokonaan pois. Käsittele puuttuvaa
+> LATTICE-heijastustiedostossa puuttuvaa tunnistetta ”ei kelvollista mittakaavaa” eikä oletusarvona.
 
-> **EXIF-tiedot siirretään vientiin.** `process()` kopioi lähdekuvan GPS-lohkon
-> **ja sen ExifIFD:n** jokaiseen tuotteeseen, joten vienti sisältää `FocalLength`:n, `FNumber`:n,
-> `ExposureTime`:n, `ISO`:n, `DateTimeOriginal` ja `CameraSerialNumber` sekä
-> georeferenssitiedot. `FocalLength` on se, mistä Pix4D laskee maanpinnan näytteenottovälin — ilman sitä
-> rekonstruktio perustuu täysin väärään mittakaavaan (eräässä mitatussa tapauksessa 411 metrin kokoinen alue
-> muuttui 47,8 kilometrin alueeksi). Kopio ei ole tarkoituksella `-all:all`: IFD0:n rakenteelliset tunnisteet häiritsevät
-> LATTICE-tulostetta, ja `ExifImageWidth`/`Height` on jätetty pois, koska ne kuvaavat lähteen
-> tallennusta eikä vietyä rasteria.
+> **EXIF-tiedot siirretään vientiin.** `process()` kopioi lähdekuvauksen GPS-lohkon
+> **ja sen ExifIFD:n** jokaiseen tuotteeseen, joten vienti sisältää `FocalLength`:n, `FNumber`,
+> `ExposureTime`, `ISO`, `DateTimeOriginal` ja `CameraSerialNumber` sekä
+> georeferenssin. `FocalLength` on se, jonka perusteella Pix4D laskee maaperän näytevälin – ilman sitä
+> rekonstruktio päätyy täysin virheelliseen mittakaavaan (eräässä mitatussa tapauksessa 411 m:n alue
+> muuttui 47,8 km:n alueeksi). Kopio ei ole tarkoituksella `-all:all`: IFD0:n rakenteelliset tunnisteet häiritsevät
+> LATTICE-tulostetta, ja `ExifImageWidth`/`Height` on jätetty pois, koska ne kuvaavat lähde
+> -kuvausta eikä vietyä rasteria.
 
 Kuvausvaiheen alilippuja (koskevat radiometrisiä tasoja — `radiance`, `reflectance`, `display`):
 
 | Lippu | Oletus | Merkitys |
 | --- | --- | --- |
-| `apply_calibration` | `True` | DSNU + tasauskuva + 3x3-sekoituksen erottelu + NIST-radiometrinen asteikko. |
-| `apply_white_balance` | `True` | WB LUT. DLS-tuki, kun DAQ on liitetty kameraan. |
+| `apply_calibration` | `True` | DSNU + tasokenttä + 3x3-sekoituksen purku + NIST-radiometrinen asteikko. |
+| `apply_white_balance` | `True` | WB LUT. Tukee DLS:ää, kun DAQ on liitetty kameraan. |
 | `apply_index` | `False` | Kasvillisuusindeksin arviointi. |
-| `index_expression` | `None` | Kaavan ohitus. Tyhjätyhjä → indeksi otetaan käyttöön automaattisesti. |
-| `annotated` | `False` | GUI-koristeiden (zebra/ruudukko/peaking) päällekkäisyys. Ei käytettävissä `raw`:lle. |
+| `index_expression` | `None` | Ohituskaava. Ei tyhjä → ottaa indeksin automaattisesti käyttöön. |
+| `annotated` | `False` | Käyttöliittymän koristeiden peitto (zebra/ruudukko/huippuarvot). Ei käytettävissä `raw`:lle. |
 
 ### `ArrayHandle`
 
@@ -1233,12 +1232,12 @@ print(counts)  # frames written per serial
 
 > **Palautustyyppi on `CapturePathMap`, ei `Dict[str, str]`.**
 > `chloros_sdk.CapturePathMap` on `Dict[str, Union[str, List[str]]]`: yksitasoinen
-> `processing` antaa jokaiselle sarjanumerolle yhden polun, kun taas monitasoinen (`"all"`, tai
-> eksplisiittinen `levels`-luettelo) antaa sille **järjestetyn luettelon** kaikista kyseiselle
-> kameralle tallennetuista tuotteista. Yhdistetty reaaliaikainen komposiitti, jos sellainen olisi suoratoistossa, saapuu erillisen
-> `"combined"`-avaimen alle eikä sarjanimikkeen alle. Koodi, joka olettaa `str`:n, kaatuu
-> luettelomuodossa ilman, että tyyppitarkistaja ilmoittaisi virheestä — merkinnän mukaan `Dict[str, str]`
-> vielä jonkin aikaa luettelo-muodon julkaisun jälkeen, minkä vuoksi alias on olemassa. Normalisoi
+> `processing` antaa jokaiselle sarjanumerolle yhden polun, kun taas monitasoinen (`"all"` tai
+> eksplisiittinen `levels`-lista) antaa sille **järjestetyn luettelon** kaikista kyseiselle
+> kameralle tallennetuista tuotteista. Suora yhdistetty komposiitti, jos sellainen olisi suoratoistossa, saapuu ylimääräisen
+> `"combined"`-avaimen alle eikä sarjanumeron alle. Koodi, joka olettaa `str`:n, kaatuu
+> luettelomuodossa ilman, että tyyppitarkistaja vastustaa sitä — merkinnässä sanottiin `Dict[str, str]`
+> jonkin aikaa luettelomuodon julkaisun jälkeen, minkä vuoksi alias on olemassa. Normalisoi
 > kun haluat tasaisen muodon:
 >
 > ```python
@@ -1249,7 +1248,7 @@ print(counts)  # frames written per serial
 
 ### Taulukon kohdistus
 
-`ArrayHandle` paljastaa koko kohdistuspinnan. Profiilit ovat oletusarvoisesti vain istuntokohtaisia — kutsu `export_alignment()` nimenomaisesti, jos haluat tallentaa ne pysyvästi.
+`ArrayHandle` paljastaa koko kohdistuspinnan. Profiilit ovat oletuksena vain istuntokohtaisia — kutsu `export_alignment()` nimenomaisesti, jotta ne tallennetaan pysyvästi.
 
 ```python
 from chloros_sdk import AlignmentSpec
@@ -1300,7 +1299,7 @@ proj.connect_all(align={
 })
 ```
 
-Käytetään oletuksena `project.json["config"]["auto_align_on_connect"]`:ää, jos asetusta ei ole määritetty.
+Jos asetusta ei määritetä, käytetään oletusarvoisesti `project.json["config"]["auto_align_on_connect"]`.
 
 ### `SensorHandle`
 
@@ -1312,9 +1311,9 @@ spectrum = proj.sensors["Sky"].read()
 
 ---
 
-## Suora laitteisto (ilman taustajärjestelmää)
+## Suora laitteisto (ilman taustapalvelua)
 
-Kun haluat täysin riippumattoman ratkaisun taustajärjestelmästä (CI, päättömät robotit, sulautetut järjestelmät), tuo `lattice_sdk` ja `daq_sdk` suoraan — molemmat viedään uudelleen `chloros_sdk`:n kautta. Suojaa `CAMERA_AVAILABLE` / `DAQ_AVAILABLE`: `lattice_sdk` on PyPI-paketissa (mutta vaatii Arena-SDK-ajoympäristön), kun taas `daq_sdk` toimitetaan vain työpöytäasennuksen mukana.
+Kun haluat täysin riippumattoman ratkaisun taustapalvelusta (CI, päättömät robotit, sulautetut laitteet), tuo `lattice_sdk` ja `daq_sdk` suoraan — molemmat viedään uudelleen `chloros_sdk`:n kautta. Suojaus `CAMERA_AVAILABLE` / `DAQ_AVAILABLE`: `lattice_sdk` on PyPI-paketissa (mutta vaatii Arena-SDK-ajoympäristön), kun taas `daq_sdk` toimitetaan vain työpöytäasennuksen mukana.
 
 ```python
 from chloros_sdk import (
@@ -1341,15 +1340,15 @@ with LatticeCamera(serial="213800234", settings=settings) as cam:
 
 ##### Esiasetukset ja laukaisija
 
-Kolme neljästä esiasetuksesta **free-run**: kamera valottaa jatkuvasti ja
+Neljästä esiasetuksesta kolme toimii **vapaakäynnillä**: kamera valottaa jatkuvasti ja
 `capture()` palauttaa seuraavan kehyksen. `triggered` on poikkeus — se virittää
-kameran odottamaan laitteistoreunaa rivillä 2, joten se ei tallenna mitään ennen kuin sellainen saapuu.
+kameran odottamaan laitteistoreunaa linjalla 2, joten se ei tallenna mitään ennen kuin sellainen saapuu.
 
 | Esiasetus | Laukaisija | Käytä, kun |
 | --- | --- | --- |
 | `default` | vapaakäynti | yleiskäyttö |
 | `high_speed` | vapaakäynti | 8-bittinen, 60 fps:n rajoitus, lyhyt valotusaika |
-| `high_quality` | vapaakäyttö | 12-bittinen, ei fps-rajoitusta — tavallinen valinta still-kuville |
+| `high_quality` | vapaa toiminta | 12-bittinen, ei kuvataajuusrajoitusta — tavallinen valinta still-kuville |
 | `triggered` | **valmiustila, linja 2** | kamera on kytketty M8-synkronointikaapeliin ja jokin muu laukaisee sen |
 
 Jos valitset `triggered` (tai asetat itse `trigger_mode="On"`) ilman, että mikään
@@ -1357,7 +1356,7 @@ ohjaa linjaa 2, jokainen `capture()` aikakatkaistaan — oikein, koska pyysit
 kameraa odottamaan. SDK selittää tämän, kun se tapahtuu; katso
 [SC_ERR_TIMEOUT tallennuksen aikana](#direct-hardware-backend-free).
 
-> **Huomautus — &quot;GVSP probe&quot; / `SC_ERR_TIMEOUT -1011`-viestit yhteyden muodostamisen yhteydessä eivät ole virheitä.**&gt; Yhteyden muodostamisen yhteydessä SDK yrittää neuvotella**jumbo-kehyksistä** (9000 tavun GVSP-paketit) suuremman siirtonopeuden saavuttamiseksi. Suoralla pisteestä pisteeseen -verkkokorttiliitännällä (esim.-paikallisessa `169.254.x.x`-osoitteessa) verkko ei yleensä kykene siirtämään jumbo-kehyksiä, joten tämä koe aikakatkaistaan ja lokiin kirjataan esimerkiksi seuraavanlaisia viestejä:
+> **Huomautus — Yhteyden muodostamisen yhteydessä näkyvät ”GVSP probe” / `SC_ERR_TIMEOUT -1011`-viestit eivät ole virheitä.**&gt; Yhteyden muodostamisen yhteydessä SDK yrittää neuvotella**jumbo-kehyksistä** (9000 tavun GVSP-paketit) suuremman läpimenokapasiteetin saavuttamiseksi. Suoralla pisteestä pisteeseen -verkkokorttilinkillä (es.esim. link-local-osoite `169.254.x.x`) verkko ei yleensä pysty siirtämään jumbo-kehyksiä, joten tämä koe aikakatkaistaan ja lokiin kirjataan esimerkiksi seuraavanlaisia rivejä:
 >
 > ```
 > [Network] GVSP probe: unexpected error (TimeoutError: ... SC_ERR_TIMEOUT -1011)
@@ -1365,15 +1364,15 @@ kameraa odottamaan. SDK selittää tämän, kun se tapahtuu; katso
 > [Network] GVSP packet size: 1500 bytes (standard)
 > ```
 >
-> Tämä on **suunniteltu varajärjestelmä**: SDK palaa automaattisesti tavallisiin 1500-tavuisia paketteja, ja kamera jatkaa yhteyden muodostamista normaalisti (seuraavat `[chunk-enable …]`-rivit ovat osa normaalia yhteydenmuodostussekvenssiä). Kaappaus toimii edelleen.
+> Tämä on **suunniteltu varajärjestelmä**: SDK siirtyy automaattisesti takaisin tavallisiin 1500 tavun paketteihin, ja kamera jatkaa yhteyden muodostamista normaalisti (seuraavat `[chunk-enable …]`-rivit ovat osa normaalia yhteydenmuodostussekvenssiä). Tallennus toimii edelleen.
 >
-> Voit ohittaa tämän testin, mutta **se ei ole pelkkä lokitiedostojen vaimentaja — se poistaa jumbo-kehykset käytöstä.** Kamera vastaa Don&#x27;t-Fragment-ping-kyselyihin vain enintään 1500 tavun paketeilla riippumatta siitä, kuinka hyvä verkko on, joten pelkällä ping-testillä ei voi koskaan havaita jumbo-kehyksiä; vain tämä testi pystyy siihen. Jos poistat sen käytöstä, kamera käyttää vakiokokoisia 1500-tavuisia paketteja ikuisesti, missä tahansa verkossa:
+> Voit ohittaa tämän testin, mutta **se ei ole pelkkä lokitiedostojen vaimennin — se poistaa jumbo-kehykset käytöstä.** Kamera vastaa Don&#x27;t-Fragment-ping-kyselyihin vain 1500 tavun kokoisina riippumatta siitä, kuinka hyvä verkko on, joten pelkällä ping-testillä ei voi koskaan havaita jumbo-kehyksiä; tämä testi on ainoa keino siihen. Poista se käytöstä, niin kamera käyttää ikuisesti tavallisia 1500 tavun paketteja missä tahansa verkossa:
 >
 > ```bash
 > CHLOROS_GVSP_PROBE_FALLBACK=0   # gives up jumbo — see the warning it prints
 > ```
 >
-> Kannattaa tehdä vain verkossa, josta *tiedät*, ettei se kestä jumbo-paketteja, missä se säästää noin sekunnin yhteyden muodostusaikaa kameraa kohti. Koska kyseessä on todellinen kompromissi eikä pelkkä kosmeettinen muutos, SDK ilmoittaa nyt asiasta, kun käytät sitä:
+> Tämä kannattaa vain verkossa, josta *tiedät* ettei se tue jumbo-paketteja, jolloin se säästää noin sekunnin yhteyden muodostusaikaa kameraa kohti. Koska kyseessä on todellinen kompromissi eikä pelkkä kosmeettinen muutos, SDK ilmoittaa nyt asiasta, kun käytät tätä asetusta:
 >
 > ```
 > [Network] ⚠️ GVSP probe disabled (CHLOROS_GVSP_PROBE_FALLBACK=0) — staying at
@@ -1381,11 +1380,11 @@ kameraa odottamaan. SDK selittää tämän, kun se tapahtuu; katso
 > up ~1.45x wire ceiling. Unset the variable to test for jumbo.
 > ```
 >
-> **Jätä se rauhaan, ellet ole syytä muuttaa sitä.** Jos ominaisuus jätetään käyttöön, jokainen yhteyden muodostus mittaa uudelleen käytössä olevan verkon: kytke kamera jumbo-paketteja tukevaan kytkimeen, ja seuraava yhteyden muodostus tunnistaa jumbo-paketit itsestään, ilman mitään konfigurointia tai uudelleenkäynnistystä.
+> **Jätä se rauhaan, ellet ole siihen syytä.** Jos se jätetään käyttöön, jokainen yhteyden muodostus mittaa uudelleen käytettävissä olevan verkon: kytke kamera jumbo-paketteja tukevaan kytkimeen, ja seuraava yhteyden muodostus tunnistaa jumbo-paketit automaattisesti ilman erillisiä asetuksia tai uudelleenkäynnistystä.
 >
-> Jos *haluat* jumbo-läpimenon, ota jumbo käyttöön päästä päähän (NIC MTU 9000 + kytkin, joka välittää ne), tai kiinnitä se asetuksella `CHLOROS_GVSP_PACKET_SIZE_FORCE=9000`, kun tiedät, että linkki tukee sitä — vaikka suosittelen komentoa kohti määritettävää `CHLOROS_GVSP_PACKET_SIZE_FORCE=9000 python …`-asetusta pysyvän asetuksen sijaan, sillä kiinteästi määritetty koko ohittaa testauksen ja estää sopeutumisen edessä olevaan verkkoon. **Jokaisen** reitillä olevan laitteen on välitettävä jumbo-paketteja — mukaan lukien kaikki PoE-jakajat tai -injektorit, jotka ovat tavallisin syy siihen, että muuten jumbo-paketteja tukeva kokoonpano ei pysty välittämään niitä.
+> Jos *haluat* jumbo-tiedonsiirtonopeuden, ota jumbo käyttöön päästä päähän (NIC MTU 9000 + kytkin, joka läpäisee ne), tai kiinnitä se komennolla `CHLOROS_GVSP_PACKET_SIZE_FORCE=9000`, kun tiedät, että linkki tukee sitä — vaikka onkin suositeltavampaa käyttää-komentoa `CHLOROS_GVSP_PACKET_SIZE_FORCE=9000 python …` pysyvän asetuksen sijaan, sillä kiinteästi asetettu koko ohittaa testauksen ja estää laitteen sopeutumisen edessä olevaan verkkoon. **Jokaisen** reitillä olevan laitteen on läpäistävä jumbo-paketteja – mukaan lukien mahdolliset PoE-jakajat tai -injektorit, jotka ovat tavallisin syy siihen, että muuten jumbo-paketteja tukeva kokoonpano ei pysty niitä siirtämään.
 
-> **`SC_ERR_TIMEOUT -1011` `capture()`- tai `grab*()`-tarkistuksen aikana on eri ongelma — se on todellinen virhe.**&gt; Yllä oleva huomautus koskee vain**connect-time-probe**-toiminnon kirjaamaa `-1011`-virhettä. Sama virhe, joka ilmenee**capture**-toiminnossa, tarkoittaa, että kamera on kytkeytynyt kunnolla, mutta ei lähetä kuvia:
+> **`SC_ERR_TIMEOUT -1011` `capture()`:n / `grab*()`:n aikana on eri ongelma — kyseessä on todellinen virhe.**&gt; Yllä oleva huomautus koskee vain**connect-time probe**-tarkistuksen kirjaamaa `-1011`-virhettä. Sama virhe, joka ilmenee**capture**-tarkistuksessa, tarkoittaa, että kamera on kytkeytynyt kunnolla, mutta se ei lähetä kuvia:
 >
 > ```
 > File ".../lattice_sdk/camera.py", line ..., in grab_frame_with_metadata
@@ -1393,13 +1392,13 @@ kameraa odottamaan. SDK selittää tämän, kun se tapahtuu; katso
 > lattice_sdk.exceptions.CaptureError: Capture failed: ... SC_ERR_TIMEOUT -1011
 > ```
 >
-> Paljastava tekijä on kamera, jonka *ohjaus*kanava on kunnossa — tunnistus toimii, asetukset ja `[chunk-enable …]`-kirjoitukset onnistuvat kaikki — mutta *jokainen* kehys ylittää aikarajan.
+> Selvä merkki on kamera, jonka *ohjaus*kanava on kunnossa — tunnistus toimii, asetukset ja `[chunk-enable …]`-kirjoitukset onnistuvat kaikki — mutta *jokainen* kehys ylittää aikarajan.
 >
-> **Tavallisin syy on, että kamera on asetettu laitteistolaukaisulle.** Kun virheet `trigger_mode="On"` ja `trigger_source="Line2"` ilmenevät, kamera ei lähetä mitään, ennen kuin M8-synkronointikaapeliin saapuu sähköinen reuna. Jos kyseistä linjaa ohjaavaa kaapelia ei ole, jokainen kuvanotto odottaa ikuisesti. Kamera ei ole rikki ja verkko toimii kunnolla — se toimii täsmälleen niin kuin sille on määrätty.
+> **Yleisin syy on, että kamera on asetettu laitteistolähtöön.** Virheiden `trigger_mode="On"` ja `trigger_source="Line2"` tapauksessa kamera ei lähetä mitään, ennen kuin M8-synkronointikaapelissa ilmenee sähköinen reuna. Jos kyseistä linjaa ei ohjaa mikään kaapeli, jokainen kuvanotto odottaa ikuisesti. Kamera ei ole rikki ja verkko toimii kunnossa — se toimii täsmälleen niin kuin sille on käsketty.
 >
-> `CameraSettings()` ja `default` / `high_speed` / `high_quality`-esiasetukset sallivat vapaan toiminnan, ja kuvausyritys, jonka aikakatkaisu tapahtuu laitteen ollessa valmiustilassa, selittää tilanteen sen sijaan, että tulostettaisiin pelkkä `-1011`. `PRESETS["triggered"]` aktivoi Line2:n, kuten on suunniteltu.
+> `CameraSettings()` sekä esiasetukset `default` / `high_speed` / `high_quality` toimivat vapaasti-toiminto, ja kuvanotto, joka aikakatkaistaan valmiustilassa, selittää tilanteen sen sijaan, että tulostaisi pelkän `-1011`-koodin. `PRESETS["triggered"]` asettaa Line2:n valmiustilaan, kuten on suunniteltu.
 >
-> Kameran pakottaminen vapaakäyntiin:
+> Pakota mikä tahansa kamera vapaakäyttöön:
 >
 > ```python
 > settings = PRESETS["high_quality"]
@@ -1408,19 +1407,19 @@ kameraa odottamaan. SDK selittää tämän, kun se tapahtuu; katso
 >
 > Jos aikakatkaisu tapahtuu edelleen komennolla `trigger_mode="Off"`, kamera ei todellakaan lähetä dataa — lähetä meille loki ja komento `ip link show`.
 
-#### Väriprofiilit (RGB-reaaliaikainen esikatselu) — `set_color_profile`
+#### Väriprofiilit (RGB live-esikatselu) — `set_color_profile`
 
-`LatticeCamera.set_color_profile(profile, custom_cct_k=None)` valitsee näytön väriprofiilin **reaaliaikaiselle esikatselulle** RGB-kameroissa (multispec-kamerat eivät ota asetusta huomioon):
+`LatticeCamera.set_color_profile(profile, custom_cct_k=None)` valitsee näyttöprofiilin **reaaliaikaiselle esikatselulle** RGB-kameroissa (multispec-kamerat eivät ota tätä asetusta huomioon):
 
 | Profiili | Merkitys |
 | --- | --- |
 | `raw` | Ohita radiometrinen ketju kokonaan. |
-| `linear` | DSNU + tasoitus + valkotasapaino, ei CCM:ää, ei gammaa. |
-| `natural` | Lineaarinen + mitattu CCM + sRGB-gamma, vain edullisella viimeistelyllä (kromaattinen tasoitus + korostusten desaturaatio) — realistinen oletusasetus. |
-| `enhanced` | `natural` sekä täysi hub-parity-viimeistely (reunojen tasoitus, värikylläisyys, CLAHE-paikalliskontrasti). Rikkaampi ulkoasu, jonka **viimeistelykustannus kehystä kohti on noin kaksinkertainen**, joten LIVE-kuvataajuus on alhaisempi. |
-| `custom_temp` | `natural`, mutta valkotasapaino kiinnitetty `custom_cct_k` Kelviniin (DLS ohitetaan; rajoitettu 2000–10000 K:n välille backend-puolella). |
+| `linear` | DSNU + tasainen + valkotasapaino, ei CCM:ää, ei gammaa. |
+| `natural` | Lineaarinen + mitattu CCM + sRGB-gamma, vain edullisella viimeistelyllä (kromaattinen tasoitus + kirkkaiden alueiden desaturaatio) — realistinen oletusasetus. |
+| `enhanced` | `natural` sekä täysi hub-parity-viimeistely (reunojen tasoitus, eloisuus, CLAHE-paikalliskontrasti). Rikkaampi ulkoasu noin **kaksinkertainen kuvakohtainen käsittelykustannus**, joten LIVE-kuvataajuus on alhaisempi. |
+| `custom_temp` | `natural`, mutta valkotasapaino on kiinnitetty `custom_cct_k` Kelviniin (DLS ohitetaan; rajoitettu arvoihin 2000–10000 K backend-puolella). |
 
-Profiili on **vain reaaliaikaisessa esikatselussa** nopeus-/ulkoasukytkin: tallennetut kuvat saavat aina täyden ja rikkaan viimeistelyn valitusta profiilista riippumatta, joten `natural`:n valitseminen kehysajan säästämiseksi ei heikennä levylle tallennettavan materiaalin laatua. Tuntematon profiili nostaa `ValueError`:n arvoa; kun chloros-taustapalvelin on käytettävissä, muutos lähetetään myös sinne POST-pyynnöllä, jotta seuraava esikatselukehys heijastaa sitä (direct-SDK-käyttäjät, joilla ei ole taustapalvelinta, saavat silti asetusten muutoksen).
+Profiili on **vain-esikatseluun rajoitettu** nopeus-/ulkoasensäädin: tallennetut kuvat saavat aina täyden ja rikkaan viimeistelyn valitusta profiilista riippumatta, joten `natural`:n valitseminen kehysajan säästämiseksi ei heikennä levylle tallennettavan materiaalin laatua. Tuntematon profiili nostaa `ValueError`; kun chloros-taustapalvelu on käytettävissä, muutos lähetetään myös sille, jolloin seuraava esikatselukehys heijastaa sitä (direct-SDK-käyttäjät, joilla ei ole taustapalvelua, saavat silti asetusten muutoksen).
 
 ```python
 with LatticeCamera(serial="214701292") as cam:   # RGB cam
@@ -1428,9 +1427,9 @@ with LatticeCamera(serial="214701292") as cam:   # RGB cam
     cam.set_color_profile("custom_temp", custom_cct_k=5600)
 ```
 
-#### Mono (M3M)-kamerat ja `Calibration`
+#### Mono (M3M) Kamerat ja `Calibration`
 
-Mono **M3M**-kamera (`M3M-<lens>-F<wavelength>`) on yksikaistainen: yksi harmaasävyinen taso, ei Bayer-mosaiikkia, ei 3×3-spektrikrosstalk-matriisia. `Calibration` tunnistaa sen ja paljastaa `is_mono`-lipun. Heijastavuus pätee edelleen kaistakohtaisena radiometrisena karttana (sekoituksen purkaminen tapahtuu identiteettimatriisin avulla), mutta yksittäisen kameran monikaistamatematiikka tuottaa mielekkäitä tuloksia sen sijaan, että se palauttaisi hölynpölyä:
+Mono **M3M**-kamera (`M3M-<lens>-F<wavelength>`) on yksikaistainen: yksi harmaasävyinen taso, ei Bayer-mosaiikkia, ei 3×3-spektrikrosstalk-matriisia. `Calibration` tunnistaa sen ja paljastaa `is_mono`-lipun. Heijastavuus pätee edelleen kaistakohtaisena radiometrisena karttana (sekoituksen purkaminen on identiteettimatriisi), mutta yksikaistaisen kameran monikaistamatematiikka tuottaa mielekkäitä tuloksia sen sijaan, että se palauttaisi hölynpölyä:
 
 ```python
 from chloros_sdk import Calibration, CalibrationError
@@ -1446,9 +1445,9 @@ except CalibrationError as e:
     print(e)   # "...single-band mono (M3M) camera. Combine multiple..."
 ```
 
-Vegetaatioindeksin rakentamiseksi monokromaattisella laitteistolla yhdistetään useita eri aallonpituuksilla toimivia M3M-kameroita kohdistetuksi monikaistapinoksi (katso [Array Alignment](#array-alignment)) ja laske indeksi kyseisen pinoon perustuen yhden kameran sijaan.
+Voit rakentaa kasvillisuusindeksin monokromaattisella laitteistolla yhdistämällä useita eri aallonpituuksilla toimivia M3M-kameroita kohdistetuksi monikaistapinoksi (katso [Array Alignment](#array-alignment)) ja laskemalla indeksin koko pinon perusteella yhden kameran sijaan.
 
-DAQ-suoratila:
+DAQ-suoramoodi:
 
 ```python
 from chloros_sdk import (
@@ -1468,9 +1467,9 @@ sensor.start_streaming()
 sensor.stop()
 ```
 
-> **`apply_sensor_settings` hyväksytyt avaimet**— tarkalleen `integration_time_ms`, `frame_avg`, `ae_enabled`, `sunshine_diffuser_installed` (DAQ-E; käytöstä poistettu, korvattu `cap_id`:llä), `filter_model` (DAQ-M), ja `cap_id` (kaikki DAQ-tyypit; `None`/`""`/`"none"` = pelkkä anturi, ilman kondensaattorikorjausta). Tuntemattomat avaimet**ohitetaan huomaamatta** — esim.esim. `{"integration_time": 64}` ei tee mitään (sen on oltava `integration_time_ms`). Palauttaa `{"applied": [...], "errors": {...}}` eikä koskaan aiheuta poikkeusta.
+> **`apply_sensor_settings` hyväksytyt avaimet**— tarkalleen `integration_time_ms`, `frame_avg`, `ae_enabled`, `sunshine_diffuser_installed` (DAQ-E; käytöstä poistettu, korvattu koodilla `cap_id`), `filter_model` (DAQ-M)ja `cap_id` (kaikki DAQ-tyypit; `None`/`""`/`"none"` = pelkkä anturi, ilman korkkikorjausta). Tuntemattomat avaimet**ohitetaan huomaamatta** — esim.esim. `{"integration_time": 64}` ei tee mitään (sen on oltava `integration_time_ms`). Palauttaa `{"applied": [...], "errors": {...}}`:n eikä aiheuta poikkeusta.
 
-`chloros_sdk` vievain yllä käytetyn ytimen pinnan. Koko `daq_sdk`-julkinen API (22 nimeä) lisää seuraavat — tuo ne suoraan `daq_sdk`:stä:
+`chloros_sdk` vievain yllä käytetyn ydinpinnan. Täydellinen `daq_sdk`-julkinen API (22 nimeä) lisää seuraavat — tuo ne suoraan `daq_sdk`:sta:
 
 ```python
 from daq_sdk import (
@@ -1488,7 +1487,7 @@ from daq_sdk import (
 
 ## Poikkeukset
 
-Ota kiinni perusluokka käsittelemään ”kaikki, mikä meni pieleen Chloros”:
+Ota kiinni perusluokka käsitelläksesi ”kaikkiChlorosissa menneet pieleen”:
 
 ```python
 import chloros_sdk
@@ -1503,7 +1502,7 @@ except chloros_sdk.ChlorosError as e:
     print(f"Chloros error: {e}")
 ```
 
-> `ChlorosAuthenticationError` ja `ChlorosConfigurationError` viedään ylätasolle muiden rinnalle; ne voidaan myös tuoda tiedostosta `chloros_sdk.exceptions`:stä, kuten kuvassa on esitetty.
+> `ChlorosAuthenticationError` ja `ChlorosConfigurationError` viedään ylätasolle muiden rinnalla; ne voidaan tuoda myös `chloros_sdk.exceptions`:sta kuvan mukaisesti.
 
 Hierarkia:
 
@@ -1613,7 +1612,7 @@ with chloros_sdk.open_project("/home/user/Chloros Projects/Field_A") as proj:
     proj.process()
 ```
 
-### 4. Monikameran kehysvirta → NumPy-putki
+### 4. Monikamerainen kehysvirta → NumPy-putki
 
 ```python
 import chloros_sdk
@@ -1688,9 +1687,9 @@ else:
     raise RuntimeError(f"Probe error: {probe.get('error')}")
 ```
 
-### 7. Tallennusohjeen vastine (puhdas Python)
+### 7. Tallennusohjeen vastine (Puhdas Python)
 
-CLI -ohjelman resepti-DSL:llä on suora Python-vastine:
+CLI:n resepti-DSL:llä on suora Python-vastaava:
 
 ```python
 import time, chloros_sdk
@@ -1724,13 +1723,13 @@ with chloros_sdk.open_project("/path/to/proj") as proj:
 
 ## Taustaprosessin automaattinen käynnistys
 
-Smart-connect-liityntäpisteet — `connect_camera`, `connect_array`, `connect_daq_sensor` ja `discover_lattice_cameras` — ovat ohuita HTTP-asiakkaita, jotka olettavat, että taustaohjelma kuuntelee porttia `127.0.0.1:5000` (Smart-Connect-rajapinnan oletusarvoinen URL). Kun graafinen käyttöliittymä (GUI) tai CLI on jo käynnissä, yksi niistä on käynnissä. Pelkästä skriptistä sitä ei välttämättä ole — joten nämä toiminnot **käynnistävät automaattisesti mukana toimitetun taustaprosessin** (ikkunattomana, samalla tavalla kuin `ChlorosLocal`) ennen ensimmäistä kutsua ja odottavat sitten enintään `backend_startup_timeout`, kunnes se käynnistyy.
+Smart-Connect-liittymäkohdat — `connect_camera`, `connect_array`, `connect_daq_sensor` ja `discover_lattice_cameras` — ovat ohuita HTTP-asiakasohjelmia, jotka olettavat, että taustapalvelu kuuntelee porttia `127.0.0.1:5000` (Smart-Connect-rajapinnan oletusURL). Kun graafinen käyttöliittymä (GUI) tai CLI on jo käynnissä, yksi on käynnissä. Pelkän skriptin perusteella sitä ei välttämättä ole — joten nämä toiminnot **käynnistää mukana toimitetun taustaprosessin binäärin automaattisesti** (ikkunattomana, samalla tavalla kuin `ChlorosLocal`) ennen ensimmäistä kutsua ja odottaa sitten enintään `backend_startup_timeout`, kunnes se käynnistyy.
 
 Säännöt:
 
-- **Ainoastaan paikallinen URL käynnistetään.** `backend_url`, joka osoittaa `localhost`:ään / `127.0.0.1`:ään / `[::1]` on sallittu; kaikkia muita isäntiä pidetään jonkun muun koneina, eikä niitä koskaan käynnistetä.
-- **Taustapalvelu jätetään käynnissä uudelleenkäyttöä varten** (samoin kuin CLI) — skriptin päättyessä ei tapahdu automaattista sammutusta. Skriptin uudelleenkäynnistyksessä käytetään jo käynnissä olevaa taustapalvelua.
-- **Voit kieltäytyä tästä käyttämällä `auto_start_backend=False`** missä tahansa näistä kutsuista (esim. kun olet määrittänyt etäisen taustaprosessin tai hallitset taustaprosessin elinkaarta itse).
+- **Ainoastaan paikallinen URL käynnistetään koskaan.** `backend_url`, joka osoittaa `localhost`:ään / `127.0.0.1`:ään / `[::1]`:ään on sallittu; minkä tahansa muun isännän oletetaan olevan jonkun toisen kone, eikä sitä koskaan käynnistetä.
+- **Taustapalvelu jätetään käynnissä uudelleenkäyttöä varten** (samoin kuin CLI) — skriptin päättyessä ei tapahdu implisiittistä sammutusta. Skriptin uudelleenkäynnistyksessä käytetään uudelleen käynnissä olevaa taustapalvelua.
+- **Kieltäydy käyttämästä `auto_start_backend=False`**:ää missä tahansa näistä kutsuista (esim. kun olet osoittanut etätaustapalvelimeen tai hallitset taustapalvelimen elinkaarta itse).
 
 ```python
 import chloros_sdk
@@ -1745,17 +1744,17 @@ arr = chloros_sdk.connect_array(serials,
                                 auto_start_backend=False)
 ```
 
-Jos mukana toimitettua binääritiedostoa ei löydy tai sitä ei voida käynnistää, seuraava HTTP-kutsu aiheuttaa toimitettavan, **alustakohtaisen** `ChlorosConnectError`-virheen sen sijaan, että se tuottaisi pelkän yhteyden hylkäämistä koskevan jäljityksen — Windows-sivustolla se ohjaa sinut työpöytäsovellukseen tai `chloros-cli`-komentoon; Linux-sivustolla (ei graafista käyttöliittymää) se ohjaa sinut `chloros-cli`-komentoon tai `.deb`-komentoon.
+Jos mukana toimitettua binääritiedostoa ei löydy tai sitä ei voida käynnistää, seuraava HTTP-kutsu aiheuttaa toimenpiteitä vaativan, **alustakohtaisen** `ChlorosConnectError`-virheen sen sijaan, että se tuottaisi pelkän yhteyden epäonnistumista koskevan jäljitystiedon — Windows-palvelussa se ohjaa sinut työpöytäsovellukseen tai `chloros-cli`-komentoon; Linux-palvelussa (ei graafista käyttöliittymää) se ohjaa sinut `chloros-cli`-komentoon tai `.deb`-komentoon.
 
 ---
 
 ## Ympäristö ja otsikot
 
-SDK-tiedosto merkitsee jokaisen taustapalvelimen HTTP-kutsun tunnisteella `X-Chloros-Client: sdk`. Taustapalvelin soveltaa SDK / CLI lisenssisääntöjä (kirjautuminen **ja** vaaditaan maksullinen Chloros+ -paketti) GUI:n ilmaisen tason sijaan. Tämä asetetaan automaattisesti tuonnin yhteydessä — sinun ei tarvitse tehdä mitään.
+SDK-palvelu merkitsee jokaisen taustapalvelimen HTTP-kutsun tunnisteella `X-Chloros-Client: sdk`. Taustapalvelin soveltaa SDK / CLI -lisenssisääntöjä (vaaditaan kirjautuminen **ja** maksullinen Chloros+ -sopimus) graafisen käyttöliittymän ilmaiskäytön sijaan. Tämä asetetaan automaattisesti tuontihetkellä — sinun ei tarvitse tehdä mitään.
 
-`http://localhost` ja `http://127.0.0.1` tunnistetaan paikalliseksi taustapalvelimeksi. Kutsut muihin isäntäkoneisiin (esim. omaan analytiikkapalveluusi) jätetään ennalleen.
+`http://localhost` ja `http://127.0.0.1` tunnistetaan paikalliseksi taustapalvelimeksi. Muille isännille (esim. omalle analytiikkapalvelullesi) suuntautuvat kutsut jätetään ennalleen.
 
-Ohita taustapalvelu URL välittämällä `backend_url=` (tai `api_url=`, jos käytössä on `ChlorosLocal`):
+Ohita taustapalvelu URL välittämällä `backend_url=` (tai `api_url=`, jos kyseessä on `ChlorosLocal`):
 
 ```python
 chloros_sdk.connect_camera("213800234", backend_url="http://127.0.0.1:5000")
@@ -1765,27 +1764,27 @@ chloros_sdk.connect_daq_sensor(eth_host="daq-e-1.local",
 chloros_sdk.ChlorosLocal(backend_url="http://127.0.0.1:5000")
 ```
 
-(Muut kuin loopback-yhteydet `backend_url` saavuttavat vain lähde-/dev-taustapalvelimeen — mukana toimitetut taustapalvelimet sitovat vain loopbackia; katso tunnelimallia kohdasta Remote-Backend Mode.)
+(Muut kuin loopback-tyyppiset `backend_url`-osoitteet saavuttavat vain source/dev-taustapalvelimen — mukana toimitetut taustapalvelimet sitoutuvat vain loopback-osoitteisiin; katso tunnelointimallia kohdasta Remote-Backend Mode.)
 
 ---
 
 ## Versiointi ja yhteensopivuus
 
-- SDK-versio näkyy nimellä `chloros_sdk.__version__`.
-- SDK sitoo käyttäytymisen mukana toimitettuun taustapalvelinversioon. Vanhemman SDK-version yhdistäminen uudemman taustapalvelimen kanssa toimii yleensä (eteenpäin yhteensopivat päätepisteet), mutta uudemman SDK-version yhdistäminen vanhemman taustapalvelimen kanssa saattaa aiheuttaa `404`-virheitä uusissa päätepisteissä — päivitä työpöytäsovellus vastaavaksi.
-- Smart-Connect-käyttöliittymä (`connect_camera` / `connect_array` / `connect_daq_sensor`) ja verkkoanalyysin päätepiste palauttavat vakaat JSON-skeemat; uudet kentät ovat lisäyksiä.
+- Versio SDK näkyy nimellä `chloros_sdk.__version__`.
+- Versio SDK sitoo käyttäytymisen mukana toimitettuun taustapalvelinversioon. Vanhemman SDK:n ja uudemman taustapalvelimen yhdistäminen toimii yleensä (eteenpäin yhteensopivat päätepisteet), mutta uudemman SDK:n yhdistäminen vanhempaan taustapalvelimeen saattaa aiheuttaa `404`-virheitä uusissa päätepisteissä — päivitä työpöytäsovellus vastaavaksi.
+- Älykäs-connect-rajapinta (`connect_camera` / `connect_array` / `connect_daq_sensor`) ja verkkoanalyysin päätepiste palauttavat vakaat JSON-skeemat; uudet kentät ovat lisäyksiä.
 
 ---
 
 ## Vianmääritysvinkkejä
 
-- **`ChlorosAuthenticationError: Login required`** → Suorita komento `chloros-cli login EMAIL PASSWORD` kerran tällä koneella tai kirjaudu sisään Chloros-työpöytäsovelluksen kautta.
-- **`ChlorosConnectError: No Chloros backend is running …`** → Smart-Connect-kutsut käynnistävät paikallisen taustapalvelimen automaattisesti, joten tämä viesti näkyy vain, jos mukana toimitettua binääritiedostoa ei löydy tai sitä ei voida käynnistää (esim. pelkästään pip-ympäristössä toimiva isäntäkone, jolla ei ole työpöytäpakettia). Viesti on alustakohtainen: Windows-käyttöjärjestelmässä avaa työpöytäsovellus tai suorita mikä tahansa `chloros-cli`-komento; Linux-käyttöjärjestelmässä suorita `chloros-cli`-komento (GUI-käyttöliittymää ei ole) tai asenna `.deb`. Etätaustapalvelimelle välitä `backend_url=` (ja `auto_start_backend=False`).
-- **`CAMERA_AVAILABLE == False`** tuonnin yhteydessä → `lattice_sdk`:n lataaminen epäonnistui (yleensä Arena-SDK-ajonaikaiset DLL-tiedostot eivät ole asennettuina). Muut kuin kamerapinnat toimivat edelleen.
-- **Array connect palauttaa natiiviresoluutiota alhaisemman resoluution**→ Backendin smart-prep-toiminto-pienentää kehyksen kokoa, jotta se mahtuu johtoon. Käytä `analyze_array_network()`:ää selvittääksesi syyn, ja päivitä sitten linkki, hyväksy pienentäminen tai käytä `force_tier="slip-emit-and-capture"`:ää peräkkäiseen tallennukseen. Pienentämisen turvaverkko**ei** kata yhteenlaskettua ylimääräistä(`oversubscribed: true`, fps-kentät 0): liian monia kameroita yhteydelle ei voida korjata binningillä/ROI:lla — vähennä kameroiden määrää, ota käyttöön jumbo-kehykset tai siirry nopeampaan verkkokorttiin (katso [Ylimerkintä](#over-subscription-the-per-cam-floor)).
-- **`analyze_array_network()` ilmoittaa verkkokortin vastaanottorengasta pieneksi (~0,26 Mt) / yhdistä portit, joissa on viesti ”FRAMES WILL DROP”** → Isäntäkortin vastaanottorengas on oletusarvossaan (nollautuu usein arvoon 32 verkkokortin ohjaimen päivityksen jälkeen). Realtek USB 10GbE -sovittimella aseta `ReceiveBufferLen=256` ja `PendingReceives=64` (korotettu), ja käynnistä sitten taustapalvelu uudelleen, jotta se lukee renkaan uudelleen. Koko menettely: [CLI Viite → Isäntäverkkokortin asetukset ja säätö](cli-reference.md#host-nic-setup--tuning-lattice-arrays).
-- **Isäntäkone jumittuu uudelleenkäynnistyksen tai sammutuksen yhteydessä, myöhemmin WMI-virheitä `Invalid class` / verkkokortti ei aktivoidu** → Vanhentunut USB 10GbE -ohjain aiheuttaa virheen `DRIVER_POWER_STATE_FAILURE` (BSOD `0x9F`). Päivitä sovittimen ohjain nykyiseen versioon (≥ 2026) ja määritä vastaanottorengasasetukset uudelleen. Katso [CLI-ohje → Isäntätietokoneen verkkokortin asetukset ja säätö](cli-reference.md#host-nic-setup--tuning-lattice-arrays).
-- **Heijastavuus hylätty** → Absoluuttisen mittakaavan heijastavuuden mittaamiseksi kameraan (tai anturiryhmään) on liitettävä aktiivinen DAQ-laite. Liitä joko käyttöliittymän kautta tai käytä `processing="radiance"` (W/m²/sr/nm) -asetusta, joka ei vaadi pariksi liitettyä anturia.
+- **`ChlorosAuthenticationError: Login required`** → Suorita `chloros-cli login EMAIL PASSWORD` kerran tällä koneella tai kirjaudu sisään Chloros-työpöytäsovelluksen kautta.
+- **`ChlorosConnectError: No Chloros backend is running …`** → Smart-Connect-kutsut käynnistävät paikallisen taustapalvelimen automaattisesti, joten tämä virhe ilmenee vain, jos mukana toimitettua binääritiedostoa ei löydy tai sitä ei voida käynnistää (esim. pelkästään pip-ohjelmistolla varustetussa isäntäkoneessa, jossa ei ole työpöytäpakettia). Viesti on alustakohtainen: osoitteessa Windows avaa työpöytäsovellus tai suorita mikä tahansa `chloros-cli`-komento; osoitteessa Linux suorita `chloros-cli`-komento (graafista käyttöliittymää ei ole) tai asenna `.deb`. Etätaustapalvelimelle välitä `backend_url=` (ja `auto_start_backend=False`).
+- **`CAMERA_AVAILABLE == False`** tuonnin yhteydessä → `lattice_sdk`:n lataaminen epäonnistui (yleensä Arena-SDK-ajonaikaiset DLL-tiedostot eivät ole asennettuina). Muu kuin kamerapinta toimii edelleen.
+- **Array connect palauttaa natiivia alhaisemman resoluution**→ Taustapalvelimen smart-prep-toiminto-pienentää kehyksen kokoa, jotta se mahtuu siirtokanavaan. Käytä `analyze_array_network()` selvittääksesi syyn, ja päivitä sitten linkki, hyväksy pienentäminen tai välitä `force_tier="slip-emit-and-capture"` peräkkäistä tallennusta varten. Pienentämisen turvaverkko**ei** kata kokonaisylivarauksia (`oversubscribed: true`, fps-kentät 0): liian monia kameroita kaapelille ei voida korjata binningillä/ROI:lla — vähennä kameroiden määrää, ota käyttöön jumbo-kehykset tai siirry nopeampaan verkkokorttiin (katso [Ylimerkintä](#over-subscription-the-per-cam-floor)).
+- **`analyze_array_network()` ilmoittaa, että verkkokortin vastaanottorengas on liian pieni (~0,26 MB) / yhdistämisportit näyttävät viestin &quot;FRAMES WILL DROP&quot;** → Isäntäverkkokortin vastaanottorengas on oletusasetuksessaan (nollautuu usein arvoon 32 verkkokortin ohjaimen päivityksen jälkeen). Realtek USB 10GbE -sovittimella aseta `ReceiveBufferLen=256` ja `PendingReceives=64` (korotetut), ja käynnistä sitten taustapalvelu uudelleen, jotta se lukee renkaan uudelleen. Koko menettely: [CLI Viite → Isäntäkortin asetukset ja säätö](cli-reference.md#host-nic-setup--tuning-lattice-arrays).
+- **Isäntäkone jumittuu uudelleenkäynnistyksen tai sammutuksen yhteydessä, myöhemmin WMI-virheitä (`Invalid class`) / verkkokorttia ei voi ottaa käyttöön** → Vanhentunut USB 10GbE -ajuri aiheuttaa virheen `DRIVER_POWER_STATE_FAILURE` -virheen (BSOD `0x9F`). Päivitä sovittimen ohjain uusimpaan versioon (≥ 2026) ja määritä vastaanottorengasasetukset uudelleen. Katso [CLI Viite → Isäntäkoneen verkkokortin asetukset ja säätö](cli-reference.md#host-nic-setup--tuning-lattice-arrays).
+- **Heijastavuus hylätty** → Absoluuttisella asteikolla mitattavaa heijastavuutta varten kameraan (tai anturiryhmään) on liitettävä aktiivinen DAQ. Liitä se joko käyttöliittymän kautta tai käytä `processing="radiance"` (W/m²/sr/nm) -asetusta, joka ei vaadi pariksi liitettyä anturia.
 - **`smart=True`-tallennus kestää odotettua kauemmin** → AE-konvergenssi riippuu kohteen dynamiikasta; kiristä `exposure_tolerance_pct`-arvoa tai lyhennä `stability_window_s`-arvoa, jos haluat nopeamman (vähemmän vakaan) laukaisun.
 
 ---
@@ -1793,5 +1792,5 @@ chloros_sdk.ChlorosLocal(backend_url="http://127.0.0.1:5000")
 ## Katso myös
 
 - [CLI-viite](cli-reference.md) — jokainen CLI-alikomento vastaa SDK-kutsua.
-- [DAQ-anturiohje](../daq/README.md) — anturikohtaiset kytkentä-, kalibrointi- ja tallennussäännöt.
+- [DAQ-anturien opas](../daq/README.md) — anturikohtaiset kytkentä-, kalibrointi- ja tallennussäännöt.
 - Verkkodokumentaatio: `https://mapir.gitbook.io/chloros/api-python-sdk`</id></sn>
