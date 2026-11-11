@@ -6,46 +6,95 @@ metaLinks:
 
 # Tuetut kamerat
 
-Chloros käsittelee kuvamateriaalia kahdesta MAPIR-kameraperheestä **kaikilla alustoilla** (Windows, Linux amd64 ja Linux arm64/Jetson):
+Chloros
+käsittelee kahden MAPIR
+-kameraperheen kuvamateriaalia **kaikilla alustoilla** (Windows
+, Linux
+amd64 ja Linux
+arm64/Jetson):
 
-* **Survey3** — Survey3W (laajakulma) ja Survey3N (kapeakulma) -kamerat. Syöte: `RAW+JPG`.
-* **LATTICE**— M3C- ja M3M-monispektrikameramoduulit. Syöte: `.tif`/`.tiff`-tallenteet. LATTICE-kameroita voidaan myös**ohjata reaaliaikaisesti** Chloros:n kautta — GUI:n Kamerat-välilehden (Windows) tai `chloros-cli lattice` / Python SDK (Windows ja Linux) kautta — mukaan lukien synkronoidut monikamerajärjestelmät. Katso [LATTICE-opas](lattice/).
+* **Survey3** — Survey3W
+(laajakulma) ja Survey3N
+(kapeakulma) -kamerat. Syöte: `RAW+JPG`.
+* **LATTICE**— M3C- ja M3M-monispektrikameramoduulit. Syöte: `.tif`/`.tiff`-tallenteet. LATTICE-kameroita voidaan myös**ohjata reaaliaikaisesti** Chloros
+-ohjelmistosta — GUI:n Kamerat-välilehden kautta (Windows
+) tai `chloros-cli lattice`:n / Python
+-SDK
+:n (Windows
+ja Linux
+) avulla — mukaan lukien synkronoidut monikamerajärjestelmät. Katso [LATTICE-opas](lattice/).
 
-Käsittelyputki hyväksyy myös `.dng`-tulotiedostoja.
+Käsittelyputki hyväksyy myös `.dng`-syöttötiedostoja.
 
 ## Survey3
 
-<table data-header-hidden><thead><tr><th width="156">Valmistaja</th><th width="250">Kameramalli</th><th width="138">Suodattimen malli</th><th width="187">Kuvatyyppi</th></tr></thead><tbody><tr><td><strong>Valmistaja</strong></td><td><strong>Kameramalli</strong></td><td><strong>Suodattimen malli</strong></td><td><strong>Kuvatyyppi</strong></td></tr><tr><td>MAPIR</td><td>Survey3W, Survey3N</td><td>RGB</td><td>RAW+JPG, JPG</td></tr><tr><td>MAPIR</td><td>Survey3W, Survey3N</td><td>RGN</td><td>RAW+JPG, JPG</td></tr><tr><td>MAPIR</td><td>Survey3W, Survey3N</td><td>OCN</td><td>RAW+JPG, JPG</td></tr><tr><td>MAPIR</td><td>Survey3W, Survey3N</td><td>NGB</td><td>RAW+JPG, JPG</td></tr><tr><td>MAPIR</td><td>Survey3W, Survey3N</td><td>RE</td><td>RAW+JPG, JPG</td></tr><tr><td>MAPIR</td><td>Survey3W, Survey3N</td><td>NIR</td><td>RAW+JPG, JPG</td></tr></tbody></table>## LATTICE
+<table data-header-hidden><thead><tr><th width="156">Valmistaja</th><th width="250">Kameramalli</th><th width="138">Suodatinmalli</th><th width="187">Kuvatyyppi</th></tr></thead><tbody><tr><td><strong>Valmistaja</strong></td><td><strong>Kameramalli</strong></td><td><strong>Suodattimen malli</strong></td><td><strong>Kuvatyyppi</strong></td></tr><tr><td>MAPIR</td><td>Survey3W, Survey3N</td><td>RGB</td><td>RAW+JPG, JPG</td></tr><tr><td>MAPIR</td><td>Survey3W, Survey3N</td><td>RGN</td><td>RAW+JPG, JPG</td></tr><tr><td>MAPIR</td><td>Survey3W, Survey3N</td><td>OCN</td><td>RAW+JPG, JPG</td></tr><tr><td>MAPIR</td><td>Survey3W, Survey3N</td><td>NGB</td><td>RAW+JPG, JPG</td></tr><tr><td>MAPIR</td><td>Survey3W, Survey3N</td><td>RE</td><td>RAW+JPG, JPG</td></tr><tr><td>MAPIR</td><td>Survey3W, Survey3N</td><td>NIR</td><td>RAW+JPG, JPG</td></tr></tbody></table>## LATTICE
 
 LATTICE-sarja on modulaarinen monispektrikamerajärjestelmä, joka perustuu Sony IMX265 -globaalilukitusanturiin (3,1 MP, 3,45 µm pikselit). Jokainen kamera tallentaa tunnisteensa mallimerkkijonona:
 
 ```
 <sensor>-<lens>-F<filter>        e.g.  M3C-L41-FRGN,  M3M-L87-F550
-```
+```.
 
-Chloros näyttää sen etuliitteellä `LATT-` (esimerkiksi `LATT-M3M-L41-F550`), ja mallimerkkijono ohjaa kaikkea jatkokäsittelyä — anturiprofiili, kaistajärjestys ja kalibrointi määritetään automaattisesti; kameraa kohden ei tarvitse määrittää mitään. Objektiivin numero on **vaakasuuntainen näkökenttä asteina**: `L41` = kapea 41°, `L87` = laaja 87°.
+Chloros
+
+-ohjelmisto näyttää sen etuliitteellä `LATT-` (esimerkiksi `LATT-M3M-L41-F550`), ja mallimerkkijono ohjaa kaikkea jatkokäsittelyä — anturiprofiili, kaistajärjestys ja kalibrointi määritetään automaattisesti; kameraa kohden ei tarvitse määrittää mitään. Objektiivin numero on **vaakasuuntainen kuvakulma asteina**: `L41` = kapea 41°, `L87` = laaja 87°.
 
 Anturimäärityksiä on kaksi:
 
 | Määritys | Anturi      | Suodatintyyppi                           | Kaistat kameraa kohti                                                        |
 | ------------- | ----------- | ------------------------------------- | ----------------------------------------------------------------------- |
 | **M3C**       | Bayer-väri | Kolmikaistainen                       | 3 spektrikaistaa yhdellä valotuksella                                 |
-| **M3M**       | Yksivärinen  | Yksi kapeakaistainen häiriösuodatin | 1 kalibroitu kaista — yhdistämällä useita M3M-kameroita kasvillisuusindeksien laskemiseksi |
+| **M3M**       | Mustavalkoinen | Yksi kapeakaistainen interferenssisuodatin | 1 kalibroitu kaista — yhdistämällä useita M3M-kameroita kasvillisuusindeksejä varten |
 
 ### M3C (Bayer) -suodatinvaihtoehdot
 
-| Suodatin | Kaistat (nimi @ keskitaajuus nm / FWHM nm)       |
+| Suodatin | Kaistat (nimi @ keskitaajuus nm / FWHM
+
+nm)       |
 | ------ | ---------------------------------------- |
-| `FRGB` | Blue 475/30 · Green 550/30 · Red 625/30  |
-| `FRGN` | Red 660/21 · Green 550/30 · NIR 850/30   |
-| `FOCN` | Orange 615/21 · Cyan 490/38 · NIR 808/14 |
-| `FNGB` | Blue 475/30 · Green 550/30 · NIR 850/30  |
+| `FRGB` | Blue
 
-### M3M (mono) -suodattimien tuoteluettelo — 23 tuotenumeroa
+475/30 · Green
 
-F-luku on tuotenumero; mitattu kaista (joka on leimattu jokaiseen kalibroituun tuotteeseen) on eräkohtainen suodattimen skannaus:
+550/30 · Red
 
-| Tuotenumero    | Keskitaajuus (nm, mitattu) | FWHM reunat (nm) | Leveys (nm) |
+625/30  |
+| `FRGN` | Red
+
+660/21 · Green
+
+550/30 · NIR
+
+850/30   |
+| `FOCN` | Orange
+
+618,4/46 · Cyan
+
+494,1/40 · NIR
+
+821,6/54 (mitattu — katso alla) |
+| `FNGB` | Blue
+
+475/30 · Green
+
+550/30 · NIR
+
+850/30  |
+
+Mallin `FOCN` arvot ovat suodattimen **mitatut** puoli-maksimikaistat (Chloros
+
+1.3.0 ja uudemmat; aiemmissa versioissa käytettiin teknisen tiedotteen arvoja 615/21 · 490/38 · 808/14). Kaistanimet pysyvät samoina: `Orange_615`, `Cyan_490` ja `NIR_808`, ja mitatut keskipisteet ja leveydet ovat ne, jotka Chloros
+
+merkitsee jokaiseen kalibroituun vientiin.
+
+### M3M (mono) -suodatinluettelo — 23 tuotenumeroa
+
+F-luku on tuotenumeron tunniste; mitattu kaista (joka on merkitty jokaiseen kalibroituun vientituotteeseen) on eräkohtainen suodatinskannaus:
+
+| Tuotenumero    | Keskiarvo (nm, mitattu) | FWHM
+
+-reunat (nm) | Leveys (nm) |
 | ------ | --------------------- | --------------- | ---------- |
 | F385   | 379,4                 | 367–392         | 25         |
 | F405   | 403,9                 | 390–417         | 27         |
@@ -71,8 +120,14 @@ F-luku on tuotenumero; mitattu kaista (joka on leimattu jokaiseen kalibroituun t
 | F950   | 945,1                 | 929–961         | 32         |
 | F988 † | 985,3                 | 968–1003        | 35         |
 
-_&quot;Kaistojen reunat on mitattu puolimaksimiarvon mukaisina kokonaisleveyksinä MAPIR:n eräkohtaisista suodatusskannauksista — nämä ovat samat arvot, jotka Chloros merkitsee jokaiseen kalibroituun vientiin.&quot;_ &quot;— (nimellinen)&quot; = eräkohtaista skannausta ei ole vielä tehty; näiden SKU-numeroiden kohdalla ilmoitettu keskipiste on SKU-numero ja leveys on valmistajan ilmoittama arvo.
+_&quot;Kaistojen reunat on mitattu puolihuippuleveyden arvoina MAPIR
 
-† &quot;F988-heijastavuus kalibroidaan käyttämällä kuvauspaikalla olevaa heijastavuuspaneelia: kaista sijaitsee DAQ-valosensorin kalibroidun alueen ulkopuolella, joten Chloros käyttää viimeisintä paneelista tallennettua arvoa ja säilyttää sen paneelin tarkistusten välillä.&quot; Katso [Kalibrointikohteet](calibration-targets.md).
+in eräkohtaisista suodatusskannauksista — samat arvot, jotka Chloros
 
-Kameran reaaliaikaisesta ohjauksesta, matriiseista, verkkoasetuksista ja radiometrisestä käsittelyketjusta on tietoa [LATTICE-oppaassa](lattice/).
+merkitsee jokaiseen kalibroituun vientiin.&quot;_ &quot;— (nimellinen)&quot; = eräskannausta ei ole vielä tehty; näiden SKU-tunnusten osalta ilmoitettu keskipiste on SKU-numero ja leveys on valmistajan ilmoittama arvo.
+
+† ”F988-heijastavuus kalibroidaan käyttämällä kuvauspaikalla olevaa heijastavuuspaneelia: kaista sijaitsee DAQ-valosensorin kalibroidun alueen ulkopuolella, joten Chloros
+
+käyttää viimeisintä paneelista tallennettua arvoa ja säilyttää sen paneelin mittausten välillä.” Katso [Kalibrointikohteet](calibration-targets.md).
+
+Reaaliaikaisesta kameran ohjauksesta, matriiseista, verkkoasetuksista ja radiometrisestä käsittelyketjusta löydät tietoa [LATTICE-oppaasta](lattice/).
