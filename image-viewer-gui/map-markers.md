@@ -82,7 +82,7 @@ Jokaiseen GPS-tietoja sisältävään kuvaan lisätään merkki sen koordinaatte
 
 Valitse karttakerroksen tyyppi painikkeilla (vasemmalta oikealle):
 
-![](&lt;../.gitbook/assets/image (14).png&gt;)
+![](<../.gitbook/assets/image (14).png>)
 
 | Tyyppi                 | Näyttää                                                                |
 | -------------------- | -------------------------------------------------------------------- |

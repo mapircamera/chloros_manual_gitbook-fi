@@ -21,7 +21,7 @@ Napsauta sivupalkin yläosassa olevaa **Liitä anturi** -painiketta. Liitäntäv
 | **↻ Päivitä** | Skannaa valitun siirtotavan uudelleen välittömästi (pois käytöstä BLE-/Ethernet-skannauksen aikana). |
 | **Yhdistä anturi** | Aktivoituu, kun laite on valittu; nimeää uudelleen `Connecting...`:ksi yhteyden muodostamisen aikana. |
 
-Haku toimii vain **silloin, kun yhteysvalintaikkuna on näytöllä**, ja se toistuu 15 sekunnin välein vain valitun siirtotavan osalta — pelkkä välilehden avaaminen ei käynnistä skannausta. Epäonnistumisen yhteydessä valintaikkunassa näkyy: *&quot;Yhteyden muodostaminen epäonnistui. Kokeile irrottaa ja kytkeä anturi uudelleen, ja napsauta sitten Yhdistä uudelleen.&quot;*
+Haku toimii vain **silloin, kun yhteysvalintaikkuna on näytöllä**, ja se toistuu 15 sekunnin välein vain valitun siirtotavan osalta — pelkkä välilehden avaaminen ei käynnistä skannausta. Epäonnistumisen yhteydessä valintaikkunassa näkyy: *"Yhteyden muodostaminen epäonnistui. Kokeile irrottaa ja kytkeä anturi uudelleen, ja napsauta sitten Yhdistä uudelleen."*
 
 Sivupalkki avautuu automaattisesti, kun ensimmäinen anturi muodostaa yhteyden.
 
@@ -43,9 +43,7 @@ Jokaiselle kytketylle anturille varataan oma rivi (sekä yksi rivi kutakin Ambie
 | Siirto-merkki | `DAQ-U` / `DAQ-M` / `DAQ-E` tai vihreä `REF`-merkki Ambient+Object-heijastusryhmälle. |
 | Laitteen nimi | Oletusarvo on anturin sarjanumero (sen vakiintunut tunniste kalibrointia, `.daq`-tiedostonimiä ja tuonnin täsmäytystä varten); mukautetut nimet säilyvät projektikohtaisesti. |
 | **Kalibroitu**-pilleri (vihreä) | Näkyy, kun anturin tehdaskalibrointipaketti on ladattu, eli spektrit ovat todellisia W/m²/nm. |
-| **Päivitys saatavilla** -kuvake (keltainen, vain DAQ-E) | Käytössä oleva laiteohjelmisto on vanhempi kuin tämän Chloros
-
--rakennuksen mukana toimitettu kuva. Päivityksen aikana se näyttää reaaliaikaista edistymistä (`Flashing… N%`, `Restarting sensor…`, sitten `Updated X → Y` tai `Failed`). |
+| **Päivitys saatavilla** -kuvake (keltainen, vain DAQ-E) | Käytössä oleva laiteohjelmisto on vanhempi kuin tämän Chloros-rakennuksen mukana toimitettu kuva. Päivityksen aikana se näyttää reaaliaikaista edistymistä (`Flashing… N%`, `Restarting sensor…`, sitten `Updated X → Y` tai `Failed`). |
 | Silmä | Vaihtaa tämän anturin näkyvyyttä kaaviossa. |
 | Hammasratas | Avaa antikohtaisen asetusikkunan (alla). |
 | ✕ (punainen) | Irrottaa anturin tai poistaa Ambient+Object-ryhmän. |
@@ -82,19 +80,11 @@ Avaa hammasrataskuvakkeella anturirivillä. Sisältö järjestyksessä:
 * **Isäntänimi / IP** — laitteen nykyinen osoite.
 * **Laiteohjelmisto**— reaaliaikainen laiteohjelmistoversio sekä toimintosolu:**Päivitä versioon \<version\>
 
-** -painike tulee näkyviin</version\>
+** -painike tulee näkyviin</version\>,<version\>
 
-,<version\>
-
-kun tämä Chloros
-
--versio sisältää uudemman DAQ-E-laiteohjelmistokuvan. Päivitys asennetaan verkon kautta noin 30 sekunnissa; anturi käynnistyy uudelleen ja muodostaa yhteyden automaattisesti, ja keskeytynyt siirto jättää nykyisen laiteohjelmiston ennallaan. Edistymistiedot näkyvät reaaliaikaisesti (`Flashing… N%` → `Restarting sensor…` → `Updated X → Y`), ja kentässä lukee `Up to date`, kun versio on ajantasainen.
-* **PTP-synkronointi** — reaaliaikainen PTP-tila (palaa tilaan `unknown`). DAQ-E-laiteohjelmistoversio v1.2.0+ toimii IEEE 1588 PTPv2 -standardissa pelkästään orjakellona; Chloros
-
--isäntäkoneen taustapalvelin toimii PTP-grandmasterina, ja jokainen LAN-verkossa oleva DAQ-E- ja LATTICE-kamera toimii sen orjana domainissa 0, jolloin aikaleimat pysyvät noin 1 ms:n tarkkuudella.
-* **Verkko**— laitteen käyttämä osoite ja sen hankintatapa (DHCP, link-local tai staattinen) sekä tallennettu asetus, joka otetaan käyttöön uudelleenkäynnistyksen jälkeen.**Muuta…**avaa lomakkeen:**Automaattinen (DHCP)**tai**Staattinen IP**, jossa on IP-osoite, aliverkon peite ja valinnainen yhdyskäytävä.**Käytä ja käynnistä uudelleen** tallentaa asetukset, käynnistää anturin uudelleen ja muodostaa yhteyden uudelleen. Tämän tietokoneen verkon ulkopuolella oleva staattinen osoite hylätään, koska Chloros
-
-ei päässyt anturiin käynnistyksen jälkeen; tällöin avautuu valintaruutu, jolla asetus voidaan sallia kuitenkin, jos tietokoneelle annetaan uusi osoite tai se reititetään kyseiseen verkkoon. **Lähetys käynnistyksen yhteydessä**määrittää, aloittaako anturi lähetyksen heti virran kytkemisen jälkeen, ennen kuin mikään ohjelmisto on muodostanut yhteyttä.**Käynnistä anturi uudelleen** käynnistää sen uudelleen ja muodostaa yhteyden uudelleen nykyisillä asetuksilla. Uudelleenkäynnistys hylätään, kun anturi tallentaa. Uutta versiossa 1.3.0.
+kun tämä Chloros-versio sisältää uudemman DAQ-E-laiteohjelmistokuvan. Päivitys asennetaan verkon kautta noin 30 sekunnissa; anturi käynnistyy uudelleen ja muodostaa yhteyden automaattisesti, ja keskeytynyt siirto jättää nykyisen laiteohjelmiston ennallaan. Edistymistiedot näkyvät reaaliaikaisesti (`Flashing… N%` → `Restarting sensor…` → `Updated X → Y`), ja kentässä lukee `Up to date`, kun versio on ajantasainen.
+* **PTP-synkronointi** — reaaliaikainen PTP-tila (palaa tilaan `unknown`). DAQ-E-laiteohjelmistoversio v1.2.0+ toimii IEEE 1588 PTPv2 -standardissa pelkästään orjakellona; Chloros-isäntäkoneen taustapalvelin toimii PTP-grandmasterina, ja jokainen LAN-verkossa oleva DAQ-E- ja LATTICE-kamera toimii sen orjana domainissa 0, jolloin aikaleimat pysyvät noin 1 ms:n tarkkuudella.
+* **Verkko**— laitteen käyttämä osoite ja sen hankintatapa (DHCP, link-local tai staattinen) sekä tallennettu asetus, joka otetaan käyttöön uudelleenkäynnistyksen jälkeen.**Muuta…**avaa lomakkeen:**Automaattinen (DHCP)**tai**Staattinen IP**, jossa on IP-osoite, aliverkon peite ja valinnainen yhdyskäytävä.**Käytä ja käynnistä uudelleen** tallentaa asetukset, käynnistää anturin uudelleen ja muodostaa yhteyden uudelleen. Tämän tietokoneen verkon ulkopuolella oleva staattinen osoite hylätään, koska Chloros ei päässyt anturiin käynnistyksen jälkeen; tällöin avautuu valintaruutu, jolla asetus voidaan sallia kuitenkin, jos tietokoneelle annetaan uusi osoite tai se reititetään kyseiseen verkkoon. **Lähetys käynnistyksen yhteydessä**määrittää, aloittaako anturi lähetyksen heti virran kytkemisen jälkeen, ennen kuin mikään ohjelmisto on muodostanut yhteyttä.**Käynnistä anturi uudelleen** käynnistää sen uudelleen ja muodostaa yhteyden uudelleen nykyisillä asetuksilla. Uudelleenkäynnistys hylätään, kun anturi tallentaa. Uutta versiossa 1.3.0.
 
 Ambient+Object-ryhmän kohdalla hammasratasvalintaikkuna näyttää vain ryhmän lähdeanturit, laitteen nimen ja kaavion viivan värin.
 
@@ -114,9 +104,7 @@ ille, mikä fyysinen suojus on asennettu anturin hajottajan päälle, ja sovelle
 | DAQ-M | Ei mitään (paljas anturi), Sunshine (kosinikorjain) |
 | DAQ-E | Ei mitään (paljas anturi), FOV 15°, FOV 45°, FOV 90°, Sunshine (kosinikorjain) |
 
-**Kaikkien mallien oletusasetuksena on Sunshine (kosinikorjain)** — MAPIR
-
-toimittaa jokaisen DAQ-laitteen Sunshine-suojuksella asennettuna, ja se on vakiomainen ulkokäyttöön tarkoitettu kokoonpano: 180°:n puolipallonäkymä, jossa kosinivirhe on ≤ ±4 % 60°:n asti ja ≤ ±4,5 % 70°:n asti (ei suositella auringon korkeuden ollessa alle ~15°), suunnittelun mukainen vaimennus (~12×). Valintasi säilyy projektissa.
+**Kaikkien mallien oletusasetuksena on Sunshine (kosinikorjain)** — MAPIR toimittaa jokaisen DAQ-laitteen Sunshine-suojuksella asennettuna, ja se on vakiomainen ulkokäyttöön tarkoitettu kokoonpano: 180°:n puolipallonäkymä, jossa kosinivirhe on ≤ ±4 % 60°:n asti ja ≤ ±4,5 % 70°:n asti (ei suositella auringon korkeuden ollessa alle ~15°), suunnittelun mukainen vaimennus (~12×). Valintasi säilyy projektissa.
 
 {% hint style="warning" %}
 **Suojuksen valinnan on vastattava fyysistä suojusta.**Anturi tai ohjelmisto eivät pysty tunnistamaan, mikä suojus on asennettuna. Valinta ohjaa sekä reaaliaikaista korjausta että jokaiseen `.daq`-tiedostoon kirjoitettavaa leimaa — Sunshine-suojuksen ~12-kertaisen vaimennuksen vuoksi ilmoittamaton suojuksen vaihto korjaa spektrejä väärin suunnilleen tällä kertoimella. (Saman suojuksen irrottaminen ja uudelleenkiinnittäminen toistaa virheen noin 1,5 %:iin.) Valitse**None (paljas anturi)** vain, kun suojus on fyysisesti irrotettu; DAQ-E-laitteessa ”None” soveltaa edelleen tehtaan geometriprofiilia sen upotetulle lasidiffuusorille – se ei ole tyhjä toiminto – ja paljas DAQ-E on laboratoriokokoonpano, ei tuettu kenttäasetus.
@@ -154,13 +142,7 @@ Kunkin anturin **spektrikaavio** näyttää:
 Kaavion alapuolella luettelonäkymässä, päivitetään 500 ms välein:
 
 * **Kaikki mallit**: Valon värinäyte (sRGB CIE XYZ:stä), Kylläinen (Kyllä/Ei), CIE 1931 X/Y/Z, Kromaattisuus x/y, CIE u′/v′, CCT (K), CRI (Ra), hallitseva aallonpituus (nm), huippuaallonpituus (nm), virityspuhtaus, Duv, CIE L\*/a\*/b\* ja Munsell H/V/C.
-* **Vain kalibroidut anturit**(mikä tahansa DAQ-U / DAQ-M / DAQ-E, kun sen tehdaskalibrointipaketti on ladattu — tunnisteena on vihreä**Kalibroitu**-merkki anturirivillä): Kokonaisteho (W/m²), fotopinen lux (lx), skotopinen lux (lx), S/P-suhde, PPFD sekä PPFD Red
-
-/Green
-
-/Blue
-
-(µmol/m²/s) ja opiset säteilyvoimakkuudet — S-kartio, Melanopic, Rhodopic, M-kartio, L-kartio (kaikki W/m²).
+* **Vain kalibroidut anturit**(mikä tahansa DAQ-U / DAQ-M / DAQ-E, kun sen tehdaskalibrointipaketti on ladattu — tunnisteena on vihreä**Kalibroitu**-merkki anturirivillä): Kokonaisteho (W/m²), fotopinen lux (lx), skotopinen lux (lx), S/P-suhde, PPFD sekä PPFD Red /Green /Blue (µmol/m²/s) ja opiset säteilyvoimakkuudet — S-kartio, Melanopic, Rhodopic, M-kartio, L-kartio (kaikki W/m²).
 
 <!-- SCREENSHOT-NEEDED: list view live data table for a DAQ-E showing both the colorimetric rows and the power-calibrated rows (Total Power, Photopic/Scotopic Lux, PPFD, opic irradiances) -->
 
@@ -173,12 +155,10 @@ Kaksi toisiinsa liitettyä anturia voidaan yhdistää reaaliaikaiseksi heijastav
 1. Napsauta ruudukkonäkymässä kaavion ruudun **+**-merkkiä ja valitse**Yhdistä ympäristö + kohde**.
 2. Valitse **Ympäristön valonlähde**-anturi ja**Kohteen skanneri**-anturi (kaksi erillistä anturia) ja valitse sitten**Luo**.
 
-Chloros
-
-laskee R(λ) = kohde(λ) / ympäristö(λ) aallonpituuskohtaisesti kahdesta reaaliaikaisesta datavirrasta (arvo 0, kun ympäristön arvo ≤ 0). Ryhmän nimike määräytyy anturien kalibrointiluokan mukaan:
+Chloros laskee R(λ) = kohde(λ) / ympäristö(λ) aallonpituuskohtaisesti kahdesta reaaliaikaisesta datavirrasta (arvo 0, kun ympäristön arvo ≤ 0). Ryhmän nimike määräytyy anturien kalibrointiluokan mukaan:
 
 * Molemmat anturit kalibroitu (paketti ladattu) → **”Näennäinen heijastavuus”**.
-* Jompikumpi anturi kalibroimaton → **&quot;Suhteellinen heijastavuus&quot;**.
+* Jompikumpi anturi kalibroimaton → **"Suhteellinen heijastavuus"**.
 
 Ryhmä näkyy sivupalkissa vihreänä `REF`-rivinä ja omassa kaaviossaan (sateenkaarenvärinen täyttö, arvot näkyvät neljän desimaalin tarkkuudella hiiren osoittimen ollessa päällä, zoomaus vetämällä).
 
@@ -190,34 +170,10 @@ Ryhmä näkyy sivupalkissa vihreänä `REF`-rivinä ja omassa kaaviossaan (satee
 
 ### Kasvillisuusindeksitaulukko
 
-Luettelonäkymässä kasvillisuusindeksitaulukko sijaitsee heijastusryhmän kaavion alapuolella, ja se lasketaan reaaliaikaisesta heijastuksesta kaistakeskuksissa **sininen 450 / vihreä 550 / punainen 670 / NIR
+Luettelonäkymässä kasvillisuusindeksitaulukko sijaitsee heijastusryhmän kaavion alapuolella, ja se lasketaan reaaliaikaisesta heijastuksesta kaistakeskuksissa **sininen 450 / vihreä 550 / punainen 670 / NIR 800 nm** (arvot neljään desimaaliin asti, `---`, jos laskeminen ei ole mahdollista; vie hiiri indeksin nimen päälle nähdäksesi sen täydellisen nimen):
 
-800 nm** (arvot neljään desimaaliin asti, `---`, jos laskeminen ei ole mahdollista; vie hiiri indeksin nimen päälle nähdäksesi sen täydellisen nimen):
-
-* **Näkyy aina** (asteikkoriippumaton, mikä tahansa anturiyhdistelmä): NDVI
-
-, GNDVI
-
-, ENDVI, WDRVI
-
-, GRVI
-
-, CVI
-
-, GCI
-
-, MSR.
-* **Vain kun molemmat anturit on kalibroitu tehon suhteen** (molemmat paketit ladattuina): EVI
-
-, SAVI
-
-, OSAVI
-
-, GSAVI, GOSAVI, MSAVI2, RDVI, TDVI, LAI
-
-, NLI, MNLI, FCI, GEMI
-
-.
+* **Näkyy aina** (asteikkoriippumaton, mikä tahansa anturiyhdistelmä): NDVI, GNDVI, ENDVI, WDRVI, GRVI, CVI, GCI, MSR.
+* **Vain kun molemmat anturit on kalibroitu tehon suhteen** (molemmat paketit ladattuina): EVI, SAVI, OSAVI, GSAVI, GOSAVI, MSAVI2, RDVI, TDVI, LAI, NLI, MNLI, FCI, GEMI.
 
 <!-- SCREENSHOT-NEEDED: an Ambient+Object reflectance group in list view — reflectance chart labeled "Apparent Reflectance" with the vegetation index table below it showing live NDVI etc. -->
 
@@ -241,13 +197,9 @@ Kvantitatiivisten säteilyvoimakkuuslukujen saamiseksi laske keskiarvo vähintä
 ## Monisensorijärjestelyt ja projektien pysyvyys
 
 * Yhdistä useita antureita yhteen kaavioon (jaetut akselit), pidä kaaviot erillisinä (automaattinen ruudukkojärjestely), siirrä antureita kaavioiden välillä, järjestä rivejä/ruutuja uudelleen vetämällä ja piilota yksittäisiä antureita silmäkuvakkeen avulla.
-* Chloros
-
-tallentaa projektikohtaisesti seuraavat tiedot: laitenimet, kaavion värit, kaavion koko, katselutila sekä kunkin anturin asetukset (integraatioaika, kehysten keskiarvo, AE-tila, suodattimen valinta).
+* Chloros tallentaa projektikohtaisesti seuraavat tiedot: laitenimet, kaavion värit, kaavion koko, katselutila sekä kunkin anturin asetukset (integraatioaika, kehysten keskiarvo, AE-tila, suodattimen valinta).
 * **Projektin avaaminen uudelleen yhdistää sen anturit automaattisesti** osoitteen perusteella — DAQ-U:n COM-portti, DAQ-M:n BLE-laite, mDNS-isäntänimi DAQ-E:n osalta (tunnistetaan, vaikka laitteen IP-osoite olisi muuttunut) — ja soveltaa uudelleen kunkin anturin tallennetun cap-profiilin, kehysten keskiarvon, AE-tilan ja manuaalisen integraatioajan.***
 
 ## Kameran pariliitos (DLS)
 
-Parittamista ei tarvita. Toisin kuin drone-DLS-työnkulut, joissa valosensori liitetään kameraan etukäteen, Chloros
-
-yhdistää DAQ-tiedot kuviin jälkikäteen: tuonti- ja käsittelyvaiheessa `.daq`-lukemat interpoloidaan kunkin kuvan valotusaikaleimaan. Tallenna millä tahansa liitetyllä anturilla (`.daq` lisätään projektiin automaattisesti), ja heijastuskyvyn käsittely löytää oikeat lukemat ajan perusteella — katso [DAQ-valosensorit](README.md) saadaksesi tietoa siitä, miten alaspäin suuntautuvaa dataa käytetään. **Reaaliaikaisissa**LATTICE-kaappauksissa valitse sen sijaan anturi Kamerat-välilehden**Valosensori**-pudotusvalikosta; jolloin jokainen tallennus tallentaa käyttämänsä lukeman, joka on sovitettu vain kyseisen tallennuksen kameroihin (katso [Heijastavuusprosessit](reflectance.md)).</version\>
+Parittamista ei tarvita. Toisin kuin drone-DLS-työnkulut, joissa valosensori liitetään kameraan etukäteen, Chloros yhdistää DAQ-tiedot kuviin jälkikäteen: tuonti- ja käsittelyvaiheessa `.daq`-lukemat interpoloidaan kunkin kuvan valotusaikaleimaan. Tallenna millä tahansa liitetyllä anturilla (`.daq` lisätään projektiin automaattisesti), ja heijastuskyvyn käsittely löytää oikeat lukemat ajan perusteella — katso [DAQ-valosensorit](README.md) saadaksesi tietoa siitä, miten alaspäin suuntautuvaa dataa käytetään. **Reaaliaikaisissa**LATTICE-kaappauksissa valitse sen sijaan anturi Kamerat-välilehden**Valosensori**-pudotusvalikosta; jolloin jokainen tallennus tallentaa käyttämänsä lukeman, joka on sovitettu vain kyseisen tallennuksen kameroihin (katso [Heijastavuusprosessit](reflectance.md)).</version\>

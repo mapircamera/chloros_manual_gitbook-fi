@@ -12,7 +12,7 @@ Seuraavissa indeksikaavoissa käytetään yhdistelmää Survey3-suodattimien kes
 
 <table><thead><tr><th align="center">Survey3-suodattimen väri</th><th width="196.199951171875" align="center">Survey3-suodattimen nimi</th><th width="159.800048828125" align="center">Läpäisyalue (FWHM)</th><th align="center">Keskimääräinen läpäisykyky</th></tr></thead><tbody><tr><td align="center">Blue</td><td align="center">NGB - Blue</td><td align="center">468–483 nm</td><td align="center">475 nm</td></tr><tr><td align="center">Cyan</td><td align="center">OCN- Cyan</td><td align="center">476–512 nm</td><td align="center">494 nm</td></tr><tr><td align="center">Green</td><td align="center">RGN | NGB - Green</td><td align="center">543–558 nm</td><td align="center">547 nm</td></tr><tr><td align="center">Orange</td><td align="center">OCN - Orange</td><td align="center">598–640 nm</td><td align="center">619 nm</td></tr><tr><td align="center">Red</td><td align="center">RGN - Red</td><td align="center">653–668 nm</td><td align="center">661 nm</td></tr><tr><td align="center">RedEdge</td><td align="center">Re-RedEdge</td><td align="center">712–735 nm</td><td align="center">724 nm</td></tr><tr><td align="center">NIR1</td><td align="center">OCN - NIR1</td><td align="center">798–848 nm</td><td align="center">823 nm</td></tr><tr><td align="center">NIR2</td><td align="center">RGN | NGB | NIR - NIR2</td><td align="center">835–865 nm</td><td align="center">850 nm</td></tr></tbody></table>
 
-Kun näitä kaavoja käytetään, nimi voi päättyä merkintään &quot;\_1&quot; tai &quot;\_2&quot;, mikä vastaa sitä, kumpaa NIR-suodatinta, joko NIR1:tä tai NIR2:tä, on käytetty.
+Kun näitä kaavoja käytetään, nimi voi päättyä merkintään "\_1" tai "\_2", mikä vastaa sitä, kumpaa NIR-suodatinta, joko NIR1:tä tai NIR2:tä, on käytetty.
 
 LATTICE M3C (Bayerin kolmikaistainen) -kameroissa sama indeksimoottori käyttää M3C-suodatinkaistoja:
 
@@ -165,7 +165,7 @@ $$
 
 GUI:ssa sekä CLI- ja SDK-esiasetusluettelossa sen symbolikaava on `(z/y)*(x/y)`, jossa x=Red, y=Green, z=NIR (RGN-kameran kaistat); LATTICE-indeksimoottorin esiasetus on `nir * red / green**2`. Jokainen pinta laskee saman indeksin.
 
-_Lähde: Vincini, M., E. Frazzi ja P. D&#x27;Alessio. &quot;A Broad-Band Leaf Chlorophyll Vegetation Index at the Canopy Scale.&quot; Precision Agriculture 9 (2008): 303–319._
+_Lähde: Vincini, M., E. Frazzi ja P. D'Alessio. "A Broad-Band Leaf Chlorophyll Vegetation Index at the Canopy Scale." Precision Agriculture 9 (2008): 303–319._
 
 ***
 
@@ -207,7 +207,7 @@ $$
 
 Metsäalueilla on alhaisemmat FCI1-arvot, mikä johtuu puiden alhaisemmasta heijastavuudesta ja latvuston sisällä olevista varjoista.
 
-_Lähde: Becker, Sarah J., Craig S.T. Daughtry ja Andrew L. Russ. ”Robust forest cover indices for multispectral images.” Photogrammetric Engineering &amp; Remote Sensing 84.8 (2018): 505–512._
+_Lähde: Becker, Sarah J., Craig S.T. Daughtry ja Andrew L. Russ. ”Robust forest cover indices for multispectral images.” Photogrammetric Engineering & Remote Sensing 84.8 (2018): 505–512._
 
 ***
 
@@ -223,7 +223,7 @@ $$
 
 Metsäalueilla on alhaisemmat FCI2-arvot, mikä johtuu puiden alhaisemmasta heijastavuudesta ja latvuston sisällä olevista varjoista.
 
-_Lähde: Becker, Sarah J., Craig S.T. Daughtry ja Andrew L. Russ. ”Robust forest cover indices for multispectral images.” Photogrammetric Engineering &amp; Remote Sensing 84.8 (2018): 505–512._
+_Lähde: Becker, Sarah J., Craig S.T. Daughtry ja Andrew L. Russ. ”Robust forest cover indices for multispectral images.” Photogrammetric Engineering & Remote Sensing 84.8 (2018): 505–512._
 
 ***
 
@@ -273,7 +273,7 @@ $$
 
 Laaja NIR- ja vihreä aallonpituusalue mahdollistaa paremman klorofyllipitoisuuden ennustamisen ja tarjoaa samalla suuremman herkkyyden sekä paremman signaali-kohinasuhteen.
 
-_Lähde: Gitelson, A., Y. Gritz ja M. Merzlyak. &quot;Lehtien klorofyllipitoisuuden ja spektrisen heijastavuuden väliset suhteet sekä algoritmit korkeampien kasvien lehtien klorofyllipitoisuuden tuhoamattomaan arviointiin.&quot; Journal of Plant Physiology 160 (2003): 271–282._
+_Lähde: Gitelson, A., Y. Gritz ja M. Merzlyak. "Lehtien klorofyllipitoisuuden ja spektrisen heijastavuuden väliset suhteet sekä algoritmit korkeampien kasvien lehtien klorofyllipitoisuuden tuhoamattomaan arviointiin." Journal of Plant Physiology 160 (2003): 271–282._
 
 ***
 
@@ -489,7 +489,7 @@ $$
 TDVI = 1.5 * {(NIR- Red) \over \sqrt{NIR^{2} + Red + 0.5}  }
 $$
 
-_Lähde: Bannari, A., H. Asalhi ja P. Teillet. ”Transformed Difference Vegetation Index (TDVI) for Vegetation Cover Mapping” Teoksessa Proceedings of the Geoscience and Remote Sensing Symposium, IGARSS &#x27;02, IEEE International, Volume 5 (2002)._
+_Lähde: Bannari, A., H. Asalhi ja P. Teillet. ”Transformed Difference Vegetation Index (TDVI) for Vegetation Cover Mapping” Teoksessa Proceedings of the Geoscience and Remote Sensing Symposium, IGARSS '02, IEEE International, Volume 5 (2002)._
 
 ***
 

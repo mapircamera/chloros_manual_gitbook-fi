@@ -22,19 +22,7 @@ Yläpalkissa on vasemmalta oikealle seuraavat kohdat:
 * **Yhdistä valosensoriin** — siirry [Valosensorit-välilehdelle](daq/) yhdistääksesi DAQ-valosensorin. Toimii ilman avointa projektia.
 
 {% hint style="info" %}
-**Vain Windows**: Chloros
-
--työpöytäkäyttöliittymä on käytettävissä Windows
-
-issa. Linux
-
--käyttäjien tulee tutustua [CLI
-
-:n](CLI.md) ja [Python
-
-SDK
-
-:n](api-python-sdk.md) dokumentaatioon päättömän käsittelyn osalta.
+**Vain Windows**: Chloros-työpöytäkäyttöliittymä on käytettävissä Windows issa. Linux-käyttäjien tulee tutustua [CLI:n](CLI.md) ja [Python SDK:n](api-python-sdk.md) dokumentaatioon päättömän käsittelyn osalta.
 {% endhint %}
 
 ### <img src=".gitbook/assets/image (2) (1) (1).png" alt="" data-size="line">
@@ -49,15 +37,9 @@ Edistymispalkki <img src=".gitbook/assets/image (5).png" alt="" data-size="line"
 
 
 
-Ilmaisessa Chloros
+Ilmaisessa Chloros-tilassa, jossa kaikki tiedostot käsitellään peräkkäin, edistymispalkki näyttää kaksi vaihetta: Kohteen tunnistus ja Käsittely.
 
--tilassa, jossa kaikki tiedostot käsitellään peräkkäin, edistymispalkki näyttää kaksi vaihetta: Kohteen tunnistus ja Käsittely.
-
-Maksullisessa Chloros
-
-+-lisenssitilassa, jossa kaikki tiedostot käsitellään samanaikaisesti, edistymispalkki näyttää neljä vaihetta: Tunnistus, Analysointi, Kalibrointi, Vienti. Jos viet hiiren osoittimen Chloros
-
-+:n edistymispalkin päälle, avautuu laajennettu neliosainen edistymispalkkipaneeli, josta voit seurata prosessin etenemistä. Ylimmän edistymispalkin napsauttaminen jäädyttää avattavan paneelin, ja uudelleen napsauttaminen vapauttaa sen.
+Maksullisessa Chloros+-lisenssitilassa, jossa kaikki tiedostot käsitellään samanaikaisesti, edistymispalkki näyttää neljä vaihetta: Tunnistus, Analysointi, Kalibrointi, Vienti. Jos viet hiiren osoittimen Chloros+:n edistymispalkin päälle, avautuu laajennettu neliosainen edistymispalkkipaneeli, josta voit seurata prosessin etenemistä. Ylimmän edistymispalkin napsauttaminen jäädyttää avattavan paneelin, ja uudelleen napsauttaminen vapauttaa sen.
 
 <figure><img src=".gitbook/assets/plus_prog.JPG" alt=""><figcaption></figcaption></figure>
 

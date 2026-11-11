@@ -16,49 +16,21 @@ Kun olet kirjautunut sisään, tilitietosi näytetään:
 | Tilauspaketti | `plan_id` | Tyyppi |
 | --- | --- | --- |
 | Iron | `0` | Ilmainen |
-| Copper | `1` | Maksullinen (Chloros
-
-+) |
-| Bronze | `2` | Maksullinen (Chloros
-
-+) |
-| Silver | `3` | Maksullinen (Chloros
-
-+) |
-| Kulta | `4` | Maksullinen (Chloros
-
-+) |
+| Copper | `1` | Maksullinen (Chloros+) |
+| Bronze | `2` | Maksullinen (Chloros+) |
+| Silver | `3` | Maksullinen (Chloros+) |
+| Kulta | `4` | Maksullinen (Chloros+) |
 
 Katso [paketit ja hinnat](https://cloud.mapir.camera/pricing) saadaksesi tietää, mitä kukin maksullinen taso sisältää.
 
-### CLI
+### CLI- ja SDK-käyttöoikeus edellyttää maksullista tasoa
 
-- ja SDK
+CLI:n ja Python-SDK:n käyttö edellyttää **mitä tahansa maksullista Chloros+-tasoa (Copper tai korkeampi)**. Tämä valvotaan**palvelinpuolella** — jokaisessa CLI/SDK-pyynnössä on oltava sekä aktiivinen istunto että maksullinen paketti:
 
--käyttöoikeus edellyttää maksullista tasoa
-
-CLI
-
-:n ja Python
-
--SDK
-
-:n käyttö edellyttää **mitä tahansa maksullista Chloros
-
-+-tasoa (Copper tai korkeampi)**. Tämä valvotaan**palvelinpuolella** — jokaisessa CLI
-
-/SDK
-
--pyynnössä on oltava sekä aktiivinen istunto että maksullinen paketti:
-
-| HTTP
-
--tila | `error_code` | Merkitys | Korjaus |
+| HTTP-tila | `error_code` | Merkitys | Korjaus |
 | --- | --- | --- | --- |
 | `401` | `AUTH_REQUIRED` | Ei kirjautunut sisään tällä laitteella | `chloros-cli login <email> <password>` |
-| `403` | `PLAN_UPGRADE_REQUIRED` | Kirjautunut sisään, mutta tilaus on liian alhainen (ilmainen Iron-taso) | Päivitä mihin tahansa maksulliseen Chloros
-
-+-tilaukseen |
+| `403` | `PLAN_UPGRADE_REQUIRED` | Kirjautunut sisään, mutta tilaus on liian alhainen (ilmainen Iron-taso) | Päivitä mihin tahansa maksulliseen Chloros+-tilaukseen |
 
 `chloros-cli status` on edelleen käytettävissä ilmaisella tasolla, joten voit aina tarkistaa nykyisen tilauksesi ja syyn, miksi pääsy evättiin.
 
@@ -73,17 +45,9 @@ Jokaisella tilauksella on yläraja sille, kuinka monta LATTICE-kameraa ja DAQ-va
 | Silver | 10 | 6 |
 | Gold | 20 | 12 |
 
-## CLI
+## CLI-kirjautuminen
 
--kirjautuminen
-
-Kirjaudu sisään Chloros
-
-+-tunnuksillasi CLI
-
--käsittelyn ottamiseksi käyttöön. Linux
-
-issa (ilman graafista käyttöliittymää) tämä on ainoa tapa aktivoida lisenssisi.
+Kirjaudu sisään Chloros+-tunnuksillasi CLI-käsittelyn ottamiseksi käyttöön. Linux issa (ilman graafista käyttöliittymää) tämä on ainoa tapa aktivoida lisenssisi.
 
 **Syntaksi:**
 
@@ -92,15 +56,7 @@ chloros-cli login <email> <password>
 ```
 
 {% hint style="info" %}
-**SDK
-
--käyttäjät**: Python
-
--SDK
-
-tarjoaa myös ohjelmointimenetelmän `logout()` välimuistissa olevien tunnistetietojen tyhjentämiseen. Katso lisätietoja [SDK
-
--viitteestä](reference/sdk-reference.md).
+**SDK-käyttäjät**: Python-SDK tarjoaa myös ohjelmointimenetelmän `logout()` välimuistissa olevien tunnistetietojen tyhjentämiseen. Katso lisätietoja [SDK-viitteestä](reference/sdk-reference.md).
 {% endhint %}
 
 **Esimerkki:**
@@ -127,23 +83,13 @@ Välimuistiin tallennetut tunnistetiedot ja asetukset tallennetaan käyttäjän 
 | **Windows** | `%USERPROFILE%\.chloros\` |
 | **Linux** | `~/.chloros/` |
 
-Uudemman version asentaminen olemassa olevan version päälle säilyttää kirjautumistietosi Windows
-
-issa (asennusohjelma) ja Linux
-
-issa (`.deb`, mukaan lukien `chloros-cli update`). Chloros
-
-in poistaminen — tai Linux
-
--paketin poistaminen — tyhjentää välimuistissa olevan kirjautumistiedon, joten sinun on kirjauduttava uudelleen sisään uuden asennuksen jälkeen.
+Uudemman version asentaminen olemassa olevan version päälle säilyttää kirjautumistietosi Windows issa (asennusohjelma) ja Linux issa (`.deb`, mukaan lukien `chloros-cli update`). Chloros in poistaminen — tai Linux-paketin poistaminen — tyhjentää välimuistissa olevan kirjautumistiedon, joten sinun on kirjauduttava uudelleen sisään uuden asennuksen jälkeen.
 
 ### Tilauksen voimassaolon päättyminen ja offline-armonjakso
 
 GUI:ssa näkyvä tilauksen voimassaolon päättymispäivä osoittaa, milloin lisenssisi menettää voimassaolonsa. Toistuvien kuukausitilauksien voimassaolo päättyy kuukauden lopussa; vuositilauksissa voimassaolo päättyy vuoden kuluttua tilauksen aloittamisesta.
 
-Chloros
-
-tarkistaa lisenssisi verkossa, mutta offline-käyttö on tuettu siirtymäajan puitteissa:
+Chloros tarkistaa lisenssisi verkossa, mutta offline-käyttö on tuettu siirtymäajan puitteissa:
 
 * Onnistuneet palvelintarkistukset tallennetaan välimuistiin **5 minuutiksi**, joten normaalikäytössä lisenssikyselyjä tarvitaan hyvin vähän.
 * Allekirjoitettu, laitteeseen sidottu lisenssivälimuisti kattaa pidemmät offline-jaksot: **30 päivää kuukausitilauksissa**ja**vuosittaisissa tilauksissa tilauksen voimassaolon päättymispäivään asti (enintään 365 päivää)**.
@@ -151,13 +97,7 @@ tarkistaa lisenssisi verkossa, mutta offline-käyttö on tuettu siirtymäajan pu
 
 ### Laiterajoitus
 
-Jokainen Chloros
-
-+-sopimus tarjoaa eri määrän rekisteröityjä laitteita. Jokainen laite, johon kirjaudut Chloros
-
-+-tililläsi, lasketaan mukaan rekisteröityjen laitteiden määrään. Voit nimetä laitteen uudelleen ja poistaa sen MAPIR
-
--pilvipalvelun tilisivulta.
+Jokainen Chloros+-sopimus tarjoaa eri määrän rekisteröityjä laitteita. Jokainen laite, johon kirjaudut Chloros+-tililläsi, lasketaan mukaan rekisteröityjen laitteiden määrään. Voit nimetä laitteen uudelleen ja poistaa sen MAPIR-pilvipalvelun tilisivulta.
 
 <table><thead><tr><th width="168.5999755859375" align="right">Chloros-tilaus</th><th align="center">COPPER</th><th align="center">BRONZE</th><th align="center">SILVER</th><th align="center">GOLD</th></tr></thead><tbody><tr><td align="right">Tuetut laitteet</td><td align="center">2</td><td align="center">2</td><td align="center">5</td><td align="center">10</td></tr></tbody></table>
 

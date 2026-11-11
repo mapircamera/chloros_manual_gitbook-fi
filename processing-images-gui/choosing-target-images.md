@@ -159,7 +159,7 @@ Jos Chloros ei tunnista kohteitasi oikein, säädä näitä asetuksia kohdassa [
 **Mahdolliset syyt:**
 
 * Kohdekuvia ei ole merkitty tiedostoselaimessa
-* Kohde on liian pieni kuvassa (&lt; 30 % kuvasta)
+* Kohde on liian pieni kuvassa (< 30 % kuvasta)
 * Huono valaistus (varjot, häikäisy)
 * Kohteen tunnistuksen asetukset ovat liian tiukat
 

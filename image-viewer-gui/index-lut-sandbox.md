@@ -77,7 +77,7 @@ Kuva piirretään **harmaasävyisenä**, venytettynä kahden kynnysarvon välill
 
 ### LUT:n lisääminen
 
-1. Napsauta kaavan alla olevaa **&quot;+ Lisää LUT&quot;**-painiketta (<img src="../.gitbook/assets/image (1) (1) (1).png" alt="" data-size="line">)
+1. Napsauta kaavan alla olevaa **"+ Lisää LUT"**-painiketta (<img src="../.gitbook/assets/image (1) (1) (1).png" alt="" data-size="line">)
 2. Valitse värigradientti
 3. Aseta leikkauksen minimi- ja maksimiarvot
 4. Valitse leikkausmoodi
@@ -99,7 +99,7 @@ Vie hiiri **gradienttipalkin**päälle avataksesi esiasetusluettelon — Chloros
 | 6 | Violetti → Blue → Green → Keltainen      | Peräkkäin, tummasta vaaleaan                                           |
 | 7 | Orange → Valkoinen → Violetti             | Hajaantuva vaalean keskipisteen ympärillä                                   |
 
-**Hajautuva**väriliukuma sijoittaa neutraalin värin ikkunan keskelle, mikä toimii hyvin, kun keskipisteellä on merkitystä (kynnysarvo, viitepäivämäärä).**Peräkkäinen** väriliukuma kulkee yksitoikkoisesti tummasta vaaleaan, mikä toimii hyvin suureille, joilla on vain &quot;enemmän&quot; ja &quot;vähemmän&quot;.
+**Hajautuva**väriliukuma sijoittaa neutraalin värin ikkunan keskelle, mikä toimii hyvin, kun keskipisteellä on merkitystä (kynnysarvo, viitepäivämäärä).**Peräkkäinen** väriliukuma kulkee yksitoikkoisesti tummasta vaaleaan, mikä toimii hyvin suureille, joilla on vain "enemmän" ja "vähemmän".
 
 Jokaisessa esiasetuksessa on seitsemän väripistettä. Napsauta esiasetusta, niin kuva päivittyy välittömästi (kun LUT-ruutu on valittuna).
 

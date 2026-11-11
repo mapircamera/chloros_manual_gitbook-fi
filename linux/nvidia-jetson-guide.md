@@ -1,8 +1,6 @@
 # NVIDIA Jetson -opas NVIDIA Jetsonilla toimiva
 
-Chloros
-mahdollistaa monispektrisen kuvankäsittelyn reuna-laitteissa — kentällä, lennokeissa ja etäasennuksissa. Chloros
-1.3.0 tunnistaa Jetson-mallisi käynnistyksen yhteydessä ja optimoi käsittelystrategiansa löydetyn laitteiston mukaan. **Manuaalista säätämistä ei tarvita.**
+Chloros mahdollistaa monispektrisen kuvankäsittelyn reuna-laitteissa — kentällä, lennokeissa ja etäasennuksissa. Chloros 1.3.0 tunnistaa Jetson-mallisi käynnistyksen yhteydessä ja optimoi käsittelystrategiansa löydetyn laitteiston mukaan. **Manuaalista säätämistä ei tarvita.**
 {% hint style="info" %}
 **Jetson-paketti 1.3.0 suorittaa käsittelyn Jetsonin GPU:lla.** `chloros_1.3.0_arm64_jp6.deb` on kehitetty JetPack 6:lle ja käyttää JetPack 6:n CUDA-rakennetta PyTorchista, joten käsittely, mukaan lukien Texture Aware -debayer, suoritetaan Orinin GPU:lla. Paketti ei sisällä itse CUDAa: se käyttää JetPack 6:n asentamia CUDA- ja cuDNN-kirjastoja (`sudo apt install nvidia-jetpack` kuvassa, josta ne puuttuvat). Jos CUDA-grafiikkaprosessoria ei ole käytettävissä, käsittely tapahtuu CPU:lla ja Texture Aware käyttää Standard-debayeria.
 {% endhint %}
@@ -18,8 +16,7 @@ mahdollistaa monispektrisen kuvankäsittelyn reuna-laitteissa — kentällä, le
 | **Jetson Orin Nano** | 8 Gt jaettua     | `GPU_SINGLE` (1 työntekijä, peräkkäinen)                     | Perustason reunalaskenta                                 |
 
 {% hint style="info" %}
-Linux
--arm64-paketti vaatii **JetPack 6**:n, joka on saatavilla Jetson Orin -tuoteperheessä. Vanhemmat mallit (Nano, TX2, Xavier NX) eivät tue JetPack 6:ta, eikä nykyinen paketti tue niitä.
+Linux-arm64-paketti vaatii **JetPack 6**:n, joka on saatavilla Jetson Orin -tuoteperheessä. Vanhemmat mallit (Nano, TX2, Xavier NX) eivät tue JetPack 6:ta, eikä nykyinen paketti tue niitä.
 {% endhint %}
 
 ***
@@ -28,10 +25,7 @@ Linux
 
 * **JetPack 6.x** (suositellaan uusinta versiota)
 * **NVIDIA CUDA ja cuDNN** JetPack 6:sta (`sudo apt install nvidia-jetpack`, jos ne puuttuvat kuvastasi)
-* **Maksullinen Chloros
-+ -sopimus** — Copper-taso tai korkeampi (vaaditaan kaikkeen CLI
-- ja SDK
--käyttöön; valvotaan palvelinpuolella)
+* **Maksullinen Chloros+ -sopimus** — Copper-taso tai korkeampi (vaaditaan kaikkeen CLI- ja SDK-käyttöön; valvotaan palvelinpuolella)
 
 ## Asennus
 
@@ -48,15 +42,10 @@ python3 -c "import chloros_sdk; print(chloros_sdk.__version__)"   # the .deb ins
 chloros-cli selftest
 ```
 
-`.deb` asentaa tämän rakennuksen kanssa yhteensopivan Python
--SDK
-:n järjestelmään `python3`. Vain virtualenv-ympäristöön on asennettava mukana toimitettu wheel-tiedosto: `pip install /usr/lib/chloros/sdk/chloros_sdk-*.whl` (täysin offline-tilassa). Yleisiä Linux
--asennuksen yksityiskohtia, tiedostojen sijainteja ja vianmääritystä koskevat ohjeet löytyvät kohdasta [Linux
--asennus](linux-installation.md).
+`.deb` asentaa tämän rakennuksen kanssa yhteensopivan Python-SDK:n järjestelmään `python3`. Vain virtualenv-ympäristöön on asennettava mukana toimitettu wheel-tiedosto: `pip install /usr/lib/chloros/sdk/chloros_sdk-*.whl` (täysin offline-tilassa). Yleisiä Linux-asennuksen yksityiskohtia, tiedostojen sijainteja ja vianmääritystä koskevat ohjeet löytyvät kohdasta [Linux-asennus](linux-installation.md).
 
 {% hint style="info" %}
-**Ei enää purkamista käynnistyksen yhteydessä.** Versiosta 1.3.0 lähtien taustapalvelu ja CLI
--sovellus asennetaan purkamattomina kansioon `/usr/lib/chloros/`, joten ne eivät enää pura itseään väliaikaiseen kansioon joka kerta käynnistyessään. Väliaikaiset tiedostot tallennetaan edelleen automaattisesti kansioon `/mnt/ssd/tmp`, jos kyseinen kansio on olemassa; muussa tapauksessa voit määrittää `TMPDIR`:n poluksi NVMe-asemallasi (`export TMPDIR=/mnt/nvme/tmp`).
+**Ei enää purkamista käynnistyksen yhteydessä.** Versiosta 1.3.0 lähtien taustapalvelu ja CLI-sovellus asennetaan purkamattomina kansioon `/usr/lib/chloros/`, joten ne eivät enää pura itseään väliaikaiseen kansioon joka kerta käynnistyessään. Väliaikaiset tiedostot tallennetaan edelleen automaattisesti kansioon `/mnt/ssd/tmp`, jos kyseinen kansio on olemassa; muussa tapauksessa voit määrittää `TMPDIR`:n poluksi NVMe-asemallasi (`export TMPDIR=/mnt/nvme/tmp`).
 {% endhint %}
 
 ***
@@ -65,8 +54,7 @@ chloros-cli selftest
 
 ### Miten se toimii
 
-Käynnistyksen yhteydessä Chloros
-luo järjestelmästäsi profiilin:
+Käynnistyksen yhteydessä Chloros luo järjestelmästäsi profiilin:
 
 1. **Tunnistaa Jetson-mallin** `/proc/device-tree/model`:n kautta
 2. **Lukee käytettävissä olevan jaetun GPU-/CPU-muistin** (Jetson käyttää yhtenäistettyä muistia)
@@ -110,13 +98,10 @@ Katso täydellinen laskentatehon mukautusohje [Dynamic Compute Adaptation](../pr
 
 ## GPU:n taajuusrajoitus Texture Aware -toiminnolle Nano- ja Orin Nano -malleissa
 
-Texture Aware -debayer suorittaa GPU:n neuroverkkojen päättelyä, mikä voi laukaista **ylivirta-varoituksia**matalatehoisissa Jetson-malleissa (10–15 W:n luokka) GPU:n täydellä kellotaajuudella. Kun välität `--debayer texture-aware`:n**Jetson Nano- tai Orin Nano -laitteessa**, CLI
-tarkistaa GPU:n enimmäistaajuuden ja rajoittaa sen arvoon **510 MHz** (510000000), jos se on tällä hetkellä korkeampi:
+Texture Aware -debayer suorittaa GPU:n neuroverkkojen päättelyä, mikä voi laukaista **ylivirta-varoituksia**matalatehoisissa Jetson-malleissa (10–15 W:n luokka) GPU:n täydellä kellotaajuudella. Kun välität `--debayer texture-aware`:n**Jetson Nano- tai Orin Nano -laitteessa**, CLI tarkistaa GPU:n enimmäistaajuuden ja rajoittaa sen arvoon **510 MHz** (510000000), jos se on tällä hetkellä korkeampi:
 
-* Jos CLI
-:n on mahdollista kirjoittaa GPU:n taajuuden sysfs-solmuun, rajoitus **otetaan käyttöön automaattisesti** ja näyttöön tulostetaan vahvistus.
-* Jos ei (vaatii root-oikeudet), CLI
-tulostaa tarkan `sudo`-komennon rajoituksen asettamiseksi manuaalisesti, odottaa hetken, jotta voit lukea sen, ja jatkaa sitten — käsittely jatkuu, mutta saattaa näyttää ylivirta-varoituksia.
+* Jos CLI:n on mahdollista kirjoittaa GPU:n taajuuden sysfs-solmuun, rajoitus **otetaan käyttöön automaattisesti** ja näyttöön tulostetaan vahvistus.
+* Jos ei (vaatii root-oikeudet), CLI tulostaa tarkan `sudo`-komennon rajoituksen asettamiseksi manuaalisesti, odottaa hetken, jotta voit lukea sen, ja jatkaa sitten — käsittely jatkuu, mutta saattaa näyttää ylivirta-varoituksia.
 
 Voit asettaa rajoituksen itse ennen käsittelyä seuraavasti:
 
@@ -127,20 +112,18 @@ echo 510000000 | sudo tee /sys/devices/platform/bus@0/17000000.gpu/devfreq/17000
 Suuremman tehon mallit (Orin NX 25W, AGX Orin 60W) toimivat täydellä GPU-nopeudella; rajoitusta ei sovelleta. Standard-debayer ei koskaan laukaise rajoitusta missään mallissa.
 
 {% hint style="info" %}
-**Texture Aware -tila Jetsonissa käsittelee aina yhden kuvan kerrallaan.** Jokainen työntekijä tarvitsisi oman CUDA-kontekstin (~1 GB) sekä oman kopionsa kohinanpoistomallista, mihin yhtenäinen muisti ei riitä — joten Jetsonissa Texture Aware -polku on kiinnitetty yhteen työntekijään, jonka GPU-käyttö on sarjoitettu. Texture Aware on odotettavasti huomattavasti hitaampi kuin Standard kaikilla Jetson-laitteilla. Texture Aware -tila koskee Survey3
--kuvia: LATTICE-kaappaukset käsitellään aina Standard-debayerin avulla. Ilman käyttökelpoista CUDA-GPU:ta suoritus käyttää Standard-tilaa, ja taustaprosessi kirjaa yhden `[DEBAYER] … needs a CUDA GPU …`-rivin, jossa selitetään syy (esitetty kuvassa `chloros-cli --verbose`).
+**Texture Aware -tila Jetsonissa käsittelee aina yhden kuvan kerrallaan.** Jokainen työntekijä tarvitsisi oman CUDA-kontekstin (~1 GB) sekä oman kopionsa kohinanpoistomallista, mihin yhtenäinen muisti ei riitä — joten Jetsonissa Texture Aware -polku on kiinnitetty yhteen työntekijään, jonka GPU-käyttö on sarjoitettu. Texture Aware on odotettavasti huomattavasti hitaampi kuin Standard kaikilla Jetson-laitteilla. Texture Aware -tila koskee Survey3-kuvia: LATTICE-kaappaukset käsitellään aina Standard-debayerin avulla. Ilman käyttökelpoista CUDA-GPU:ta suoritus käyttää Standard-tilaa, ja taustaprosessi kirjaa yhden `[DEBAYER] … needs a CUDA GPU …`-rivin, jossa selitetään syy (esitetty kuvassa `chloros-cli --verbose`).
 {% endhint %}
 
 ***
 
 ## Lämmönhallinta
 
-Jetson-laitteiden lämmönvaranto on rajallinen, etenkin suljetuissa tiloissa tai ilmakäytössä. Chloros
-valvoo SoC:n lämpötilaa ja rajoittaa eräkokoja automaattisesti:
+Jetson-laitteiden lämmönvaranto on rajallinen, etenkin suljetuissa tiloissa tai ilmakäytössä. Chloros valvoo SoC:n lämpötilaa ja rajoittaa eräkokoja automaattisesti:
 
 | Lämpötila         | Toimenpide                                            |
 | ------------------- | ------------------------------------------------- |
-| **&lt; 70 °C**          | Normaali toiminta — täysi prosessointinopeus          |
+| **< 70 °C**          | Normaali toiminta — täysi prosessointinopeus          |
 | **70 °C** (Varoitus)  | Erän koko pienenee asteittain (100 % → 50 % välillä 70 °C – 80 °C) |
 | **80 °C** (Kriittinen) | Voimakas rajoitus (50 % → 0 % välillä 80 °C – 90 °C) |
 | **90 °C** (Sammutus) | GPU-käsittely pysäytetään kokonaan — jäähdytys vaaditaan |
@@ -187,8 +170,7 @@ echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
 
 ### OOM (Out of Memory) -tilanteiden käsittely
 
-Käsittelyn aikana Chloros
-valvoo GPU:n muistia ja hidastaa toimintaa sujuvasti kaatumisen sijaan:
+Käsittelyn aikana Chloros valvoo GPU:n muistia ja hidastaa toimintaa sujuvasti kaatumisen sijaan:
 
 1. Kun GPU:n muistin käyttöaste ylittää **85 %**, eräkokoja pienennetään ennaltaehkäisevästi
 2. Jos muistin loppumistilanne silti tapahtuu, eräkoko **puolitetaan** ja puolitetaan uudelleen jokaisen peräkkäisen OOM-tilanteen yhteydessä; jokainen sen jälkeen onnistunut erä siirtää tämän rajoituksen yhden askeleen taaksepäin
@@ -216,12 +198,9 @@ Suunnittele virrankulutus jatkuvaa prosessointia varten — suurin virrankulutus
 * SD-kortit ovat liian hitaita prosessointiin — käytä niitä vain käynnistysvälineenä
 * Varaa prosessoidulle tulokselle 2–3-kertainen tila raakakuvadatan kokoon verrattuna
 
-### Päätön käyttö SSH
-:n kautta
+### Päätön käyttö SSH:n kautta
 
-Chloros
--CLI
-on ihanteellinen päätön Jetson-käyttöönottoihin:
+Chloros-CLI on ihanteellinen päätön Jetson-käyttöönottoihin:
 
 ```bash
 # SSH into the Jetson
@@ -236,16 +215,14 @@ chloros-cli export-status
 
 ### Jatkuvasti päällä oleva taustapalvelu LATTICE- ja DAQ-E-aikasynkronointia varten
 
-Jos Jetson ohjaa LATTICE-kameroita tai DAQ-E-valosensoreita ilman näyttöä, ota backend-systemd-palvelu käyttöön **omalla käyttäjätunnuksellasi**, jotta PTP-grandmaster toimii jatkuvasti ja SDK
--skriptit löytävät käynnissä olevan backendin (yksikkö on asennettu, mutta sitä ei ole oletusarvoisesti otettu käyttöön):
+Jos Jetson ohjaa LATTICE-kameroita tai DAQ-E-valosensoreita ilman näyttöä, ota backend-systemd-palvelu käyttöön **omalla käyttäjätunnuksellasi**, jotta PTP-grandmaster toimii jatkuvasti ja SDK-skriptit löytävät käynnissä olevan backendin (yksikkö on asennettu, mutta sitä ei ole oletusarvoisesti otettu käyttöön):
 
 ```bash
 sudo systemctl enable --now chloros-backend@$USER.service    # $USER expands to your user name
 chloros-cli time-sync status
 ```
 
-Tällöin taustapalvelu toimii sinun nimissäsi: sen tallentamat tiedot kuuluvat sinulle, ja se käyttää sinun `chloros-cli login`-tunnustasi. Katso [Linux
--asennus](linux-installation.md#always-on-ptp-for-headless-hosts) saadaksesi lisätietoja, mukaan lukien root-käyttäjän `chloros-backend.service` ja siitä, miten paketti tekee PTP-porteista 319/320 sidottavissa ilman root-oikeuksia.
+Tällöin taustapalvelu toimii sinun nimissäsi: sen tallentamat tiedot kuuluvat sinulle, ja se käyttää sinun `chloros-cli login`-tunnustasi. Katso [Linux-asennus](linux-installation.md#always-on-ptp-for-headless-hosts) saadaksesi lisätietoja, mukaan lukien root-käyttäjän `chloros-backend.service` ja siitä, miten paketti tekee PTP-porteista 319/320 sidottavissa ilman root-oikeuksia.
 
 ### Automaattinen käsittely systemd:n avulla
 
@@ -305,9 +282,7 @@ chloros-cli process /data/flights/flight_042 \
     --indices NDVI GNDVI OSAVI
 ```
 
-### Python
--SDK
-Jetsonilla
+### Python-SDK Jetsonilla
 
 ```python
 from chloros_sdk import ChlorosLocal
@@ -351,27 +326,15 @@ Kenttä- ja ilmakäyttöön kannattaa harkita seuraavia Jetson Orin NX 16 GB -ka
 * **Kestävä kenttäkäyttö**: IP67/IP69K-luokan vedenpitävät kotelot, joissa on PoE-GigE-kameraliitäntä
 * **Minimaalinen/edullinen**: Kehittäjäsarjat lisäkoteloilla
 
-Ota yhteyttä [MAPIR
--tukeen](https://www.mapir.camera/community/contact), jos tarvitset laitteistosuosituksia juuri sinun käyttötilanteeseesi.
+Ota yhteyttä [MAPIR-tukeen](https://www.mapir.camera/community/contact), jos tarvitset laitteistosuosituksia juuri sinun käyttötilanteeseesi.
 
 ***
 
 ## Seuraavat vaiheet
 
-* [Linux
--asennus](linux-installation.md) — Yleisiä Linux
--asennustietoja
+* [Linux-asennus](linux-installation.md) — Yleisiä Linux-asennustietoja
 * [Dynaaminen laskentakapasiteetin mukautus](../processing-architecture/dynamic-compute-adaptation.md) — Täydellinen laskentastrategiaopas
 * [Käsittelyputki](../processing-architecture/processing-pipeline.md) — 4-säikeisen käsittelyputken ymmärtäminen
-* [CLI
-: komentorivi](../CLI.md) — CLI
--opas
-* [API
-: Python
--SDK
-](../api-python-sdk.md) — SDK
--opas
-* [CLI
--viite](../reference/cli-reference.md) ja [SDK
--viite](../reference/sdk-reference.md) — Kattavat komento- ja API
--luettelot versioon 1.3.0
+* [CLI: komentorivi](../CLI.md) — CLI-opas
+* [API: Python-SDK](../api-python-sdk.md) — SDK-opas
+* [CLI-viite](../reference/cli-reference.md) ja [SDK-viite](../reference/sdk-reference.md) — Kattavat komento- ja API-luettelot versioon 1.3.0

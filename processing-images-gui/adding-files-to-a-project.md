@@ -26,18 +26,18 @@ Kuvia voi lisätä projektiin pääasiassa kahdella tavalla:
 
 Käytä tätä vaihtoehtoa yksittäisten kuvatiedostojen tai pienen tiedostovalikoiman tuontiin.
 
-1. Napsauta **&quot;Lisää tiedostoja&quot;**-painiketta <img src="../.gitbook/assets/image (3).png" alt="" data-size="line">, joka sijaitsee Tiedostoselaimen paneelin yläosassa
+1. Napsauta **"Lisää tiedostoja"**-painiketta <img src="../.gitbook/assets/image (3).png" alt="" data-size="line">, joka sijaitsee Tiedostoselaimen paneelin yläosassa
 2. Siirry kansioon, jossa kuvasi sijaitsevat
 3. Valitse yksi tai useampi kuvatiedosto (pidä **Ctrl**-näppäintä painettuna valitaksesi useita tiedostoja)
-4. Napsauta **&quot;Avaa&quot;** tuodaksesi valitut tiedostot
+4. Napsauta **"Avaa"** tuodaksesi valitut tiedostot
 
 ### Tapa 2: Lisää kansio
 
 Käytä tätä vaihtoehtoa, kun haluat tuoda kaikki kuvat kansiosta kerralla. Voit valita **useita kansioita** yhdessä valintaikkunassa.
 
-1. Napsauta **&quot;Lisää kansio&quot;**-painiketta <img src="../.gitbook/assets/image (1) (1).png" alt="" data-size="line">, joka sijaitsee Tiedostoselaimen paneelin yläosassa
+1. Napsauta **"Lisää kansio"**-painiketta <img src="../.gitbook/assets/image (1) (1).png" alt="" data-size="line">, joka sijaitsee Tiedostoselaimen paneelin yläosassa
 2. Siirry kansioon tai kansioihin, joissa kuvaussession kuvat sijaitsevat, ja valitse ne
-3. Napsauta **&quot;Valitse kansio&quot;** tuodaksesi kaikki tuetut kuvat
+3. Napsauta **"Valitse kansio"** tuodaksesi kaikki tuetut kuvat
 
 {% hint style="info" %}
 **Tiedostot, joita ei onnistuta lataamaan, raportoidaan.** Jos kansio sisältää tiedostoja, jotka Chloros tunnistaa mutta joita se ei voi ladata, saat siitä varoituksen – kuvat eivät katoa ruudukosta huomaamatta.
@@ -113,7 +113,7 @@ Napsauttamalla taulukon yläoikeassa kulmassa olevaa kytkinpainiketta saat valit
 Voit poistaa tarpeettomia kuvia projektistasi seuraavasti:
 
 1. Valitse yksi tai useampi kuva Tiedostoselaimen taulukosta
-2. Napsauta **&quot;Poista valitut&quot;**-painiketta <img src="../.gitbook/assets/image (2) (1).png" alt="" data-size="line">
+2. Napsauta **"Poista valitut"**-painiketta <img src="../.gitbook/assets/image (2) (1).png" alt="" data-size="line">
 3. Vahvista poisto (tiedostoja ei poisteta levyltä, vaan ne poistetaan vain projektista)
 
 ### Lajittelu ja suodatus

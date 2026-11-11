@@ -66,7 +66,7 @@
 * [Dynaaminen laskentakapasiteetin mukautus](processing-architecture/dynamic-compute-adaptation.md)
 * [Käsittelyputki](processing-architecture/processing-pipeline.md)
 
-## Viite (CLI &amp; SDK)
+## Viite (CLI & SDK)
 
 * [Chloros CLI Viite](reference/cli-reference.md)
 * [Chloros Python SDK Viite](reference/sdk-reference.md)

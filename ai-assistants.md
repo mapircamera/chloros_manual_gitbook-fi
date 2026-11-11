@@ -43,7 +43,7 @@ Palvelimen työkalut kattavat [Python-SDK:n](api-python-sdk.md) toiminnot. Ne as
 claude mcp add chloros -- chloros-mcp
 ```
 
-**Claude Desktop:**lisää tämä tiedostoon `claude_desktop_config.json` (**Asetukset &gt; Kehittäjä &gt; Muokkaa asetuksia**avaa sen) ja käynnistä sitten Claude Desktop uudelleen.**Cursor** käyttää samaa merkintää tiedostossa `~/.cursor/mcp.json`.
+**Claude Desktop:**lisää tämä tiedostoon `claude_desktop_config.json` (**Asetukset > Kehittäjä > Muokkaa asetuksia**avaa sen) ja käynnistä sitten Claude Desktop uudelleen.**Cursor** käyttää samaa merkintää tiedostossa `~/.cursor/mcp.json`.
 
 ```json
 {

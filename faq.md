@@ -27,15 +27,9 @@ Kyllä. Chloros 1.3.0 tukee LATTICE M3C- ja M3M-kameramoduuleja kokonaisuudessaa
 
 <summary>Voinko kalibroida kuvani heijastavuuden suhteen ilman kalibrointikohdetta?</summary>
 
-**Survey3
+**Survey3:** Ei. Ilman kalibrointikohteen kuvaa, joka on otettu samaan aikaan kuin muut kuvat, et voi yhdistää kuvan pikseliarvoja tunnettuun heijastavuusprosenttiin. Jos et myöskään liitä mukaan MAPIR-valosensorin lokitietoja, ympäristön valospektriä ei mitata, eivätkä heijastavuustulokset ole tarkkoja.
 
-:** Ei. Ilman kalibrointikohteen kuvaa, joka on otettu samaan aikaan kuin muut kuvat, et voi yhdistää kuvan pikseliarvoja tunnettuun heijastavuusprosenttiin. Jos et myöskään liitä mukaan MAPIR
-
--valosensorin lokitietoja, ympäristön valospektriä ei mitata, eivätkä heijastavuustulokset ole tarkkoja.
-
-**LATTICE:** Kyllä. Heijastavuus voidaan suhteuttaa paneelin sijaan DAQ-valosensorilla mitattuun alaspäin suuntautuvaan säteilyvoimakkuuteen (ρ = π·L/E). Kun laadunvarmistuksen läpäissyt kohde *on* läsnä kuvakehyksessä, siitä tulee oletusarvoisesti absoluuttinen vertailukohta (`--reflectance-source auto`), ellei se läpäise tarkastusta lippua käyttäen, jolloin kohde ja DAQ-ketjut kilpailevat mitatusta pisteytyksestä. Yksi poikkeus: ”F988-heijastavuus kalibroidaan kuvauskohteessa olevan heijastavuuspaneelin avulla: kaista sijaitsee DAQ-valosensorin kalibroidun alueen ulkopuolella, joten Chloros
-
-käyttää viimeisintä paneelista tallennettua arvoa ja säilyttää sen paneelin havaintojen välillä.” Katso [Kalibrointikohteet](calibration-targets.md).
+**LATTICE:** Kyllä. Heijastavuus voidaan suhteuttaa paneelin sijaan DAQ-valosensorilla mitattuun alaspäin suuntautuvaan säteilyvoimakkuuteen (ρ = π·L/E). Kun laadunvarmistuksen läpäissyt kohde *on* läsnä kuvakehyksessä, siitä tulee oletusarvoisesti absoluuttinen vertailukohta (`--reflectance-source auto`), ellei se läpäise tarkastusta lippua käyttäen, jolloin kohde ja DAQ-ketjut kilpailevat mitatusta pisteytyksestä. Yksi poikkeus: ”F988-heijastavuus kalibroidaan kuvauskohteessa olevan heijastavuuspaneelin avulla: kaista sijaitsee DAQ-valosensorin kalibroidun alueen ulkopuolella, joten Chloros käyttää viimeisintä paneelista tallennettua arvoa ja säilyttää sen paneelin havaintojen välillä.” Katso [Kalibrointikohteet](calibration-targets.md).
 
 </details>
 
@@ -43,9 +37,7 @@ käyttää viimeisintä paneelista tallennettua arvoa ja säilyttää sen paneel
 
 <summary>Tarvitsenko DAQ-valosensorin?</summary>
 
-Ei säteilyvoimakkuuden mittaamiseen: LATTICE-säteilyvoimakkuusvienti perustuu kunkin kameran tehtaalla tehtyyn radiometriseen kalibrointiin, eikä se vaadi DAQ-anturia eikä kohdetta. **Heijastavuuden**mittaamiseen tarvitset vertailukohdan ympäristön valolle — joko DAQ-valosensorin alaspäin suuntautuvan valon mittauksen tai kuvan sisällä olevan kalibrointikohteen. DAQ-anturin avulla voit tuottaa kalibroidun heijastavuuden**asettamatta paneeleita kuvauspaikalle**. Tallennetut `.daq`-tiedostot yhdistetään kuvamateriaaliisi automaattisesti aikaleiman perusteella. Katso [Kalibrointikohteet](calibration-targets.md) ja [CLI
-
--ohjeet](reference/cli-reference.md).
+Ei säteilyvoimakkuuden mittaamiseen: LATTICE-säteilyvoimakkuusvienti perustuu kunkin kameran tehtaalla tehtyyn radiometriseen kalibrointiin, eikä se vaadi DAQ-anturia eikä kohdetta. **Heijastavuuden**mittaamiseen tarvitset vertailukohdan ympäristön valolle — joko DAQ-valosensorin alaspäin suuntautuvan valon mittauksen tai kuvan sisällä olevan kalibrointikohteen. DAQ-anturin avulla voit tuottaa kalibroidun heijastavuuden**asettamatta paneeleita kuvauspaikalle**. Tallennetut `.daq`-tiedostot yhdistetään kuvamateriaaliisi automaattisesti aikaleiman perusteella. Katso [Kalibrointikohteet](calibration-targets.md) ja [CLI-ohjeet](reference/cli-reference.md).
 
 </details>
 
@@ -143,9 +135,7 @@ Kun valitset tiedostoselaimen taulukon oikeassa sarakkeessa kohdekuvat etukätee
 
 <summary>Jos aion ladata kuvani <a href="https://www.mapir.camera/collections/software/products/mapir-cloud-subscription">MAPIR-pilvipalveluun,</a> pitäisikö minun käsitellä ne Chloros-ohjelmassa ennen lataamista?</summary>
 
-Jos aiot ladata kuvat online-käsittelyalustallemme [MAPIR
-
-Cloud](https://www.mapir.camera/collections/software/products/mapir-cloud-subscription), älä muokkaa kuvia ennen lataamista. Cloud suorittaa kaikki samat käsittelyt ja paljon muuta.
+Jos aiot ladata kuvat online-käsittelyalustallemme [MAPIR Cloud](https://www.mapir.camera/collections/software/products/mapir-cloud-subscription), älä muokkaa kuvia ennen lataamista. Cloud suorittaa kaikki samat käsittelyt ja paljon muuta.
 
 </details>
 
@@ -185,9 +175,7 @@ Kyllä! Chloros sisältää [dynaamisen laskentasovituksen](processing-architect
 
 <summary>Mikä on 4-säikeinen käsittelyputki?</summary>
 
-Chloros
-käyttää 4-säikeistä putkiarkkitehtuuria Chloros
-+-käyttäjille: Säie 1 (tunnistus) lataa kuvat ja tunnistaa kalibrointikohteet, säie 2 (kalibrointi) laskee heijastavuuskalibroinnin, säie 3 (käsittely) suorittaa GPU-kiihdytetyn debayeringin ja indeksin laskennan, ja säie 4 (vienti) kirjoittaa tulostustiedostot. Useita kuvia voi olla samanaikaisesti eri säikeissä maksimaalisen suorituskyvyn saavuttamiseksi. Katso lisätietoja kohdasta [Käsittelyputki](processing-architecture/processing-pipeline.md).
+Chloros käyttää 4-säikeistä putkiarkkitehtuuria Chloros+-käyttäjille: Säie 1 (tunnistus) lataa kuvat ja tunnistaa kalibrointikohteet, säie 2 (kalibrointi) laskee heijastavuuskalibroinnin, säie 3 (käsittely) suorittaa GPU-kiihdytetyn debayeringin ja indeksin laskennan, ja säie 4 (vienti) kirjoittaa tulostustiedostot. Useita kuvia voi olla samanaikaisesti eri säikeissä maksimaalisen suorituskyvyn saavuttamiseksi. Katso lisätietoja kohdasta [Käsittelyputki](processing-architecture/processing-pipeline.md).
 
 </details>
 

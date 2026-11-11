@@ -1,17 +1,14 @@
 # Dynaaminen laskentakapasiteetin mukautus
 
-Chloros
-1.3.0 hyödyntää laitteiston tunnistusta ja automaattista käsittelystrategian valintaa. Käsittelymoottori mukautuu laitteistoosi — Jetson Orin Nanosta monen GPU:n työasemaan — ilman manuaalista konfigurointia.
+Chloros 1.3.0 hyödyntää laitteiston tunnistusta ja automaattista käsittelystrategian valintaa. Käsittelymoottori mukautuu laitteistoosi — Jetson Orin Nanosta monen GPU:n työasemaan — ilman manuaalista konfigurointia.
 
 ***
 
 ## Miten se toimii
 
-Kun Chloros
-käynnistyy, se kartoittaa järjestelmän:
+Kun Chloros käynnistyy, se kartoittaa järjestelmän:
 
-1. **Tunnistaa käyttöjärjestelmän** — Windows
-tai Linux
+1. **Tunnistaa käyttöjärjestelmän** — Windows tai Linux
 2. **Tunnistaa CPU-ytimet ja RAM-muistin kokonaismäärän**
 
 3.**Tunnistaa GPU:n läsnäolon** — NVIDIA CUDA -yhteensopivuus, VRAM, malli
@@ -24,19 +21,16 @@ Tunnistettu profiili tallennetaan välimuistiin istunnon ajaksi sekä muistiin e
 
 | Alusta | Välimuistissa oleva profiili |
 | --- | --- |
-| **Linux
-/ Jetson** | `~/.config/chloros/system_config.json` (huomioi `XDG_CONFIG_HOME`) |
+| **Linux / Jetson** | `~/.config/chloros/system_config.json` (huomioi `XDG_CONFIG_HOME`) |
 | **Windows** | `%LOCALAPPDATA%\Chloros\config\system_config.json` |
 
-Poista kyseinen tiedosto, jotta tunnistus suoritetaan uudelleen — tämä on hyödyllistä esimerkiksi GPU:n tai lisää RAM-muistia lisättyäsi. Chloros
-suorittaa tunnistuksen automaattisesti uudelleen myös silloin, kun välimuisti on tallennettu yhteensopimattomalla vanhemmalla versiolla.
+Poista kyseinen tiedosto, jotta tunnistus suoritetaan uudelleen — tämä on hyödyllistä esimerkiksi GPU:n tai lisää RAM-muistia lisättyäsi. Chloros suorittaa tunnistuksen automaattisesti uudelleen myös silloin, kun välimuisti on tallennettu yhteensopimattomalla vanhemmalla versiolla.
 
 ***
 
 ## Laskentastrategiat
 
-Chloros
-valitsee laitteistosi perusteella yhden kolmesta laskentastrategiasta:
+Chloros valitsee laitteistosi perusteella yhden kolmesta laskentastrategiasta:
 
 | Strategia | Valitaan, kun | Työntekijät | Suorittaja | Putki |
 | --- | --- | --- | --- | --- |
@@ -50,11 +44,7 @@ Esimerkkejä `GPU_PARALLEL`-työntekijäkaavasta: 12 Gt VRAM → 2 työntekijä�
 **GPU-strategiat edellyttävät CUDA:ta tukevaa PyTorchia.** Laite, jonka PyTorchissa ei ole käytettävissä olevaa CUDA-laitetta, saa luokituksen `CPU_PARALLEL` riippumatta sen GPU:sta. Jetson-paketti 1.3.0 käyttää JetPack 6:n CUDA-rakennetta PyTorchista, joten Jetson täyttää vaatimukset, kunhan JetPackin CUDA- ja cuDNN-kirjastot on asennettu. Jetson, jonka RAM-muisti on alle 12 GB, käsittelee aina yhden kuvan kerrallaan prosessin aikana (kirjataan virhelokiksi `GPU_SINGLE`).
 {% endhint %}
 
-GPU-strategiat käyttävät työprosessien joukkoa, joista kukin on erillinen käyttöjärjestelmäprosessi omalla CUDA-kontekstillaan. Chloros
-käynnistää ne käynnistämällä uudelleen oman asennetun taustaohjelmansa (ei Python
-in `multiprocessing`:n kautta, jonka työprosessien käynnistys ei toimi pakatun sovelluksen sisällä). CPU-strategia käyttää säiepoolia (Python
-in `ThreadPoolExecutor`). Chloros
-ei käytä mitään kolmannen osapuolen hajautettua kehystä (kuten Rayta).
+GPU-strategiat käyttävät työprosessien joukkoa, joista kukin on erillinen käyttöjärjestelmäprosessi omalla CUDA-kontekstillaan. Chloros käynnistää ne käynnistämällä uudelleen oman asennetun taustaohjelmansa (ei Python in `multiprocessing`:n kautta, jonka työprosessien käynnistys ei toimi pakatun sovelluksen sisällä). CPU-strategia käyttää säiepoolia (Python in `ThreadPoolExecutor`). Chloros ei käytä mitään kolmannen osapuolen hajautettua kehystä (kuten Rayta).
 
 ### Putkityypit
 
@@ -75,8 +65,7 @@ Aseta `CHLOROS_STRATEGY`-ympäristömuuttuja pakottaaksesi tietyn strategian —
 CHLOROS_STRATEGY=CPU_PARALLEL chloros-cli process ~/datasets/flight001
 ```
 
-Muuttujan tunnistuksessa ei oteta huomioon kirjainkokoa; kaikki muut kuin nämä kolme nimeä ohitetaan ja automaattinen tunnistus etenee normaalisti. Ohituksen ollessa käytössä Chloros
-valitsee edelleen työntekijämäärän puolestasi:
+Muuttujan tunnistuksessa ei oteta huomioon kirjainkokoa; kaikki muut kuin nämä kolme nimeä ohitetaan ja automaattinen tunnistus etenee normaalisti. Ohituksen ollessa käytössä Chloros valitsee edelleen työntekijämäärän puolestasi:
 
 | Ohitus | Käytetty työntekijämäärä |
 | --- | --- |
@@ -124,8 +113,7 @@ Erilliset GPU:t varaavat järjestelmälle vain 0,5 GB, koska ne eivät jaa järj
 
 ## Dynaaminen GPU-muistin allokointi
 
-Chloros
-käyttää [4-säikeistä käsittelyputkea](processing-pipeline.md):
+Chloros käyttää [4-säikeistä käsittelyputkea](processing-pipeline.md):
 
 * **Säie 1** (Tunnistus) — Kuvan lataaminen, EXIF-tietojen jäsentäminen, kohteen tunnistus
 * **Säie 2** (Kalibrointi) — Heijastavuuskalibroinnin laskenta
@@ -152,26 +140,23 @@ Suoritusaikana tosiasiallisesti käytetty arvo on alusta-profiilin allokoinnin j
 
 ## Tekstuuritietoinen käsittely
 
-Texture Aware -debayer (**vain Chloros
-+** — `--debayer texture-aware`) käyttää AI/ML-kohinanpoistomallia, joka tarvitsee kopioittain noin 1,75 GB VRAM-muistia FP16-muodossa, joten se käyttää huomattavasti enemmän GPU-muistia kuin Standard-menetelmä:
+Texture Aware -debayer (**vain Chloros+** — `--debayer texture-aware`) käyttää AI/ML-kohinanpoistomallia, joka tarvitsee kopioittain noin 1,75 GB VRAM-muistia FP16-muodossa, joten se käyttää huomattavasti enemmän GPU-muistia kuin Standard-menetelmä:
 
 * Järjestelmät, joissa on **alle 7 Gt VRAM-muistia**, käsittelevät tekstuuritietoista käsittelyä**synkronisessa silmukassa, yksi kuva kerrallaan** — useita mallikopioita ei mahdu kerralla, ja työryhmä vain lisäisi kilpailua
 * Järjestelmät, joissa on **7 GB tai enemmän VRAM-muistia**, voivat käsitellä Texture Aware -toimintoa samanaikaisesti, vaikkakin Standard-menetelmään verrattuna pienemmällä työntekijämäärällä
 * **Jetson**-laitteilla Texture Aware on aina kiinnitetty yhteen työntekijään
 * Jos **käytettävissä ei ole CUDA-GPU:ta**, suoritus käyttää Standard-debayeria, ja taustapalvelu kirjaa lokiin yhden `[DEBAYER] … needs a CUDA GPU …`-rivin, jossa selitetään syy
-* Vähävirtaisissa Jetson-laitteissa (Nano, Orin Nano) CLI
-asettaa GPU:n taajuudelle ylärajan, kun pyydät Texture Aware -toimintoa — katso [NVIDIA Jetson -opas](../linux/nvidia-jetson-guide.md#gpu-frequency-cap-for-texture-aware-on-nano-and-orin-nano)
+* Vähävirtaisissa Jetson-laitteissa (Nano, Orin Nano) CLI asettaa GPU:n taajuudelle ylärajan, kun pyydät Texture Aware -toimintoa — katso [NVIDIA Jetson -opas](../linux/nvidia-jetson-guide.md#gpu-frequency-cap-for-texture-aware-on-nano-and-orin-nano)
 
 ***
 
 ## Lämmönhallinta (Jetson)
 
-Jetson-laitteilla on lämpörajoituksia, erityisesti suljetuissa tai lentokoneissa käytettävissä asennuksissa. Chloros
-valvoo Jetsonin sisäisiä lämpötila-antureita ja skaalaa eräkokoja automaattisesti:
+Jetson-laitteilla on lämpörajoituksia, erityisesti suljetuissa tai lentokoneissa käytettävissä asennuksissa. Chloros valvoo Jetsonin sisäisiä lämpötila-antureita ja skaalaa eräkokoja automaattisesti:
 
 | Lämpötila | Reaktio |
 | --- | --- |
-| **&lt; 70 °C** | Normaali toiminta — täysi nopeus |
+| **< 70 °C** | Normaali toiminta — täysi nopeus |
 | **70 °C** (Varoitus) | Erän koko pienenee asteittain (100 % → 50 % välillä 70 °C – 80 °C) |
 | **80 °C** (Kriittinen) | Voimakas tehonrajoitus (50 % → 0 % välillä 80 °C – 90 °C) |
 | **90 °C** (Sammutus) | GPU-käsittely lopetetaan kokonaan |
@@ -182,11 +167,9 @@ Riittävän jäähdytyksen omaavissa pöytätietokoneissa lämpösäätö laukea
 
 ## Muistin kuormituksen hallinta
 
-Chloros
-valvoo GPU:n muistia jatkuvasti käsittelyn aikana ja reagoi kolmella tasolla.
+Chloros valvoo GPU:n muistia jatkuvasti käsittelyn aikana ja reagoi kolmella tasolla.
 
-**Erän koon määrittäminen.** Erä alkaa 8 kuvasta kerrottuna yllä olevien taulukoiden mukaisella alustakertoimella. Chloros
-tarkistaa sitten vapaan VRAM-muistin, varaa siitä 20 % PyTorchin omalle hallinnalle ja olettaa, että 12 MP:n kuva vie noin 100 Mt GPU-muistia — erän koko on pienempi näistä kahdesta: muistista johdettu raja tai alustan perusarvo. Se ei koskaan laske alle 1:n.
+**Erän koon määrittäminen.** Erä alkaa 8 kuvasta kerrottuna yllä olevien taulukoiden mukaisella alustakertoimella. Chloros tarkistaa sitten vapaan VRAM-muistin, varaa siitä 20 % PyTorchin omalle hallinnalle ja olettaa, että 12 MP:n kuva vie noin 100 Mt GPU-muistia — erän koko on pienempi näistä kahdesta: muistista johdettu raja tai alustan perusarvo. Se ei koskaan laske alle 1:n.
 
 **Ennakoiva pienentäminen.**Kun**VRAM-käyttöaste ylittää 85 %**, eräkokoja pienennetään ennen kuin mitään menee vikaan.**Säikeittäinen allokaation leikkaaminen.** Kun reaaliaikainen käyttöaste nousee, kunkin säikeen GPU-budjettia supistetaan: ×0,75 yli 80 %:n käyttöasteella, ×0,5 yli 90 %:n käyttöasteella. Seurannan raja-arvot ovat 70 % (varovainen), 85 % (normaali toimintaraja) ja 95 % (OOM-riski).**OOM-peruutus ja palautuminen.** Jos muistin loppumistilanne kuitenkin tapahtuu:
 
@@ -194,8 +177,7 @@ tarkistaa sitten vapaan VRAM-muistin, varaa siitä 20 % PyTorchin omalle hallinn
 * aktiivisten säikeiden allokaatiot leikataan 70 %:iin niiden nykyisestä arvosta ja allokoija siirtyy konservatiiviseen strategiaan, jota lievennetään jälleen onnistuneiden allokaatioiden sarjan jälkeen
 * vakavan kuormituksen alla putki siirtyy tilasta `fused_gpu` tilaan `tiled_gpu` ja viimeisenä keinona tilaan `cpu_fallback`
 
-**Isäntäkoneen RAM-muisti (Jetson).** Ennen käsittelyä CLI
-arvioi isäntäkoneen huippumuistin kuvamäärän ja debayer-tilan perusteella ja varoittaa, jos RAM-muisti ja tiedostopohjainen swap-tila eivät todennäköisesti riitä, tulostaen tarkat komennot swap-tilan lisäämiseksi — katso [NVIDIA Jetson -opas](../linux/nvidia-jetson-guide.md#swap-warning-and-recommendations).
+**Isäntäkoneen RAM-muisti (Jetson).** Ennen käsittelyä CLI arvioi isäntäkoneen huippumuistin kuvamäärän ja debayer-tilan perusteella ja varoittaa, jos RAM-muisti ja tiedostopohjainen swap-tila eivät todennäköisesti riitä, tulostaen tarkat komennot swap-tilan lisäämiseksi — katso [NVIDIA Jetson -opas](../linux/nvidia-jetson-guide.md#swap-warning-and-recommendations).
 
 ***
 
@@ -219,22 +201,17 @@ Tarkistus 7 tulostaa `CUDA: <bool>, Denoiser: <bool>` — molempien on oltava to
 
 ### Taustaprosessin lokit
 
-Strategia ja työntekijöiden lukumäärä valitaan taustaprosessissa kunkin ajon alussa — niitä ei ilmoiteta CLI
--bannerissa. Kun jokin toimii odottamattomasti (GPU-polun varasuunnitelma, OOM-virhe, denoiserin latausongelma), se näkyy kyseisen istunnon taustaprosessin lokissa:
+Strategia ja työntekijöiden lukumäärä valitaan taustaprosessissa kunkin ajon alussa — niitä ei ilmoiteta CLI-bannerissa. Kun jokin toimii odottamattomasti (GPU-polun varasuunnitelma, OOM-virhe, denoiserin latausongelma), se näkyy kyseisen istunnon taustaprosessin lokissa:
 
 | Alusta | Lokin sijainti |
 | --- | --- |
-| **Linux
-/ Jetson** | `~/.cache/chloros/logs/backend_<YYYYMMDD_HHMMSS>.log` (yksi tiedosto kutakin käynnistystä kohti) |
-| **Linux
-, CLI
-:llä käynnistetty taustaprosessi** | myös `~/.chloros/backend.log` |
+| **Linux / Jetson** | `~/.cache/chloros/logs/backend_<YYYYMMDD_HHMMSS>.log` (yksi tiedosto kutakin käynnistystä kohti) |
+| **Linux, CLI:llä käynnistetty taustaprosessi** | myös `~/.chloros/backend.log` |
 | **Windows** | `%LOCALAPPDATA%\Chloros\logs\` |
 
 ### Reaaliaikainen edistymisnäyttö
 
-Suorituksen aikana CLI
-näyttää reaaliaikaisen säikeittäisen edistymisen (tunnistus, analysointi, käsittely, vienti), joka välitetään Server-Sent Events -protokollan kautta — tämä on käytännöllinen tapa selvittää, onko säie 3 pullonkaula. Katso [Käsittelyputki](processing-pipeline.md).
+Suorituksen aikana CLI näyttää reaaliaikaisen säikeittäisen edistymisen (tunnistus, analysointi, käsittely, vienti), joka välitetään Server-Sent Events -protokollan kautta — tämä on käytännöllinen tapa selvittää, onko säie 3 pullonkaula. Katso [Käsittelyputki](processing-pipeline.md).
 
 ***
 
@@ -242,8 +219,5 @@ näyttää reaaliaikaisen säikeittäisen edistymisen (tunnistus, analysointi, k
 
 * [Käsittelyputki](processing-pipeline.md) — 4-säikeisen putkiarkkitehtuurin ymmärtäminen
 * [NVIDIA Jetson -opas](../linux/nvidia-jetson-guide.md) — Jetson-laitteille ominaiset käyttöönotto- ja optimointiohjeet
-* [CLI
-: komentorivi](../CLI.md) — CLI
--opas
-* [CLI
--viite](../reference/cli-reference.md) — Kattava komentojen luettelo versioon 1.3.0
+* [CLI: komentorivi](../CLI.md) — CLI-opas
+* [CLI-viite](../reference/cli-reference.md) — Kattava komentojen luettelo versioon 1.3.0

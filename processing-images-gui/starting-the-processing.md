@@ -63,7 +63,7 @@ Chloros toimii kahdessa eri käsittelytilassa lisenssistäsi riippuen:
 2. **Käsittely** – Kalibroinnin soveltaminen ja kuvien vienti**Käsittelyaika:**
 
 * Paljon hitaampi kuin Chloros+:n rinnakkaistilassa
-* Sopii pienille ja keskisuurille aineistoille (&lt; 200 kuvaa)
+* Sopii pienille ja keskisuurille aineistoille (< 200 kuvaa)
 
 ### Chloros+-tila (rinnakkaiskäsittely)
 
@@ -306,7 +306,7 @@ Katso [CLI-viite](../reference/cli-reference.md#a-run-that-writes-no-images-fail
 **Ratkaisut:**
 
 1. Säilytä projektit lyhyemmässä kansiossa — muuta**Työkansio** kohdassa [Projektin asetukset](../project-settings/project-settings.md) ja luo projekti uudelleen, tai
-2. Ota Windowsin pitkät polut käyttöön ja käynnistä Chloros uudelleen: suorita Chloros-asennusohjelma uudelleen, kun **Ota Windowsin pitkät polut käyttöön** -valinta on valittuna (se on valittuna oletuksena), tai käytä ryhmäkäytäntöä: *Tietokoneen kokoonpano &gt; Hallintamallit &gt; Järjestelmä &gt; Tiedostojärjestelmä &gt; Ota Win32-pitkät polut käyttöön*.
+2. Ota Windowsin pitkät polut käyttöön ja käynnistä Chloros uudelleen: suorita Chloros-asennusohjelma uudelleen, kun **Ota Windowsin pitkät polut käyttöön** -valinta on valittuna (se on valittuna oletuksena), tai käytä ryhmäkäytäntöä: *Tietokoneen kokoonpano > Hallintamallit > Järjestelmä > Tiedostojärjestelmä > Ota Win32-pitkät polut käyttöön*.
 
 ### Varoitus ”Kohteita ei havaittu”
 

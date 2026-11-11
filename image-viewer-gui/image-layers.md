@@ -4,11 +4,7 @@ Kuvankatseluohjelman oikeassa yläkulmassa oleva **kerrosvalikko** mahdollistaa 
 
 ## Mitä ovat kuvakerrokset?
 
-Chloros
-
--ohjelmistossa ”kerros” on yksi **tuotetiedosto**, joka on rekisteröity yhtä lähdekuvaa kohden. Tuonti tuo lähdetiedostot; käsittely lisää kerroksen jokaiselle ajon tuottamalle tuotteelle. Viedyt tiedostot säilyttävät lähdetiedoston nimen — tuotteen tunnistaa**kansio**, ja kerroksen nimi on Chloros
-
-in kyseiselle kansiolle antama nimike.
+Chloros-ohjelmistossa ”kerros” on yksi **tuotetiedosto**, joka on rekisteröity yhtä lähdekuvaa kohden. Tuonti tuo lähdetiedostot; käsittely lisää kerroksen jokaiselle ajon tuottamalle tuotteelle. Viedyt tiedostot säilyttävät lähdetiedoston nimen — tuotteen tunnistaa**kansio**, ja kerroksen nimi on Chloros in kyseiselle kansiolle antama nimike.
 
 <!-- SCREENSHOT-NEEDED: Image Viewer full screen with the layer dropdown open on a processed LATTICE multispectral image, showing the full list: TIFF base, RAW (Original), RAW (Debayered), RAW (Preview), RAW (Radiance), RAW (Reflectance), and one RAW (NDVI Index) entry. -->
 
@@ -20,24 +16,12 @@ in kyseiselle kansiolle antama nimike.
 
 | Kerros | Mikä se on |
 | --- | --- |
-| **JPG**(tai**PNG
-
-**/**TIFF
-
-**) | Kaappauksen mukana tullut perustiedosto. Survey3
-
-tuo jokaisen `.RAW`-tiedoston viereen `.JPG`-tiedoston; LATTICE-kaappaukset tuovat PNG
-
-- tai TIFF
-
--esikatselukuvan. Nimetty sen mukaan, mitä tosiasiallisesti tuotiin |
+| **JPG**(tai**PNG**/**TIFF**) | Kaappauksen mukana tullut perustiedosto. Survey3 tuo jokaisen `.RAW`-tiedoston viereen `.JPG`-tiedoston; LATTICE-kaappaukset tuovat PNG- tai TIFF-esikatselukuvan. Nimetty sen mukaan, mitä tosiasiallisesti tuotiin |
 | **RAW (alkuperäinen)** | Lähteenä oleva raakakuva, josta on poistettu bayes-koodaus näyttöä varten ilman korjauksia. Saatavilla heti tuonnin jälkeen — ei vaadi käsittelyä |
 
 LATTICE-kaappauksella, jonka perustiedosto **on** sen raakakuva, ei ole erillistä perustietuetta: `RAW (Original)` kattaa sen jo.
 
-### Survey3
-
-:n käsittelytuotteet
+### Survey3:n käsittelytuotteet
 
 | Kerros | Tallennetaan | Olemassa, kun |
 | --- | --- | --- |
@@ -57,31 +41,19 @@ LATTICE tallentaa fan-out-tiedot näihin tasoihin yhdellä käsittelykierroksell
 
 | Kerros | Tallennetaan | Koskee |
 | --- | --- | --- |
-| **RAW (Debayered)** | `Debayered_Images/` | RGB
-
-- ja monispektriset |
+| **RAW (Debayered)** | `Debayered_Images/` | RGB- ja monispektriset |
 | **RAW (esikatselu)** | `Preview_Images/` | Monispektriset (väärävärinen venytys) |
-| **Valkotasapainotettu** | `Preview_Images/` | RGB
-
--pääkamerat — RGB
-
--esikatselu on rekisteröity tällä nimellä, jotta se vastaa samannimistä Survey3
-
--kerrosta |
+| **Valkotasapainotettu** | `Preview_Images/` | RGB-pääkamerat — RGB-esikatselu on rekisteröity tällä nimellä, jotta se vastaa samannimistä Survey3-kerrosta |
 | **RAW (säteily)** | `Radiance_Images/` | Vain monispektrinen |
 | **RAW (heijastavuus)** | `Reflectance_Calibrated_Images/` | Vain monispektrinen, ja vain silloin, kun vastaava `.daq`-alas suuntautuva tallenne tai laadunvarmistuksen läpäissyt kehyksen sisäinen kohde peittää kehyksen |
 
-RGB
-
--pääkameroissa ei ole kaistakohtaista radiometriaa, joten niiden säteilyvoimakkuus ja heijastavuus ohitetaan merkinnällä **ei sovelleta** — lokitiedostossa ilmoitetaan tästä sen sijaan, että virhe jäisi huomaamatta.
+RGB-pääkameroissa ei ole kaistakohtaista radiometriaa, joten niiden säteilyvoimakkuus ja heijastavuus ohitetaan merkinnällä **ei sovelleta** — lokitiedostossa ilmoitetaan tästä sen sijaan, että virhe jäisi huomaamatta.
 
 {% hint style="info" %}
 **RAW- ja debayeroidut kerrokset ovat linjassa tuotteiden kanssa (uusi ominaisuus versiossa 1.3.0).**LATTICE-RAW- ja debayeroidut tiedostot tallennetaan anturin alkuperäisessä suunnassa, ja niihin tallennetaan XMP-tiedostoon niille kuuluva suunta; muut tuotteet tallennetaan kyseisen suunnan ollessa jo sovellettu. Katseluohjelma ja kuvaruudukko kääntävät**RAW (Original)**- ja**RAW (Debayered)**-kerrokset kyseisen tiedon mukaisesti näyttöä varten, joten kuva ei enää käänny ylösalaisin, kun vaihdat tuotekerroksen ja raakakerroksen välillä. Tämä koskee vain näyttöä — tiedostoja ei koskaan kirjoiteta uudelleen. Tiedostot, joissa ei ole suuntatietoa (otettu ennen versiota 1.3.0 tai tallennettu muulla ohjelmistolla), näytetään tallennetussa muodossaan. Katso [Tulostuskuvamuodot](../output-image-formats.md#orientation).
 {% endhint %}
 
-Clamp-maskit (`*_clampmask.tif` kansiossa `clamp_masks/`) eivät ole kerroksia: Chloros
-
-ohittaa ne tuonnin yhteydessä. Katso [Tulostuskuvamuodot](../output-image-formats.md#clamp-masks).
+Clamp-maskit (`*_clampmask.tif` kansiossa `clamp_masks/`) eivät ole kerroksia: Chloros ohittaa ne tuonnin yhteydessä. Katso [Tulostuskuvamuodot](../output-image-formats.md#clamp-masks).
 
 ### Indeksi-, LUT- ja hiekkalaatikkokerrokset
 
@@ -125,87 +97,41 @@ Zoomaaminen ja panorointi toimivat myös kuvien välillä, mikä helpottaa saman
 
 | Kerros | Näytetty yksikkö | Huomautukset |
 | --- | --- | --- |
-| Perus (JPG / PNG
-
-/ TIFF
-
--esikatselu) | DN, 0–255 | Näyttöarvot, gamma-korjattu RGB
-
-:n mukaan. Vain silmämääräiseen tarkasteluun |
+| Perus (JPG / PNG / TIFF-esikatselu) | DN, 0–255 | Näyttöarvot, gamma-korjattu RGB:n mukaan. Vain silmämääräiseen tarkasteluun |
 | RAW (Alkuperäinen) | DN | Anturin raakadigitaalinumerot. Histogrammin akseli ilmaisee syvyyden: 255 (8-bittinen), 4095 (12-bittinen) tai 65535 (16-bittinen) |
 | RAW (Debayered) | DN | Lineaarinen, ei näytön venytystä |
 | RAW (Esikatselu) / Valkotasapainotettu | DN | Näyttötuote — venytetty tai gamma-korjattu. Ei mittaukseen |
 | RAW (säteilyvoimakkuus) | **W/m²/sr/nm** | Float32-muotoinen fyysinen säteilyvoimakkuus. Ei DN-saraketta |
 | RAW (heijastavuus) | DN **ja %** | Prosenttiosuus laskettu kyseisen tiedoston omalla asteikolla — katso alla |
-| Indeksi / LUT / sandbox-vienti | Indeksiarvo tai RGB
-
--komponentit | Yksikanavainen indeksitiedosto ilmoittaa indeksiarvon; värikartoitettu LUT-tiedosto ilmoittaa Red
-
-/Green
-
-/Blue
-
--komponentit |
+| Indeksi / LUT / sandbox-vienti | Indeksiarvo tai RGB-komponentit | Yksikanavainen indeksitiedosto ilmoittaa indeksiarvon; värikartoitettu LUT-tiedosto ilmoittaa Red /Green /Blue-komponentit |
 
 ### Heijastavuus: asteikko on tiedostokohtainen
 
 {% hint style="warning" %}
-**”Jaa 65 535:llä” pätee vain Survey3
-
-:een.** LATTICE-heijastavuus tallennetaan eri asteikolla, ja näiden kahden jakajan sekoittaminen on yleisin tapa saada heijastavuusarvot, jotka ovat täsmälleen puolet siitä, mitä niiden pitäisi olla.
+**”Jaa 65 535:llä” pätee vain Survey3:een.** LATTICE-heijastavuus tallennetaan eri asteikolla, ja näiden kahden jakajan sekoittaminen on yleisin tapa saada heijastavuusarvot, jotka ovat täsmälleen puolet siitä, mitä niiden pitäisi olla.
 {% endhint %}
 
 | Lähde | DN, joka vastaa heijastavuutta 1,0 | Tunnistettu |
 | --- | --- | --- |
 | **LATTICE**(M3C / M3M) |**32768** | XMP-tunniste `Chloros:PixelScale=32768`, joka on merkitty jokaiseen LATTICE-heijastavuusvientiin. 2×:n liikkumavara tarkoittaa, että ρ-arvo yli 1,0 voidaan esittää leikkaamatta |
-| **Survey3**| **65535** | Ei Chloros
+| **Survey3**| **65535** | Ei Chloros-XMP-asteikotunnistetta — Survey3-kalibrointi tallentaa ρ × dtype-max ja leikkaa arvon 1,0:ssa |
 
--XMP-asteikotunnistetta — Survey3
-
--kalibrointi tallentaa ρ × dtype-max ja leikkaa arvon 1,0:ssa |
-
-GIS-käyttöä ja skriptausta varten: lue tiedostosta `Chloros:PixelScale` ja jaa tulos sillä. Jos tunnistetta ei ole, tiedoston mittakaava on Survey3
-
-(65535). Katseluohjelma, indeksi-/LUT-hiekkalaatikko ja indeksin vienti määrittävät mittakaavan kaikki tällä samalla tavalla, joten kursorin kohdalla näkyvä luku on se, jota indeksin laskennassa on käytetty.
+GIS-käyttöä ja skriptausta varten: lue tiedostosta `Chloros:PixelScale` ja jaa tulos sillä. Jos tunnistetta ei ole, tiedoston mittakaava on Survey3 (65535). Katseluohjelma, indeksi-/LUT-hiekkalaatikko ja indeksin vienti määrittävät mittakaavan kaikki tällä samalla tavalla, joten kursorin kohdalla näkyvä luku on se, jota indeksin laskennassa on käytetty.
 
 Tämän asteikon päälle tallennetaan formaattikohtaiset tiedot:
 
-* **TIFF
-
-(32-bittinen, prosentti)** tallentaa DN / 65535 liukuluvuna
-* **PNG
-
-(8-bittinen)**ja**JPG (8-bittinen)** tallentavat DN × 255 / 65535
+* **TIFF (32-bittinen, prosentti)** tallentaa DN / 65535 liukuluvuna
+* **PNG (8-bittinen)**ja**JPG (8-bittinen)** tallentavat DN × 255 / 65535
 * **8-bittisen kuvan 8-bittinen DN-arvo** tai ennen versiota 1.3.0 tallennettu heijastustiedosto rajataan arvoalueelle 0–255, eikä niissä ole mittakaavatunnistetta. Paneeli näyttää näiden tiedostojen kohdalla vain DN-arvon ilman prosenttisaraketta
 
 ### Indeksiarvojen alueet
 
 | Indeksiryhmä | Tyypillinen alue | Lukema |
 | --- | --- | --- |
-| Normalisoitu ero (NDVI
-
-, GNDVI
-
-, NDRE
-
-, ENDVI…) | −1 – +1 | Terve kasvillisuus yleensä 0,4–0,9; paljas maaperä lähellä 0; vesi negatiivinen |
-| Maaperän mukaan korjattu (SAVI
-
-, OSAVI
-
-, MSAVI2…) | noin −1 – +1,5 | Samanlainen lukema kuin NDVI
-
-, mutta maaperän tausta on vaimennettu |
-| Suhde (GRVI
-
-, GCI
-
-, MSR, CIRE…) | ylärajaa ei ole | Suhdeluvut kasvavat rajattomasti, kun nimittäjäkaista menee nollaan |
-| EVI
-
-/ LAI
-
-| 0 – ~1, 0 – ~3,5 | Pilvet ja muut kyllästyneet pikselit työntävät molemmat arvojen ulkopuolelle — peitä ne ensin |
+| Normalisoitu ero (NDVI, GNDVI, NDRE, ENDVI…) | −1 – +1 | Terve kasvillisuus yleensä 0,4–0,9; paljas maaperä lähellä 0; vesi negatiivinen |
+| Maaperän mukaan korjattu (SAVI, OSAVI, MSAVI2…) | noin −1 – +1,5 | Samanlainen lukema kuin NDVI, mutta maaperän tausta on vaimennettu |
+| Suhde (GRVI, GCI, MSR, CIRE…) | ylärajaa ei ole | Suhdeluvut kasvavat rajattomasti, kun nimittäjäkaista menee nollaan |
+| EVI / LAI | 0 – ~1, 0 – ~3,5 | Pilvet ja muut kyllästyneet pikselit työntävät molemmat arvojen ulkopuolelle — peitä ne ensin |
 
 Katso [Monispektristen indeksien kaavat](../project-settings/multispectral-index-formulas.md) saadaksesi tietää jokaisen esiasetuksen taustalla olevan tarkan kaavan.
 
@@ -236,9 +162,7 @@ Katso [Monispektristen indeksien kaavat](../project-settings/multispectral-index
 1. Valitse **RAW (Reflectance)**
 
 2. Lue**%**-sarake Cursor Values -paneelista — se on jo skaalattu oikein kyseiselle tiedostolle
-3. Tarkista arvot vertailemalla niitä kehyksessä oleviin tunnettuihin materiaaleihin: terve kasvillisuus on korkea NIR
-
--alueella ja matala punaisella; kalibrointikohteen lukeman tulisi olla lähellä sen julkaistua heijastavuusarvoa
+3. Tarkista arvot vertailemalla niitä kehyksessä oleviin tunnettuihin materiaaleihin: terve kasvillisuus on korkea NIR-alueella ja matala punaisella; kalibrointikohteen lukeman tulisi olla lähellä sen julkaistua heijastavuusarvoa
 
 ***
 
@@ -250,25 +174,19 @@ Katso [Monispektristen indeksien kaavat](../project-settings/multispectral-index
 
 * Kuvaa ei ole koskaan käsitelty — vain base- ja `RAW (Original)`-kerrokset ovat olemassa
 * Tuotteen vientikytkin on poistettu valinnasta Projektin asetuksissa
-* Tuotetta ei voida soveltaa kyseiseen kameraan (säteily ja heijastavuus RGB
-
--pääkuvassa; mikä tahansa indeksi yksikaistaisessa M3M-monokamerassa)
+* Tuotetta ei voida soveltaa kyseiseen kameraan (säteily ja heijastavuus RGB-pääkuvassa; mikä tahansa indeksi yksikaistaisessa M3M-monokamerassa)
 * Heijastavuuskalibroinnilla ei ollut mitään, mistä lähteä — ei `.daq`-alaspäin suuntautuvaa peittoa eikä laadunvarmistuksen läpäissyttä kohdetta kuvassa — joten kuva palautui Vignette Corrected- tai Sensor Response -tilaan
 
 **Toimenpiteet**
 
-1. Tarkista ajon loki: Chloros
-
-ilmoittaa, milloin pyydettyä vientituotetta ei voitu tuottaa ja miksi
+1. Tarkista ajon loki: Chloros ilmoittaa, milloin pyydettyä vientituotetta ei voitu tuottaa ja miksi
 2. Tarkista tuotekohtaiset vientivalinnat kohdassa [Projektin asetukset](../project-settings/project-settings.md)
 3. Varmista, että tuotekansio on olemassa projektin tulostuspuussa
 4. Suorita käsittely uudelleen, kun tuote on käytössä
 
 ### Kerrosluettelo näyttää vanhentuneelta
 
-Chloros
-
-skannaa projektin tuotekansiot uudelleen ajon ollessa käynnissä ja korjaa puuttuvat kerrosten rekisteröinnit levyllä olevien tietojen perusteella, joten normaaliin tapaan viety kerros näkyy itsestään kyselyssä. Siirtyminen pois kuvasta ja takaisin pakottaa uuden ratkaisun.
+Chloros skannaa projektin tuotekansiot uudelleen ajon ollessa käynnissä ja korjaa puuttuvat kerrosten rekisteröinnit levyllä olevien tietojen perusteella, joten normaaliin tapaan viety kerros näkyy itsestään kyselyssä. Siirtyminen pois kuvasta ja takaisin pakottaa uuden ratkaisun.
 
 ### Heijastusarvot näyttävät olevan puolet siitä, mitä niiden pitäisi olla
 

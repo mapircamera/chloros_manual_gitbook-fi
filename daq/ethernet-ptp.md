@@ -1,8 +1,6 @@
 # DAQ-E-verkko ja aikasynkronointi
 
-> Anturin fyysinen verkkoasennus – kaapelointi, PoE, IP-osoitteen määrittäminen ja laitteen omat verkkoasetukset – on kuvattu **[DAQ-käyttöoppaassa](https://mapir.gitbook.io/daq/daq-e/network-setup)**. Tällä sivulla käsitellään Chloros
-
--puolta: liitäntää, aikasynkronointia ja toimia, jos laitteen tunnistus ei tuota tulosta.
+> Anturin fyysinen verkkoasennus – kaapelointi, PoE, IP-osoitteen määrittäminen ja laitteen omat verkkoasetukset – on kuvattu **[DAQ-käyttöoppaassa](https://mapir.gitbook.io/daq/daq-e/network-setup)**. Tällä sivulla käsitellään Chloros-puolta: liitäntää, aikasynkronointia ja toimia, jos laitteen tunnistus ei tuota tulosta.
 
 DAQ-E on DAQ-tuoteperheen Ethernet-malli: se saa virran PoE:n kautta, se löydetään mDNS:n avulla (palvelu `_daq-e._tcp`) ja se on osoitettavissa anturin tunnisteesta johdetulla isäntänimellä — `daq-e-<6 hex>.local`, esim. `daq-e-def330.local`. Tällä sivulla käsitellään, miten laite siirtää dataa verkossa ja miten se osallistuu PTP-aikasynkronointiin.
 
@@ -13,35 +11,17 @@ DAQ-E on DAQ-tuoteperheen Ethernet-malli: se saa virran PoE:n kautta, se löydet
 | **Multicast** (oletus) | UDP `239.10.10.10:5002` | Mikä tahansa laite samassa lähiverkossa vastaanottaa saman datavirran | Jokainen datagrammi on CRC-16/CCITT-validoitu |
 | **Raw** | TCP-portti `5000` | Täsmälleen yksi asiakas (yksinomainen) | Täysin yhteensopiva DAQ-U:n kanssa tavutason |
 
-Chloros
-
-käyttää oletuksena multicastia, minkä ansiosta GUI, CLI
-
-ja SDK
-
-voivat kaikki seurata yhtä anturia samanaikaisesti.
+Chloros käyttää oletuksena multicastia, minkä ansiosta GUI, CLI ja SDK voivat kaikki seurata yhtä anturia samanaikaisesti.
 
 ## Verkkoedellytykset
 
-* **Sama lähetysalue.** Chloros
-
--ohjelmistoa ajavan koneen on oltava samassa L2-verkko-osassa kuin anturi — mDNS-hakutoiminto ei läpäise reitittimiä.
-* **Palomuuri.** Windows
-
-issa asennusohjelma lisää jokaiseen verkkoprofiiliin **Chloros
-
-Backend (UDP-In)**-palomuurisäännön, joka kattaa DAQ-E-tiedot (UDP 5002), mDNS:n (UDP 5353) ja PTP:n (UDP 319/320), sekä**Chloros
-
-Backend (TCP-In)** -säännön, joka on rajoitettu paikalliseen aliverkkoon ja koskee DAQ-E:n yhteyttä tietokoneeseen laiteohjelmiston päivityksen aikana. Linux
-
-issa `.deb` avaa UDP-portit `ufw`:ssä tai `firewalld`:ssä, kun kyseinen palomuuri on aktiivinen asennuksen aikana. Kolmannen osapuolen palomuurissa tai myöhemmin käyttöönotetussa palomuurissa samat portit on sallittava.
+* **Sama lähetysalue.** Chloros-ohjelmistoa ajavan koneen on oltava samassa L2-verkko-osassa kuin anturi — mDNS-hakutoiminto ei läpäise reitittimiä.
+* **Palomuuri.** Windows issa asennusohjelma lisää jokaiseen verkkoprofiiliin **Chloros Backend (UDP-In)**-palomuurisäännön, joka kattaa DAQ-E-tiedot (UDP 5002), mDNS:n (UDP 5353) ja PTP:n (UDP 319/320), sekä**Chloros Backend (TCP-In)** -säännön, joka on rajoitettu paikalliseen aliverkkoon ja koskee DAQ-E:n yhteyttä tietokoneeseen laiteohjelmiston päivityksen aikana. Linux issa `.deb` avaa UDP-portit `ufw`:ssä tai `firewalld`:ssä, kun kyseinen palomuuri on aktiivinen asennuksen aikana. Kolmannen osapuolen palomuurissa tai myöhemmin käyttöönotetussa palomuurissa samat portit on sallittava.
 * **PoE-virta, ei tilan LED-merkkivaloa.** DAQ-E:llä ei ole omaa LED-merkkivaloa — tarkista virransyöttö kytkimen tai injektoriportin linkki-/PoE-merkkivalosta ja odota käynnistyksen jälkeen muutama sekunti, jotta laite ehtii käynnistyä ja liittyä verkkoon.
 
 ## Yhdistäminen
 
-**GUI:** Valosensorit-välilehti → Yhdistä anturi → Laitetyyppi &quot;DAQ-E (Ethernet)&quot;. Laitteiden etsintä tapahtuu vain niin kauan kuin yhdistämisvalintaikkuna on näytöllä (mDNS-haku sekä ARP-pyyhkäisy Windows
-
-issa), ja se toistuu 15 sekunnin välein; Päivitä-painike käynnistää uuden haun välittömästi. Löydetyt anturit näkyvät pudotusvalikossa; ensimmäinen havaittu anturi valitaan automaattisesti.
+**GUI:** Valosensorit-välilehti → Yhdistä anturi → Laitetyyppi "DAQ-E (Ethernet)". Laitteiden etsintä tapahtuu vain niin kauan kuin yhdistämisvalintaikkuna on näytöllä (mDNS-haku sekä ARP-pyyhkäisy Windows issa), ja se toistuu 15 sekunnin välein; Päivitä-painike käynnistää uuden haun välittömästi. Löydetyt anturit näkyvät pudotusvalikossa; ensimmäinen havaittu anturi valitaan automaattisesti.
 
 <!-- SCREENSHOT-NEEDED: DAQ connect dialog with Device Type set to "DAQ-E (Ethernet)" and at least one discovered sensor listed in the Hostname/IP dropdown (e.g. daq-e-xxxxxx.local), Connect button enabled. -->
 
@@ -67,23 +47,9 @@ chloros-cli daq pool-connect --eth-host daq-e-def330.local
 
 ## Laiteasetukset ja laiteohjelmisto
 
-Anturi itse säilyttää verkkoasetuksensa: DHCP (tehdasasetus, joka siirtyy 169.254.x.x-linkkipaikalliseen osoitteeseen, jos mikään DHCP-palvelin ei vastaa) tai staattinen osoite. Se säilyttää myös tiedon siitä, aloittaako se datan lähettämisen virran kytkemisen yhteydessä. Muuta asetuksia graafisessa käyttöliittymässä (anturin hammasratasasetukset, **Verkko**:**Muuta…**,**Lähetä virran kytkemisen yhteydessä**,**Käynnistä anturi uudelleen**; katso [DAQ-välilehti](gui.md)), tai CLI
+Anturi itse säilyttää verkkoasetuksensa: DHCP (tehdasasetus, joka siirtyy 169.254.x.x-linkkipaikalliseen osoitteeseen, jos mikään DHCP-palvelin ei vastaa) tai staattinen osoite. Se säilyttää myös tiedon siitä, aloittaako se datan lähettämisen virran kytkemisen yhteydessä. Muuta asetuksia graafisessa käyttöliittymässä (anturin hammasratasasetukset, **Verkko**:**Muuta…**,**Lähetä virran kytkemisen yhteydessä**,**Käynnistä anturi uudelleen**; katso [DAQ-välilehti](gui.md)), tai CLI:n ja SDK:n kautta komentoilla `pool-set-network`, `pool-set-auto-stream` ja `pool-reboot` (`DAQSensorSession.set_network()`, `set_auto_stream()`, `reboot()`; katso [CLI-ohje](../reference/cli-reference.md#daq-e-device-settings)). Anturi käynnistyy uudelleen verkkomuutoksen voimaansaattamiseksi, ja Chloros muodostaa siihen uuden yhteyden. Verkossa on oltava staattinen osoite, joka kuuluu Chloros-ohjelmistoa käyttävän tietokoneen verkkoon: Chloros hylkää osoitteen, johon se ei pääse käsiksi uudelleenkäynnistyksen jälkeen. Anturin tunnus ja sen `daq-e-<id>.local`-isäntänimi eivät koskaan muutu. Uutta versiossa 1.3.0.
 
-:n ja SDK
-
-:n kautta komentoilla `pool-set-network`, `pool-set-auto-stream` ja `pool-reboot` (`DAQSensorSession.set_network()`, `set_auto_stream()`, `reboot()`; katso [CLI
-
--ohje](../reference/cli-reference.md#daq-e-device-settings)). Anturi käynnistyy uudelleen verkkomuutoksen voimaansaattamiseksi, ja Chloros
-
-muodostaa siihen uuden yhteyden. Verkossa on oltava staattinen osoite, joka kuuluu Chloros
-
--ohjelmistoa käyttävän tietokoneen verkkoon: Chloros
-
-hylkää osoitteen, johon se ei pääse käsiksi uudelleenkäynnistyksen jälkeen. Anturin tunnus ja sen `daq-e-<id>.local`-isäntänimi eivät koskaan muutu. Uutta versiossa 1.3.0.
-
-**Laiteohjelmistopäivitykset on integroitu käyttöliittymään.** Kun kytketty DAQ-E käyttää vanhempaa laiteohjelmistoversiota kuin Chloros
-
--asennuksesi mukana toimitettu kuva, sen anturirivillä näkyy keltainen **Päivitys saatavilla** -kuvake, ja asetusvalikossa on ”Päivitä versioon <version>” -painike. Päivitys siirtyy verkon kautta noin 30 sekunnissa; anturi käynnistyy uudelleen ja muodostaa yhteyden automaattisesti, ja keskeytynyt siirto jättää nykyisen laiteohjelmiston ennallaan. CLI:n tai SDK:n kautta sekä Linux-ympäristössä, jossa ei ole käyttöliittymää, suorita komento `chloros-cli daq pool-update-firmware --sensor-id <id>` (`DAQSensorSession.update_firmware()`).
+**Laiteohjelmistopäivitykset on integroitu käyttöliittymään.** Kun kytketty DAQ-E käyttää vanhempaa laiteohjelmistoversiota kuin Chloros-asennuksesi mukana toimitettu kuva, sen anturirivillä näkyy keltainen **Päivitys saatavilla** -kuvake, ja asetusvalikossa on ”Päivitä versioon <version>” -painike. Päivitys siirtyy verkon kautta noin 30 sekunnissa; anturi käynnistyy uudelleen ja muodostaa yhteyden automaattisesti, ja keskeytynyt siirto jättää nykyisen laiteohjelmiston ennallaan. CLI:n tai SDK:n kautta sekä Linux-ympäristössä, jossa ei ole käyttöliittymää, suorita komento `chloros-cli daq pool-update-firmware --sensor-id <id>` (`DAQSensorSession.update_firmware()`).
 
 <!-- SCREENSHOT-NEEDED: DAQ-E per-sensor settings modal showing the DAQ-E-only rows: Hostname/IP, Firmware row with the "Update to <ver>" button (or "Up to date"), and the PTP Sync row with a live state value. -->
 
@@ -112,7 +78,7 @@ Yksityiskohdat tiukan synkronoinnin vaativille käyttäjille:
 
 * Jokaisessa lähetetyssä datagrammissa on lippukenttä; **bitti 2 on asetettu kehyksissä, joiden aikaleima on PTP-synkronoitu**. Putkistot, jotka vaativat tiukkaa kamera-/DAQ-synkronointia, tulisi rajata kyseisen bitin perusteella.
 * Ennen synkronoitua tallennusta varmista, että anturi näkyy `chloros-cli time-sync peers`:ssä ja että `chloros-cli daq pool-list` ei merkitse sen PTP:tä pois päältä olevaksi. (MAPIRin sisäiset suorat laitteistotyökalut voivat myös rajoittaa tallennusta PTP-lukituksen perusteella `--wait-ptp`-lipulla, joka odottaa jopa 15 sekuntia, kunnes anturi saavuttaa SLAVE-tilan; kyseiset työkalut eivät kuulu toimitettuun CLI-käyttöliittymään.)
-* Kun PTP toimii aktiivisesti orjana, anturi hylkää manuaaliset kellosyötöt (&quot;PTP toimittaa kellotaajuuden&quot;). Tämä on tarkoituksellista — luota PTP:hen.
+* Kun PTP toimii aktiivisesti orjana, anturi hylkää manuaaliset kellosyötöt ("PTP toimittaa kellotaajuuden"). Tämä on tarkoituksellista — luota PTP:hen.
 
 ## Linux-huomautukset
 
@@ -126,7 +92,7 @@ Yksityiskohdat tiukan synkronoinnin vaativille käyttäjille:
 
   Ilman tätä PTP toimii vain, kun jokin on käynnistänyt taustapalvelun — joko `chloros-cli`-komento tai SDK-skripti. Katso [Linux-asennus](../linux/linux-installation.md#always-on-ptp-for-headless-hosts) saadaksesi tietoja root-käyttäjästä `chloros-backend.service` ja siitä, miten siirtyä pois siitä.
 
-## Vianmääritys: &quot;No DAQ-E devices found&quot;
+## Vianmääritys: "No DAQ-E devices found"
 
 | Tarkistus | Yksityiskohdat |
 | --- | --- |

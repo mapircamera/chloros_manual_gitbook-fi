@@ -1,8 +1,6 @@
 # Tallennus ja .daq-tiedostomuoto
 
-`.daq`-tiedosto on Chloros
-
-in valosensorin tallennusmuoto: **SQLite-tietokanta**, joka sisältää yhden DAQ-anturin kalibroituja spektrikuvia. Tallenna yksi tiedosto tallennusistunnon aikana, niin heijastavuusprosessointiputki voi myöhemmin jakaa jokaisen kuvan juuri sillä hetkellä mitatulla alaspäin suuntautuvalla säteilyvoimakkuudella.
+`.daq`-tiedosto on Chloros in valosensorin tallennusmuoto: **SQLite-tietokanta**, joka sisältää yhden DAQ-anturin kalibroituja spektrikuvia. Tallenna yksi tiedosto tallennusistunnon aikana, niin heijastavuusprosessointiputki voi myöhemmin jakaa jokaisen kuvan juuri sillä hetkellä mitatulla alaspäin suuntautuvalla säteilyvoimakkuudella.
 
 ## Mitä .daq-tiedosto sisältää
 
@@ -16,15 +14,11 @@ in valosensorin tallennusmuoto: **SQLite-tietokanta**, joka sisältää yhden DA
 
 Muoto on identtinen malleissa DAQ-U, DAQ-M, DAQ-E ja DAQ-E-S, joten jatkokäsittelyssä ei ole merkitystä, mikä siirtolaite tallensi tiedot. DAQ-E-S-tallenteessa tallennetaan myös laitteen kallistus, kierto ja nousukulma jokaisen spektrin yhteyteen.
 
-**Tallenteet säilyvät sähkökatkon jälkeen (1.3.0).**Reaaliaikainen tallenne kirjoitetaan lokitiedostoon ja levyn täyssynkronoinnin yhteydessä jokaisen tallennuksen yhteydessä, joten sähkökatko tai keskeytetty prosessi menettää vain noin viimeiset 3 sekuntia, ei koko tiedostoa. Kirjoituksen kesken pysähtynyt tallenne voi jättää `<name>.daq-journal`-tiedoston `.daq`-tiedoston viereen:**säilytä ja kopioi molemmat yhdessä.** Chloros
-
-palauttaa lokin ensimmäisellä kerralla, kun se lukee tiedoston. Kiireinen levy viivästyttää tiedoston tallennusta, mutta ei koskaan anturin lukemia.
+**Tallenteet säilyvät sähkökatkon jälkeen (1.3.0).**Reaaliaikainen tallenne kirjoitetaan lokitiedostoon ja levyn täyssynkronoinnin yhteydessä jokaisen tallennuksen yhteydessä, joten sähkökatko tai keskeytetty prosessi menettää vain noin viimeiset 3 sekuntia, ei koko tiedostoa. Kirjoituksen kesken pysähtynyt tallenne voi jättää `<name>.daq-journal`-tiedoston `.daq`-tiedoston viereen:**säilytä ja kopioi molemmat yhdessä.** Chloros palauttaa lokin ensimmäisellä kerralla, kun se lukee tiedoston. Kiireinen levy viivästyttää tiedoston tallennusta, mutta ei koskaan anturin lukemia.
 
 **DAQ-E, joka lakkaa lähettämästä dataa, kytketään uudelleen (1.3.0).** Kun DAQ-E:n datavirta katkeaa (kytkimen virta katkaistaan ja kytketään uudelleen, yhteys katkeaa), taustapalvelu yhdistää sen uudelleen aiemmilla asetuksilla, ja tallennus jatkuu samassa `.daq`-tiedostossa, jossa katkos on merkitty.
 
-Kalibroitu tallennus edellyttää anturin tehdaskalibrointipakettia. DAQ-U- ja DAQ-M-laitteiden osalta taustapalvelu hakee paketin MAPIR
-
-in pilvestä anturin tunnisteen perusteella (tallennus hylätään, jos tämä ei onnistu); DAQ-E-laitteet ovat poikkeus, koska niiden kalibrointitiedot säilytetään laitteessa.
+Kalibroitu tallennus edellyttää anturin tehdaskalibrointipakettia. DAQ-U- ja DAQ-M-laitteiden osalta taustapalvelu hakee paketin MAPIR in pilvestä anturin tunnisteen perusteella (tallennus hylätään, jos tämä ei onnistu); DAQ-E-laitteet ovat poikkeus, koska niiden kalibrointitiedot säilytetään laitteessa.
 
 ## Tallennus käyttöliittymästä
 
@@ -41,15 +35,9 @@ Tiedostot tallennetaan `<project>/light_sensor/`-kansioon, ja kun tallennus lope
 
 
 
-## Tallennus CLI
+## Tallennus CLI:n kautta
 
-:n kautta
-
-CLI
-
-tallentaa taustapalvelimen anturipoolin kautta (taustapalvelimen on oltava käynnissä — nämä komennot ovat kevyitä HTTP
-
--asiakasohjelmia):
+CLI tallentaa taustapalvelimen anturipoolin kautta (taustapalvelimen on oltava käynnissä — nämä komennot ovat kevyitä HTTP-asiakasohjelmia):
 
 ```bash
 # Connect the sensor into the backend pool
@@ -69,40 +57,22 @@ Hae arvo `--sensor-id` kohteesta `chloros-cli daq pool-list`. Kaksi hyödyllist�
 | Optio | Oletusarvo |
 | --- | --- |
 | `--duration` | `0` — tallenna, kunnes `pool-record --stop` |
-| `--output` / `-o` | `~/Documents/DAQ Live View/` **taustapalvelimen** tiedostojärjestelmässä, ei CLI
+| `--output` / `-o` | `~/Documents/DAQ Live View/` **taustapalvelimen** tiedostojärjestelmässä, ei CLI:n |
 
-:n |
-
-Tulostuskansioiden ero on merkityksellinen, kun CLI
-
-:n kohde on toisella koneella sijaitseva taustapalvelin: tiedosto tallentuu sinne, missä taustapalvelin toimii. Kun taustapalvelin sijaitsee samalla tietokoneella, suhteellinen `-o` (kuten yllä oleva `./out`) määritetään sen kansion suhteen, jossa komento suoritettiin.
+Tulostuskansioiden ero on merkityksellinen, kun CLI:n kohde on toisella koneella sijaitseva taustapalvelin: tiedosto tallentuu sinne, missä taustapalvelin toimii. Kun taustapalvelin sijaitsee samalla tietokoneella, suhteellinen `-o` (kuten yllä oleva `./out`) määritetään sen kansion suhteen, jossa komento suoritettiin.
 
 ## Tallennus Python
 
-ista `DAQSensorSession` (jonka palauttaa `chloros_sdk.connect_daq_sensor()`) paljastaa saman yhdistettyjen tallenteiden joukon: `record_start(output_dir=None, device_name=None)` palauttaa tiedostopolun, `record_stop()` palauttaa `{path, rows}`:n. Katso [SDK
-
--viite](../reference/sdk-reference.md) saadaksesi täydellisen istunto-API
-
-:n. SDK
-
-:n suorat laitteistoluokat (vain työpöytäasennukset) kirjoittavat tallenteet oletusarvoisesti `~/Documents/DAQ/`:ään; julkaistuissa versioissa yllä mainittu yhdistetty polku on tuettu reitti.
+ista `DAQSensorSession` (jonka palauttaa `chloros_sdk.connect_daq_sensor()`) paljastaa saman yhdistettyjen tallenteiden joukon: `record_start(output_dir=None, device_name=None)` palauttaa tiedostopolun, `record_stop()` palauttaa `{path, rows}`:n. Katso [SDK-viite](../reference/sdk-reference.md) saadaksesi täydellisen istunto-API:n. SDK:n suorat laitteistoluokat (vain työpöytäasennukset) kirjoittavat tallenteet oletusarvoisesti `~/Documents/DAQ/`:ään; julkaistuissa versioissa yllä mainittu yhdistetty polku on tuettu reitti.
 
 ## .daq-tiedoston käyttö käsittelyvaiheessa
 
-Jotta Chloros
-
-voi laskea kuvien heijastavuuden, se tarvitsee jokaiselle valotukselle vastaavan alaspäin suuntautuvan säteilyn voimakkuuden:
+Jotta Chloros voi laskea kuvien heijastavuuden, se tarvitsee jokaiselle valotukselle vastaavan alaspäin suuntautuvan säteilyn voimakkuuden:
 
 * **Säilytä `.daq` kuvien mukana.**Käsittelyvaiheessa prosessiketju määrittää**aikaleimaltaan vastaavan alaspäin suuntautuvan säteilyn** automaattisesti tallennetusta `.daq`-tiedostosta (mikä tahansa DAQ-malli) — tai kuvien vierestä löytyvästä DAQ-M-muotoisesta `.csv`-tiedostosta — joka löytyy kuvien vierestä. GUI-tallenteet täyttävät tämän vaatimuksen automaattisesti, koska ne lisätään projektiin heti, kun ne pysähtyvät.
-* **Kalibrointi haetaan tarpeen mukaan.** Jos kamera- tai DAQ-kohtaista tehdaskalibrointipakettia ei ole vielä tallennettu paikalliseen välimuistiin, Chloros
-
-hakee sen automaattisesti MAPIR
-
-in pilvestä ensimmäisellä käyttökerralla (vaatii internet-yhteyden kerran; tallennetaan välimuistiin tiedostona `~/.chloros/`).
+* **Kalibrointi haetaan tarpeen mukaan.** Jos kamera- tai DAQ-kohtaista tehdaskalibrointipakettia ei ole vielä tallennettu paikalliseen välimuistiin, Chloros hakee sen automaattisesti MAPIR in pilvestä ensimmäisellä käyttökerralla (vaatii internet-yhteyden kerran; tallennetaan välimuistiin tiedostona `~/.chloros/`).
 * **Reaaliaikaiset tallenteet kirjoittavat oman sivutiedostonsa.** Jokaisesta reaaliaikaisesti tallennetusta heijastavuuskehyksestä tallennetaan tosiasiallisesti käytetty DAQ-lukema `.daq`-tiedostona tallenteiden `daq/`-kansioon, jotta tallennetta voidaan käsitellä uudelleen myöhemmin ilman alkuperäistä tallennetta.
-* **`chloros_scripts`-tallentimista peräisin olevat tallenteet (1.3.0).**Julkisten [`chloros_scripts`](https://github.com/mapircamera/chloros_scripts)-tallentimien kirjoittama `.daq`-tiedosto näkyy sen tuottaneena DAQ-mallina, ja sen yläraja voidaan asettaa kohdassa**Projektin asetukset → DAQ-valosensori** kuten minkä tahansa muun tallennuksen kohdalla. Nämä tallentimet tallentavat raakatiedot anturilukemista; Chloros
-
-hakee anturin tehdaskalibroinnin sarjaliitännän kautta ja soveltaa sitä.
+* **`chloros_scripts`-tallentimista peräisin olevat tallenteet (1.3.0).**Julkisten [`chloros_scripts`](https://github.com/mapircamera/chloros_scripts)-tallentimien kirjoittama `.daq`-tiedosto näkyy sen tuottaneena DAQ-mallina, ja sen yläraja voidaan asettaa kohdassa**Projektin asetukset → DAQ-valosensori** kuten minkä tahansa muun tallennuksen kohdalla. Nämä tallentimet tallentavat raakatiedot anturilukemista; Chloros hakee anturin tehdaskalibroinnin sarjaliitännän kautta ja soveltaa sitä.
 * **Kenen lukema se on (1.3.0).**Jokaisen `.daq`-tallennuksen vieressä on `.daq.cameras.json`-merkintä, joka nimeää kameran tai kamerat, joiden kuvia kyseinen lukema kuvaa, ja käsittely sovittaa sen**vain kyseisten kameroiden kuviin**. Itsenäinen kamera, jolla ei ole omaa valosensoria, ei siis enää lainaa toisen kameran lukemaa — liitä siihen sensori tai tallenna oma lukema. Itse DAQ:lla tehty tallenne (GUI Record, `daq pool-record`) sekä kaikki `.daq`-tiedostot, joissa kyseistä tiedostoa ei ole (mukaan lukien vanhemmat tallenteet), palvelevat edelleen kaikkia kameroita.
 
 ## Säteilyvoimakkuuden palauttaminen
@@ -111,9 +81,7 @@ Projektin käsittely vie myös kaikki sen sisältämät valosensoritallenteet
 `Light Sensor/`-kansioon kuvatuotteiden viereen. Tämä ei **vaadi** kuvamateriaalia:
 yksinään tallennettu valosensori on täydellinen tallenne, ja kansio, joka sisältää vain `.daq`-
 tiedostoja, on kelvollinen syöte. Projekti, joka sisältää vain valosensoritallenteita, listaa ne ja
-käsittelee ne sekä sovelluksessa että CLI
-
-:ssä, ja ne pysyvät luettelossa käsittelyn jälkeen. Käsittely
+käsittelee ne sekä sovelluksessa että CLI:ssä, ja ne pysyvät luettelossa käsittelyn jälkeen. Käsittely
 ilmoittaa, kuinka monta valosensorituotetta se on tallentanut.
 
 | Tuote | Mikä se on |
@@ -132,9 +100,7 @@ paikalliseen välimuistiin ei ole tallennettu mitään.
 **DAQ-A** on peräisin ajalta ennen sarjanumeroittaista kalibrointipakettijärjestelmää, eikä sillä ole pakettia, jota
 voitaisiin hakea. Tämä ei ole laiminlyönti: DAQ-A kalibroidaan kentällä
 heijastavuuskohteen avulla, ja kohdepohjainen kalibrointi vaatii vain anturin *suhteellisen*
-vasteen — mikä on juuri sen raakalukujen sisältö. Chloros
-
-kalibroi laitteet nykyään niiden avulla.
+vasteen — mikä on juuri sen raakalukujen sisältö. Chloros kalibroi laitteet nykyään niiden avulla.
 
 Joten DAQ-A-tallenne viedään, mutta eri nimellä:
 
@@ -153,12 +119,8 @@ vain todelliselle säteilyvoimakkuudelle — kokonaisteho, lux, PPFD — jätet�
 laskettaisiin laskentojen perusteella.
 
 Vanhemmat DAQ-A-SD-tallenteet (skeema v1.01 / v1.02) tallentavat vain tiedoston kirjoitusajan, eivät
-aikaleimaa kutakin lukemaa kohden. Chloros
-
-ei täsmää kuvia näiden kanssa — kehyksen yhdistäminen
+aikaleimaa kutakin lukemaa kohden. Chloros ei täsmää kuvia näiden kanssa — kehyksen yhdistäminen
 kirjoitusajankohtaan olisi virheellistä, vaikka se ei näyttäisikään virheelliseltä — mutta vienti lukee ne ongelmitta ja
-CSV
-
--tiedostossa ilmoitetaan, mihin kelloon ne perustuvat.
+CSV-tiedostossa ilmoitetaan, mihin kelloon ne perustuvat.
 
 Kattava kuvaus heijastavuuden käsittelystä — yksi anturi kameran kanssa ja kaksi anturia (ympäristö/kohde) — löytyy kohdasta [Heijastavuuden työnkulut](reflectance.md).

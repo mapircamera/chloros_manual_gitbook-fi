@@ -1,10 +1,6 @@
 # Käsittelyn seuranta
 
-Kun käsittely on alkanut, Chloros
-
-tarjoaa useita tapoja seurata edistymistä, tarkistaa mahdolliset ongelmat ja ymmärtää, mitä aineistollesi tapahtuu. Tällä sivulla kerrotaan, miten voit seurata käsittelyä ja tulkita Chloros
-
-in tarjoamia tietoja.
+Kun käsittely on alkanut, Chloros tarjoaa useita tapoja seurata edistymistä, tarkistaa mahdolliset ongelmat ja ymmärtää, mitä aineistollesi tapahtuu. Tällä sivulla kerrotaan, miten voit seurata käsittelyä ja tulkita Chloros in tarjoamia tietoja.
 
 ## Edistymispalkin yleiskatsaus
 
@@ -12,9 +8,7 @@ Yläreunan etupalkissa oleva edistymispalkki näyttää käsittelyn tilan ja val
 
 ### Ilmaistilan edistymispalkki
 
-Käyttäjille, joilla ei ole Chloros
-
-+ -lisenssiä:
+Käyttäjille, joilla ei ole Chloros+ -lisenssiä:
 
 **2-vaiheinen edistymisnäkymä:**
 
@@ -25,13 +19,9 @@ Käyttäjille, joilla ei ole Chloros
 * Nykyisen vaiheen nimi
 * Yksinkertainen vaakasuora palkkikuvaus
 
-### Chloros
+### Chloros+:n edistymispalkki
 
-+:n edistymispalkki
-
-Chloros
-
-+-lisenssin omaaville käyttäjille:
+Chloros+-lisenssin omaaville käyttäjille:
 
 **4-vaiheinen edistymisnäkymä:**
 
@@ -44,11 +34,7 @@ Chloros
 * Jokaisessa vaiheessa näkyy sen oma edistymisaste (0–100 %)
 
 {% hint style="info" %}
-**Pariteetti CLI
-
-:n kanssa**: `chloros-cli process`-ajon aikana samat neljä säiettä raportoivat tiloina Detecting, Analyzing, Processing ja Exporting, ja `chloros-cli export-status` näyttää reaaliaikaisesti säikeen 4 vientin etenemisen toisesta päätelaitteesta. Katso [CLI
-
--ohje](../reference/cli-reference.md).
+**Pariteetti CLI:n kanssa**: `chloros-cli process`-ajon aikana samat neljä säiettä raportoivat tiloina Detecting, Analyzing, Processing ja Exporting, ja `chloros-cli export-status` näyttää reaaliaikaisesti säikeen 4 vientin etenemisen toisesta päätelaitteesta. Katso [CLI-ohje](../reference/cli-reference.md).
 {% endhint %}
 
 ***
@@ -63,9 +49,7 @@ Chloros
 
 **Mitä tapahtuu:**
 
-* Chloros
-
-skannaa kuvat, jotka olet valinnut Kohde-valintaruudulla (kaikki kuvat, jos yhtään ei ole valittu)
+* Chloros skannaa kuvat, jotka olet valinnut Kohde-valintaruudulla (kaikki kuvat, jos yhtään ei ole valittu)
 * Tietokoneen näköalgoritmit tunnistavat kalibrointipaneelit
 * Jokaisesta paneelista poimitaan heijastusarvot
 * Kohteiden aikaleimat tallennetaan oikean kalibrointiaikataulun suunnittelua varten
@@ -94,9 +78,7 @@ skannaa kuvat, jotka olet valinnut Kohde-valintaruudulla (kaikki kuvat, jos yht�
 * Kuvien EXIF-metatietojen lukeminen (aikaleimat, valotusasetukset)
 * Kalibrointistrategian määrittäminen kohteiden aikaleimojen ja käytettävissä olevien DAQ-alasuuntaisten tietojen perusteella
 * Kuvankäsittelyjonon järjestäminen
-* Rinnakkaiskäsittelytyöntekijöiden valmistelu (vain Chloros
-
-+)
+* Rinnakkaiskäsittelytyöntekijöiden valmistelu (vain Chloros+)
 
 **Kesto:** 5–30 sekuntia**Edistymisilmaisin:**
 
@@ -123,9 +105,7 @@ skannaa kuvat, jotka olet valinnut Kohde-valintaruudulla (kaikki kuvat, jos yht�
 * Valmiit kuvat / Kuvien kokonaismäärä
 
 **Käsittelytapa:*** **Vapaa tila**: Käsittelee kuvia yksi kerrallaan peräkkäin
-* **Chloros
-
-+ -tila**: Käyttää laitteistoon sopeutuvaa työryhmää — 1–4 samanaikaista työryhmää GPU-järjestelmissä (VRAM:n mukaan), yksi työryhmä fyysistä ydintä kohti (miinus yksi) pelkästään CPU-pohjaisissa järjestelmissä. Katso [Dynaaminen laskentatehon sopeutus](../processing-architecture/dynamic-compute-adaptation.md)
+* **Chloros+ -tila**: Käyttää laitteistoon sopeutuvaa työryhmää — 1–4 samanaikaista työryhmää GPU-järjestelmissä (VRAM:n mukaan), yksi työryhmä fyysistä ydintä kohti (miinus yksi) pelkästään CPU-pohjaisissa järjestelmissä. Katso [Dynaaminen laskentatehon sopeutus](../processing-architecture/dynamic-compute-adaptation.md)
 * **GPU-kiihdytys**: Nopeuttaa tätä vaihetta merkittävästi**Mitä kannattaa seurata:**
 
 * Tasainen eteneminen kuvamäärän mukaan
@@ -171,17 +151,13 @@ Vianmääritysloki tarjoaa yksityiskohtaista tietoa käsittelyn etenemisestä ja
 
 ### Lokiviestien ymmärtäminen
 
-Chloros
-
--lokirivien alussa on suluissa oleva tunniste, joka nimeää alijärjestelmän — esimerkiksi `[PROCESSING]`, `[RUN-SUMMARY]`, `[LATTICE-EXPORT]`, `[EXPORT-CHECK]`, `[IMPORT-LEVEL]`. Tärkein tiedettävä asia on **ajon yhteenveto**, joka tulostetaan jokaisen ajon lopussa (myös keskeytetyt ajot):
+Chloros-lokirivien alussa on suluissa oleva tunniste, joka nimeää alijärjestelmän — esimerkiksi `[PROCESSING]`, `[RUN-SUMMARY]`, `[LATTICE-EXPORT]`, `[EXPORT-CHECK]`, `[IMPORT-LEVEL]`. Tärkein tiedettävä asia on **ajon yhteenveto**, joka tulostetaan jokaisen ajon lopussa (myös keskeytetyt ajot):
 
 ```
 [RUN-SUMMARY] 49 image(s) in 2 camera group(s); 4 target(s) detected; 45 image(s) calibrated; 180 file(s) written.
 ```
 
-Lisäksi `[RUN-SUMMARY]`-vihjeitä seuraa aina, kun jotain on selitettävä — esimerkiksi ajo, joka ei tuottanut mitään, tai kamera, jonka pyydetty tuote ohitettiin soveltumattomana. `[EXPORT-CHECK]`-rivit selittävät kamerakohtaisia ohituksia (esim. miksi RGB
-
--kamera ei saanut säteilyvoimakkuustuotetta).
+Lisäksi `[RUN-SUMMARY]`-vihjeitä seuraa aina, kun jotain on selitettävä — esimerkiksi ajo, joka ei tuottanut mitään, tai kamera, jonka pyydetty tuote ohitettiin soveltumattomana. `[EXPORT-CHECK]`-rivit selittävät kamerakohtaisia ohituksia (esim. miksi RGB-kamera ei saanut säteilyvoimakkuustuotetta).
 
 Yleiset viestien vakavuustasot (alla olevat esimerkit ovat havainnollistavia, eivät sananmukaisia):
 
@@ -212,17 +188,9 @@ Kriittisiä ongelmia, jotka voivat aiheuttaa käsittelyn epäonnistumisen – es
 | Kohteita ei löydy                      | Kalibrointikohteita ei havaittu               | Merkitse kohdekuvat tai poista heijastuskalibrointi käytöstä |
 | Levytilaa ei riitä               | Tulostustiedostoille ei ole tarpeeksi tallennustilaa                 | Vapauta levytilaa                                    |
 | Ohitetaan vioittunut tiedosto               | Kuvatiedosto on vioittunut                         | Kopioi tiedosto uudelleen SD-kortilta                             |
-| `[IMPORT-LEVEL] Skipping ... no raw source` | Kuvaus ilman raakakuvaa ei voi käsitellä | Ota kuva uudelleen raakakuvalla, tai käytä CLI
-
-:tä `--input-level`  |
+| `[IMPORT-LEVEL] Skipping ... no raw source` | Kuvaus ilman raakakuvaa ei voi käsitellä | Ota kuva uudelleen raakakuvalla, tai käytä CLI:tä `--input-level`  |
 | `[RUN-SUMMARY] ... 0 file(s) written` | Suoritus ei tuottanut kuvatuotteita — raportoitu epäonnistumisena vihjeiden kera | Lue vihjelinjat; tarkista, mitä ohitettiin ja miksi |
-| `[PROCESS] refused: The project folder is too deep for this computer…` | Windows
-
-in pitkät polut ovat pois päältä ja projektikansio on liian syvällä 260 merkin polkurajan vuoksi; mitään ei käsitelty | Käytä lyhyempää projektikansiota (viestissä ilmoitetaan pisin sallittu polku) tai ota Windows
-
-in pitkät polut käyttöön ja käynnistä Chloros
-
-uudelleen — katso [Käsittelyn aloittaminen](starting-the-processing.md#the-project-folder-is-too-deep-for-this-computer) |
+| `[PROCESS] refused: The project folder is too deep for this computer…` | Windows in pitkät polut ovat pois päältä ja projektikansio on liian syvällä 260 merkin polkurajan vuoksi; mitään ei käsitelty | Käytä lyhyempää projektikansiota (viestissä ilmoitetaan pisin sallittu polku) tai ota Windows in pitkät polut käyttöön ja käynnistä Chloros uudelleen — katso [Käsittelyn aloittaminen](starting-the-processing.md#the-project-folder-is-too-deep-for-this-computer) |
 | `[unmix-clamp-mask] …` | LATTICE-tuotteen clamp-maskia ei voitu kirjoittaa; tuote itsessään on kunnossa ja ilmoittaa `Chloros:UnmixClampMask=unavailable` | Tarkista levytila ja kansioiden käyttöoikeudet, ja käsittele sitten uudelleen, jos tarvitset maskia |
 
 ### Lokitietojen kopioiminen
@@ -232,32 +200,18 @@ Kopioi loki vianmääritystä tai tukea varten seuraavasti:
 1. Avaa Debug Log -paneeli
 2. Napsauta **Copy**-painiketta (kopioi lokin leikepöydälle) tai**Download**-painiketta tallentaaksesi sen tekstitiedostona
 3. Liitä tekstitiedostoon tai sähköpostiin
-4. Lähetä tarvittaessa MAPIR
-
--tukeen
+4. Lähetä tarvittaessa MAPIR-tukeen
 
 ### Virheen ilmoittaminen lokivälilehdeltä
 
-Uutta versiossa 1.3.0: Debug Log -välilehden yläosassa oleva virhekuvake (**Ilmoita virhe**) lähettää raportin suoraan MAPIR
-
-ille.
+Uutta versiossa 1.3.0: Debug Log -välilehden yläosassa oleva virhekuvake (**Ilmoita virhe**) lähettää raportin suoraan MAPIR ille.
 
 1. Napsauta Debug Log -välilehden yläosassa olevaa virhekuvaketta
 2. Kuvaile ongelmaa: mitä olit tekemässä, mitä odotit tapahtuvan ja mitä sen sijaan tapahtui (pakollinen)
 3. Valitse halutessasi **Lisää muutama kuva (enintään 10)**ja valitse kuvat avoimesta projektista tai käytä**Selaa...**-painiketta muiden kuvatiedostojen valitsemiseen
 4. Napsauta **Lähetä**
 
-Raportti sisältää kuvauksesi, liittämät kuvat, Chloros
-
--lokit sekä järjestelmätiedot (Chloros
-
--versio, käyttöjärjestelmä, GPU ja projektin asetukset). Sinun on oltava kirjautuneena Chloros
-
-iin (Käyttäjä-välilehti), jotta voit lähettää raportin. Voit sulkea ikkunan lähetyksen aikana; kun lähetys on valmis, lokiin kirjoitetaan viitenumero, kuten `Bug report sent. Reference: BR-…` — mainitse se, kun otat yhteyttä MAPIR
-
-:iin. Jos raporttia ei voida ladata (esimerkiksi internetyhteyden puuttuessa), Chloros
-
-tallentaa sen tietokoneellesi ja näyttää polun, jotta voit lähettää sen sähköpostitse osoitteeseen support@mapir.camera.
+Raportti sisältää kuvauksesi, liittämät kuvat, Chloros-lokit sekä järjestelmätiedot (Chloros-versio, käyttöjärjestelmä, GPU ja projektin asetukset). Sinun on oltava kirjautuneena Chloros iin (Käyttäjä-välilehti), jotta voit lähettää raportin. Voit sulkea ikkunan lähetyksen aikana; kun lähetys on valmis, lokiin kirjoitetaan viitenumero, kuten `Bug report sent. Reference: BR-…` — mainitse se, kun otat yhteyttä MAPIR:iin. Jos raporttia ei voida ladata (esimerkiksi internetyhteyden puuttuessa), Chloros tallentaa sen tietokoneellesi ja näyttää polun, jotta voit lähettää sen sähköpostitse osoitteeseen support@mapir.camera.
 
 ***
 
@@ -271,33 +225,25 @@ tallentaa sen tietokoneellesi ja näyttää polun, jotta voit lähettää sen s�
 * Muut ytimet lepotilassa tai käytettävissä
 * Järjestelmä toimii edelleen sujuvasti
 
-**Chloros
-
-+:n rinnakkaistila:**
+**Chloros+:n rinnakkaistila:**
 
 * Useat ytimet korkealla käyttöasteella – niiden määrä riippuu [Dynamic Compute Adaptation](../processing-architecture/dynamic-compute-adaptation.md) -toiminnon valitsemasta strategiasta
 * Järjestelmä saattaa tuntua hitaammalta
 
 **Seuranta:**
 
-* Windows
-
-in Tehtävienhallinta (Ctrl+Shift+Esc)
+* Windows in Tehtävienhallinta (Ctrl+Shift+Esc)
 * Suorituskyky-välilehti → CPU-osio
-* Etsi ”Chloros
-
-”- tai ”chloros-backend”-prosesseja
+* Etsi ”Chloros”- tai ”chloros-backend”-prosesseja
 
 ### Muistin (RAM) käyttö
 
 **Tyypillinen käyttö:**
 
-* Pienet projektit (&lt; 100 kuvaa): 2–4 GB
+* Pienet projektit (< 100 kuvaa): 2–4 GB
 * Keskisuuret projektit (100–500 kuvaa): 4–8 GB
 * Suuret projektit (yli 500 kuvaa): 8–16 GB
-* Chloros
-
-+:n rinnakkaistila kuluttaa enemmän RAM-muistia
+* Chloros+:n rinnakkaistila kuluttaa enemmän RAM-muistia
 
 **Jos muistia on vähän:**
 
@@ -305,9 +251,7 @@ in Tehtävienhallinta (Ctrl+Shift+Esc)
 * Sulje muut sovellukset
 * Päivitä RAM-muistia, jos käsittelet säännöllisesti suuria aineistoja
 
-### GPU:n käyttö (Chloros
-
-+ ja CUDA)
+### GPU:n käyttö (Chloros+ ja CUDA)
 
 Kun GPU-kiihdytys on käytössä:
 
@@ -345,9 +289,7 @@ Kun GPU-kiihdytys on käytössä:
 
 * Tarkista virheet vianmäärityslokista
 * Tarkista käytettävissä oleva levytila
-* Tarkista Tehtävienhallinnasta, että Chloros
-
--ohjelma on käynnissä
+* Tarkista Tehtävienhallinnasta, että Chloros-ohjelma on käynnissä
 
 **Virheilmoituksia ilmenee usein:**
 
@@ -357,9 +299,7 @@ Kun GPU-kiihdytys on käytössä:
 
 **Järjestelmä lakkaa vastaamasta:**
 
-* Chloros
-
-in rinnakkaistila käyttää liikaa resursseja
+* Chloros in rinnakkaistila käyttää liikaa resursseja
 * Harkitse samanaikaisten tehtävien vähentämistä tai laitteiston päivittämistä
 * Vapaa tila kuluttaa vähemmän resursseja
 
@@ -398,9 +338,7 @@ Keskeytä käsittely, jos huomaat:
 
 1. Jos käsittely on juuri alkanut ja on tunnistusvaiheessa: Pysäytä, merkitse kohteet ja käynnistä uudelleen
 2. Tulevaisuutta varten: Käytä SSD-asemaa, vähennä indeksejä, päivitä laitteistoa
-3. Harkitse CLI
-
-:n käyttöä suurten tietojoukkojen eräkäsittelyssä
+3. Harkitse CLI:n käyttöä suurten tietojoukkojen eräkäsittelyssä
 
 ### ”Levytila”-varoitukset
 
@@ -410,9 +348,7 @@ Keskeytä käsittely, jos huomaat:
 2. Siirrä projekti levylle, jossa on enemmän tilaa
 3. Vähennä vietävien indeksien määrää
 4. Poista käytöstä tarpeettomat LATTICE-vientituotteet (Projektin asetukset → Käsittely)
-5. Käytä JPG-muotoa TIFF
-
--muodon sijaan (pienemmät tiedostot)
+5. Käytä JPG-muotoa TIFF-muodon sijaan (pienemmät tiedostot)
 
 ### Toistuvat ”Tiedosto vioittunut” -viestit
 
@@ -429,9 +365,7 @@ Keskeytä käsittely, jos huomaat:
 
 1. Varmista riittävä ilmanvaihto
 2. Puhdista pöly tietokoneen tuuletusaukoista
-3. Vähennä käsittelykuormitusta (käytä Free-tilaa Chloros
-
-+:n sijaan)
+3. Vähennä käsittelykuormitusta (käytä Free-tilaa Chloros+:n sijaan)
 4. Käsittele kuvia päivän viileämpinä aikoina
 
 ***

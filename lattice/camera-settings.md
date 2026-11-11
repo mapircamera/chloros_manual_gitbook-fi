@@ -1,12 +1,8 @@
 # Kameran asetukset
 
-**Kamerat**-välilehti on Chloros
+**Kamerat**-välilehti on Chloros in LATTICE-kameroiden reaaliaikainen ohjauspaneeli: pääkuva-alue, jossa jokainen kytketty kamera näkyy reaaliaikaisena ruuduna, sekä sivupalkki, jota liu’uttamalla voi vaihtaa kolmen sivun välillä — **kameraluettelo**,**asetusruutu**(kamerakohtaiset, ryhmä- tai tallennusasetukset – yksi kerrallaan) sekä**indeksilaskuri**. Tällä sivulla kuvataan kaikki kameraluettelon, kamerakohtaisen asetuspaneelin ja ryhmäasetuspaneelin säätimet. Tallennustilat, vientityypin valinta ja ”Capture All” -toiminto löytyvät oheissivulta [Tallennusasetukset ja -tilat](capture.md).
 
-in LATTICE-kameroiden reaaliaikainen ohjauspaneeli: pääkuva-alue, jossa jokainen kytketty kamera näkyy reaaliaikaisena ruuduna, sekä sivupalkki, jota liu’uttamalla voi vaihtaa kolmen sivun välillä — **kameraluettelo**,**asetusruutu**(kamerakohtaiset, ryhmä- tai tallennusasetukset – yksi kerrallaan) sekä**indeksilaskuri**. Tällä sivulla kuvataan kaikki kameraluettelon, kamerakohtaisen asetuspaneelin ja ryhmäasetuspaneelin säätimet. Tallennustilat, vientityypin valinta ja ”Capture All” -toiminto löytyvät oheissivulta [Tallennusasetukset ja -tilat](capture.md).
-
-”Kamerat”-välilehti näkyy sivupalkissa, kun Chloros
-
--taustapalvelu on valmis. Kaikki alla olevat säätimet kommunikoivat paikallisen taustapalvelun kanssa tunnuksen `127.0.0.1:5000`:n kautta; muutokset näkyvät kameran reaaliaikaisessa kuvassa välittömästi, ellei toisin mainita.
+”Kamerat”-välilehti näkyy sivupalkissa, kun Chloros-taustapalvelu on valmis. Kaikki alla olevat säätimet kommunikoivat paikallisen taustapalvelun kanssa tunnuksen `127.0.0.1:5000`:n kautta; muutokset näkyvät kameran reaaliaikaisessa kuvassa välittömästi, ellei toisin mainita.
 
 ## Tällä sivulla käytetyt kameratyypit
 
@@ -14,40 +10,12 @@ Säätimet näkyvät tai piiloutuvat sen mukaan, minkä tyyppinen kamera on vali
 
 | Termi | Merkitys | Suodatinkanavat |
 | --- | --- | --- |
-| **RGB
-
--kamera** | LATTICE M3C, jossa on FRGB-suodatin (mallissa on `-FRGB`) | Red
-
-/ Green
-
-/ Blue
-
-|
-| **Bayer-monispektrinen** | LATTICE M3C, jossa on FRGN-, FOCN- tai FNGB-suodatin | FRGN: Red
-
-/ Green
-
-/ NIR
-
-· FOCN: Orange
-
-/ Cyan
-
-/ NIR
-
-· FNGB: NIR
-
-/ Green
-
-/ Blue
-
-|
+| **RGB-kamera** | LATTICE M3C, jossa on FRGB-suodatin (mallissa on `-FRGB`) | Red / Green / Blue |
+| **Bayer-monispektrinen** | LATTICE M3C, jossa on FRGN-, FOCN- tai FNGB-suodatin | FRGN: Red / Green / NIR · FOCN: Orange / Cyan / NIR · FNGB: NIR / Green / Blue |
 | **Mono (M3M)** | LATTICE M3M — yksi kapeakaistainen suodatin, yksi kalibroitu kaista | Yksi kaista |
 | **Ryhmän jäsen** | Kamera, joka on kytketty osaksi synkronoitua ryhmää (yhdistetty tai erillinen näyttö) | Suodattimensa mukaan |
 
- RGB
-
--kameroille suoritetaan fotometrinen käsittely (valkotasapaino, väriprofiilit, gamma); monispektrisille ja mono-kameroille suoritetaan radiometrinen käsittelyketju, ja fotometriset säädöt ohitetaan. Ryhmän jäsenet välittävät stream-tason asetukset (pikselimuoto, resoluutio, binning, laukaisija, kuvataajuus) ryhmälle — nämä rivit muuttuvat kamerakohtaisessa paneelissa vain luku -tilaan ja siirtyvät sen sijaan ryhmän asetuspaneeliin.
+ RGB-kameroille suoritetaan fotometrinen käsittely (valkotasapaino, väriprofiilit, gamma); monispektrisille ja mono-kameroille suoritetaan radiometrinen käsittelyketju, ja fotometriset säädöt ohitetaan. Ryhmän jäsenet välittävät stream-tason asetukset (pikselimuoto, resoluutio, binning, laukaisija, kuvataajuus) ryhmälle — nämä rivit muuttuvat kamerakohtaisessa paneelissa vain luku -tilaan ja siirtyvät sen sijaan ryhmän asetuspaneeliin.
 
 ## Pääsyötealue
 
@@ -55,9 +23,7 @@ Säätimet näkyvät tai piiloutuvat sen mukaan, minkä tyyppinen kamera on vali
 
 
 
-Jos kameroita ei ole kytketty, syötealueella näkyy **&quot;Kytke kamera aloittaaksesi&quot;**-aloitusnäyttö, jossa on kaksi painiketta:**Kytke kamera**(vihreä, avaa yhden kameran liitäntävalintaikkunan) ja**Liitä kameraryhmä** (sininen, avaa kameraryhmän liitäntävalintaikkunan). Itse liitäntävalintaikkunoista on tietoa kohdassa [Kameroiden liittäminen](connecting.md); kameraryhmän käsitteistä (synkronointi, tasot, kaistanleveys) kohdassa [Monikamerajärjestelmissä](arrays.md). Kun avaat tallennetun projektin, jossa on kameroita, aloitusnäytössä näkyy sen sijaan pyörivä kuvake ja teksti ”Avataan uudelleen N tallennettua kameraa…”, kun Chloros
-
-palauttaa viimeisen istunnon videovirrat.
+Jos kameroita ei ole kytketty, syötealueella näkyy **"Kytke kamera aloittaaksesi"**-aloitusnäyttö, jossa on kaksi painiketta:**Kytke kamera**(vihreä, avaa yhden kameran liitäntävalintaikkunan) ja**Liitä kameraryhmä** (sininen, avaa kameraryhmän liitäntävalintaikkunan). Itse liitäntävalintaikkunoista on tietoa kohdassa [Kameroiden liittäminen](connecting.md); kameraryhmän käsitteistä (synkronointi, tasot, kaistanleveys) kohdassa [Monikamerajärjestelmissä](arrays.md). Kun avaat tallennetun projektin, jossa on kameroita, aloitusnäytössä näkyy sen sijaan pyörivä kuvake ja teksti ”Avataan uudelleen N tallennettua kameraa…”, kun Chloros palauttaa viimeisen istunnon videovirrat.
 
 <!-- SCREENSHOT-NEEDED: Cameras tab empty state — the "Connect a camera to get started" splash with the green Connect Camera and blue Connect Array buttons. -->
 
@@ -122,21 +88,11 @@ Avaa kamerarivin **hammasrataskuvakkeella**. Paneeli liukuu kameraluettelon pä�
 
 ### Reaaliaikainen histogrammi
 
-Paneelin yläosassa on reaaliaikainen luma-histogrammi, joka lasketaan JPEG
+Paneelin yläosassa on reaaliaikainen luma-histogrammi, joka lasketaan JPEG-esikatselukuvasta noin 8 Hz:n taajuudella. Keskiarvo on Bayer-painotettu — (R+2G+B)/4 — vastaamaan kameran omaa AE-mittausta.
 
--esikatselukuvasta noin 8 Hz:n taajuudella. Keskiarvo on Bayer-painotettu — (R+2G+B)/4 — vastaamaan kameran omaa AE-mittausta.
-
-* **Oranssi (Orange
-
-) katkoviiva**= AE-kohde.**Vedä sitä vaakasuoraan kohteen muuttamiseksi** — yksi komento lähetetään, kun irrotat sormesi, ja vetäminen vaihtaa AE-kohdetilan manuaaliseksi.
-* **Vihreä (Green
-
-) yhtenäinen viiva** = todellinen keskimääräinen luma (se, mitä AE tuottaa tällä hetkellä).
-* **RGB
-
--painike** (oikeassa yläkulmassa): vaihtaa kaistakohtaisten päällekkäisten histogrammien värejä kameran suodattimen mukaan (esim. FRGN-tilassa: harmaa NIR
-
-, vihreä, punainen). Mono-kameroissa (M3M) painikkeessa lukee ”MONO” ja se on pois käytöstä — mono-tilassa näytetään aina yksikaistainen luma-histogrammi.
+* **Oranssi (Orange) katkoviiva**= AE-kohde.**Vedä sitä vaakasuoraan kohteen muuttamiseksi** — yksi komento lähetetään, kun irrotat sormesi, ja vetäminen vaihtaa AE-kohdetilan manuaaliseksi.
+* **Vihreä (Green) yhtenäinen viiva** = todellinen keskimääräinen luma (se, mitä AE tuottaa tällä hetkellä).
+* **RGB-painike** (oikeassa yläkulmassa): vaihtaa kaistakohtaisten päällekkäisten histogrammien värejä kameran suodattimen mukaan (esim. FRGN-tilassa: harmaa NIR, vihreä, punainen). Mono-kameroissa (M3M) painikkeessa lukee ”MONO” ja se on pois käytöstä — mono-tilassa näytetään aina yksikaistainen luma-histogrammi.
 * X-akselin merkinnät noudattavat nykyisen pikselimuodon anturin bittisyvyyttä: 0..255, 0..1023, 0..4095 tai 0..65535.
 
 ### Kameratietorivit
@@ -148,54 +104,22 @@ Paneelin yläosassa on reaaliaikainen luma-histogrammi, joka lasketaan JPEG
 | Rivi | Toiminta |
 | --- | --- |
 | **Malli** | Vain luku -tila (esim. `LATT-M3C-L87-FRGN`). |
-| **Radiometrinen kalibrointi** | Green**&quot;Active&quot;**-merkki, jonka tekstissä näkyy kalibrointitaso, hash-arvo, kalibrointipäivämäärä ja kaistaluettelo, jotka on ladattu kameran kalibrointipaketista (katso [Tehdasradiometrinen kalibrointi](https://mapir.gitbook.io/lattice-camera/calibration/factory-radiometric-calibration)).**Piilotettu RGB
-
--kameroissa** — niissä on fotometrinen valkotasapainokalibrointi, ei kaistakohtaista säteilyvoimakkuutta. |
-| **Kalibrointiraportti**|**Lataa**-painike — avaa kameran sarjanumeroittain jaetun NIST-kalibrointitodistuksen PDF-tiedostona käyttöjärjestelmän katseluohjelmassa. Jos todistusta ei ole vielä tallennettu välimuistiin, Chloros
-
-näyttää sen sijaan vihjeen. |
+| **Radiometrinen kalibrointi** | Green**"Active"**-merkki, jonka tekstissä näkyy kalibrointitaso, hash-arvo, kalibrointipäivämäärä ja kaistaluettelo, jotka on ladattu kameran kalibrointipaketista (katso [Tehdasradiometrinen kalibrointi](https://mapir.gitbook.io/lattice-camera/calibration/factory-radiometric-calibration)).**Piilotettu RGB-kameroissa** — niissä on fotometrinen valkotasapainokalibrointi, ei kaistakohtaista säteilyvoimakkuutta. |
+| **Kalibrointiraportti**|**Lataa**-painike — avaa kameran sarjanumeroittain jaetun NIST-kalibrointitodistuksen PDF-tiedostona käyttöjärjestelmän katseluohjelmassa. Jos todistusta ei ole vielä tallennettu välimuistiin, Chloros näyttää sen sijaan vihjeen. |
 | **Sarjanumero** | Vain luku -tila. |
 | **Laiteohjelmisto**| Näyttää nykyisen version ja hakee sitten tämän mallin saatavilla olevan version (tallennetaan välimuistiin mallikohtaisesti — N-kamerajärjestelmä tarkistaa palvelimen kerran). Tilat: ”Tarkistetaan…” →**”Päivitä versioon X”**-painike → ”Päivitetään…” → ”Päivitetty A → B” / ”Epäonnistui: …” / ”Ohitettu: …” / vihreä**”Ajantasalla”**. Päivityspainikkeen työkaluvinkki: ”Tehdasasetusten palautus + flashaus + UserSet1:n uudelleenohjelmointi. ~2–3 minuuttia; älä katkaise yhteyttä.” |
 | **IP** | Vain luku. |
 | **Lämpötila** | Vain luku -tila, päivitetään 3 sekunnin välein. Muuttuu oranssiksi, kun lämpötila on ≥65 °C, ja punaiseksi ⚠-merkillä, kun lämpötila on ≥75 °C. |
-| **Kalibrointikohde** valintaruutu | Ottaa käyttöön ArUco-heijastavuustavoitteen tunnistuksen paneelikohtaisella NDVI
-
--validointitaulukolla reaaliaikaisen syötteen alapuolella (luettelonäkymä) — katso [Kalibrointikohdetaulukko](#the-calibration-target-table). Vain istunnon ajan — avautuu aina pois päältä. |
-| **Valosensori**-pudotusvalikko | Liittää DAQ-valosensorin (DAQ-E/M/U, Valosensorit-välilehden luettelosta) tähän kameraan alaspäin suuntautuvan valon (DLS) valaistuksen korjausta ja ennakoivaa automaattista valotusta varten. &quot;”Ei mitään” poistaa liitännän. Jos antureita ei ole kytketty, pudotusvalikossa näkyy ”(antureita ei kytketty — avaa DAQ-välilehti)”. Liitos tallennetaan projektin mukana. |
+| **Kalibrointikohde** valintaruutu | Ottaa käyttöön ArUco-heijastavuustavoitteen tunnistuksen paneelikohtaisella NDVI-validointitaulukolla reaaliaikaisen syötteen alapuolella (luettelonäkymä) — katso [Kalibrointikohdetaulukko](#the-calibration-target-table). Vain istunnon ajan — avautuu aina pois päältä. |
+| **Valosensori**-pudotusvalikko | Liittää DAQ-valosensorin (DAQ-E/M/U, Valosensorit-välilehden luettelosta) tähän kameraan alaspäin suuntautuvan valon (DLS) valaistuksen korjausta ja ennakoivaa automaattista valotusta varten. "”Ei mitään” poistaa liitännän. Jos antureita ei ole kytketty, pudotusvalikossa näkyy ”(antureita ei kytketty — avaa DAQ-välilehti)”. Liitos tallennetaan projektin mukana. |
 
 #### Kalibrointikohdetaulukko
 
-Taulukko on **vain validointitarkistusta varten** (&quot;vain validointia varten — ei muuta kalibrointia&quot;). Sen otsikossa mainitaan kameran sarjanumero, suodatin, kohteen numero ja merkin koko pikseleinä, ja siinä on yksi rivi kutakin paneelia kohti:
+Taulukko on **vain validointitarkistusta varten** ("vain validointia varten — ei muuta kalibrointia"). Sen otsikossa mainitaan kameran sarjanumero, suodatin, kohteen numero ja merkin koko pikseleinä, ja siinä on yksi rivi kutakin paneelia kohti:
 
-* **Paneeli**, jonka jälkeen on yksi sarake kutakin kaistaa kohti, jossa on paneelin arvo — Bayer-kamera näyttää kolme kaistaansa nimen ja aallonpituuden mukaan (esim. FRGN: Red
-
-660 nm / Green
-
-550 nm / NIR
-
-850 nm); **mono (M3M)-kamera näyttää yhden kaistansa** (esim. `F750`) eikä siinä ole NDVI
-
--sarakkeita.
+* **Paneeli**, jonka jälkeen on yksi sarake kutakin kaistaa kohti, jossa on paneelin arvo — Bayer-kamera näyttää kolme kaistaansa nimen ja aallonpituuden mukaan (esim. FRGN: Red 660 nm / Green 550 nm / NIR 850 nm); **mono (M3M)-kamera näyttää yhden kaistansa** (esim. `F750`) eikä siinä ole NDVI-sarakkeita.
 * **Sat** — paneelin kyllästyneiden pikselien osuus (keltainen alkaen 1 %, punainen alkaen 5 %).
-* **NDVI
-
-Meas**,**NDVI
-
-Theo** (paneelin vertailuheijastavuus-NDVI
-
-) ja **Δ**— vain Bayer-monispektrikameroille. Pieni merkki ”NDVI
-
-Meas” -merkinnän jälkeen kertoo, mistä mitattu NDVI
-
-on laskettu:**ρ**(heijastavuus — valosensorin lukema on käytettävissä),**L**(säteily — valosensorin lukemaa ei ole) tai**DN**(kameran raaka-arvot). Vain**ρ**-NDVI
-
-on vertailukelpoinen NDVI
-
-Theo:n kanssa: L:n ja DN:n kohdalla Δ-sarake on harmaana ja huomautus kertoo tämän (&quot;Ei valosensorin lukemaa: NDVI
-
-on peräisin säteilyvoimakkuudesta, joten Δ ei ole kalibrointitarkistus&quot; / &quot;NDVI
-
-on peräisin kameran raaka-arvoista, joten Δ ei ole kalibrointitarkistus&quot;). Arvon ρ ollessa kyseessä Δ on vihreä alle 0,02:n, keltainen alle 0,05:n ja muutoin punainen.
+* **NDVI Meas**,**NDVI Theo** (paneelin vertailuheijastavuus-NDVI) ja **Δ**— vain Bayer-monispektrikameroille. Pieni merkki ”NDVI Meas” -merkinnän jälkeen kertoo, mistä mitattu NDVI on laskettu:**ρ**(heijastavuus — valosensorin lukema on käytettävissä),**L**(säteily — valosensorin lukemaa ei ole) tai**DN**(kameran raaka-arvot). Vain**ρ**-NDVI on vertailukelpoinen NDVI Theo:n kanssa: L:n ja DN:n kohdalla Δ-sarake on harmaana ja huomautus kertoo tämän ("Ei valosensorin lukemaa: NDVI on peräisin säteilyvoimakkuudesta, joten Δ ei ole kalibrointitarkistus" / "NDVI on peräisin kameran raaka-arvoista, joten Δ ei ole kalibrointitarkistus"). Arvon ρ ollessa kyseessä Δ on vihreä alle 0,02:n, keltainen alle 0,05:n ja muutoin punainen.
 
 <!-- SCREENSHOT-NEEDED: a 1.3.0 Calibration Target table under a live feed in list view — a Bayer camera's table showing the band columns, Sat, and "NDVI Meas ρ" / NDVI Theo / Δ; ideally next to a mono camera's single-band table with no NDVI columns. -->
 
@@ -203,34 +127,24 @@ on peräisin kameran raaka-arvoista, joten Δ ei ole kalibrointitarkistus&quot;)
 
 <!-- SCREENSHOT-NEEDED: per-camera Exposure & Gain section — Exposure (us) and Gain (dB) rows with Auto/Manual toggles, AE Target Brightness, AE Smoothing slider, AE Region of Interest row with the Aim button, and (on an array camera) AE Tune Speed and Highlight Protection rows. -->
 
-Kaikki tämän osion numeeriset syöttökentät käyttävät pidä painettuna nopeuttaaksesi -tyyppisiä säätimiä: napautus = ±1, pidä painettuna &gt;1,5 s = ±10, pidä painettuna &gt;3 s = ±100. Arvo lähetetään kameraan, kun vapautat painikkeen.
+Kaikki tämän osion numeeriset syöttökentät käyttävät pidä painettuna nopeuttaaksesi -tyyppisiä säätimiä: napautus = ±1, pidä painettuna >1,5 s = ±10, pidä painettuna >3 s = ±100. Arvo lähetetään kameraan, kun vapautat painikkeen.
 
 | Säädin | Alue / vaihtoehdot | Oletus | Koskee | Toiminto |
 | --- | --- | --- | --- | --- |
 | **Valotus (us)**| Kameran reaaliaikaiset minimi-/maksimiarvot | Auto | Kaikki | Valotusaika mikrosekunteina, jossa on**Auto/Manuaali**vaihtoehdon. Auto = jatkuva kameran oma automaattinen valotus. Manuaalisen valotuksen asettaminen jättää**vahvistuksen** Auto-tilaan, jos se oli siinä, jolloin kameran koko vahvistusalue on käytettävissä, kunnes muokkaat vahvistusta tai asetat sen manuaaliseksi. |
 | **Vahvistus (dB)**| Kameran reaaliaikaiset minimi- ja maksimiarvot (esim. enintään 48 dB) | Manuaalinen (pois) | Kaikki | Analoginen/digitaalinen vahvistus, jossa on oma**Auto/Manuaali**-kytkin. |
 | **AE-kohdekirkkaus**| 0–255 | 80, tila**Auto**| Kaikki (muokattavissa, kun AE tai automaattinen vahvistus on päällä) | Kirkkaus, johon AE tähtää.**Auto**-tilassa (oletus) histogrammipohjainen taustasäädin valitsee tavoitearvon itse ja pitää valotuksen 60–75 %:ssa anturin maksimiarvosta. Arvon kirjoittaminen tai histogrammin oranssin viivan vetäminen vaihtaa tilan**Manuaaliseksi**. |
-| **AE-tasoitus** | 0,5–40, askel 0,1 | 8,0 | Kaikki | AE-vaimennus. Työkaluvinkki: &quot;Pienempi arvo = AE reagoi nopeammin (voi pulsoida korkeilla kuvataajuuksilla). Suurempi arvo = tasaisempi / hitaampi.” Oletusarvoa huomattavasti pienemmät arvot voivat aiheuttaa AE:n pulsointia ja horjuttaa suoratoistoa korkeilla kuvataajuuksilla; 8,0 on vakaa oletusarvo. |
+| **AE-tasoitus** | 0,5–40, askel 0,1 | 8,0 | Kaikki | AE-vaimennus. Työkaluvinkki: "Pienempi arvo = AE reagoi nopeammin (voi pulsoida korkeilla kuvataajuuksilla). Suurempi arvo = tasaisempi / hitaampi.” Oletusarvoa huomattavasti pienemmät arvot voivat aiheuttaa AE:n pulsointia ja horjuttaa suoratoistoa korkeilla kuvataajuuksilla; 8,0 on vakaa oletusarvo. |
 | **AE:n kohdealue**| Valintaruutu +**Aim**-painike | Pois | Kaikki | Kun tämä on päällä, AE mittaa vain viivalla merkittyä vihreää aluetta koko kehyksen sijaan.**Tähtäys** aktivoi napsauta-ja-sijoita-toiminnon suorassa lähetyksessä: napsautus keskittää alueen 30 %:iin kehyksestä; napsauta ja vedä piirtää mukautetun suorakulmion (vähintään 5 % × 5 %). Tavoite-toiminto poistuu käytöstä yhden sijoituksen jälkeen. Alue kartoitetaan takaisin kameran omille koordinaateille asettamasi kierto- tai peilausasetusten mukaisesti ja tallennetaan projektin mukana. |
 | **AE-säätönopeus** | 0,1–5, askel 0,1 | 1,0 | Vain Array-jäsenille | Kuinka nopeasti automaattisen AE-kohteen seuranta reagoi kohtauksen kirkkauden muutoksiin; 1,0× tarkistaa tilanteen uudelleen 2,5 sekunnin välein. |
 | **Kirkkaiden alueiden suojaus** | Tiukka (1 %) / Normaali (5 %) / Löyhä (15 %) | Tiukka | Kamerat, joissa tämä asetus on käytettävissä | Kuinka suuri osa kuvasta saa leikkautua valkoiseksi, ennen kuin AE tummentaa kuvaa. |
 
 {% hint style="info" %}
-**Valaistusvaatimukset Bayer-monispektrikameroille (RGN
-
-/ OCN
-
-/ NGB
-
-):** kuvauskohteessa on oltava riittävästi valoa kaikissa kolmessa kanavassa, muuten kalibrointi ei toimi oikein — yksi aistimen valotus kattaa kaikki kolme spektriä. Mittaa valaistusta DAQ-valosensorilla tai käytä kokonaan monokromista tilaa (M3M), jolloin jokainen kaista saa oman valotuksensa. Jos kuvaus rikkoo tätä sääntöä, Chloros
-
-havaitsee sen ja varoittaa sinua (unmix-clamp-ilmoitus). Reaaliaikaisessa näkymässä kanavajakokuvaruudussa näkyy **”Low-confidence band data · N%”**, kun unmix on rajoittanut kyseisen kaistan 25 %:ssa tai useammassa sen pikseleistä.
+**Valaistusvaatimukset Bayer-monispektrikameroille (RGN / OCN / NGB):** kuvauskohteessa on oltava riittävästi valoa kaikissa kolmessa kanavassa, muuten kalibrointi ei toimi oikein — yksi aistimen valotus kattaa kaikki kolme spektriä. Mittaa valaistusta DAQ-valosensorilla tai käytä kokonaan monokromista tilaa (M3M), jolloin jokainen kaista saa oman valotuksensa. Jos kuvaus rikkoo tätä sääntöä, Chloros havaitsee sen ja varoittaa sinua (unmix-clamp-ilmoitus). Reaaliaikaisessa näkymässä kanavajakokuvaruudussa näkyy **”Low-confidence band data · N%”**, kun unmix on rajoittanut kyseisen kaistan 25 %:ssa tai useammassa sen pikseleistä.
 {% endhint %}
 
 {% hint style="info" %}
-**Kuinka automaattinen valotus käyttää valotusaikaa ja vahvistusta (1.3.0).** Kun vahvistus on asetettu automaattiseksi (Gain on Auto), Chloros
-
-pitää vahvistuksen 0 dB:ssä, kunnes valotus on saavuttanut sallitun enimmäisarvon (AE:n yläraja, matriisin laukaisuväli tai DAQ:n valotuksen yläraja); vasta sitten vahvistus nousee. Matriisissa laukaisutaajuus on etusijalla: automaattinen valotus täyttää taajuuden määrittämän jaksonja nostaa sitten vahvistusta, joten pimenemässä oleva kohde ei enää laske automaattista laukaisutaajuutta (versiossa 1.2.0 se vielä laski). **Manuaalinen**valotus matriisin jäsenellä, joka kestää kauemmin kuin laukaisujakso, hidastaa matriisin laukaisutaajuutta sen mukaiseksi; automaattinen laukaisutaajuus palautuu, kun jokainen sen hidastanut jäsen on palannut automaattiseen valotukseen. Kun**Valotus**ja**AE-kohteen kirkkaus** ovat molemmat automaattisella ja DAQ-valosensori antaa lukeman, kunkin kameran valotusta pidetään vakiona, kun automaattinen valotus on vakiintunut, niin kauan kuin mitattu valo pysyy noin ±25 %:n rajoissa; suurempi, pitkäkestoinen valonmuutos, asetusten uudelleenkäynnistys (esimerkiksi ROI-alueen muutos) tai käyttäjän tekemä valotuksen muutos käynnistää sen uudelleen.
+**Kuinka automaattinen valotus käyttää valotusaikaa ja vahvistusta (1.3.0).** Kun vahvistus on asetettu automaattiseksi (Gain on Auto), Chloros pitää vahvistuksen 0 dB:ssä, kunnes valotus on saavuttanut sallitun enimmäisarvon (AE:n yläraja, matriisin laukaisuväli tai DAQ:n valotuksen yläraja); vasta sitten vahvistus nousee. Matriisissa laukaisutaajuus on etusijalla: automaattinen valotus täyttää taajuuden määrittämän jaksonja nostaa sitten vahvistusta, joten pimenemässä oleva kohde ei enää laske automaattista laukaisutaajuutta (versiossa 1.2.0 se vielä laski). **Manuaalinen**valotus matriisin jäsenellä, joka kestää kauemmin kuin laukaisujakso, hidastaa matriisin laukaisutaajuutta sen mukaiseksi; automaattinen laukaisutaajuus palautuu, kun jokainen sen hidastanut jäsen on palannut automaattiseen valotukseen. Kun**Valotus**ja**AE-kohteen kirkkaus** ovat molemmat automaattisella ja DAQ-valosensori antaa lukeman, kunkin kameran valotusta pidetään vakiona, kun automaattinen valotus on vakiintunut, niin kauan kuin mitattu valo pysyy noin ±25 %:n rajoissa; suurempi, pitkäkestoinen valonmuutos, asetusten uudelleenkäynnistys (esimerkiksi ROI-alueen muutos) tai käyttäjän tekemä valotuksen muutos käynnistää sen uudelleen.
 {% endhint %}
 
 {% hint style="info" %}
@@ -271,34 +185,18 @@ Kaikki tässä osiossa on **vain näyttöpuolen asetuksia**— ne muuttavat sit�
 | --- | --- | --- | --- | --- |
 | **Renderöintitarkkuus** | 360p (nopein) / 480p / 720p / 1080p / Alkuperäinen anturitarkkuus (hitain) | 720p | Kaikki | Korkeus, jolla taustaprosessi suorittaa radiometrisen esikatseluketjun. Pienempi arvo parantaa kuvataajuutta muuttamatta näkökenttää. |
 | **Indeksi**| Valintaruutu ”Ota käyttöön” + ratas | Pois | Vain Bayer-monispektriset,**ei** yhdistettyjen matriisien jäsenet | Kasvillisuusindeksin reaaliaikainen esikatselu. Hammasratas avaa jaetun [Indeksilaskurin](#index-calculator-pane), johon on esiladattu kameran suodattimen luonnolliset kaistat (esim. `Red_660_RGN`, `Green_550_RGN`, `NIR_850_RGN`). Mukautettu lauseke sekä LUT (päällä/pois, oletustaso 7-stop, oletusminimi 0,2, oletusmaksimi 1) lasketaan jokaisessa esikatselukuvassa. Yhdistettyjen matriisien jäsenet piilottavat tämän rivin — matriisi omistaa yhden jaetun indeksin. |
-| **Valkotasapaino** | Pois / Kerran / Jatkuva + uudelleenkuvauspainike | Jatkuva | Vain RGB
-
-| Reaaliaikainen valkotasapaino. Päivitä-painike tallentaa valkotasapainon uudelleen nykyisestä DLS-spektristä (pois käytöstä, kun tila on Pois). |
-| **Gamma** | Päällä / Pois | Päällä | Vain RGB
-
-| Näytä gamma (γ = 2,2 LUT) reaaliaikaisessa esikatselussa. Tallennetut kuvat pysyvät lineaarisina. |
+| **Valkotasapaino** | Pois / Kerran / Jatkuva + uudelleenkuvauspainike | Jatkuva | Vain RGB | Reaaliaikainen valkotasapaino. Päivitä-painike tallentaa valkotasapainon uudelleen nykyisestä DLS-spektristä (pois käytöstä, kun tila on Pois). |
+| **Gamma** | Päällä / Pois | Päällä | Vain RGB | Näytä gamma (γ = 2,2 LUT) reaaliaikaisessa esikatselussa. Tallennetut kuvat pysyvät lineaarisina. |
 | **Kohinanpoisto** | Valintaruutu + voimakkuus 0–100 | Pois / 50 | Kaikki (kamera-kohtaisesti, myös ryhmien sisällä) | Bilateraalinen suodatin reaaliaikaisessa esikatselussa. Suurempi arvo = tasaisempi, mutta pehmeämmät yksityiskohdat. |
 | **Terävyys** | Valintaruutu + voimakkuus 0–100 | Pois / 30 | Kaikki | Terävöintimaski reaaliaikaisessa esikatselussa, sovelletaan viimeisenä. Voi vahvistaa kohinaa. Vain esikatselussa. |
 | **Vignette**| Valintaruutu + voimakkuus 0–100 | Pois / 0 | Kaikki | Manuaalinen jäännösvignetoinnin poisto (kirkastaa kulmia), joka lisätään ryhmän Smart Vignette -arvion päälle.**Radiometrinen — vaikuttaa reaaliaikaiseen näkymään JA vientiin**, toisin kuin kohinanpoisto ja terävyys. |
-| **Väriprofiili** | Raw / Lineaarinen / Luonnollinen / Parannettu / Mukautettu lämpötila | Luonnollinen | Vain RGB
-
-| Katso alla. |
-| **Värilämpötila** | 2000–10000 K, askel 100 | 5500 K | Vain RGB
-
-, mukautettu lämpötilaprofiili | Kiinnittää valkotasapainon kiinteään korreloituun värilämpötilaan (DLS-syöttöä ei huomioida). Viimeksi valittu Kelvin-arvo muistetaan profiilinvaihtojen yli. |
-| **Kirkkaat kohdat** | −100 – 0, askel 1 | 0 (pois päältä) | Vain RGB
-
-| Uutta versiossa 1.3.0. Tummentaa kuvan kirkkaimpia, valkoisimpia alueita (0 = ei muutosta, −100 = voimakkain). Koskee reaaliaikaista esikatselua **sekä näytötasoisia (Preview) kaappauksia**, jotka tallentavat asetuksen (`Chloros:DisplayHighlights`); säteily- ja heijastavuusvientiä tämä ei koskaan vaikuta. Se ei voi palauttaa leikkautuneita anturitietoja — vähennä valotusta sen vuoksi. Zebra-peittokuva seuraa tummennettua kuvaa. Poissa käytöstä Raw-väriprofiililla (”Ei sovelleta Raw-väriprofiilin kanssa.”). |
-| **Kylläisyys** | 0–200 (100 = neutraali) | 100 | Vain RGB
-
-| HSV-kylläisyys reaaliaikaisessa esikatselussa. |
-| **Kontrasti** | 0–200 (100 = neutraali) | 100 | Vain RGB
-
-| Lineaarinen kontrasti keskiharmaan ympärillä reaaliaikaisessa esikatselussa. |
+| **Väriprofiili** | Raw / Lineaarinen / Luonnollinen / Parannettu / Mukautettu lämpötila | Luonnollinen | Vain RGB | Katso alla. |
+| **Värilämpötila** | 2000–10000 K, askel 100 | 5500 K | Vain RGB, mukautettu lämpötilaprofiili | Kiinnittää valkotasapainon kiinteään korreloituun värilämpötilaan (DLS-syöttöä ei huomioida). Viimeksi valittu Kelvin-arvo muistetaan profiilinvaihtojen yli. |
+| **Kirkkaat kohdat** | −100 – 0, askel 1 | 0 (pois päältä) | Vain RGB | Uutta versiossa 1.3.0. Tummentaa kuvan kirkkaimpia, valkoisimpia alueita (0 = ei muutosta, −100 = voimakkain). Koskee reaaliaikaista esikatselua **sekä näytötasoisia (Preview) kaappauksia**, jotka tallentavat asetuksen (`Chloros:DisplayHighlights`); säteily- ja heijastavuusvientiä tämä ei koskaan vaikuta. Se ei voi palauttaa leikkautuneita anturitietoja — vähennä valotusta sen vuoksi. Zebra-peittokuva seuraa tummennettua kuvaa. Poissa käytöstä Raw-väriprofiililla (”Ei sovelleta Raw-väriprofiilin kanssa.”). |
+| **Kylläisyys** | 0–200 (100 = neutraali) | 100 | Vain RGB | HSV-kylläisyys reaaliaikaisessa esikatselussa. |
+| **Kontrasti** | 0–200 (100 = neutraali) | 100 | Vain RGB | Lineaarinen kontrasti keskiharmaan ympärillä reaaliaikaisessa esikatselussa. |
 | **Peilaa vaakasuoraan / Peilaa pystysuoraan** | Valintaruudut | Pois | Kaikki | Käännä esikatselua vaakasuoraan / pystysuoraan. |
-| **Kierto**| 0° / 90° / 180° / 270° | 0° | Kaikki | Kierrä esikatselua. Suunta sovelletaan esikatseluketjun lopussa.**Tallennetut kuvat (1.3.0):**erillisen kameran esikatselu-, säteily-, heijastus- ja indeksituotteet käännetään peilaus-/kiertotoiminnoilla, kun taas**Raw- ja Debayered-tuotteet säilyttävät kameran alkuperäisen suunnan**; jokainen kuvatiedosto tallentaa asetuksen XMP-tiedostoonsa, joten raakakuvan myöhempi käsittely soveltaa sitä samalla tavalla.**Array-jäsenetiedostot säilyttävät alkuperäisen suunnan** (asetus tallennetaan, mutta sitä ei sovelleta), ja array-yhdistelmänäkymät eivät ota sitä huomioon. |**Väriprofiilien semantiikka** (RGB
-
--kamerat):
+| **Kierto**| 0° / 90° / 180° / 270° | 0° | Kaikki | Kierrä esikatselua. Suunta sovelletaan esikatseluketjun lopussa.**Tallennetut kuvat (1.3.0):**erillisen kameran esikatselu-, säteily-, heijastus- ja indeksituotteet käännetään peilaus-/kiertotoiminnoilla, kun taas**Raw- ja Debayered-tuotteet säilyttävät kameran alkuperäisen suunnan**; jokainen kuvatiedosto tallentaa asetuksen XMP-tiedostoonsa, joten raakakuvan myöhempi käsittely soveltaa sitä samalla tavalla.**Array-jäsenetiedostot säilyttävät alkuperäisen suunnan** (asetus tallennetaan, mutta sitä ei sovelleta), ja array-yhdistelmänäkymät eivät ota sitä huomioon. |**Väriprofiilien semantiikka** (RGB-kamerat):
 
 * **Raw** — ohittaa käsittelyketjun kokonaan.
 * **Lineaarinen** — tummasignaali + tasokenttä + valkotasapaino; ei värimatriisia, ei gammaa.
@@ -323,20 +221,12 @@ Nämä ovat vain käyttöliittymän ominaisuuksia — ne piirretään videon pä
 | **Ruudukko** | Pois / 3 × 3 / 9 × 9 | Pois | Sommitteluruudukko. |
 | **Histogrammi** | Valintaruutu + leveys 0,10–0,90 kuvan leveydestä | Pois / 0,25 | Lähetyksessä näkyvä histogrammikaistale. |
 | **Focus Peak** | Valintaruutu + kynnysarvo 20–200 + värinäyte | Pois / 80 / `#ff5722` | Sobel-reunakorostus tarkennusta varten. |
-| **Kanavajaot** | &quot;Näytä jaot (Red
-
-/ Green
-
-/ NIR
-
-)&quot; / &quot;Piilota jaot&quot; -painike | Piilotettu | Lisää kolme itsenäistä harmaasävyistä kanavakohtaista ruutua yhdistelmäkuvan viereen (painikkeen teksti noudattaa kameran suodatinkanavia). Jokainen jaettu ruutu on siirrettävissä ja sillä on kameran reunusväri. Ei käytettävissä mustavalkokameroissa. Tallennetaan projektin mukana. |
+| **Kanavajaot** | "Näytä jaot (Red / Green / NIR)" / "Piilota jaot" -painike | Piilotettu | Lisää kolme itsenäistä harmaasävyistä kanavakohtaista ruutua yhdistelmäkuvan viereen (painikkeen teksti noudattaa kameran suodatinkanavia). Jokainen jaettu ruutu on siirrettävissä ja sillä on kameran reunusväri. Ei käytettävissä mustavalkokameroissa. Tallennetaan projektin mukana. |
 
 ### Pistemittari
 
 * **Napsauta näytteenottoa varten**-valintaruutu: napsauta reaaliaikaista kuvaa yhden pikselin näytteen ottamiseksi (ristikohdistin merkitsee sen) tai napsauta ja vedä aluetta pikselien keskiarvon laskemiseksi.**Tyhjennä**poistaa näytteen ja kohdistimen. Ei voi olla käytössä samanaikaisesti AE-ROI**Aim** -tilan kanssa.
-* **Näytä**-pudotusvalikko:**Raw (bittisyvyys)**— alkuperäiset digitaaliset arvot anturin bittisyvyydellä (esim. 12-bittinen → 0..4095) — tai**Näyttö (8-bittinen)** (oletus). Kun reaaliaikainen indeksi on aktiivinen, Näyttö-valinta näyttää sen sijaan lasketun indeksiarvon (esim. NDVI
-
-).
+* **Näytä**-pudotusvalikko:**Raw (bittisyvyys)**— alkuperäiset digitaaliset arvot anturin bittisyvyydellä (esim. 12-bittinen → 0..4095) — tai**Näyttö (8-bittinen)** (oletus). Kun reaaliaikainen indeksi on aktiivinen, Näyttö-valinta näyttää sen sijaan lasketun indeksiarvon (esim. NDVI).
 * Lukupaneelissa näkyvät pikselikoordinaatit, kehyksen koko, pikselimuoto, bittisyvyys sekä kanavataulukko (Chan / Value / %), jossa on kaistamerkinnät ja aallonpituudet; Bayerin vihreät parit on keskiarvoistettu; alueiden näytteissä näkyy ”N px avg”.
 
 Pistemittarin tila on voimassa vain kyseisen istunnon ajan.
@@ -358,18 +248,10 @@ Tämä osio näkyy vain, kun **vähintään yksi DAQ-valosensori on kytketty** �
 | **Kohteen heijastavuus**|**Kalibroi ρ uudelleen** -painike | — | Arvioi uudelleen ratkaisijan käyttämän kohteen heijastavuuskertoimen. |
 
 {% hint style="info" %}
-**Array Connect poistaa ennakoivan automaattisen valotuksen käytöstä oletuksena** — matriisikameroissa Chloros
-
-in älykäs automaattinen valotus sekä kameran oma automaattinen valotus hoitavat valotuksen (kylläisyyssuojauksella), eikä ennakoivan automaattisen valotuksen yksittäisen kohtauksenheijastavuusarvio ei ole turvallinen sekakohtauksissa. Voit ottaa sen uudelleen käyttöön kamerakohtaisesti täällä, jos haluat nimenomaan DLS-ohjattua radiometristä valotusta.
+**Array Connect poistaa ennakoivan automaattisen valotuksen käytöstä oletuksena** — matriisikameroissa Chloros in älykäs automaattinen valotus sekä kameran oma automaattinen valotus hoitavat valotuksen (kylläisyyssuojauksella), eikä ennakoivan automaattisen valotuksen yksittäisen kohtauksenheijastavuusarvio ei ole turvallinen sekakohtauksissa. Voit ottaa sen uudelleen käyttöön kamerakohtaisesti täällä, jos haluat nimenomaan DLS-ohjattua radiometristä valotusta.
 {% endhint %}
 
-**DAQ-ohjattu valotuksen yläraja ja saapuvan valon mukaan lukittu AE.** Edellä mainitusta valintaruudusta riippumatta, kun DAQ-valosensori on määritetty RGB
-
--kameraan, Chloros
-
-laskee — mitatun absoluuttisen alaspäin suuntautuvan säteilyvoimakkuuden perusteella — suurimman valotuksen×vahvistuksen, jolla 100 %:n heijastavuuden pinta pysyy leikkautumisen alapuolella, ja soveltaa sitä **rajoitukseksi**automaattisessa valotuksessa. Versiosta 1.3.0 lähtien rajoitus on voimassa vain silloin, kun kalibrointikohde on kyseisen kameran näkökentässä (näkyy sen kuvakehyksessä viimeisten 10 sekunnin aikana); kun kohdetta ei ole näkymässä, kameran tavallinen automaattinen valotus, jossa on oma kirkkaiden alueiden suojaus, toimii sen sijaan, jotta muuta kuvaa ei pidetä tarpeettoman tummana. Kun yläraja on aktiivinen, kamera on**kiinnitetty tulevan valon mukaan**: se toimii avoimessa säätöpiirissä valonmittaukseen perustuvalla valotuksella, kun vahvistus on 0 dB — valotus seuraa mitattua valoa, ei kuvauskohteen sisältöä. Koska yläraja voi vain lyhentää valotusaikaa, se ei voi itsessään aiheuttaa leikkautumista. Versiosta 1.3.0 lähtien yläraja lasketaan kameran omalla valotusvakiolla, joka on peräisin sen kalibrointipaketista (laivaston keskiarvo käytetään vain, jos paketissa ei ole omaa arvoa). Yläraja kytkeytyy pois päältä automaattisesti — ja normaali kuvan automaattinen valotus jatkuu — aina, kun kalibrointikohdetta ei ole näkymässä, DAQ-lukema puuttuu, on vanhentunut (&gt;30 s), pimeä tai jos ≥15 % kuvasta leikkautuu kiinnitetyllä valotuksella (eli anturi ja kamera havaitsevat erilaista valaistusta). Tälle ei ole GUI-kytkintä; tämä on vakiokäyttäytyminen aina, kun RGB
-
--kameralla on DAQ-yhteys.
+**DAQ-ohjattu valotuksen yläraja ja saapuvan valon mukaan lukittu AE.** Edellä mainitusta valintaruudusta riippumatta, kun DAQ-valosensori on määritetty RGB-kameraan, Chloros laskee — mitatun absoluuttisen alaspäin suuntautuvan säteilyvoimakkuuden perusteella — suurimman valotuksen×vahvistuksen, jolla 100 %:n heijastavuuden pinta pysyy leikkautumisen alapuolella, ja soveltaa sitä **rajoitukseksi**automaattisessa valotuksessa. Versiosta 1.3.0 lähtien rajoitus on voimassa vain silloin, kun kalibrointikohde on kyseisen kameran näkökentässä (näkyy sen kuvakehyksessä viimeisten 10 sekunnin aikana); kun kohdetta ei ole näkymässä, kameran tavallinen automaattinen valotus, jossa on oma kirkkaiden alueiden suojaus, toimii sen sijaan, jotta muuta kuvaa ei pidetä tarpeettoman tummana. Kun yläraja on aktiivinen, kamera on**kiinnitetty tulevan valon mukaan**: se toimii avoimessa säätöpiirissä valonmittaukseen perustuvalla valotuksella, kun vahvistus on 0 dB — valotus seuraa mitattua valoa, ei kuvauskohteen sisältöä. Koska yläraja voi vain lyhentää valotusaikaa, se ei voi itsessään aiheuttaa leikkautumista. Versiosta 1.3.0 lähtien yläraja lasketaan kameran omalla valotusvakiolla, joka on peräisin sen kalibrointipaketista (laivaston keskiarvo käytetään vain, jos paketissa ei ole omaa arvoa). Yläraja kytkeytyy pois päältä automaattisesti — ja normaali kuvan automaattinen valotus jatkuu — aina, kun kalibrointikohdetta ei ole näkymässä, DAQ-lukema puuttuu, on vanhentunut (>30 s), pimeä tai jos ≥15 % kuvasta leikkautuu kiinnitetyllä valotuksella (eli anturi ja kamera havaitsevat erilaista valaistusta). Tälle ei ole GUI-kytkintä; tämä on vakiokäyttäytyminen aina, kun RGB-kameralla on DAQ-yhteys.
 
 ### Tiedonkeruu ja laukaisu
 
@@ -393,7 +275,7 @@ Ryhmän jäsenissä näkyvät lisäksi vain luku -muotoiset **Rooli**(Master sin
 
 ### Tallennus
 
-Paneelin lopussa on **&quot;Avaa tallennusasetukset…&quot;** -painike, joka vie [Tallennusasetukset-paneeliin](capture.md#the-capture-settings-pane) (pois käytöstä, kunnes projekti on avoinna — ”Luo tai avaa projekti tallentaaksesi tallenteet”). Jos kamera on piilotettu tai keskeytetty, vihje muistuttaa sinua paljastamaan/jatkamaan ennen tallennusta.
+Paneelin lopussa on **"Avaa tallennusasetukset…"** -painike, joka vie [Tallennusasetukset-paneeliin](capture.md#the-capture-settings-pane) (pois käytöstä, kunnes projekti on avoinna — ”Luo tai avaa projekti tallentaaksesi tallenteet”). Jos kamera on piilotettu tai keskeytetty, vihje muistuttaa sinua paljastamaan/jatkamaan ennen tallennusta.
 
 ## Ryhmäasetukset-paneeli
 
@@ -413,17 +295,13 @@ Näkyy sekä yhdistetyissä että erillisissä matriiseissa:
 
 * **Valosensori**-pudotusvalikko — sitoo yhden DAQ:n koko matriisiin. Valinta astuu voimaan välittömästi, ja se välittyy jokaisen jäsenkameran omaan**Valoanturi**-pudotusvalikkoon (voit silti ohittaa valinnan kamerakohtaisesti) sekä alkaa välittää spektrejä matriisiin.
 * Reaaliaikainen **Tila**-rivi: Pois · ”Odotetaan ensimmäistä spektriä…” · ”Aktiivinen — kaikkien ryhmän kameroiden valaistus on korjattu” · ”Ei uutta spektriä viimeisten 3 sekunnin aikana — käytetään edelleen viimeistä lukemaa (ei vanhentunut aikakatkaisua)…”.
-* Huomautus ruudussa: &quot;Koko ryhmän kattava radiometrinen korjaus. Kamerakohtaiset asetukset ohittavat tämän.&quot;
+* Huomautus ruudussa: "Koko ryhmän kattava radiometrinen korjaus. Kamerakohtaiset asetukset ohittavat tämän."
 
 ### Kalibrointikohde
 
 Oma ryhmänsä heti ympäristön valosensorin jälkeen, sekä yhdistetyille että erillisille ryhmille:
 
-* **Ota käyttöön** -valintaruutu — &quot;Tunnista MAPIR
-
-ArUco -kohde ja validoi NDVI
-
-:n suhteen paneelin heijastavuus-LUT&quot;; ohjaa yhdistettyjen ruutujen kohdepeittoa ja validointitaulukoita. **Erillisessä** matriisissa se aktivoi jokaisen jäsenen oman [kalibrointikohdetaulukon](#the-calibration-target-table) (yksi kutakin kamerariviä kohti luettelonäkymässä).
+* **Ota käyttöön** -valintaruutu — "Tunnista MAPIR ArUco -kohde ja validoi NDVI:n suhteen paneelin heijastavuus-LUT"; ohjaa yhdistettyjen ruutujen kohdepeittoa ja validointitaulukoita. **Erillisessä** matriisissa se aktivoi jokaisen jäsenen oman [kalibrointikohdetaulukon](#the-calibration-target-table) (yksi kutakin kamerariviä kohti luettelonäkymässä).
 
 ### Tallennus — yhtenäiset anturiasetukset
 
@@ -445,7 +323,7 @@ Huomautus paneelissa: ”Muoto- tai resoluutiomuutokset käynnistävät kaikki k
 
 Uutta versiossa 1.3.0. ROI-rajausrivi ja sen alla oleva kartta toimivat yhdessä:
 
-* **ROI päällä / ROI pois päältä**— kytkee anturin rajauksen**välittömästi**päälle tai pois päältä (kamerat käynnistyvät uudelleen hetkeksi; ruudukon ruudussa näkyy ”Asetuksia sovelletaan…”).**Pois**lukee koko anturin tiedot ja**muistaa rajauksesi**— kentät näyttävät sen edelleen;**Päällä** ottaa sen uudelleen käyttöön. Jos ROI kytketään päälle ilman määritettyä rajausta, se soveltaa keskitettyä puolikokoista rajausta (&quot;Rajausta ei määritetty, joten sovellettiin keskitettyä puolikokoista rajausta. Säädä sitä kenttien avulla.&quot;).
+* **ROI päällä / ROI pois päältä**— kytkee anturin rajauksen**välittömästi**päälle tai pois päältä (kamerat käynnistyvät uudelleen hetkeksi; ruudukon ruudussa näkyy ”Asetuksia sovelletaan…”).**Pois**lukee koko anturin tiedot ja**muistaa rajauksesi**— kentät näyttävät sen edelleen;**Päällä** ottaa sen uudelleen käyttöön. Jos ROI kytketään päälle ilman määritettyä rajausta, se soveltaa keskitettyä puolikokoista rajausta ("Rajausta ei määritetty, joten sovellettiin keskitettyä puolikokoista rajausta. Säädä sitä kenttien avulla.").
 * **Valitse**— piirtää rajauksen kartalle: vedä sen yli tai napsauta kahta vastakkaista kulmaa (Esc peruuttaa). Suorakulmio tallentuu W/H/X/Y-kenttiin, kiinnittyen edellä mainittuihin vaiheisiin; mitään ei sovelleta, ennen kuin painat**Käytä**, joten voit ensin hienosäätää sitä kenttien nuolilla. Yksi suorakulmio jokaista Valitse-painallusta kohti.
 * **Kartta**näyttää rajauksen koko kennolla, joten voit laajentaa sitä takaisin: ”Koko kenno, reaaliaikainen”, kun kamerat lukevat koko kennon, tai ”Koko kennon tilannekuva ajankohdasta {aika}. Kamerat lukevat vain rajattua aluetta.” kun ne on rajattu. Jos kameraryhmä on lähettänyt virtaa aina vain rajattuna, kartassa lukee ”Ei vielä koko kennon näkymää: tämä kameraryhmä on lähettänyt virtaa vain rajattuna.” ja**Näytä koko kuva** -painikkeen, joka poistaa ROI:n käytöstä. Rajauksen `W×H @ X,Y`-merkintä sijaitsee ruudun ulkopuolella (sen yläpuolella tai alapuolella, kun ruutu ulottuu yläreunaan asti) sekä kartalla että reaaliaikaisessa ruudussa.
 * **Käytä**vahvistaa kenttien asetukset: rajaus kytkee ROI:n päälle; täyskuva (**Nollaa**-toiminnon jälkeen) jättää sen pois päältä, mutta edellinen rajaus muistetaan; pois päältä oleva ROI, jonka kentissä näkyy edelleen muistettu rajaus, pysyy pois päältä, kun teet uuden muutoksen (formaatti, binning, kuvataajuus).
@@ -463,23 +341,23 @@ Näytetään **sekä yhdistetyille että erillisille matriiseille** (versiossa 1
 
 * **Jäännös**-pilleri: ”RMS x,xx px” — vihreä alle 1 px, keltainen alle 3 px, punainen muussa tapauksessa tai jos jokin kamera epäonnistui; ”ei profiilia” ennen ensimmäistä ratkaisua.
 * Yhteenvetorivi: ”✓ Kaikki kamerat kohdistettu (N)” / ”⚠ p/N kameraa kohdistettu — <serial (filter)="">epäonnistui” / ”Rajaaminen aktiivinen — Kalibroi uudelleen kohdistusta varten (käyttää koko kennoa)” / ”Odotetaan valotuksen vakiintumista…” / ”Asetuksia sovelletaan…” (kamerat käynnistyvät uudelleen) / ”Järjestelmä lakkasi toimittamasta kuvia — liitä järjestelmä uudelleen”.
-* Kamerakohtainen taulukko: kamera (sarjanumeron 4 viimeistä merkkiä + suodatin), uudelleenprojektio-virhe px:inä ja vastaavuuksien lukumäärä (&quot;ref&quot; pääkameralle) sekä päällekkäisyyden normalisoitu ristikorrelaatiopisteet suhteessa 0,35:n läpäisyrajaan.
+* Kamerakohtainen taulukko: kamera (sarjanumeron 4 viimeistä merkkiä + suodatin), uudelleenprojektio-virhe px:inä ja vastaavuuksien lukumäärä ("ref" pääkameralle) sekä päällekkäisyyden normalisoitu ristikorrelaatiopisteet suhteessa 0,35:n läpäisyrajaan.
 * **Kalibroi kohdistus uudelleen** -painike (teksti ”Kalibroi kohdistus” ennen ensimmäistä profiilia) — suorittaa ko-rekisteröinnin uudelleen uusilla kuvilla.
-* **&quot;Automaattinen valotus kameroille kohdistusta varten&quot;** -valintaruutu (oletusarvoisesti valittuna) — kirkastaa väliaikaisesti tummia tai tasaisia kameroita (ensin valotus, sitten vahvistus), jotta niillä on tekstuuria, jota voidaan verrata, ja palauttaa sitten automaattisen valotuksen.
+* **"Automaattinen valotus kameroille kohdistusta varten"** -valintaruutu (oletusarvoisesti valittuna) — kirkastaa väliaikaisesti tummia tai tasaisia kameroita (ensin valotus, sitten vahvistus), jotta niillä on tekstuuria, jota voidaan verrata, ja palauttaa sitten automaattisen valotuksen.
 
 Chloros kohdistaa jokaisen matriisin automaattisesti yhteyden muodostamisen jälkeen molemmissa näyttötiloissa, kun matriisin jäsenten automaattinen valotus on vakiintunut (ohjelma yrittää tätä enintään 5 minuuttia); yhdistetty esikatselu kohdistaa myös avattaessa. Erillisellä ryhmällä ei ole yhdistettyä ruutua, joten tämä osa tarkistaa kohdistustilan ja suorittaa Recalibrate-toiminnon itse. Suorita Recalibrate, jos tarkennus tai kuvausetäisyys on muuttunut. Kohdistus on **suunniteltu vain istuntokohtaiseksi** — sitä ei koskaan tallenneta profiiliin, koska se riippuu kulloisestakin kuvausetäisyydestä. Tallenteet voidaan silti viedä pikselikohtaisesti kohdistettuina (katso [Kohdistetut vientitiedostot](capture.md#per-array-controls)).
 
 ### Älykäs vinjetointi
 
 * **Ota korjaus käyttöön**-valintaruutu — soveltaa kamerakohtaista vinjetointiarviota radiometriseen ketjuun (reaaliaikaisesti**ja** vientitiedostoissa).
-* **Kalibroi nykyisestä näkymästä**— suuntaa matriisi ensin tasaiselle kohteelle (litteä paneeli, seinä tai taivas); jokainen kamera tasoitetaan erikseen ja tilailmoitus kertoo tasaisuuden parannuksen muodossa &quot;n/N kameraa · −x,x %&quot;.**Tyhjennä** poistaa arvion.
+* **Kalibroi nykyisestä näkymästä**— suuntaa matriisi ensin tasaiselle kohteelle (litteä paneeli, seinä tai taivas); jokainen kamera tasoitetaan erikseen ja tilailmoitus kertoo tasaisuuden parannuksen muodossa "n/N kameraa · −x,x %".**Tyhjennä** poistaa arvion.
 * Tila: ”Kalibroitu”, ”Ei kalibroitu” tai ”Osittain kalibroitu — suorita uudelleen”, kun vain joidenkin kameroiden arviot pätevät edelleen niiden nykyisessä kuvauskehyksessä (esimerkiksi kun ”Kalibroi uudelleen” -toiminto on siirtänyt kameran rajausikkunaa) — suorita kalibrointi uudelleen.
 * Hienosäädä kameraa kohden kamerakohtaisella **Vignette**-liukusäätimellä kohdassa [Live Preview](#live-preview).
 
 ### Live-esikatselu
 
 * **Histogrammi**-valintaruutu + leveysliukusäädin (0,10–0,90 kuvan leveydestä) — syötteen päällä näkyvä histogrammikaistale jokaisen jäsenen ruudulla kerralla (mukaan lukien jaetut kanavaruudut), koko ryhmälle asetettu [histogrammipäällys](#display-overlays-drawn-over-the-live-feed) asetetaan koko ryhmälle. Se näkyy päällä, kun jokaisella jäsenellä on se jo.**Erillisessä** ryhmässä tämä on ryhmän ainoa rivi.
-* *Vain yhdistettynä:* **Indeksi**: valintaruutu + ratas — avaa jaetun [Indeksilaskurin](#index-calculator-pane), jossa on**kaikkien** jäsenkameroiden kuvista piirretyt kaistat. Alla oleva lausekkeen esikatselurivi näyttää nykyisen lausekkeen (&quot;Lauseketta ei ole asetettu — avaa laskin luodaksesi sellaisen&quot;), joka päivitetään sekunnin välein.
+* *Vain yhdistettynä:* **Indeksi**: valintaruutu + ratas — avaa jaetun [Indeksilaskurin](#index-calculator-pane), jossa on**kaikkien** jäsenkameroiden kuvista piirretyt kaistat. Alla oleva lausekkeen esikatselurivi näyttää nykyisen lausekkeen ("Lauseketta ei ole asetettu — avaa laskin luodaksesi sellaisen"), joka päivitetään sekunnin välein.
 * *Vain yhdistettynä:* **Renderöintitarkkuus**-pudotusvalikko (samat esiasetukset kuin kamerakohtaisesti, oletus 720p): live-näkymän virran korkeus**ja** tallennetun yhdistelmän vientikoko. Huomaa paneelissa: ”Esikatselu + tallennetun yhdistelmän koko. Kamerakohtaiset kuvat viedään aina täysresoluutiolla.”
 
 ### Näyttökerrokset *(vain yhdistetty)** **Ota käyttöön** -valintaruutu (oletusarvoisesti pois päältä — pääkamera näkyy suoraan; päällä = kerrostettu yhdistelmä).
@@ -493,9 +371,9 @@ Chloros kohdistaa jokaisen matriisin automaattisesti yhteyden muodostamisen jäl
 
 Vain luku -paneeli, joka päivitetään 5 sekunnin välein:
 
-* **Tason nimike**: &quot;Samanaikainen tallennus&quot; (vihreä) · &quot;Samanaikainen tallennus (FTD-porrastettu lähetys)&quot; (vihreä) · &quot;Porrastettu tallennus (100 ms viive)&quot; (keltainen) · &quot;Määritys liian suuri&quot; (punainen).
-* **Kehysten kunto**: &quot;x,xx % keskeneräistä&quot; — vihreä alle 1 %, keltainen alle 5 %, punainen 5 % tai enemmän.
-* **Linkkilinja**: &quot;NIC {mbps} Mbps – jatkuva {MB/s} MB/s&quot;.
+* **Tason nimike**: "Samanaikainen tallennus" (vihreä) · "Samanaikainen tallennus (FTD-porrastettu lähetys)" (vihreä) · "Porrastettu tallennus (100 ms viive)" (keltainen) · "Määritys liian suuri" (punainen).
+* **Kehysten kunto**: "x,xx % keskeneräistä" — vihreä alle 1 %, keltainen alle 5 %, punainen 5 % tai enemmän.
+* **Linkkilinja**: "NIC {mbps} Mbps – jatkuva {MB/s} MB/s".
 
 Tämä on kameraryhmän reaaliaikainen kaistanleveysbudjetti. Taustalla olevat kuvataajuudet (fps) ja verkkomalli — sekä mitä muutoksia on tehtävä, kun taso muuttuu keltaiseksi tai punaiseksi — löytyvät kohdasta [Monikamerajärjestelmät](arrays.md) ja [CLI-viiteoppaasta](../reference/cli-reference.md).
 
