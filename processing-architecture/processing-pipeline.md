@@ -15,7 +15,9 @@ Images In → [Thread 1: Detection] → [Thread 2: Calibration] → [Thread 3: P
 
 Jokainen kuva kulkee järjestyksessä kaikkien neljän säikeen läpi. Chloros+:n monisäikeisessä käsittelyssä useat kuvat ovat samanaikaisesti eri säikeissä — kun säie 3 käsittelee yhtä kuvaa, säie 1 voi tunnistaa seuraavaa, säie 2 kalibroida toista ja säie 4 tallentaa valmiin kuvan levylle.
 
-Edistymistä raportoidaan säiettä kohden, ja tiedot välitetään Server-Sent Events -protokollan kautta (taustapalvelu julkaisee ne osoitteessa `/api/events`). CLI:n reaaliaikaisessa edistymisnäytössä neljä vaihetta on nimetty **Tunnistus, Analysointi, Käsittely, Vienti**.***
+Edistymistä raportoidaan säiettä kohden, ja tiedot välitetään Server-Sent Events -protokollan kautta (taustapalvelu julkaisee ne osoitteessa `/api/events`). CLI:n reaaliaikaisessa edistymisnäytössä neljä vaihetta on nimetty **Tunnistus, Analysointi, Käsittely, Vienti**.
+
+***
 
 ## Säikeiden tiedot
 

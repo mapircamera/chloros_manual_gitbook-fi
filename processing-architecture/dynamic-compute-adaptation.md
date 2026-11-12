@@ -136,7 +136,9 @@ Lukuja säätelevät kaksi sääntöä:
 * **Ainoa** aktiivinen säie saa profiilinsa enimmäismääräisen allokoinnin.
 * Kun useampi kuin yksi *raskas* GPU-tehtävä on aktiivinen, kunkin raskaan tehtävän perusallokointi jaetaan niiden kesken (ei koskaan alle määritetyn vähimmäismäärän).
 
-Suoritusaikana tosiasiallisesti käytetty arvo on alusta-profiilin allokoinnin ja GPU-muistimonitorin reaaliaikaisen suosituksen **pienempi**, joten kuormitettu kortti voittaa aina optimistisen profiilin.***
+Suoritusaikana tosiasiallisesti käytetty arvo on alusta-profiilin allokoinnin ja GPU-muistimonitorin reaaliaikaisen suosituksen **pienempi**, joten kuormitettu kortti voittaa aina optimistisen profiilin.
+
+***
 
 ## Tekstuuritietoinen käsittely
 

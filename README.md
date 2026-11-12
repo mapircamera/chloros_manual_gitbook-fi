@@ -64,7 +64,9 @@ Kattava opas: [Chloros in käyttö AI-avustajien kanssa](ai-assistants.md).
 * **Rehellinen virhesemantiikka.** `chloros-cli process`-ajo, joka pyysi tuotteita mutta ei kirjoittanut yhtään, epäonnistuu nyt selvästi ja päättyy nollasta poikkeavalla tuloksella; onnistuneet ajot raportoivat, kuinka monta kuvatuotetta ne kirjoittivat.
 * **Uusi tulosteiden rakenne.** Tuotteet tallennetaan `<project>/<camera>/<format>/<Product>_Images/`-kansioihin ja säilyttävät lähdetiedoston nimen — kansio, ei tiedostotunnistetta, tunnistaa tuotteen. Katso [Kuvien tulostusformaatit](output-image-formats.md).
 * **Lisää syötteitä, suunnitelmia ja kieliä.** `.dng`-syötteen tuki; kaikki 38 käyttöliittymäkieltä täysin käytettävissä; suunnitelmakohtaiset laitteistorajoitukset, joissa ilmaista (kirjautumattomaa) käyttöä varten sallitaan enintään 4 kameraa ja 2 valosensoria.
-* **Luotettavuus.** Käsittelyn lopettaminen päättyy siististi ja rehellisellä suoritusyhteenvedolla, monikameraprojektit vievät tiedot jokaisesta kamerasta, eikä asennusohjelman päivitys enää kirjaa sinua ulos.***
+* **Luotettavuus.** Käsittelyn lopettaminen päättyy siististi ja rehellisellä suoritusyhteenvedolla, monikameraprojektit vievät tiedot jokaisesta kamerasta, eikä asennusohjelman päivitys enää kirjaa sinua ulos.
+
+***
 
 Chloros ia on saatavana kolmella käyttöliittymäalustalla:
 

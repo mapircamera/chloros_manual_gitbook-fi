@@ -100,4 +100,4 @@ Yksityiskohdat tiukan synkronoinnin vaativille käyttäjille:
 | Lähetysalue | Isäntä ja anturi samassa L2-segmentissä; mDNS ei reititä |
 | Palomuuri | Windows: asennusohjelman **Chloros Backend (UDP-In)** -sääntö sallii DAQ-E-virran (UDP 5002), mDNS:n (5353) ja PTP:n (319/320) pääsyn; kolmannen osapuolen palomuurissa tarvitaan sama asetus. Linux: `.deb` avaa nämä portit `ufw` / `firewalld`:ssä vain, jos palomuuri oli aktiivinen asennuksen aikana — salli ne itse, jos palomuuri otetaan käyttöön myöhemmin |
 | Usean verkkokortin isäntäkone | Löytötoiminto etsii mDNS-verkosta ARP-varajärjestelmän avulla; `--eth-host <ip-or-hostname>` ohittaa löytötoiminnon ja muodostaa yhteyden suoraan |
-| Uudelleenskannaus käyttöliittymässä | Löytötoiminto toimii vain, kun yhteysvalintaikkuna on auki; käytä Päivitä-painiketta |</version>
+| Uudelleenskannaus käyttöliittymässä | Löytötoiminto toimii vain, kun yhteysvalintaikkuna on auki; käytä Päivitä-painiketta |

@@ -17,7 +17,9 @@ MAPIRin **DAQ**-valosensorit mittaavat ympäristön valoa radiometrisesti kalibr
 | --- | --- | --- |
 | **DAQ-U** | USB (sarjaliitäntä) | sarjaportin skannaus |
 | **DAQ-M** | Bluetooth Low Energy | BLE-skannaus nimen perusteella |
-| **DAQ-E** | Ethernet (IPv4, PoE-virtalähde) | mDNS `_daq-e._tcp` (isäntänimi `daq-e-<id>.local`) |**DAQ-E-S (uusi versio 1.3.0).** DAQ-E, jossa on kiinteä hajotin ja kallistusanturi. Chloros-ohjelmisto luettelee sen nimellä `DAQ-E-S`, ja se toimii täsmälleen kuten DAQ-E, paitsi että se ei vaadi korkkikorjausta ja jokainen lukema sisältää laitteen kallistuksen, kiertymän ja nousukulman. Katso [DAQ-E-S: kiinteä hajotin ja kallistus](caps-and-range.md#daq-e-s-fixed-diffuser-and-tilt).
+| **DAQ-E** | Ethernet (IPv4, PoE-virtalähde) | mDNS `_daq-e._tcp` (isäntänimi `daq-e-<id>.local`) |
+
+**DAQ-E-S (uusi versio 1.3.0).** DAQ-E, jossa on kiinteä hajotin ja kallistusanturi. Chloros-ohjelmisto luettelee sen nimellä `DAQ-E-S`, ja se toimii täsmälleen kuten DAQ-E, paitsi että se ei vaadi korkkikorjausta ja jokainen lukema sisältää laitteen kallistuksen, kiertymän ja nousukulman. Katso [DAQ-E-S: kiinteä hajotin ja kallistus](caps-and-range.md#daq-e-s-fixed-diffuser-and-tilt).
 
 Kaikki kolme käyttävät samaa tiedonsiirtoprotokollaa ja toimittavat identtisiä tietoja:
 

@@ -32,7 +32,9 @@ Voit avata projektin asetukset seuraavasti:
 * **Vaihtoehdot**: `Default (512 px)`, `1024 px`, `2048 px`, `Full resolution`
 * **Oletus**: Oletus (512 px)
 * **Kuvaus**: Resoluutio (pisin sivu, pikseleinä), jolla kuvaruudukon pikkukuvat renderöidään. Suuremmat arvot näyttävät terävämmiltä zoomattaessa, mutta latautuvat hitaammin ja vievät enemmän muistia. Täysi resoluutio vastaa alkuperäisen kuvan kokoa.
-* **Huomautus**: Vain näyttöä varten — tämä ei vaikuta milloinkaan käsittelyyn tai vietyihin tiedostoihin.***
+* **Huomautus**: Vain näyttöä varten — tämä ei vaikuta milloinkaan käsittelyyn tai vietyihin tiedostoihin.
+
+***
 
 ## Kohteen tunnistus
 
@@ -184,7 +186,9 @@ Yksikkökohtaiset **mitatut** kohdeskannaukset haetaan kohdeyksikön sarjanumero
   * Yksi kamera + yksi liitin: Liitin 2 asetetaan automaattisesti tilaan ”Älä käytä”
   * Yksi kamera + kaksi liitintä: Liitin 2 asetetaan automaattisesti tilaan ”Älä käytä”
   * Useita kameroita: Manuaalinen valinta vaaditaan
-* **Huomautus**: Samaa kameraa ei voi määrittää samanaikaisesti sekä liittimeen 1 että liittimeen 2.***
+* **Huomautus**: Samaa kameraa ei voi määrittää samanaikaisesti sekä liittimeen 1 että liittimeen 2.
+
+***
 
 ## DAQ-valosensori
 
@@ -205,7 +209,9 @@ Jokaisella rivillä näkyy tiedosto, anturimalli ja kyseiselle tiedostolle tosia
 * **Kuvaus**: `Auto` käyttää kunkin tiedoston tallennettua suojusta (jos mitään ei ole tallennettu, oletuksena käytetään Sunshine-suojusta, mutta DAQ-U-, DAQ-M- ja DAQ-E-laitteissa ei ole suojusta mukana ja Chloros-ohjelmisto ei näe, mikä suojus on asennettu, joten käsittely antaa varoituksen oletetusta korkista: valitse asennettu korkki). Tietyn korkin valinta ohittaa **kaikki** projektin alaspäin suuntautuvat tiedostot paitsi DAQ-E-S:n tiedostot, joiden hajotin on osa sen kalibrointia; projektissa, jossa on vain DAQ-E-S-laitteita, pudotusvalikkoa ei näy: raakatallenteet korjataan sen avulla, ja tallenteet, joissa on jo korkki, viitataan uudelleen (tallennettu korjaus peruutetaan ja valittu korjaus otetaan käyttöön).
 * **Tärkeää**: Valitun korkin on vastattava tallennuksen aikana fyysisesti asennettua korkkia. Anturi tai ohjelmisto eivät pysty tunnistamaan fyysistä korkkia — väärä korkkitunnus korjaa spektrit virheellisesti.
 
-Tarkoituksena on, että on **yksi** koko projektia koskeva säätö eikä tiedostokohtaisia pudotusvalikoita: asetus koskee jokaista projektin alaspäin suuntautuvaa lähdettä.***
+Tarkoituksena on, että on **yksi** koko projektia koskeva säätö eikä tiedostokohtaisia pudotusvalikoita: asetus koskee jokaista projektin alaspäin suuntautuvaa lähdettä.
+
+***
 
 ## Array-kohdistus
 
@@ -276,7 +282,9 @@ Jokainen lisäämäsi indeksi näyttää kaavansa matemaattisena, ja jokaisella 
   * Operaattorit: `+`, `-`, `*`, `/`, `^` ja `()` ryhmittelyä varten
   * Toiminnot: `sqrt()`, `log()`, `ln()`, `abs()`, `sign()`, `log1p()`, `log2()`
 * **Miksi symboleja, ei bändinimiä**: kaava, joka on kirjoitettu muodossa `(y-x)/(y+x)`, toimii millä tahansa kameralla, koska vedä ja pudota -kartoitus päättää, onko `y` RGN-suodattimen 850 nm:n NIR vai OCN-suodattimen 808 nm:n NIR. sisäänrakennetut esiasetukset tallennetaan samalla tavalla — katso [Monispektriset indeksikaavat](multispectral-index-formulas.md), josta löydät kaikkien 27 kaavan tarkat symbolimuodot.
-* **Käyttöalue**: mukautetut kaavat tallennetaan projektin asetusten mukana, ja niitä voidaan käyttää sekä [indeksi-/LUT-hiekkalaatikossa](../image-viewer-gui/index-lut-sandbox.md) että kuvankäsittelyssä. CLI- ja SDK-nimiluettelo (`--indices`) **ei** tue niitä, sillä se laajentaa vain 22 sisäänrakennettua esiasetuksen nimeä.***
+* **Käyttöalue**: mukautetut kaavat tallennetaan projektin asetusten mukana, ja niitä voidaan käyttää sekä [indeksi-/LUT-hiekkalaatikossa](../image-viewer-gui/index-lut-sandbox.md) että kuvankäsittelyssä. CLI- ja SDK-nimiluettelo (`--indices`) **ei** tue niitä, sillä se laajentaa vain 22 sisäänrakennettua esiasetuksen nimeä.
+
+***
 
 ## Vienti
 

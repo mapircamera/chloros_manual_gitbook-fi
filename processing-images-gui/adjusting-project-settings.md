@@ -152,7 +152,9 @@ Tämä osio näkyy **vain**, kun vähintään yksi projektin kuva sisältää mo
 
 * **Käytä matriisin kohdistusta** (oletus: päällä): vääristää jokaisen käsitellyn tuotteen (debayeroitu / esikatselu / säteilyvoimakkuus / heijastavuus / indeksi) matriisin yhteiseen vertailugeometriaan. Pois päältä = vienti alkuperäisessä anturigeometriassa.
 * **Rajaa yhteiseen päällekkäisyyteen** (oletus: päällä): rajaa kohdistetut vientitiedostot alueelle, joka on yhteinen kaikille moduuleille, jolloin jokaisella kaistalla on sama peittoalue. Pois päältä säilyttää koko anturin kuvan (musta täyttö lähteen ulkopuolella).
-* **Uudelleennäytteenotto**:**Bilineaarinen (tasainen, oletus)**,**Lähin (säilyttää tarkat arvot)**— ei pikselien välistä sekoittumista, tiukkaa radiometristä analyysia varten — tai**Kubinen (terävin)**.***
+* **Uudelleennäytteenotto**:**Bilineaarinen (tasainen, oletus)**,**Lähin (säilyttää tarkat arvot)**— ei pikselien välistä sekoittumista, tiukkaa radiometristä analyysia varten — tai**Kubinen (terävin)**.
+
+***
 
 ## Asetusten tallentaminen ja lataaminen
 

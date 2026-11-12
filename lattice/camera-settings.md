@@ -196,7 +196,9 @@ Kaikki tässä osiossa on **vain näyttöpuolen asetuksia**— ne muuttavat sit�
 | **Kylläisyys** | 0–200 (100 = neutraali) | 100 | Vain RGB | HSV-kylläisyys reaaliaikaisessa esikatselussa. |
 | **Kontrasti** | 0–200 (100 = neutraali) | 100 | Vain RGB | Lineaarinen kontrasti keskiharmaan ympärillä reaaliaikaisessa esikatselussa. |
 | **Peilaa vaakasuoraan / Peilaa pystysuoraan** | Valintaruudut | Pois | Kaikki | Käännä esikatselua vaakasuoraan / pystysuoraan. |
-| **Kierto**| 0° / 90° / 180° / 270° | 0° | Kaikki | Kierrä esikatselua. Suunta sovelletaan esikatseluketjun lopussa.**Tallennetut kuvat (1.3.0):**erillisen kameran esikatselu-, säteily-, heijastus- ja indeksituotteet käännetään peilaus-/kiertotoiminnoilla, kun taas**Raw- ja Debayered-tuotteet säilyttävät kameran alkuperäisen suunnan**; jokainen kuvatiedosto tallentaa asetuksen XMP-tiedostoonsa, joten raakakuvan myöhempi käsittely soveltaa sitä samalla tavalla.**Array-jäsenetiedostot säilyttävät alkuperäisen suunnan** (asetus tallennetaan, mutta sitä ei sovelleta), ja array-yhdistelmänäkymät eivät ota sitä huomioon. |**Väriprofiilien semantiikka** (RGB-kamerat):
+| **Kierto**| 0° / 90° / 180° / 270° | 0° | Kaikki | Kierrä esikatselua. Suunta sovelletaan esikatseluketjun lopussa.**Tallennetut kuvat (1.3.0):**erillisen kameran esikatselu-, säteily-, heijastus- ja indeksituotteet käännetään peilaus-/kiertotoiminnoilla, kun taas**Raw- ja Debayered-tuotteet säilyttävät kameran alkuperäisen suunnan**; jokainen kuvatiedosto tallentaa asetuksen XMP-tiedostoonsa, joten raakakuvan myöhempi käsittely soveltaa sitä samalla tavalla.**Array-jäsenetiedostot säilyttävät alkuperäisen suunnan** (asetus tallennetaan, mutta sitä ei sovelleta), ja array-yhdistelmänäkymät eivät ota sitä huomioon. |
+
+**Väriprofiilien semantiikka** (RGB-kamerat):
 
 * **Raw** — ohittaa käsittelyketjun kokonaan.
 * **Lineaarinen** — tummasignaali + tasokenttä + valkotasapaino; ei värimatriisia, ei gammaa.

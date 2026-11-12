@@ -71,7 +71,9 @@ Täydellinen kaavojen viite — kaikki kolme esiasetettua luetteloa ja tiedot si
 
 ### Kun Indeksi on valittuna, mutta LUT:ta ei ole
 
-Kuva piirretään **harmaasävyisenä**, venytettynä kahden kynnysarvon välille. Tämä on tarkoituksellista: indeksikuvassa on skalaaritietoja, ja harmaasävyinen kuva on sen rehellinen esitys. Lisää LUT, kun haluat väriä.***
+Kuva piirretään **harmaasävyisenä**, venytettynä kahden kynnysarvon välille. Tämä on tarkoituksellista: indeksikuvassa on skalaaritietoja, ja harmaasävyinen kuva on sen rehellinen esitys. Lisää LUT, kun haluat väriä.
+
+***
 
 ## LUT-taulukoiden (Look-Up Tables) käyttö**Hakutaulukko** yhdistää indeksiarvot väreihin: syötetään NDVI 0,65, tuloksena tietty vihreä väri. Se ei muuta dataa — se muuttaa tapaa, jolla dataa tulkitaan.
 
@@ -135,7 +137,9 @@ Esimerkki NDVI-ikkunoista:
 | Vain terve kasvillisuus                 | 0,5  | 0,9 |
 | Korosta stressiä                        | 0,2  | 0,5 |
 
-Ikkunan kaventaminen lisää kontrastia kiinnostuksen kohteena olevalla alueella ja siirtää kaiken muun alueen ulkopuolelle — missä **leikkausmoodi** päättää, mitä sille tapahtuu.***
+Ikkunan kaventaminen lisää kontrastia kiinnostuksen kohteena olevalla alueella ja siirtää kaiken muun alueen ulkopuolelle — missä **leikkausmoodi** päättää, mitä sille tapahtuu.
+
+***
 
 ## Leikkausmoodit
 

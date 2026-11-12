@@ -76,7 +76,9 @@ Jokaiseen GPS-tietoja sisältävään kuvaan lisätään merkki sen koordinaatte
 | Palveluntarjoaja        | Huomautukset                                                                                                                                                             |
 | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Google Maps** | Laaja maailmanlaajuinen kattavuus; tukee kaikkia neljää karttalaattatyyppiä                                                                                                            |
-| **Esri ArcGIS**| Usein korkeamman resoluution ilmakuvia tietyillä alueilla.**Terrain**-karttalaattatyyppiä ei tarjota Esrille, ja sen painike on poissa käytöstä, kun Esri on valittuna |***
+| **Esri ArcGIS**| Usein korkeamman resoluution ilmakuvia tietyillä alueilla.**Terrain**-karttalaattatyyppiä ei tarjota Esrille, ja sen painike on poissa käytöstä, kun Esri on valittuna |
+
+***
 
 ## Karttalaattatyypit
 
@@ -91,7 +93,9 @@ Valitse karttakerroksen tyyppi painikkeilla (vasemmalta oikealle):
 | **Satelliitti**        | Yksityiskohtaiset satelliittikuvat, ilman merkintöjä — vaihtoehto, joka vaatii eniten kaistanleveyttä |
 | **Hybridi** (oletus) | Satelliittikuvat, joiden päälle on piirretty tiet ja merkinnät                |
 
-Kartta-välilehti avautuu **Hybridi**-asetuksella. Valintasi vaikuttaa palveluntarjoajan vaihtoon, jos palveluntarjoaja tukee sitä.***
+Kartta-välilehti avautuu **Hybridi**-asetuksella. Valintasi vaikuttaa palveluntarjoajan vaihtoon, jos palveluntarjoaja tukee sitä.
+
+***
 
 ## Kartan navigointi
 
@@ -139,7 +143,9 @@ Kartta-välilehti avautuu **Hybridi**-asetuksella. Valintasi vaikuttaa palvelunt
 
 ### Kartta on tyhjä tai ruutujen latautuminen keskeytyy
 
-Ruutujen tarjoajat ovat verkkopalveluita. Jos ruutujen latautuminen lakkaa, tarkista laitteen verkkoyhteys ja yritä sitten vaihtaa palveluntarjoajaa. Jos olet zoomannut karttaa erittäin paljon, paina **×**-nollauspainiketta palataksesi normaaliin zoomausasteeseen ja anna kartan pyytää ruudut uudelleen.***
+Ruutujen tarjoajat ovat verkkopalveluita. Jos ruutujen latautuminen lakkaa, tarkista laitteen verkkoyhteys ja yritä sitten vaihtaa palveluntarjoajaa. Jos olet zoomannut karttaa erittäin paljon, paina **×**-nollauspainiketta palataksesi normaaliin zoomausasteeseen ja anna kartan pyytää ruudut uudelleen.
+
+***
 
 ## Aiheeseen liittyvät sivut
 

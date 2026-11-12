@@ -10,7 +10,9 @@ Säädä pikkukuvien kokoa oikeassa yläkulmassa olevalla zoomausliukusäätimel
 * **Ctrl + `+`**/**Ctrl + `=`**ja**Ctrl + `−`** muuttavat kokoa 4 px kerrallaan painallusta kohti. Näppäinyhdistelmän avulla kokoa voi pienentää 64 px:iin ja suurentaa niin suureksi, että nykyiseen ikkunaan mahtuu tarkalleen kaksi pikkukuvaa riviä kohden.
 * Valitsemasi koko tallennetaan projektin mukana (`UI → Grid thumbnail size` kohdassa `project.json`, oletusarvo `160`), joten projektin avaaminen palauttaa sen.
 
-<figure><img src="../.gitbook/assets/chloros_grid_zoom.gif" alt=""><figcaption></figcaption></figure>Pikkukuvan *resoluutio* on erillinen asetus pikkukuvan *koosta*: katso **Näyttö → Kuvan pikkukuvan resoluutio** kohdassa [Projektin asetukset](../project-settings/project-settings.md) (oletusarvo 512 pikseliä pitkältä sivulta). Koko määrittää, kuinka suureksi ruutu piirretään; resoluutio määrittää, kuinka paljon yksityiskohtia haetaan sen täyttämiseksi.***
+<figure><img src="../.gitbook/assets/chloros_grid_zoom.gif" alt=""><figcaption></figcaption></figure>Pikkukuvan *resoluutio* on erillinen asetus pikkukuvan *koosta*: katso **Näyttö → Kuvan pikkukuvan resoluutio** kohdassa [Projektin asetukset](../project-settings/project-settings.md) (oletusarvo 512 pikseliä pitkältä sivulta). Koko määrittää, kuinka suureksi ruutu piirretään; resoluutio määrittää, kuinka paljon yksityiskohtia haetaan sen täyttämiseksi.
+
+***
 
 ## Ruudukon työkalurivi
 

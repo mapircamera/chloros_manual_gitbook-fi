@@ -57,7 +57,9 @@ Kun tehollinen suurennus ylittää **60×**, Chloros piirtää korostusruudun ku
 | **←**                           | Koko näyttö | Edellinen kuva                      |
 | **Ctrl + R**                    | Koko näyttö | Nollaa hakemisto/LUT-hiekkalaatikko         |
 | **Ctrl + `+`**/**Ctrl + `=`** | Ruudukko        | Suuremmat pikkukuvat (4 px painallusta kohti)  |
-| **Ctrl + `−`**                  | Ruudukko        | Pienemmät pikkukuvat (4 px painallusta kohti) |***
+| **Ctrl + `−`**                  | Ruudukko        | Pienemmät pikkukuvat (4 px painallusta kohti) |
+
+***
 
 ## Kursorin arvot
 
@@ -100,7 +102,9 @@ Katseluohjelma, indeksi-/LUT-hiekkalaatikko ja indeksin vienti määrittävät s
 Kaksi huomionarvoista seikkaa:
 
 * **32-bittinen prosenttiarvo**TIFF tallentaa DN/65535:n float-muodossa, ja**8-bittinen** PNG/JPG-vienti tallentaa DN × 255/65535 — katseluohjelma muuntaa molemmat takaisin ennen prosenttiluvun tulostamista.
-* Yhtä tapausta ei voida korjata: **8-bittisen lähdekuvan 8-bittinen TIFF-vienti** rajataan arvoihin 0–255 sen sijaan, että sitä skaalattaisiin uudelleen, eikä siinä ole tarkoituksella skaalausmerkintää. Näiden tiedostojen kohdalla paneeli tulostaa vain DN-arvon ilman prosenttisaraketta. Tämä on rehellinen vastaus, ei vika.***
+* Yhtä tapausta ei voida korjata: **8-bittisen lähdekuvan 8-bittinen TIFF-vienti** rajataan arvoihin 0–255 sen sijaan, että sitä skaalattaisiin uudelleen, eikä siinä ole tarkoituksella skaalausmerkintää. Näiden tiedostojen kohdalla paneeli tulostaa vain DN-arvon ilman prosenttisaraketta. Tämä on rehellinen vastaus, ei vika.
+
+***
 
 ## Kerroksen histogrammi
 
@@ -126,7 +130,9 @@ Histogrammin yläpuolella on kolme painiketta:
 | **INDEX**| Päällä      | Näkyy vain, kun indeksi on aktiivinen. Vaihdaa histogrammin lähdekaistoista**indeksiarvon jakaumaan**, jolloin kaksi leikkauskynnystä on merkitty oransseina katkoviivoina ja kursorin indeksiarvo valkoisena viivana                                                          |
 | **RGB**| Pois     | Vaihtaa yhdistetyistä käyristä kanavakohtaisiin käyriin. Monosensorissa tämän painikkeen teksti on**MONO** ja se on pois käytöstä — näytettävää kanavaa on vain yksi                                                                                                                                  |
 
-Histogrammi lasketaan **näkyvissä olevien lohkojen** perusteella, ei niiden takana olevien lähdepikselien: kun muutat GSD-lohkon kokoa, jakauma lasketaan uudelleen, jolloin histogrammi, kursorimerkki ja näytettävä kuva ovat aina yhdenmukaisia.***
+Histogrammi lasketaan **näkyvissä olevien lohkojen** perusteella, ei niiden takana olevien lähdepikselien: kun muutat GSD-lohkon kokoa, jakauma lasketaan uudelleen, jolloin histogrammi, kursorimerkki ja näytettävä kuva ovat aina yhdenmukaisia.
+
+***
 
 ## GSD-lohkon koko
 
@@ -185,7 +191,9 @@ Käytä monispektrisiä indeksejä ja väri-LUT-taulukoita sivupalkista:
 
 3. Valitse kamerasi suodatin ja indeksikaava, ja vedä sitten kanavaympyrät kaavan paikoille
 4. Lisää LUT ja valitse gradientti, kynnysarvot ja leikkaustila
-5. Lue arvot kursorin kohdalta ja tallenna tulos valitsemalla **Vie/Tallenna kuva(s)**Katso [Indeksi/LUT-kokeilualusta](index-lut-sandbox.md) saadaksesi täydellisen ohjeen.***
+5. Lue arvot kursorin kohdalta ja tallenna tulos valitsemalla **Vie/Tallenna kuva(s)**Katso [Indeksi/LUT-kokeilualusta](index-lut-sandbox.md) saadaksesi täydellisen ohjeen.
+
+***
 
 ## Vianmääritys
 

@@ -191,7 +191,9 @@ Avaa edistyneitä ominaisuuksia Chloros+-tilauksella:
 * **🐻 Edistyksellinen tekstuuritietoinen debayer-menetelmä** – korkealaatuinen, reunoja tunnistava debayer-menetelmä yhdistettynä AI/ML-kohinanpoistomalliin, joka poistaa lähes kaiken debayer-kohinan.
 * 🧮 **Mukautetut kaavat** – Luo mukautettuja monispektrisiä indeksejä
 
-<p align="center"><a href="https://cloud.mapir.camera/pricing" class="button primary">Katso Chloros+ -paketit ja hinnat</a></p>***
+<p align="center"><a href="https://cloud.mapir.camera/pricing" class="button primary">Katso Chloros+ -paketit ja hinnat</a></p>
+
+***
 
 ## Asennusohjeet
 
@@ -230,7 +232,9 @@ Tarvitsetko apua asennuksessa tai käyttöönotossa?
 * 📧 **Sähköposti**: info@mapir.camera
 * 🌐 **Verkkosivusto**: [https://www.mapir.camera/community/contact](https://www.mapir.camera/community/contact)
 * 📚 **Ohjeet**: [Aloitusopas](./)
-* ❓ **UKK**: [Usein kysytyt kysymykset](faq.md)***
+* ❓ **UKK**: [Usein kysytyt kysymykset](faq.md)
+
+***
 
 ## Ohjelmistopäivitykset
 

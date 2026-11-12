@@ -62,7 +62,9 @@ output/
 * Kuvaussarjakansio, joka on tallennettu **ilman** raakakuvien tuontia, näkyy normaalisti, mutta käsittely ohittaa sen ja ilmoittaa siitä lokiin. (CLI-lippu `--input-level` voi pakottaa aloituskohdan tässä tapauksessa — katso [CLI-viite](../reference/cli-reference.md#what-a-captures-folder-looks-like).)
 * Versiosta 1.3.0 lähtien kaappauskansio voi sisältää myös `clamp_masks/`-kansion (pikselikohtaiset naamiot säteily- ja heijastustasoille — katso [Lähtökuvamuodot](../output-image-formats.md#clamp-masks)). Naamioita ei pidetä kohtauksen kuvina, ja Chloros ohittaa ne tuonnin yhteydessä riippumatta siitä, missä ne sijaitsevat.
 
-**LATTICE-hub-istunnot** tuodaan samalla tavalla: valitse Lisää kansio -toiminto ja osoita hubista kopioitu istuntokansio (se sisältää tiedostot `raw/` ja `previews/`) sekä mahdolliset DAQ-M-tiedostot `.csv`, jotka sisältävät alaspäin suuntautuvan datan lokitiedot. Jos kameran tai DAQ:n kalibrointitietoja ei ole vielä tallennettu koneellesi, Chloros hakee ne automaattisesti sarjanumeron perusteella tuonnin yhteydessä (vaatii internetyhteyden kerran).***
+**LATTICE-hub-istunnot** tuodaan samalla tavalla: valitse Lisää kansio -toiminto ja osoita hubista kopioitu istuntokansio (se sisältää tiedostot `raw/` ja `previews/`) sekä mahdolliset DAQ-M-tiedostot `.csv`, jotka sisältävät alaspäin suuntautuvan datan lokitiedot. Jos kameran tai DAQ:n kalibrointitietoja ei ole vielä tallennettu koneellesi, Chloros hakee ne automaattisesti sarjanumeron perusteella tuonnin yhteydessä (vaatii internetyhteyden kerran).
+
+***
 
 ## Tiedostoselaimen taulukon ymmärtäminen
 
@@ -104,7 +106,9 @@ Napsauttamalla taulukon yläoikeassa kulmassa olevaa kytkinpainiketta saat valit
 
 * `.daq`- ja `.csv`-tiedostot näkyvät tiedostoselaimen luettelossa, mutta niitä ei voi klikata kuvina — ne sisältävät alaspäin suuntautuvan säteilyn heijastuskalibrointia varten.
 * Jokainen tuotu `.daq`/`.csv`-tiedosto näkyy kohdassa **Projektin asetukset → DAQ-valosensori**, jossa voit tarkistaa kunkin tiedoston voimassa olevan hajotinkannen korjauksen. Katso [Projektiasetusten säätäminen](adjusting-project-settings.md).
-* **Valosensorit**-välilehdessä tekemäsi tallenteet lisätään avoimeen projektiin automaattisesti – manuaalista tuontia ei tarvita.***
+* **Valosensorit**-välilehdessä tekemäsi tallenteet lisätään avoimeen projektiin automaattisesti – manuaalista tuontia ei tarvita.
+
+***
 
 ## Tiedostojen hallinta projektissasi
 
@@ -221,7 +225,9 @@ Jos projektisi sisältää kuvia useista MAPIR-kameroista:
 
 ### Uudelleen avattu projekti ilmoittaa puuttuvista tiedostoista
 
-Jos lähdetiedostoja on siirretty tai poistettu sen jälkeen, kun projekti avattiin viimeksi, Chloros ilmoittaa **mitkä**tiedostot puuttuvat sen sijaan, että avaisi tyhjän ruudukon. Jos itse projektikansio on siirretty, Chloros ohjaa lähdepolut uudelleen kansioon, jossa `project.json` nyt sijaitsee, ja säilyttää varmuuskopion (`project.json.before-relink-<date>-<time>`). Jos tiedostoja ei löydy,**Lähdetiedostoja ei löydy**-ikkunassa on**Selaa**-painike uuden sijainnin valitsemiseksi sekä vaihtoehdot Uusi projekti tai Poista projekti. Käytä CLI:ssä `chloros-cli project open PATH --relink FOLDER`; SDK:ssä `open_project(path, relink=...)`.***
+Jos lähdetiedostoja on siirretty tai poistettu sen jälkeen, kun projekti avattiin viimeksi, Chloros ilmoittaa **mitkä**tiedostot puuttuvat sen sijaan, että avaisi tyhjän ruudukon. Jos itse projektikansio on siirretty, Chloros ohjaa lähdepolut uudelleen kansioon, jossa `project.json` nyt sijaitsee, ja säilyttää varmuuskopion (`project.json.before-relink-<date>-<time>`). Jos tiedostoja ei löydy,**Lähdetiedostoja ei löydy**-ikkunassa on**Selaa**-painike uuden sijainnin valitsemiseksi sekä vaihtoehdot Uusi projekti tai Poista projekti. Käytä CLI:ssä `chloros-cli project open PATH --relink FOLDER`; SDK:ssä `open_project(path, relink=...)`.
+
+***
 
 ## Seuraavat vaiheet
 

@@ -181,7 +181,9 @@ Kun käsittely on käynnistetty, koko käsittelyputki toimii automaattisesti:
 * Lopetettu ajo raportoi rehellisesti, mitä se on saanut valmiiksi (katso lokin `[RUN-SUMMARY]`-rivit)
 * Uusi ajo käynnistää prosessiketjun alusta
 
-**Suunnitteluvinkki:** Erittäin suurissa projekteissa kannattaa harkita käsittelyä erissä tai komentorivin (CLI) käyttöä paremman hallinnan saavuttamiseksi.***
+**Suunnitteluvinkki:** Erittäin suurissa projekteissa kannattaa harkita käsittelyä erissä tai komentorivin (CLI) käyttöä paremman hallinnan saavuttamiseksi.
+
+***
 
 ## Käsittelyn seuranta
 

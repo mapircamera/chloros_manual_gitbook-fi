@@ -110,7 +110,9 @@ Heijastavuus tallennetaan kokonaislukuna DN, ja **se DN-arvo, joka vastaa ρ = 1
 | LATTICE (M3C/M3M) | **32768** (varaa ρ 2,0:een asti) | Tiedostoon on merkitty XMP-tunniste `Chloros:PixelScale=32768` |
 | Survey3          | **65535** (rajattu arvoon ρ 1,0)     | Ei `Chloros:PixelScale`-tunnistetta — sen puuttuminen on merkki (Survey3-tuotteissa on muita `Chloros:*`-käsittelytunnisteita) |
 
-**Lue `Chloros:PixelScale`-tunniste ja jaa arvo sillä** sen sijaan, että olettaisit yleisarvoksi 65535 — LATTICE-heijastavuuden jakaminen 65535:llä puolittaa hiljaisesti jokaisen arvon. Ennen versiota 1.3.0 tallennettu 8-bittinen heijastustiedosto on rajattu, ei skaalattu uudelleen, eikä siinä ole skaalausmerkintää: vie se uudelleen 16- tai 32-bittisenä sen sijaan, että jakaisit sen. Katso [Tulostuskuvamuodot](../output-image-formats.md) saadaksesi koko tarinan.***
+**Lue `Chloros:PixelScale`-tunniste ja jaa arvo sillä** sen sijaan, että olettaisit yleisarvoksi 65535 — LATTICE-heijastavuuden jakaminen 65535:llä puolittaa hiljaisesti jokaisen arvon. Ennen versiota 1.3.0 tallennettu 8-bittinen heijastustiedosto on rajattu, ei skaalattu uudelleen, eikä siinä ole skaalausmerkintää: vie se uudelleen 16- tai 32-bittisenä sen sijaan, että jakaisit sen. Katso [Tulostuskuvamuodot](../output-image-formats.md) saadaksesi koko tarinan.
+
+***
 
 ## Vientiin siirrettävät metatiedot
 
@@ -165,7 +167,9 @@ Voit tallentaa lokin käsittelyn dokumentointia varten tai lähettää sen MAPIR
 3. Liitä se projektin dokumentaatioon
 4. Lähetä MAPIR-tukeen, jos ongelmia ilmenee
 
-Voit lähettää ongelman suoraan MAPIR ille käyttämällä virhekuvaketta (**Ilmoita virheestä**) Debug Log -välilehden yläosassa — katso [Virheen ilmoittaminen lokivälilehdestä](monitoring-the-processing.md#reporting-a-bug-from-the-log-tab).***
+Voit lähettää ongelman suoraan MAPIR ille käyttämällä virhekuvaketta (**Ilmoita virheestä**) Debug Log -välilehden yläosassa — katso [Virheen ilmoittaminen lokivälilehdestä](monitoring-the-processing.md#reporting-a-bug-from-the-log-tab).
+
+***
 
 ## Yleisiä tulostusongelmia ja ratkaisuja
 

@@ -170,7 +170,9 @@ chloros-cli daq pool-reboot --sensor-id daq-e-def330
 chloros-cli daq pool-update-firmware --sensor-id daq-e-def330
 ```
 
-`pool-info` näyttää anturin laiteohjelmiston (ja sen, sisältääkö tämä Chloros-versio uudempaa), sen osoitteen ja miten se on saatu, tallennetut verkkoasetukset, jos ne eroavat käytössä olevista, virran kytkemisen yhteydessä tapahtuvan datan lähetyksen sekä PTP:n. `pool-set-network` käynnistää anturin uudelleen muutoksen voimaansaattamiseksi ja yhdistää sen uudelleen aiemmilla asetuksilla; `--no-reboot` vain tallentaa asetukset. Staattisen osoitteen on oltava tämän tietokoneen verkossa, muuten Chloros hylkää sen; `--force` ohittaa tämän rajoituksen, mutta vain sellaisen tietokoneen osalta, jolle osoite määritetään uudelleen tai joka reititetään siihen. Uudelleenkäynnistykset hylätään, kun anturi tallentaa tietoja. `pool-update-firmware` vastaa käyttöliittymän **Päivitä kohtaan \<version\>** </version\>-toimintoa<version\> komentorivillä ja on tapa päivittää DAQ-E-laite Linuxissa, jossa ei ole käyttöliittymää. Uusi ominaisuus versiossa 1.3.0.***
+`pool-info` näyttää anturin laiteohjelmiston (ja sen, sisältääkö tämä Chloros-versio uudempaa), sen osoitteen ja miten se on saatu, tallennetut verkkoasetukset, jos ne eroavat käytössä olevista, virran kytkemisen yhteydessä tapahtuvan datan lähetyksen sekä PTP:n. `pool-set-network` käynnistää anturin uudelleen muutoksen voimaansaattamiseksi ja yhdistää sen uudelleen aiemmilla asetuksilla; `--no-reboot` vain tallentaa asetukset. Staattisen osoitteen on oltava tämän tietokoneen verkossa, muuten Chloros hylkää sen; `--force` ohittaa tämän rajoituksen, mutta vain sellaisen tietokoneen osalta, jolle osoite määritetään uudelleen tai joka reititetään siihen. Uudelleenkäynnistykset hylätään, kun anturi tallentaa tietoja. `pool-update-firmware` vastaa käyttöliittymän **Päivitä kohtaan \<version\>** </version\>-toimintoa<version\> komentorivillä ja on tapa päivittää DAQ-E-laite Linuxissa, jossa ei ole käyttöliittymää. Uusi ominaisuus versiossa 1.3.0.
+
+***
 
 ## Komentojen yhteenveto
 

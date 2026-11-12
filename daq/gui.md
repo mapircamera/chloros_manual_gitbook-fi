@@ -198,7 +198,9 @@ Kvantitatiivisten säteilyvoimakkuuslukujen saamiseksi laske keskiarvo vähintä
 
 * Yhdistä useita antureita yhteen kaavioon (jaetut akselit), pidä kaaviot erillisinä (automaattinen ruudukkojärjestely), siirrä antureita kaavioiden välillä, järjestä rivejä/ruutuja uudelleen vetämällä ja piilota yksittäisiä antureita silmäkuvakkeen avulla.
 * Chloros tallentaa projektikohtaisesti seuraavat tiedot: laitenimet, kaavion värit, kaavion koko, katselutila sekä kunkin anturin asetukset (integraatioaika, kehysten keskiarvo, AE-tila, suodattimen valinta).
-* **Projektin avaaminen uudelleen yhdistää sen anturit automaattisesti** osoitteen perusteella — DAQ-U:n COM-portti, DAQ-M:n BLE-laite, mDNS-isäntänimi DAQ-E:n osalta (tunnistetaan, vaikka laitteen IP-osoite olisi muuttunut) — ja soveltaa uudelleen kunkin anturin tallennetun cap-profiilin, kehysten keskiarvon, AE-tilan ja manuaalisen integraatioajan.***
+* **Projektin avaaminen uudelleen yhdistää sen anturit automaattisesti** osoitteen perusteella — DAQ-U:n COM-portti, DAQ-M:n BLE-laite, mDNS-isäntänimi DAQ-E:n osalta (tunnistetaan, vaikka laitteen IP-osoite olisi muuttunut) — ja soveltaa uudelleen kunkin anturin tallennetun cap-profiilin, kehysten keskiarvon, AE-tilan ja manuaalisen integraatioajan.
+
+***
 
 ## Kameran pariliitos (DLS)
 

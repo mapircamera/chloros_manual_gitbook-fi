@@ -10,7 +10,8 @@ Chloros 1.3.0 tarjoaa natiivin Linux-tuen **CLI:lle**ja**Python SDK:lle** — n�
 
 ## Alustatukitaulukko
 
-| Ominaisuus | Windows (GUI) | Windows (CLI/SDK) | Linux amd64 (CLI/ --- | --- | --- | --- |
+| Ominaisuus | Windows (GUI) | Windows (CLI/SDK) | Linux amd64 (CLI/SDK) | Linux arm64 / Jetson (CLI/SDK) |
+| --- | --- | --- | --- | --- |
 | **Työpöydän graafinen käyttöliittymä** | Kyllä | Ei saatavilla | Ei | Ei |
 | **CLI** (`chloros-cli`) | Kyllä | Kyllä | Kyllä | Kyllä |
 | **Python-SDK** (`chloros-sdk`) | Kyllä | Kyllä | Kyllä | Kyllä |
@@ -22,7 +23,9 @@ Chloros 1.3.0 tarjoaa natiivin Linux-tuen **CLI:lle**ja**Python SDK:lle** — n�
 | **Tekstuuritunnistava debayer** (vaatii CUDA-GPU:n) | Kyllä (Chloros+) | Kyllä (Chloros+) | Kyllä (Chloros+) | Kyllä (Chloros+) |
 | **Dynaaminen laskentasovitus** | Kyllä | Kyllä | Kyllä | Kyllä |
 | **Taustapalvelu järjestelmäpalveluna** (`chloros-backend@<user>.service`) | Ei | Ei | Kyllä (valinnainen) | Kyllä (valinnainen) |
-| **Paikallinen päivitysohjelma** (`chloros-cli update`) | Ei (suorita asennusohjelma) | Ei (suorita asennusohjelma) | Kyllä | Kyllä |***
+| **Paikallinen päivitysohjelma** (`chloros-cli update`) | Ei (suorita asennusohjelma) | Ei (suorita asennusohjelma) | Kyllä | Kyllä |
+
+***
 
 ## Tuetut arkkitehtuurit
 
@@ -35,7 +38,9 @@ Chloros 1.3.0 tarjoaa natiivin Linux-tuen **CLI:lle**ja**Python SDK:lle** — n�
 
 * **Ubuntu 22.04 LTS tai uudempi** (amd64)
 * **Debian 12 tai uudempi** (amd64)
-* **NVIDIA JetPack 6** (arm64 — Jetson Orin -alustat)***
+* **NVIDIA JetPack 6** (arm64 — Jetson Orin -alustat)
+
+***
 
 ## Mitä Linux-käyttäjät saavat
 
@@ -54,7 +59,9 @@ Chloros 1.3.0 tarjoaa natiivin Linux-tuen **CLI:lle**ja**Python SDK:lle** — n�
 
 * **Työpöydän graafinen käyttöliittymä** — ei graafista käyttöliittymää; kaikki vuorovaikutus tapahtuu CLI:n tai Python-SDK:n kautta
 * **Kuvankatseluohjelma** — ei interaktiivista kuvankatseluohjelmaa, ruudukkonäkymää tai karttamerkkejä
-* **Visuaalinen projektinhallinta** — projektit luodaan ja hallitaan CLI-komentojen ja SDK-kutsuiden avulla (itse laitteisto — kamerat, anturit, tallennus — on edelleen täysin hallittavissa terminaalista)***
+* **Visuaalinen projektinhallinta** — projektit luodaan ja hallitaan CLI-komentojen ja SDK-kutsuiden avulla (itse laitteisto — kamerat, anturit, tallennus — on edelleen täysin hallittavissa terminaalista)
+
+***
 
 ## Lisenssivaatimukset
 
