@@ -685,7 +685,7 @@ False         # export in native sensor geometry / skip the common-overlap crop
 
 #### Radiometrinen lähtö (LATTICE-monispektrinen prosessiketju)
 
-`process`-putkiston LATTICE-monispektrinen (M3C/M3M) vientitaso — `reflectance` (oletus), `radiance`, `sensor-response` tai `all` (kaikki kuvakohtaiset soveltuvat tilat) — määrittää projektin **”Vie säteilyvoimakkuus”**- ja**”Vie heijastavuus”**** tuotteet: `radiance` vie vain säteilyvoimakkuuden, `reflectance` vain heijastavuuden, `sensor-response` ei kumpaakaan (vain debayeroidut ja esikatselutuotteet), `all` molemmat. Debayeroituja ja esikatselutuotteita ei voi muuttaa tällä tasolla. `configure()`:llä on oma avainsanansa:
+`process`-putkiston LATTICE-monispektrinen (M3C/M3M) vientitaso — `reflectance` (oletus), `radiance`, `sensor-response` tai `all` (kaikki kuvakohtaiset soveltuvat tilat) — määrittää projektin **”Vie säteilyvoimakkuus”**- ja **”Vie heijastavuus”** tuotteet: `radiance` vie vain säteilyvoimakkuuden, `reflectance` vain heijastavuuden, `sensor-response` ei kumpaakaan (vain debayeroidut ja esikatselutuotteet), `all` molemmat. Debayeroituja ja esikatselutuotteita ei voi muuttaa tällä tasolla. `configure()`:llä on oma avainsanansa:
 
 ```python
 with chloros_sdk.ChlorosLocal() as cl:

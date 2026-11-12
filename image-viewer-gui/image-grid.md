@@ -26,7 +26,7 @@ Kun ikkuna on liian kapea kaikkien painikkeiden näyttämiseen, ryhmät piilotet
 
 <!-- SCREENSHOT-NEEDED: Image grid toolbar of a LATTICE array project at full width, showing all three button groups inline: Per Trigger / Per Camera, three camera filter buttons labelled "LATT-M3M (serial)", and the export/view buttons including TIFF, RAW (Original), RAW (Radiance), RAW (Reflectance). -->
 
-*****
+***
 
 ## Vienti- ja katselupainikkeet
 
