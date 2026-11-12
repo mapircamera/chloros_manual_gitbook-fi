@@ -57,7 +57,11 @@ output/
 └── *.daq          the downwelling reading matched to the capture
 ```
 
-**Valitse Lisää kansio -kohdasta kuvien juurikansio** (edellä oleva `output/`). Kun valitussa kansiossa ei itsessään ole kuvia, mutta siinä on alikansioita, Chloros etenee niihin automaattisesti — kyseisen tason alikansiot ja juurikansio `.daq` haetaan kaikki kerralla.**Kuinka tallenteet tuodaan:*** Jokainen tallenne tuodaan **yhtenä kuvana**, ryhmiteltynä tallenteen mukaan (ei yhtä merkintää tasoa kohti). Saman tallenteen muut tasot näkyvät kyseisen kuvan katselutilana.
+**Valitse Lisää kansio -kohdasta kuvien juurikansio** (edellä oleva `output/`). Kun valitussa kansiossa ei itsessään ole kuvia, mutta siinä on alikansioita, Chloros etenee niihin automaattisesti — kyseisen tason alikansiot ja juurikansio `.daq` haetaan kaikki kerralla.
+
+**Kuinka tallenteet tuodaan:**
+
+* Jokainen tallenne tuodaan **yhtenä kuvana**, ryhmiteltynä tallenteen mukaan (ei yhtä merkintää tasoa kohti). Saman tallenteen muut tasot näkyvät kyseisen kuvan katselutilana.
 * **Käsittely alkaa aina raakakehyksestä.** Muut tasot ovat nähtävissä, mutta vain `raw` syötetään käsittelyputkeen — jo käsitellyn tuotteen uudelleenkäsittely johtaisi korjausten kaksinkertaiseen soveltamiseen, joten Chloros hylkää sen. Uudelleen tuotu vienti ei voi koskaan ottaa kuvaussarjan raakakuvapaikkaa.
 * Kuvaussarjakansio, joka on tallennettu **ilman** raakakuvien tuontia, näkyy normaalisti, mutta käsittely ohittaa sen ja ilmoittaa siitä lokiin. (CLI-lippu `--input-level` voi pakottaa aloituskohdan tässä tapauksessa — katso [CLI-viite](../reference/cli-reference.md#what-a-captures-folder-looks-like).)
 * Versiosta 1.3.0 lähtien kaappauskansio voi sisältää myös `clamp_masks/`-kansion (pikselikohtaiset naamiot säteily- ja heijastustasoille — katso [Lähtökuvamuodot](../output-image-formats.md#clamp-masks)). Naamioita ei pidetä kohtauksen kuvina, ja Chloros ohittaa ne tuonnin yhteydessä riippumatta siitä, missä ne sijaitsevat.

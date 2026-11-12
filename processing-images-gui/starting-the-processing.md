@@ -79,7 +79,11 @@ Chloros toimii kahdessa eri käsittelytilassa lisenssistäsi riippuen:
 1. **Tunnistaminen** (ketju 1) – Kalibrointikohteiden etsiminen
 2. **Analysointi** (säie 2) – Kuvan metatietojen tarkastelu ja kalibroinnin laskeminen
 3. **Kalibrointi** (säie 3) – Debayering, vinjetoinnin korjaus, kalibrointi, indeksin laskeminen
-4. **Vienti** (säie 4) – Käsiteltyjen kuvien ja indeksien tallentaminen**Edistymispalkin käyttö:*** **Vie hiiri** palkin päälle nähdäksesi yksityiskohtaisen nelivaiheisen pudotusvalikon
+4. **Vienti** (säie 4) – Käsiteltyjen kuvien ja indeksien tallentaminen
+
+**Edistymispalkin käyttö:**
+
+* **Vie hiiri** palkin päälle nähdäksesi yksityiskohtaisen nelivaiheisen pudotusvalikon
 * **Napsauta** edistymispalkkia pysäyttääksesi pudotusvalikon paikalleen
 * **Napsauta uudelleen** vapauttaaksesi valikon ja piilottaaksesi sen**Käsittelyaika:**
 
@@ -117,7 +121,9 @@ Chloros toimii kahdessa eri käsittelytilassa lisenssistäsi riippuen:
 
 ### Vaihe 3: Kalibrointi
 
-**Mitä Chloros tekee:*** **Vignettikorjaus**: Poistaa objektiivin aiheuttaman tummenemisen reunoilta
+**Mitä Chloros tekee:**
+
+* **Vignettikorjaus**: Poistaa objektiivin aiheuttaman tummenemisen reunoilta
 * **Heijastavuuden kalibrointi**: Normalisoi käyttämällä kohteen heijastavuusarvoja ja/tai DAQ:n alaspäin suuntautuvaa dataa
 * Soveltaa korjauksia kaikkiin kaistoihin/kanaviin
 * Käyttää kullekin kuvalle sopivaa kalibrointiviitettä aikaleiman perusteella

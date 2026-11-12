@@ -252,10 +252,15 @@ in 1.3.0 uudet ominaisuudet** [Aloitusopas](./)-sivulla.**Versio 1.2.0**— kats
 
 **Julkaisupäivä: 10. helmikuuta 2026**
 
-**Uudet ominaisuudet*** **Tekstuuritietoinen debayer-menetelmä \[Vain Chloros+] -** Tekstuuritietoinen menetelmä käyttää korkealaatuista, reunoja tunnistavaa debayer-menetelmää yhdistettynä AI/ML-kohinanpoistomalliin, joka poistaa lähes kaiken debayer-kohinan.
-* **Tuki T4P-kalibrointikohteille*** **Nopeampi Chloros+ GPU-käsittely, parempi muistinhallinta**
+**Uudet ominaisuudet**
 
-**Virhekorjaukset*** Täysin uusi käyttöliittymä (GUI), jonka pitäisi nyt toimia kaikilla Windows-tietokoneilla.
+* **Tekstuuritietoinen debayer-menetelmä \[Vain Chloros+] -** Tekstuuritietoinen menetelmä käyttää korkealaatuista, reunoja tunnistavaa debayer-menetelmää yhdistettynä AI/ML-kohinanpoistomalliin, joka poistaa lähes kaiken debayer-kohinan.
+* **Tuki T4P-kalibrointikohteille**
+* **Nopeampi Chloros+ GPU-käsittely, parempi muistinhallinta**
+
+**Virhekorjaukset**
+
+* Täysin uusi käyttöliittymä (GUI), jonka pitäisi nyt toimia kaikilla Windows-tietokoneilla.
 
 </details>
 
@@ -265,14 +270,18 @@ in 1.3.0 uudet ominaisuudet** [Aloitusopas](./)-sivulla.**Versio 1.2.0**— kats
 
 **Julkaisupäivä: 5. tammikuuta 2026**
 
-**Uudet ominaisuudet*** **Kuva/metatiedot-kytkin**: Tiedostoselaimeen on lisätty kytkin, jolla valitun kuvan metatiedot voidaan tarkastella taulukkomuodossa kuvaruudukon sijaan
+**Uudet ominaisuudet**
+
+* **Kuva/metatiedot-kytkin**: Tiedostoselaimeen on lisätty kytkin, jolla valitun kuvan metatiedot voidaan tarkastella taulukkomuodossa kuvaruudukon sijaan
 * **Kuvaruudukon zoomausliukusäädin**: Uusi käyttöliittymän liukusäädin pikkukuvien koon säätämiseen (tukee myös CTRL + hiiren rullaa)
 * **Kuvaruudukon vientipainikkeet**: Ylärivillä olevat painikkeet, joilla voi vaihtaa pikkukuvien tiedostomuodon JPG:stä käsiteltyihin vientimuotoihin (Targets, Reflectance, Index, LUT)
 * **Kartta-välilehti**: Uusi interaktiivinen 2D-kartta, joka näyttää kuvien GPS-sijaintimerkit
   * Tukee Google Mapsia ja ESRI-karttalaattoja (valitsee automaattisesti parhaan karttapalvelun zoomausasteen saatavuuden perusteella)
   * Pikkukuvien esikatselu karttamerkkien päällä hiiren osoittimen ollessa niiden päällä
 
-**Virhekorjaukset*** Parannettu tuki Chloros-ohjelman asentamiselle muilla kuin englanninkielisillä tietokoneilla
+**Virhekorjaukset**
+
+* Parannettu tuki Chloros-ohjelman asentamiselle muilla kuin englanninkielisillä tietokoneilla
 
 </details>
 
@@ -282,13 +291,21 @@ in 1.3.0 uudet ominaisuudet** [Aloitusopas](./)-sivulla.**Versio 1.2.0**— kats
 
 **Julkaisupäivä: 20. joulukuuta 2025**
 
-**Uudet ominaisuudet*** Ensimmäinen julkaisu
+**Uudet ominaisuudet**
 
-**Parannukset*** Ensimmäinen julkaisu
+* Ensimmäinen julkaisu
 
-**Virhekorjaukset*** Ensimmäinen julkaisu
+**Parannukset**
 
-**Tunnetut ongelmat*** Ensimmäinen julkaisu
+* Ensimmäinen julkaisu
+
+**Virhekorjaukset**
+
+* Ensimmäinen julkaisu
+
+**Tunnetut ongelmat**
+
+* Ensimmäinen julkaisu
 
 </details>
 

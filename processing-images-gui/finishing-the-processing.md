@@ -81,7 +81,9 @@ Tuotteet tallennetaan **projektikansion alle, ryhmiteltynä kameran ja sen jälk
 
 ### Esikatselu ulkoisissa kuvankatseluohjelmissa
 
-**Suositellut katseluohjelmat:*** **QGIS** – Ilmainen GIS-ohjelmisto (sopii parhaiten georeferoituun monispektrianalyysiin)
+**Suositellut katseluohjelmat:**
+
+* **QGIS** – Ilmainen GIS-ohjelmisto (sopii parhaiten georeferoituun monispektrianalyysiin)
 * **IrfanView** – Nopea, kevyt kuvankatseluohjelma (tukee TIFF-tiedostoja)
 * **Adobe Photoshop** – Ammattimainen kuvankäsittely (TIFF-tuki)
 * **GIMP** – Ilmainen vaihtoehto Photoshopille
@@ -221,7 +223,9 @@ Voit lähettää ongelman suoraan MAPIR ille käyttämällä virhekuvaketta (**I
 
 ### Ongelma: NDVI-arvot näyttävät virheellisiltä
 
-**Odotetut NDVI-arvot:*** **Vesi, kivet, maaperä**: -0,1 – 0,2
+**Odotetut NDVI-arvot:**
+
+* **Vesi, kivet, maaperä**: -0,1 – 0,2
 * **Harva/epäterve kasvillisuus**: 0,2 – 0,4
 * **Kohtalainen kasvillisuus**: 0,4 – 0,6
 * **Terve, tiheä kasvillisuus**: 0,6–0,9**Jos arvot ovat näiden alueiden ulkopuolella:**
@@ -275,12 +279,18 @@ Voit lähettää ongelman suoraan MAPIR ille käyttämällä virhekuvaketta (**I
 
 ### Suositeltu varmuuskopiointistrategia
 
-**Mitä tallentaa:*** ✅ **Alkuperäiset RAW-/JPG-kuvat tai LATTICE-raakakuvat** – Arkistoi erilliselle levylle tai pilvipalveluun; raakakuvat ovat käsittelyputken lähde, ja kaikki muu voidaan luoda uudelleen niiden pohjalta
+**Mitä tallentaa:**
+
+* ✅ **Alkuperäiset RAW-/JPG-kuvat tai LATTICE-raakakuvat** – Arkistoi erilliselle levylle tai pilvipalveluun; raakakuvat ovat käsittelyputken lähde, ja kaikki muu voidaan luoda uudelleen niiden pohjalta
 * ✅ **`.daq` / `.csv`-valosensoritiedostot** – Tarvitaan heijastavuuden uudelleenlaskemiseen myöhemmin
 * ✅ **Käsitellyt tulokset** – Säilytä kalibroidut kuvat ja indeksit
 * ✅ **Projektikansio** (`project.json` ja siihen liittyvät tiedostot) – Sisältää kaikki asetukset, joita tarvitaan uudelleenkäsittelyyn tarvittaessa
 * ✅ **Virheloki** – Dokumentoi käsittelyn yksityiskohdat
-* ✅ **Kalibrointikohdekuvat** – Tarkistusta ja uudelleenkäsittelyä varten**Tallennussuositukset:*** **Välitön varmuuskopio**: Ulkoinen kiintolevy
+* ✅ **Kalibrointikohdekuvat** – Tarkistusta ja uudelleenkäsittelyä varten
+
+**Tallennussuositukset:**
+
+* **Välitön varmuuskopio**: Ulkoinen kiintolevy
 * **Pitkäaikainen arkistointi**: Pilvitallennustila (Google Drive, Dropbox jne.)
 * **Kriittiset tiedot**: Säilytä 2–3 kopiota eri paikoissa***
 

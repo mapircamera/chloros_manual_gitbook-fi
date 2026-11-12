@@ -363,7 +363,7 @@ Chloros kohdistaa jokaisen matriisin automaattisesti yhteyden muodostamisen jäl
 * *Vain yhdistettynä:* **Renderöintitarkkuus**-pudotusvalikko (samat esiasetukset kuin kamerakohtaisesti, oletus 720p): live-näkymän virran korkeus**ja** tallennetun yhdistelmän vientikoko. Huomaa paneelissa: ”Esikatselu + tallennetun yhdistelmän koko. Kamerakohtaiset kuvat viedään aina täysresoluutiolla.”
 
 ### Näyttökerrokset *(vain yhdistetty)** **Ota käyttöön** -valintaruutu (oletusarvoisesti pois päältä — pääkamera näkyy suoraan; päällä = kerrostettu yhdistelmä).
-* ****Etualalla**/**Taustalla**-pudotusvalikot: kukin jäsenkamera (nimen mukaan) tai**Indeksi**. Kun Etualalla on Indeksi, LUT:n minimi- ja maksimiarvojen ulkopuolella olevat pikselit näyttävät Taustakerroksen.
+* **Etualalla** /**Taustalla**-pudotusvalikot: kukin jäsenkamera (nimen mukaan) tai**Indeksi**. Kun Etualalla on Indeksi, LUT:n minimi- ja maksimiarvojen ulkopuolella olevat pikselit näyttävät Taustakerroksen.
 
 ### Jaettu näkymä *(vain yhdistetty)*
 
@@ -401,7 +401,7 @@ Pikaopas siitä, mitkä asetukset sijaitsevat missä, kun kamera on matriisin j�
 Muita kokonaisuutta koskevia toimintoja:
 
 * **Yhdistetty vs. erillinen näyttö** valitaan matriisin liitännän yhteydessä: yhdistetty = yksi kohdistettu yhdistelmäruutu (jäsenet lähettävät kuvaa vain jaetun näkymän kautta); erillinen = kukin jäsen renderöi oman synkronoidun ruutunsa. Kamera ei koskaan näytä sekä erillistä kuvaa että matriisin ruutua samanaikaisesti.
-* ****Automaattinen uudelleenkytkentä**: tallennetun projektin avaaminen palauttaa sen kamerat ja matriisit sekä soveltaa kaikki tallennetut asetukset taustapalvelimeen ennen kuin lähetykset jatkuvat.
+* **Automaattinen uudelleenkytkentä**: tallennetun projektin avaaminen palauttaa sen kamerat ja matriisit sekä soveltaa kaikki tallennetut asetukset taustapalvelimeen ennen kuin lähetykset jatkuvat.
 * **Tallennuksen rajoitus**: piilotetut tai keskeytetyt kamerat jätetään pois Capture All -toiminnosta; matriisi estetään kokonaan vasta, kun KAIKKI jäsenet ovat piilotettuja/keskeytettyjä. Katso [Tallennusasetukset ja -tilat](capture.md).
 
 ## Asetusten säilyminen

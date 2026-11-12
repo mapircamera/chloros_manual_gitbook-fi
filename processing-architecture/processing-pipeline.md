@@ -45,7 +45,11 @@ CPU-riippuvainen laskentasäie. Survey3- tai sekakäytössä säie 3 odottaa tä
 
 ### Säie 3: Käsittely (GPU)
 
-**Tarkoitus**: Korjausten soveltaminen ja kasvillisuusindeksien laskeminen.**Tämä on laskennallisesti vaativin säie.*** **Debayering**: muuntaa RAW-Bayer-tiedot monikanavaisiksi kuviksi
+**Tarkoitus**: Korjausten soveltaminen ja kasvillisuusindeksien laskeminen.
+
+**Tämä on laskennallisesti vaativin säie.**
+
+* **Debayering**: muuntaa RAW-Bayer-tiedot monikanavaisiksi kuviksi
   * Standard (nopea, keskilaatu) — oletusasetus, `--debayer standard`
   * Texture Aware (hidas, korkein laatu) — vain Chloros+, `--debayer texture-aware`, käyttää AI/ML-kohinanpoistomallia
   * LATTICE mono (M3M) -kuvat ovat yksikaistaisia: niiden kohdalla demosaic- ja valkotasapainovaiheet ohitetaan (yhden rivin lokiviestillä), kun taas samassa ajossa olevat M3C/Bayer-kuvat käyvät ne läpi

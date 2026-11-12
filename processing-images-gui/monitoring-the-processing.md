@@ -28,7 +28,11 @@ Chloros+-lisenssin omaaville käyttäjille:
 1.**Tunnistus** – Kalibrointikohteiden etsiminen
 2. **Analysointi** – Kuvien tarkastelu ja prosessiketjun valmistelu
 3. **Kalibrointi** – Vignetoinnin ja heijastavuuden korjausten soveltaminen
-4. **Vienti** – Käsiteltyjen tiedostojen tallentaminen**Interaktiiviset ominaisuudet:*** **Vie hiiri** edistymispalkin päälle nähdäksesi laajennetun 4-vaiheisen paneelin
+4. **Vienti** – Käsiteltyjen tiedostojen tallentaminen
+
+**Interaktiiviset ominaisuudet:**
+
+* **Vie hiiri** edistymispalkin päälle nähdäksesi laajennetun 4-vaiheisen paneelin
 * **Napsauta** edistymispalkkia jäädyttääksesi/kiinnittääksesi laajennetun paneelin
 * **Napsauta uudelleen**, jotta paneeli vapautuu ja piiloutuu automaattisesti, kun hiiri viedään pois
 * Jokaisessa vaiheessa näkyy sen oma edistymisaste (0–100 %)
@@ -92,7 +96,9 @@ Chloros+-lisenssin omaaville käyttäjille:
 
 ### Vaihe 3: Kalibrointi
 
-**Mitä tapahtuu:*** **Debayering**: RAW-Bayer-kuvion muuntaminen 3 kanavaksi (ohitetaan LATTICE-mono-moduuleissa, mistä on huomautus)
+**Mitä tapahtuu:**
+
+* **Debayering**: RAW-Bayer-kuvion muuntaminen 3 kanavaksi (ohitetaan LATTICE-mono-moduuleissa, mistä on huomautus)
 * **Vignettikorjaus**: Objektiivin reunoilla esiintyvän tummenemisen poistaminen
 * **Heijastavuuden kalibrointi**: Normalisointi tavoitearvojen ja/tai DAQ-tiedon perusteella
 * **Indeksin laskeminen**: Monispektristen indeksien laskeminen
@@ -104,7 +110,9 @@ Chloros+-lisenssin omaaville käyttäjille:
 * Käsiteltävänä oleva kuva
 * Valmiit kuvat / Kuvien kokonaismäärä
 
-**Käsittelytapa:*** **Vapaa tila**: Käsittelee kuvia yksi kerrallaan peräkkäin
+**Käsittelytapa:**
+
+* **Vapaa tila**: Käsittelee kuvia yksi kerrallaan peräkkäin
 * **Chloros+ -tila**: Käyttää laitteistoon sopeutuvaa työryhmää — 1–4 samanaikaista työryhmää GPU-järjestelmissä (VRAM:n mukaan), yksi työryhmä fyysistä ydintä kohti (miinus yksi) pelkästään CPU-pohjaisissa järjestelmissä. Katso [Dynaaminen laskentatehon sopeutus](../processing-architecture/dynamic-compute-adaptation.md)
 * **GPU-kiihdytys**: Nopeuttaa tätä vaihetta merkittävästi**Mitä kannattaa seurata:**
 

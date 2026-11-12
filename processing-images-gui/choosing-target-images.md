@@ -32,7 +32,9 @@ Jos **yhtään** kuvaa ei ole valittu, Chloros skannaa oletuksena kaikki projekt
 
 Selaa tuotuja kuvia tiedostoselaimessa ja tunnista, mitkä kuvat sisältävät kalibrointikohteita.
 
-**Yleisiä tilanteita:*** **Ennen kuvauksen aloittamista otettu kohde**: Otettu ennen istunnon aloittamista
+**Yleisiä tilanteita:**
+
+* **Ennen kuvauksen aloittamista otettu kohde**: Otettu ennen istunnon aloittamista
 * **Kuvauksen jälkeinen kohde**: Kuvattu istunnon päätyttyä
 * **Kenttäkohteet**: Kohteet, jotka on sijoitettu kuvausalueelle
 * **Useita kohteita**: 2–3 kohdekuvaa istuntoa kohti (suositeltava)
@@ -140,9 +142,17 @@ Käytä tätä saraketta varmistaaksesi, että olet merkinnyt kohteet jokaiselle
 
 ### Tunnistuksen herkkyyden säätäminen
 
-Jos Chloros ei tunnista kohteitasi oikein, säädä näitä asetuksia kohdassa [Projektin asetukset](adjusting-project-settings.md):**Kalibroinnin vähimmäisnäytteen pinta-ala (px):*** **Oletus**: 25 pikseliä
+Jos Chloros ei tunnista kohteitasi oikein, säädä näitä asetuksia kohdassa [Projektin asetukset](adjusting-project-settings.md):
+
+**Kalibroinnin vähimmäisnäytteen pinta-ala (px):**
+
+* **Oletus**: 25 pikseliä
 * **Suurenna**, jos pienistä esineistä saadaan vääriä tunnistustuloksia
-* **Pienennä**, jos kohteita ei tunnisteta**Kohteiden ryhmittelyn vähimmäisarvo (0–100):*** **Oletus**: 60
+* **Pienennä**, jos kohteita ei tunnisteta
+
+**Kohteiden ryhmittelyn vähimmäisarvo (0–100):**
+
+* **Oletus**: 60
 * **Lisää**, jos kohteet jakautuvat useiksi tunnistuksiksi
 * **Vähennä**, jos värivaihteluita sisältäviä kohteita ei tunnisteta kokonaan
 

@@ -44,7 +44,9 @@ Projektiasetukset-paneeli on jaoteltu alla oleviin osioihin. Kaksi lisäosiota �
 
 Määrittää, miten Chloros tunnistaa kalibrointikohteet kuvissasi.
 
-**Tärkeimmät asetukset:*** **Kalibroinnin vähimmäisnäytteen pinta-ala (px)**: Kohteen tunnistuksen kokoraja (oletus:**25**, alue 0–10000)
+**Tärkeimmät asetukset:**
+
+* **Kalibroinnin vähimmäisnäytteen pinta-ala (px)**: Kohteen tunnistuksen kokoraja (oletus:**25**, alue 0–10000)
 * **Kohteiden ryhmittelyn vähimmäisarvo (0–100)**: Kohdealueiden ryhmittelyn samankaltaisuuskynnys (oletus:**60**)**Milloin säätää:**
 
 * Suurenna näytealuetta, jos ohjelma tunnistaa vääriä kohteita
@@ -59,19 +61,26 @@ Nämä asetukset ovat harmaana, kun **heijastavuuskalibrointi / valkotasapaino**
 
 Tärkeimmät kuvankäsittely- ja kalibrointiasetukset.
 
-**Tärkeimmät asetukset:*** **Vignettikorjaus**: Kompensoi objektiivin reunoilla esiintyvää tummenemista ✅ Suositeltava
+**Tärkeimmät asetukset:**
+
+* **Vignettikorjaus**: Kompensoi objektiivin reunoilla esiintyvää tummenemista ✅ Suositeltava
 * **Heijastavuuskalibrointi / valkotasapaino**: Kalibroi kuvat tunnistettujen kohteiden (Survey3) ja/tai DAQ-valosensorin tietojen (LATTICE) avulla ✅ Suositeltava
 * **Debayer-menetelmä**: Algoritmi RAW-tiedostojen muuntamiseksi 3-kanavaisiksi monispektrisiksi
 * **Vähimmäiskalibrointiväli**: Kalibrointikohteen käytön välinen vähimmäisaika sekunteina (oletus:**0** = käytä kaikkia, alue 0–3600)**Kalibroimattomat varatuotteet:**Kun kuvakehyksen heijastuskykyä ei voida kalibroida (kohdetta ei ole saatavilla tai kalibrointi on pois käytöstä), se viedään yhtenä kahdesta varatuotteesta —**jokaisella ajolla on täsmälleen yksi näistä kahdesta**, ja valinta tehdään Vignette-korjauskytkimellä:
 
-* **Vie anturin vaste**: tallentaa tiedoston `Sensor_Response_Images` — käytetään, kun vignettikorjaus on**pois päältä*** **Vienti vignettikorjattuna**: tallentaa tiedoston `Vignette_Corrected_Images` — käytetään, kun vignettikorjaus on**päällä**Valintaruutu, jota ei ole käytössä, on harmaana. Aktiivisen valintaruudun valinnan poistaminen estää kyseisen tiedoston tallentamisen kokonaan.**LATTICE-vientituotteet** (näkyvät jokaisessa projektissa; ne koskevat LATTICE-kaappauksia):
+* **Vie anturin vaste**: tallentaa tiedoston `Sensor_Response_Images` — käytetään, kun vignettikorjaus on**pois päältä**
+* **Vienti vignettikorjattuna**: tallentaa tiedoston `Vignette_Corrected_Images` — käytetään, kun vignettikorjaus on**päällä**Valintaruutu, jota ei ole käytössä, on harmaana. Aktiivisen valintaruudun valinnan poistaminen estää kyseisen tiedoston tallentamisen kokonaan.**LATTICE-vientituotteet** (näkyvät jokaisessa projektissa; ne koskevat LATTICE-kaappauksia):
 
 * **Vie debayeroitu**: lineaarinen debayeroitu kuva (`Debayered_Images`): kalibrointipaketin tumma offset on poistettu, minkä jälkeen kuva on demosaikoitu ilman tasokenttää tai sekoituksen purkua — sama tiedosto, jonka tallennus tallentaa debayeroidulla tasollaan — anturin alkuperäisessä suunnassa. Koskee RGB- ja monispektrisiä moduuleja.
 * **Vie esikatselu**: näytön esikatselu (`Preview_Images`). RGB = valkotasapaino (DAQ-valonlähde, jos saatavilla, muuten harmaa maailma) + gamma; monispektrinen = väärävärinen venytys.
 * **Vie säteilyvoimakkuus**: float32-muotoinen spektrinen säteilyvoimakkuus (`Radiance_Images`, W/m²/sr/nm). Vain monispektriset moduulit — ei koske RGB-pääkuvia.
 * **Vie heijastavuus**: uint16-heijastavuus (`Reflectance_Calibrated_Images`, DN 32768 = ρ 1,0), kun `.daq`-alas suuntautuva lukema tai kehyksen sisällä oleva kohde peittää kehyksen. Vain monispektriset moduulit.
 
-Kaikki neljä ovat **oletusarvoisesti päällä**— yksi tuotu LATTICE-raakakehys jaetaan kaikkiin käytössä oleviin ja soveltuviin tuotteisiin yhdellä käsittelykierroksella.**Vie heijastavuus** -valintaruutu on harmaana, kun heijastavuuden kalibrointi on pois päältä. Asetukset, joiden käyttö on mahdotonta niiden yläpuolella olevan kytkimen vuoksi, ovat aina harmaana, ja niissä näkyy työkaluvinkki, jossa mainitaan muutettava kytkin.**Lisäasetukset:*** **Valosensorin aikavyöhykkeen siirtymä**: Tunnit UTC:sta valosensorin ajan sovittamista varten (oletus: 0, alue −12 – +12)
+Kaikki neljä ovat **oletusarvoisesti päällä**— yksi tuotu LATTICE-raakakehys jaetaan kaikkiin käytössä oleviin ja soveltuviin tuotteisiin yhdellä käsittelykierroksella.**Vie heijastavuus** -valintaruutu on harmaana, kun heijastavuuden kalibrointi on pois päältä. Asetukset, joiden käyttö on mahdotonta niiden yläpuolella olevan kytkimen vuoksi, ovat aina harmaana, ja niissä näkyy työkaluvinkki, jossa mainitaan muutettava kytkin.
+
+**Lisäasetukset:**
+
+* **Valosensorin aikavyöhykkeen siirtymä**: Tunnit UTC:sta valosensorin ajan sovittamista varten (oletus: 0, alue −12 – +12)
 * **Käytä PPK-korjauksia**: Käyttää `.daq`-tiedostojen GPS-/valotuspin-tietoja (oletus: pois päältä)
 * **Valotuspin 1/2**: Määrittää kamerat valotuspineille kaksoiskamerajärjestelmissä
 
@@ -104,7 +113,9 @@ Määritä, mitkä kasvillisuusindeksit lasketaan ja viedään. Käyttöliittym�
 3. Määritä visualisointiasetukset (LUT-värit, arvoalueet)
 4. Lisää useita indeksejä tarpeen mukaan
 
-**Suosittuja indeksejä:*** **NDVI**: Kasvillisuuden yleinen terveydentila (yleisin)
+**Suosittuja indeksejä:**
+
+* **NDVI**: Kasvillisuuden yleinen terveydentila (yleisin)
 * **NDRE**: RedEdge-tekniikalla tapahtuva varhainen stressin havaitseminen* **GNDVI**: Herkkä klorofyllipitoisuudelle
 * **OSAVI**: Toimii hyvin näkyvän maaperän kanssa
 * **EVI**: Alueet, joilla lehtipinta-ala-indeksi (LAI) on korkea
@@ -214,7 +225,11 @@ Jos käytät GPS-toiminnolla varustettuja MAPIR-DAQ-tallentimia tarkkaan maantie
 3. Määritä tarvittaessa **"Valosensorin aikavyöhykkeen siirtymä"** (oletus: 0, eli UTC)
 4. Määritä kamerat valotusliittimille:
    * **Yksi kamera**: Määritetään automaattisesti liittimeen 1
-   * **Kaksi kameraa**: Määritä kukin kamera manuaalisesti oikealle liittimelle**Valotusliittimien määrittäminen:*** **Valotusliitin 1**: Valitse kameramalli avattavasta valikosta
+   * **Kaksi kameraa**: Määritä kukin kamera manuaalisesti oikealle liittimelle
+
+**Valotusliittimien määrittäminen:**
+
+* **Valotusliitin 1**: Valitse kameramalli avattavasta valikosta
 * **Valotusliitin 2**: Valitse toinen kamera tai ”Älä käytä”
 * Samaa kameraa ei voi määrittää molemmille liittimille
 
